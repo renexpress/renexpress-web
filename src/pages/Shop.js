@@ -18,9 +18,9 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
   const [categoryPath, setCategoryPath] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [sortBy, setSortBy] = useState('featured');
-  const [priceRange, setPriceRange] = useState([0, 100000]);
+  const [priceRange, setPriceRange] = useState([0, 99999999]);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 12;
+  const productsPerPage = 8;
 
   // Mobile states
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -39,37 +39,27 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
     return result;
   };
 
-  const CACHE_KEY = 'shop_cache';
+  const CACHE_KEY = 'shop_cache_v2';
   const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
   useEffect(() => {
-    // Try to load from cache first
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      try {
-        const { products: cachedProducts, categories: cachedCategories, colors: cachedColors, timestamp } = JSON.parse(cached);
-        if (Date.now() - timestamp < CACHE_DURATION) {
-          setProducts(cachedProducts);
-          setAllCategories(cachedCategories);
-          setColors(cachedColors);
-          setLoading(false);
-          // Refresh in background
-          fetchData(true);
-          return;
-        }
-      } catch (e) {}
-    }
+    // Clear all old caches and fetch fresh data
+    localStorage.removeItem('shop_cache');
+    localStorage.removeItem('shop_cache_v2');
     fetchData(false);
   }, []);
 
   const fetchData = async (background = false) => {
     if (!background) setLoading(true);
     try {
+      // Add timestamp to bust cache
+      const timestamp = Date.now();
       const [productsRes, categoriesRes, colorsRes] = await Promise.all([
-        axios.get(`${API_URL}/products/`),
-        axios.get(`${API_URL}/categories/`),
-        axios.get(`${API_URL}/colors/`).catch(() => ({ data: [] }))
+        axios.get(`${API_URL}/products/?_t=${timestamp}`),
+        axios.get(`${API_URL}/categories/?_t=${timestamp}`),
+        axios.get(`${API_URL}/colors/?_t=${timestamp}`).catch(() => ({ data: [] }))
       ]);
+
       const productsData = productsRes.data.results || productsRes.data || [];
       const categoriesData = categoriesRes.data.results || categoriesRes.data || [];
       const colorsData = colorsRes.data.results || colorsRes.data || [];
@@ -77,17 +67,10 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
       // Flatten the nested categories
       const flatCategories = flattenCategories(categoriesData);
 
+      console.log('Loaded products:', productsData.length);
       setProducts(productsData);
       setAllCategories(flatCategories);
       setColors(colorsData);
-
-      // Save to cache
-      localStorage.setItem(CACHE_KEY, JSON.stringify({
-        products: productsData,
-        categories: flatCategories,
-        colors: colorsData,
-        timestamp: Date.now()
-      }));
     } catch (err) {
       console.error('Error fetching data:', err);
     } finally {
@@ -235,9 +218,9 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
         const allowedCats = getAllDescendantIds(currentCategoryId);
         if (!allowedCats.includes(p.category)) return false;
       }
-      // Price filter
+      // Price filter - skip if price is 0 or invalid
       const price = p.discount_price || p.retail_price || p.price || 0;
-      if (price < priceRange[0] || price > priceRange[1]) return false;
+      if (price > 0 && (price < priceRange[0] || price > priceRange[1])) return false;
       // Search filter
       if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
       // Color filter
@@ -384,7 +367,7 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
         <div className="filter-drawer-content" onClick={(e) => e.stopPropagation()}>
           <div className="filter-drawer-header">
             <h3>Фильтры</h3>
-            <button onClick={() => { setCategoryPath([]); setSelectedColors([]); setPriceRange([0, 100000]); setFilterCategoryPath([]); }}>
+            <button onClick={() => { setCategoryPath([]); setSelectedColors([]); setPriceRange([0, 99999999]); setFilterCategoryPath([]); }}>
               Сбросить
             </button>
           </div>
@@ -691,107 +674,107 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
             ) : paginatedProducts.length === 0 ? (
               <p style={styles.noProducts}>Товары не найдены</p>
             ) : (
-              <>
-                <div className="products-grid" style={styles.productsGrid}>
-                  {paginatedProducts.map(product => (
-                    <div key={product.id} style={styles.productCard} onClick={() => navigate(`/product/${product.id}`)}>
-                      <div style={styles.productImageContainer}>
-                        {product.primary_image ? (
-                          <img src={product.primary_image} alt={product.name} style={styles.productImage} />
-                        ) : (
-                          <div style={styles.noImage}>Нет фото</div>
-                        )}
-                        {product.is_new && (
-                          <span style={styles.newBadge}>НОВИНКА</span>
-                        )}
-                        {product.discount_price && product.retail_price && (
-                          <span style={styles.discountBadge}>
-                            -{Math.round((1 - product.discount_price / product.retail_price) * 100)}%
-                          </span>
-                        )}
+              <div className="products-grid" style={styles.productsGrid}>
+                {paginatedProducts.map(product => (
+                  <div key={product.id} style={styles.productCard} onClick={() => navigate(`/product/${product.id}`)}>
+                    <div style={styles.productImageContainer}>
+                      {product.primary_image ? (
+                        <img src={product.primary_image} alt={product.name} style={styles.productImage} />
+                      ) : (
+                        <div style={styles.noImage}>Нет фото</div>
+                      )}
+                      {product.is_new && (
+                        <span style={styles.newBadge}>НОВИНКА</span>
+                      )}
+                      {product.discount_price && product.retail_price && (
+                        <span style={styles.discountBadge}>
+                          -{Math.round((1 - product.discount_price / product.retail_price) * 100)}%
+                        </span>
+                      )}
+                    </div>
+                    <div style={styles.productInfo}>
+                      <div style={styles.productRow}>
+                        <h3 style={styles.productName}>{product.name}</h3>
+                        <div style={styles.productPrices}>
+                          {product.discount_price && product.retail_price ? (
+                            <>
+                              <span style={styles.productPrice}>{product.discount_price} ₽</span>
+                              <span style={styles.oldPrice}>{product.retail_price} ₽</span>
+                            </>
+                          ) : (
+                            <span style={styles.productPrice}>{product.retail_price || product.price || 0} ₽</span>
+                          )}
+                        </div>
                       </div>
-                      <div style={styles.productInfo}>
-                        <div style={styles.productRow}>
-                          <h3 style={styles.productName}>{product.name}</h3>
-                          <div style={styles.productPrices}>
-                            {product.discount_price && product.retail_price ? (
-                              <>
-                                <span style={styles.productPrice}>{product.discount_price} ₽</span>
-                                <span style={styles.oldPrice}>{product.retail_price} ₽</span>
-                              </>
-                            ) : (
-                              <span style={styles.productPrice}>{product.retail_price || product.price || 0} ₽</span>
-                            )}
-                          </div>
-                        </div>
-                        <p style={styles.productSubtitle}>{product.category_name || ''}</p>
-                        <div style={styles.productRating}>
-                          <span style={styles.stars}>{'★'.repeat(Math.round(product.avg_rating || 0))}{'☆'.repeat(5 - Math.round(product.avg_rating || 0))}</span>
-                          <span style={styles.reviewCount}>{product.reviews_count || 0} отзывов</span>
-                        </div>
+                      <p style={styles.productSubtitle}>{product.category_name || ''}</p>
+                      <div style={styles.productRating}>
+                        <span style={styles.stars}>{'★'.repeat(Math.round(product.avg_rating || 0))}{'☆'.repeat(5 - Math.round(product.avg_rating || 0))}</span>
+                        <span style={styles.reviewCount}>{product.reviews_count || 0} отзывов</span>
                       </div>
                     </div>
-                  ))}
-                </div>
-
-                {/* Pagination */}
-                <div style={styles.pagination}>
-                  <span style={styles.paginationInfo}>
-                    Показано {paginatedProducts.length} из {filteredProducts.length} товаров
-                  </span>
-                  <div style={styles.paginationButtons}>
-                    <button
-                      onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                      disabled={currentPage === 1}
-                      style={{...styles.pageButton, opacity: currentPage === 1 ? 0.5 : 1}}
-                    >
-                      Назад
-                    </button>
-                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                      let pageNum;
-                      if (totalPages <= 5) {
-                        pageNum = i + 1;
-                      } else if (currentPage <= 3) {
-                        pageNum = i + 1;
-                      } else if (currentPage >= totalPages - 2) {
-                        pageNum = totalPages - 4 + i;
-                      } else {
-                        pageNum = currentPage - 2 + i;
-                      }
-                      return (
-                        <button
-                          key={pageNum}
-                          onClick={() => setCurrentPage(pageNum)}
-                          style={{
-                            ...styles.pageButton,
-                            ...(currentPage === pageNum ? styles.pageButtonActive : {})
-                          }}
-                        >
-                          {pageNum}
-                        </button>
-                      );
-                    })}
-                    {totalPages > 5 && currentPage < totalPages - 2 && (
-                      <>
-                        <span style={styles.pageEllipsis}>...</span>
-                        <button
-                          onClick={() => setCurrentPage(totalPages)}
-                          style={styles.pageButton}
-                        >
-                          {totalPages}
-                        </button>
-                      </>
-                    )}
-                    <button
-                      onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                      disabled={currentPage === totalPages || totalPages === 0}
-                      style={{...styles.pageButton, opacity: currentPage === totalPages || totalPages === 0 ? 0.5 : 1}}
-                    >
-                      Вперёд
-                    </button>
                   </div>
+                ))}
+              </div>
+            )}
+
+            {/* Pagination - always at same position */}
+            {!loading && filteredProducts.length > 0 && (
+              <div style={styles.pagination}>
+                <span style={styles.paginationInfo}>
+                  Показано {Math.min(currentPage * productsPerPage, filteredProducts.length)} из {filteredProducts.length} товаров
+                </span>
+                <div style={styles.paginationButtons}>
+                  <button
+                    onClick={() => setCurrentPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    style={{...styles.pageButton, opacity: currentPage === 1 ? 0.5 : 1, cursor: currentPage === 1 ? 'not-allowed' : 'pointer'}}
+                  >
+                    Назад
+                  </button>
+                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                    let pageNum;
+                    if (totalPages <= 5) {
+                      pageNum = i + 1;
+                    } else if (currentPage <= 3) {
+                      pageNum = i + 1;
+                    } else if (currentPage >= totalPages - 2) {
+                      pageNum = totalPages - 4 + i;
+                    } else {
+                      pageNum = currentPage - 2 + i;
+                    }
+                    return (
+                      <button
+                        key={pageNum}
+                        onClick={() => setCurrentPage(pageNum)}
+                        style={{
+                          ...styles.pageButton,
+                          ...(currentPage === pageNum ? styles.pageButtonActive : {})
+                        }}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+                  {totalPages > 5 && currentPage < totalPages - 2 && (
+                    <>
+                      <span style={styles.pageEllipsis}>...</span>
+                      <button
+                        onClick={() => setCurrentPage(totalPages)}
+                        style={styles.pageButton}
+                      >
+                        {totalPages}
+                      </button>
+                    </>
+                  )}
+                  <button
+                    onClick={() => setCurrentPage(currentPage + 1)}
+                    disabled={currentPage >= totalPages}
+                    style={{...styles.pageButton, opacity: currentPage >= totalPages ? 0.5 : 1, cursor: currentPage >= totalPages ? 'not-allowed' : 'pointer'}}
+                  >
+                    Вперёд
+                  </button>
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
@@ -1090,6 +1073,8 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',
     gap: 20,
+    minHeight: 600,
+    alignContent: 'start',
   },
   productCard: {
     cursor: 'pointer',

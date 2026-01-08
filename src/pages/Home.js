@@ -15,35 +15,24 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const CACHE_KEY = 'home_cache';
+  const CACHE_KEY = 'home_cache_v2';
   const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
   useEffect(() => {
-    // Try to load from cache first
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      try {
-        const { products: cachedProducts, categories: cachedCategories, timestamp } = JSON.parse(cached);
-        if (Date.now() - timestamp < CACHE_DURATION) {
-          setProducts(cachedProducts);
-          setCategories(cachedCategories);
-          setLoading(false);
-          // Refresh in background
-          fetchData(true);
-          return;
-        }
-      } catch (e) {}
-    }
+    // Always fetch fresh data
+    localStorage.removeItem(CACHE_KEY);
     fetchData(false);
   }, []);
 
   const fetchData = async (background = false) => {
     if (!background) setLoading(true);
     try {
+      const timestamp = Date.now();
       const [productsRes, categoriesRes] = await Promise.all([
-        axios.get(`${API_URL}/products/`),
-        axios.get(`${API_URL}/categories/`)
+        axios.get(`${API_URL}/products/?_t=${timestamp}`),
+        axios.get(`${API_URL}/categories/?_t=${timestamp}`)
       ]);
+
       const productsData = productsRes.data.results || productsRes.data || [];
       const categoriesData = categoriesRes.data.results || categoriesRes.data || [];
 
@@ -89,7 +78,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
       {/* Header */}
       <header style={styles.header}>
         <div className="header-content" style={styles.headerContent}>
-          {/* Logo */}
+          {/* Left: Logo */}
           <div className="header-logo" style={styles.logo}>
             <div style={styles.logoIcon}>
               <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
@@ -100,7 +89,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
             <span style={styles.logoText}>RENEXPRESS</span>
           </div>
 
-          {/* Search */}
+          {/* Center: Search */}
           <div className="header-search" style={styles.searchContainer}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" style={styles.searchIcon}>
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -114,15 +103,13 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
             />
           </div>
 
-          {/* Nav */}
-          <nav className="header-nav" style={styles.nav}>
-            <a href="#" style={styles.navLink}>Каталог</a>
-            <a href="#" style={styles.navLink}>О нас</a>
-            <a href="#" style={styles.navLink}>Контакты</a>
-          </nav>
-
-          {/* Icons */}
-          <div className="header-icons" style={styles.headerIcons}>
+          {/* Right: Nav + Login */}
+          <div className="header-icons" style={styles.headerRight}>
+            <nav className="header-nav" style={styles.nav}>
+              <a href="/shop" style={styles.navLink}>Каталог</a>
+              <a href="#" style={styles.navLink}>О нас</a>
+              <a href="#" style={styles.navLink}>Контакты</a>
+            </nav>
             {isAuthenticated ? (
               <button onClick={handleLogout} style={styles.iconButton} title="Выйти">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
@@ -447,7 +434,14 @@ const styles = {
     padding: '0 24px',
     display: 'flex',
     alignItems: 'center',
-    gap: 32,
+    justifyContent: 'space-between',
+    gap: 24,
+  },
+  headerRight: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 24,
+    flexShrink: 0,
   },
   logo: {
     display: 'flex',
@@ -464,9 +458,9 @@ const styles = {
     color: '#111827',
   },
   searchContainer: {
-    flex: 1,
-    maxWidth: 480,
+    width: 400,
     position: 'relative',
+    flexShrink: 0,
   },
   searchIcon: {
     position: 'absolute',
