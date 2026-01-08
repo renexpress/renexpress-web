@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import API_URL from '../config/api';
+import '../styles/responsive.css';
 
 const PRIMARY = '#3D8B8B';
 
@@ -74,9 +75,9 @@ function Register({ setIsAuthenticated }) {
       </header>
 
       {/* Main Content */}
-      <div style={styles.container}>
+      <div className="auth-container" style={styles.container}>
         {/* Left Side */}
-        <div style={styles.leftSide}>
+        <div className="auth-left" style={styles.leftSide}>
           <div style={styles.leftContent}>
             {/* Image */}
             <div style={styles.imageContainer}>
@@ -108,7 +109,7 @@ function Register({ setIsAuthenticated }) {
         </div>
 
         {/* Right Side */}
-        <div style={styles.rightSide}>
+        <div className="auth-right" style={styles.rightSide}>
           {/* Form Card */}
           <div style={styles.formCard}>
             <h1 style={styles.formTitle}>Создать аккаунт</h1>

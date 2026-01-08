@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import API_URL from '../config/api';
+import '../styles/responsive.css';
 
 const PRIMARY = '#3D8B8B';
 
@@ -42,7 +43,7 @@ function Login({ setIsAuthenticated }) {
   };
 
   return (
-    <div style={styles.container}>
+    <div className="auth-container" style={styles.container}>
       <style>
         {`
           input::placeholder {
@@ -55,7 +56,7 @@ function Login({ setIsAuthenticated }) {
         `}
       </style>
       {/* Left Side - Hero */}
-      <div style={styles.leftSide}>
+      <div className="auth-left" style={styles.leftSide}>
         {/* Logo at top */}
         <div style={styles.logoTop}>
           <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
@@ -92,7 +93,7 @@ function Login({ setIsAuthenticated }) {
       </div>
 
       {/* Right Side - Form */}
-      <div style={styles.rightSide}>
+      <div className="auth-right" style={styles.rightSide}>
         {/* Top Link */}
         <div style={styles.topLink}>
           <span style={styles.topLinkText}>Нет аккаунта?</span>

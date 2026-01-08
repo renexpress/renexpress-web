@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import API_URL from '../config/api';
+import '../styles/responsive.css';
 
 const PRIMARY = '#3D8B8B';
 
@@ -20,6 +21,11 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
   const [priceRange, setPriceRange] = useState([0, 100000]);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
+
+  // Mobile states
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
+  const [filterCategoryPath, setFilterCategoryPath] = useState([]);
 
   // Flatten nested categories into a single array with parent references
   const flattenCategories = (cats, parentId = null) => {
@@ -178,6 +184,39 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
 
   const availableColors = getAvailableColors();
 
+  // Mobile filter drawer category navigation helpers
+  const getFilterCurrentCategoryId = () => filterCategoryPath.length > 0 ? filterCategoryPath[filterCategoryPath.length - 1] : null;
+  const filterCurrentCategoryId = getFilterCurrentCategoryId();
+  const filterCurrentCategory = filterCurrentCategoryId ? allCategories.find(c => c.id === filterCurrentCategoryId) : null;
+
+  const getFilterDisplayCategories = () => {
+    if (filterCurrentCategoryId) {
+      return allCategories.filter(c => c.parent === filterCurrentCategoryId);
+    }
+    return allCategories.filter(c => !c.parent);
+  };
+
+  const filterDisplayCategories = getFilterDisplayCategories();
+
+  const navigateFilterCategory = (catId) => {
+    setFilterCategoryPath([...filterCategoryPath, catId]);
+  };
+
+  const goBackFilterCategory = () => {
+    setFilterCategoryPath(filterCategoryPath.slice(0, -1));
+  };
+
+  const selectFilterCategory = (catId) => {
+    setCategoryPath([...filterCategoryPath, catId]);
+    setFilterCategoryPath([]);
+    setCurrentPage(1);
+    setFilterDrawerOpen(false);
+  };
+
+  const resetFilterCategory = () => {
+    setFilterCategoryPath([]);
+  };
+
   // Toggle color selection
   const toggleColor = (colorId) => {
     if (selectedColors.includes(colorId)) {
@@ -232,7 +271,7 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
     <div style={styles.page}>
       {/* Header */}
       <header style={styles.header}>
-        <div style={styles.headerContent}>
+        <div className="header-content" style={styles.headerContent}>
           <div style={styles.logo} onClick={() => navigate('/')}>
             <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
               <rect width="32" height="32" rx="8" fill={PRIMARY} />
@@ -241,7 +280,7 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
             <span style={styles.logoText}>RENEXPRESS</span>
           </div>
 
-          <div style={styles.searchContainer}>
+          <div className="header-search" style={styles.searchContainer}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" style={styles.searchIcon}>
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
             </svg>
@@ -254,13 +293,13 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
             />
           </div>
 
-          <nav style={styles.nav}>
+          <nav className="header-nav" style={styles.nav}>
             <a href="/" style={styles.navLink}>Главная</a>
             <a href="/shop" style={{...styles.navLink, color: PRIMARY}}>Каталог</a>
             <a href="#" style={styles.navLink}>О нас</a>
           </nav>
 
-          <div style={styles.headerIcons}>
+          <div className="header-icons" style={styles.headerIcons}>
             {isAuthenticated ? (
               <button onClick={handleLogout} style={styles.iconButton} title="Выйти">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
@@ -272,12 +311,245 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
                 Войти
               </button>
             )}
+            {/* Mobile Menu Button */}
+            <button
+              className="mobile-menu-btn"
+              onClick={() => setMobileMenuOpen(true)}
+              style={styles.mobileMenuBtn}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
+                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
           </div>
         </div>
       </header>
 
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`}
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+          <div className="mobile-menu-header">
+            <div style={styles.logo}>
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="8" fill={PRIMARY} />
+                <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
+              </svg>
+              <span style={styles.logoText}>RENEXPRESS</span>
+            </div>
+            <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <nav className="mobile-menu-nav">
+            <a href="/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              </svg>
+              Главная
+            </a>
+            <a href="/shop" className="active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+              </svg>
+              Каталог
+            </a>
+            <a href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/>
+              </svg>
+              О нас
+            </a>
+          </nav>
+          <div className="mobile-menu-footer">
+            {isAuthenticated ? (
+              <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>Выйти</button>
+            ) : (
+              <button onClick={() => { navigate('/login'); setMobileMenuOpen(false); }}>Войти</button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Filter Drawer */}
+      <div
+        className={`mobile-filter-drawer ${filterDrawerOpen ? 'open' : ''}`}
+        onClick={() => setFilterDrawerOpen(false)}
+      >
+        <div className="filter-drawer-content" onClick={(e) => e.stopPropagation()}>
+          <div className="filter-drawer-header">
+            <h3>Фильтры</h3>
+            <button onClick={() => { setCategoryPath([]); setSelectedColors([]); setPriceRange([0, 100000]); setFilterCategoryPath([]); }}>
+              Сбросить
+            </button>
+          </div>
+          <div className="filter-drawer-body">
+            {/* Categories with Subcategory Navigation */}
+            <div style={{marginBottom: 20}}>
+              <h4 style={{fontSize: 14, fontWeight: 600, marginBottom: 12}}>Категория</h4>
+
+              {/* Back button and current category when in subcategory */}
+              {filterCurrentCategory && (
+                <div style={{marginBottom: 12}}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      padding: '10px 12px',
+                      background: '#F3F4F6',
+                      borderRadius: 8,
+                      cursor: 'pointer',
+                      marginBottom: 8
+                    }}
+                    onClick={goBackFilterCategory}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    <span style={{fontSize: 13, color: '#6B7280'}}>Назад</span>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '12px 14px',
+                      background: categoryPath.includes(filterCurrentCategoryId) ? '#F0FDFA' : '#fff',
+                      border: categoryPath.includes(filterCurrentCategoryId) ? `2px solid ${PRIMARY}` : `1px solid ${PRIMARY}`,
+                      borderRadius: 10,
+                      cursor: 'pointer'
+                    }}
+                    onClick={() => selectFilterCategory(filterCurrentCategoryId)}
+                  >
+                    <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
+                      <span style={{fontSize: 14, fontWeight: 600, color: PRIMARY}}>{filterCurrentCategory.name}</span>
+                      <span style={{fontSize: 12, color: '#9CA3AF'}}>({getCategoryCount(filterCurrentCategoryId)})</span>
+                    </div>
+                    <span style={{fontSize: 12, color: PRIMARY}}>Выбрать</span>
+                  </div>
+                </div>
+              )}
+
+              <div style={{display: 'flex', flexDirection: 'column', gap: 8}}>
+                {filterDisplayCategories.map(cat => {
+                  const catHasChildren = hasChildren(cat.id);
+                  const isSelected = categoryPath.includes(cat.id);
+                  return (
+                    <div
+                      key={cat.id}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '12px 14px',
+                        border: isSelected ? `2px solid ${PRIMARY}` : '1px solid #E5E7EB',
+                        borderRadius: 10,
+                        background: isSelected ? '#F0FDFA' : '#fff',
+                        cursor: 'pointer'
+                      }}
+                      onClick={() => catHasChildren ? navigateFilterCategory(cat.id) : selectFilterCategory(cat.id)}
+                    >
+                      <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
+                        <span style={{fontSize: 14, color: isSelected ? PRIMARY : '#374151', fontWeight: isSelected ? 600 : 400}}>
+                          {cat.name}
+                        </span>
+                        <span style={{fontSize: 12, color: '#9CA3AF'}}>({getCategoryCount(cat.id)})</span>
+                      </div>
+                      {catHasChildren && (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2">
+                          <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                      )}
+                    </div>
+                  );
+                })}
+                {filterDisplayCategories.length === 0 && filterCurrentCategoryId && (
+                  <p style={{fontSize: 13, color: '#6B7280', textAlign: 'center', padding: 12}}>
+                    Нет подкатегорий
+                  </p>
+                )}
+              </div>
+
+            </div>
+            {/* Price Range */}
+            <div style={{marginBottom: 20}}>
+              <h4 style={{fontSize: 14, fontWeight: 600, marginBottom: 12}}>Цена</h4>
+              <div style={{display: 'flex', gap: 8}}>
+                <input
+                  type="number"
+                  placeholder="От"
+                  value={priceRange[0]}
+                  onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
+                  style={{flex: 1, padding: '10px 12px', border: '1px solid #E5E7EB', borderRadius: 8, fontSize: 14}}
+                />
+                <input
+                  type="number"
+                  placeholder="До"
+                  value={priceRange[1]}
+                  onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+                  style={{flex: 1, padding: '10px 12px', border: '1px solid #E5E7EB', borderRadius: 8, fontSize: 14}}
+                />
+              </div>
+            </div>
+            {/* Colors */}
+            {colors.length > 0 && (
+              <div>
+                <h4 style={{fontSize: 14, fontWeight: 600, marginBottom: 12}}>Цвет</h4>
+                <div style={{display: 'flex', flexWrap: 'wrap', gap: 8}}>
+                  {colors.map(color => (
+                    <button
+                      key={color.id}
+                      onClick={() => toggleColor(color.id)}
+                      style={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: '50%',
+                        backgroundColor: color.hex_code || color.code || '#ccc',
+                        border: selectedColors.includes(color.id) ? '3px solid #111' : '2px solid #E5E7EB',
+                        cursor: 'pointer'
+                      }}
+                      title={color.name}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="filter-drawer-footer">
+            <button onClick={() => setFilterDrawerOpen(false)}>Отмена</button>
+            <button onClick={() => setFilterDrawerOpen(false)}>
+              Показать {filteredProducts.length} товаров
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Main Content */}
-      <main style={styles.main}>
+      <main className="shop-container" style={styles.main}>
+        {/* Mobile Filter Bar */}
+        <div className="mobile-filter-bar">
+          <button onClick={() => { setFilterCategoryPath(categoryPath); setFilterDrawerOpen(true); }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+            </svg>
+            Фильтры
+          </button>
+          <button>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/>
+              <line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+            </svg>
+            Сортировка
+          </button>
+        </div>
+
         {/* Breadcrumb */}
         <div style={styles.breadcrumb}>
           {breadcrumb.map((item, index) => (
@@ -297,9 +569,9 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
         </div>
 
         {/* Page Title */}
-        <div style={styles.pageHeader}>
+        <div className="shop-header" style={styles.pageHeader}>
           <div>
-            <h1 style={styles.pageTitle}>{currentCategory ? currentCategory.name : 'Все товары'}</h1>
+            <h1 className="shop-title" style={styles.pageTitle}>{currentCategory ? currentCategory.name : 'Все товары'}</h1>
             <p style={styles.pageSubtitle}>
               {currentCategory
                 ? `Откройте для себя нашу коллекцию в категории ${currentCategory.name.toLowerCase()}`
@@ -420,7 +692,7 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
               <p style={styles.noProducts}>Товары не найдены</p>
             ) : (
               <>
-                <div style={styles.productsGrid}>
+                <div className="products-grid" style={styles.productsGrid}>
                   {paginatedProducts.map(product => (
                     <div key={product.id} style={styles.productCard} onClick={() => navigate(`/product/${product.id}`)}>
                       <div style={styles.productImageContainer}>
@@ -597,6 +869,17 @@ const styles = {
     width: 40,
     height: 40,
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    border: 'none',
+    borderRadius: 8,
+    cursor: 'pointer',
+  },
+  mobileMenuBtn: {
+    display: 'none',
+    width: 40,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',

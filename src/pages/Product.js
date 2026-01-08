@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import API_URL from '../config/api';
+import '../styles/responsive.css';
 
 const PRIMARY = '#3D8B8B';
 
@@ -16,6 +17,7 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
   const [similarProducts, setSimilarProducts] = useState([]);
   const [reviews, setReviews] = useState([]);
   const similarScrollRef = useRef(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollSimilar = (direction) => {
     if (similarScrollRef.current) {
@@ -236,22 +238,22 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
     <div style={styles.page}>
       {/* Header */}
       <header style={styles.header}>
-        <div style={styles.headerContent}>
-          <div style={styles.logo} onClick={() => navigate('/')}>
+        <div className="header-content" style={styles.headerContent}>
+          <div className="header-logo" style={styles.logo} onClick={() => navigate('/')}>
             <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
               <rect width="32" height="32" rx="8" fill={PRIMARY} />
               <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
             </svg>
             <span style={styles.logoText}>RENEXPRESS</span>
           </div>
-          <div style={styles.searchContainer}>
+          <div className="header-search" style={styles.searchContainer}>
             <input type="text" placeholder="Поиск..." style={styles.searchInput} />
           </div>
-          <nav style={styles.nav}>
+          <nav className="header-nav" style={styles.nav}>
             <a href="/" style={styles.navLink}>Главная</a>
             <a href="/shop" style={styles.navLink}>Каталог</a>
           </nav>
-          <div style={styles.headerRight}>
+          <div className="header-icons" style={styles.headerRight}>
             {isAuthenticated ? (
               <button onClick={handleLogout} style={styles.iconBtn}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
@@ -261,11 +263,65 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
             ) : (
               <button onClick={() => navigate('/login')} style={styles.signInBtn}>Войти</button>
             )}
+            {/* Mobile Menu Button */}
+            <button
+              className="mobile-menu-btn"
+              onClick={() => setMobileMenuOpen(true)}
+              style={styles.mobileMenuBtn}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
+                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
           </div>
         </div>
       </header>
 
-      <main style={styles.main}>
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`}
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+          <div className="mobile-menu-header">
+            <div style={styles.logo}>
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="8" fill={PRIMARY} />
+                <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
+              </svg>
+              <span style={styles.logoText}>RENEXPRESS</span>
+            </div>
+            <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <nav className="mobile-menu-nav">
+            <a href="/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              </svg>
+              Главная
+            </a>
+            <a href="/shop">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="7" height="7"/>
+              </svg>
+              Каталог
+            </a>
+          </nav>
+          <div className="mobile-menu-footer">
+            {isAuthenticated ? (
+              <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>Выйти</button>
+            ) : (
+              <button onClick={() => { navigate('/login'); setMobileMenuOpen(false); }}>Войти</button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <main className="product-detail-container" style={styles.main}>
         {/* Breadcrumb */}
         <div style={styles.breadcrumb}>
           <span style={styles.crumbLink} onClick={() => navigate('/')}>Главная</span>
@@ -280,10 +336,10 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
         </div>
 
         {/* Product Grid */}
-        <div style={styles.productGrid}>
+        <div className="product-detail-grid" style={styles.productGrid}>
           {/* Left - Images */}
           <div style={styles.imagesCol}>
-            <div style={styles.mainImage}>
+            <div className="product-gallery" style={styles.mainImage}>
               {images[selectedImage] ? (
                 <img src={images[selectedImage]} alt="" style={styles.mainImg} />
               ) : (
@@ -313,7 +369,7 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
 
           {/* Right - Info */}
           <div style={styles.infoCol}>
-            <h1 style={styles.name}>{product.name}</h1>
+            <h1 className="product-detail-title" style={styles.name}>{product.name}</h1>
 
             {/* Rating */}
             <div style={styles.ratingRow}>
@@ -448,40 +504,15 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
         </div>
 
         {/* Description & Characteristics */}
-        <div style={styles.detailsRow}>
-          <div style={styles.descCol}>
-            <div style={styles.descBlock}>
-              <h3 style={styles.sectionTitle}>Описание</h3>
-              <p style={styles.descText}>{product.description || 'Описание отсутствует.'}</p>
-            </div>
-
-            {/* Similar Products - under description */}
-            <div style={styles.similarSection}>
-              <div style={styles.similarHeader}>
-                <h3 style={{...styles.sectionTitle, marginBottom: 0}}>Похожие товары</h3>
-                <div style={styles.scrollBtns}>
-                  <button style={styles.scrollBtn} onClick={() => scrollSimilar('left')}>‹</button>
-                  <button style={styles.scrollBtn} onClick={() => scrollSimilar('right')}>›</button>
-                </div>
-              </div>
-              <div style={styles.similarScroll} ref={similarScrollRef}>
-                {similarProducts.length > 0 ? (
-                  similarProducts.map(p => (
-                    <div key={p.id} style={styles.simCard} onClick={() => navigate(`/product/${p.id}`)}>
-                      <div style={styles.simImg}>
-                        {p.primary_image ? <img src={p.primary_image} alt="" style={styles.simImage} /> : <div style={styles.simNo}>Нет фото</div>}
-                      </div>
-                      <div style={styles.simName}>{p.name}</div>
-                      <div style={styles.simPrice}>{formatPrice(p.retail_price || p.price)} ₽</div>
-                    </div>
-                  ))
-                ) : (
-                  <div style={{color: '#9CA3AF', fontSize: 11}}>Загрузка...</div>
-                )}
-              </div>
-            </div>
+        <div className="product-details-row" style={styles.detailsRow}>
+          {/* Description Block */}
+          <div className="product-desc-block" style={styles.descBlock}>
+            <h3 style={styles.sectionTitle}>Описание</h3>
+            <p style={styles.descText}>{product.description || 'Описание отсутствует.'}</p>
           </div>
-          <div style={styles.charBlock}>
+
+          {/* Characteristics Block */}
+          <div className="product-char-block" style={styles.charBlock}>
             <h3 style={styles.sectionTitle}>Характеристики</h3>
             {product.characteristics_list && product.characteristics_list.length > 0 ? (
               product.characteristics_list.map((char, i) => (
@@ -502,8 +533,34 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
           </div>
         </div>
 
+        {/* Similar Products */}
+        <div className="similar-section" style={styles.similarSection}>
+          <div style={styles.similarHeader}>
+            <h3 style={{...styles.sectionTitle, marginBottom: 0}}>Похожие товары</h3>
+            <div style={styles.scrollBtns}>
+              <button style={styles.scrollBtn} onClick={() => scrollSimilar('left')}>‹</button>
+              <button style={styles.scrollBtn} onClick={() => scrollSimilar('right')}>›</button>
+            </div>
+          </div>
+          <div className="similar-products-grid" style={styles.similarScroll} ref={similarScrollRef}>
+            {similarProducts.length > 0 ? (
+              similarProducts.map(p => (
+                <div key={p.id} style={styles.simCard} onClick={() => navigate(`/product/${p.id}`)}>
+                  <div style={styles.simImg}>
+                    {p.primary_image ? <img src={p.primary_image} alt="" style={styles.simImage} /> : <div style={styles.simNo}>Нет фото</div>}
+                  </div>
+                  <div style={styles.simName}>{p.name}</div>
+                  <div style={styles.simPrice}>{formatPrice(p.retail_price || p.price)} ₽</div>
+                </div>
+              ))
+            ) : (
+              <div style={{color: '#9CA3AF', fontSize: 11}}>Нет похожих товаров</div>
+            )}
+          </div>
+        </div>
+
         {/* Reviews */}
-        <div style={styles.reviewsSection}>
+        <div className="reviews-section" style={styles.reviewsSection}>
           <h2 style={styles.reviewsTitle}>Отзывы покупателей</h2>
 
           {/* Rating Summary Row - Rating on left, Bars on right */}
@@ -559,6 +616,20 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
         </div>
 
       </main>
+
+      {/* Mobile Sticky Cart Bar */}
+      <div className="sticky-cart-bar">
+        <div className="price">
+          {formatPrice(retailPrice)} ₽
+        </div>
+        <button>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginRight: 8}}>
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          В корзину
+        </button>
+      </div>
     </div>
   );
 }
@@ -574,8 +645,9 @@ const styles = {
   searchInput: { width: '100%', padding: '5px 10px', fontSize: 11, border: '1px solid #E5E7EB', borderRadius: 4, outline: 'none' },
   nav: { display: 'flex', gap: 12 },
   navLink: { fontSize: 11, color: '#374151', textDecoration: 'none' },
-  headerRight: {},
+  headerRight: { display: 'flex', alignItems: 'center', gap: 8 },
   iconBtn: { width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent', border: 'none', cursor: 'pointer' },
+  mobileMenuBtn: { display: 'none', width: 40, height: 40, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent', border: 'none', borderRadius: 8, cursor: 'pointer' },
   signInBtn: { padding: '5px 12px', backgroundColor: PRIMARY, color: '#fff', border: 'none', borderRadius: 4, fontSize: 11, fontWeight: 600, cursor: 'pointer' },
   main: { maxWidth: 900, margin: '0 auto', padding: '12px' },
   breadcrumb: { fontSize: 9, marginBottom: 10, color: '#9CA3AF' },

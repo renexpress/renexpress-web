@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import API_URL from '../config/api';
+import '../styles/responsive.css';
 
 const PRIMARY = '#3D8B8B';
 
@@ -12,6 +13,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const CACHE_KEY = 'home_cache';
   const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
@@ -86,9 +88,9 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
     <div style={styles.page}>
       {/* Header */}
       <header style={styles.header}>
-        <div style={styles.headerContent}>
+        <div className="header-content" style={styles.headerContent}>
           {/* Logo */}
-          <div style={styles.logo}>
+          <div className="header-logo" style={styles.logo}>
             <div style={styles.logoIcon}>
               <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
                 <rect width="32" height="32" rx="8" fill={PRIMARY} />
@@ -99,7 +101,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           </div>
 
           {/* Search */}
-          <div style={styles.searchContainer}>
+          <div className="header-search" style={styles.searchContainer}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" style={styles.searchIcon}>
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
             </svg>
@@ -113,14 +115,14 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           </div>
 
           {/* Nav */}
-          <nav style={styles.nav}>
+          <nav className="header-nav" style={styles.nav}>
             <a href="#" style={styles.navLink}>Каталог</a>
             <a href="#" style={styles.navLink}>О нас</a>
             <a href="#" style={styles.navLink}>Контакты</a>
           </nav>
 
           {/* Icons */}
-          <div style={styles.headerIcons}>
+          <div className="header-icons" style={styles.headerIcons}>
             {isAuthenticated ? (
               <button onClick={handleLogout} style={styles.iconButton} title="Выйти">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
@@ -132,22 +134,93 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                 Войти
               </button>
             )}
+            {/* Mobile Menu Button */}
+            <button
+              className="mobile-menu-btn"
+              onClick={() => setMobileMenuOpen(true)}
+              style={styles.mobileMenuBtn}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
+                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
           </div>
         </div>
       </header>
 
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`}
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+          <div className="mobile-menu-header">
+            <div style={styles.logo}>
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="8" fill={PRIMARY} />
+                <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
+              </svg>
+              <span style={styles.logoText}>RENEXPRESS</span>
+            </div>
+            <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <nav className="mobile-menu-nav">
+            <a href="/" className="active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+              Главная
+            </a>
+            <a href="/shop">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+              </svg>
+              Каталог
+            </a>
+            <a href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+              </svg>
+              О нас
+            </a>
+            <a href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/>
+              </svg>
+              Контакты
+            </a>
+          </nav>
+          <div className="mobile-menu-footer">
+            {isAuthenticated ? (
+              <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>
+                Выйти
+              </button>
+            ) : (
+              <button onClick={() => { navigate('/login'); setMobileMenuOpen(false); }}>
+                Войти
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section */}
-      <section style={styles.hero}>
+      <section className="hero-section" style={styles.hero}>
         <img src="/room.png" alt="" style={styles.heroImage} />
         <div style={styles.heroOverlay}>
-          <div style={styles.heroContent}>
+          <div className="hero-content" style={styles.heroContent}>
             <span style={styles.heroBadge}>Новинки</span>
-            <h1 style={styles.heroTitle}>Маркетплейс для<br/>современного профессионала</h1>
-            <p style={styles.heroSubtitle}>
+            <h1 className="hero-title" style={styles.heroTitle}>Маркетплейс для<br/>современного профессионала</h1>
+            <p className="hero-subtitle" style={styles.heroSubtitle}>
               Откройте для себя проверенные товары от надёжных продавцов.<br/>
               Улучшите своё пространство качественными товарами и декором.
             </p>
-            <button style={styles.heroButton}>
+            <button className="hero-button" style={styles.heroButton}>
               Смотреть каталог
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: 8 }}>
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -159,10 +232,11 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
 
       {/* Categories */}
       <section style={styles.categoriesSection}>
-        <div style={styles.categoriesContainer}>
+        <div className="categories-container" style={styles.categoriesContainer}>
           {categories.slice(0, 6).map((cat) => (
             <button
               key={cat.id}
+              className="category-tab"
               onClick={() => setSelectedCategory(selectedCategory === cat.id ? null : cat.id)}
               style={{
                 ...styles.categoryTab,
@@ -177,11 +251,11 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* Main Content */}
-      <main style={styles.main}>
+      <main className="main-content" style={styles.main}>
         {/* Editor's Picks */}
         <section style={styles.editorSection}>
-          <div style={styles.sectionHeader}>
-            <h2 style={styles.sectionTitle}>
+          <div className="section-header" style={styles.sectionHeader}>
+            <h2 className="section-title" style={styles.sectionTitle}>
               <span style={styles.sectionIcon}>★</span> Выбор редакции
             </h2>
             <a href="/shop" style={styles.viewAll}>Смотреть все</a>
@@ -191,27 +265,27 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
             {loading ? (
               <p>Загрузка...</p>
             ) : editorPicks.map((product, index) => (
-              <div key={product.id} style={styles.editorCard} onClick={() => navigate(`/product/${product.id}`)}>
-                <div style={styles.editorCardImage}>
+              <div key={product.id} className="editor-card" style={styles.editorCard} onClick={() => navigate(`/product/${product.id}`)}>
+                <div className="editor-card-image" style={styles.editorCardImage}>
                   {product.primary_image ? (
                     <img src={product.primary_image} alt={product.name} style={styles.productImage} />
                   ) : (
                     <div style={styles.noImage}>Нет фото</div>
                   )}
                 </div>
-                <div style={styles.editorCardContent}>
+                <div className="editor-card-content" style={styles.editorCardContent}>
                   <span style={styles.productCategory}>{product.category_name || 'Товар'}</span>
-                  <h3 style={styles.editorCardTitle}>{product.name}</h3>
+                  <h3 className="editor-card-title" style={styles.editorCardTitle}>{product.name}</h3>
                   <p style={styles.editorCardDesc}>{product.description?.slice(0, 80)}...</p>
                   <div style={styles.editorCardFooter}>
                     <div style={styles.priceContainer}>
                       {product.discount_price && product.retail_price ? (
                         <>
                           <span style={styles.oldPrice}>{product.retail_price} ₽</span>
-                          <span style={styles.productPrice}>{product.discount_price} ₽</span>
+                          <span className="product-price" style={styles.productPrice}>{product.discount_price} ₽</span>
                         </>
                       ) : (
-                        <span style={styles.productPrice}>{product.retail_price || product.price || 0} ₽</span>
+                        <span className="product-price" style={styles.productPrice}>{product.retail_price || product.price || 0} ₽</span>
                       )}
                     </div>
                   </div>
@@ -223,13 +297,13 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
 
         {/* Trending Now */}
         <section style={styles.trendingSection}>
-          <div style={styles.sectionHeader}>
-            <h2 style={styles.sectionTitle}>
+          <div className="section-header" style={styles.sectionHeader}>
+            <h2 className="section-title" style={styles.sectionTitle}>
               <span style={styles.sectionIcon}>🔥</span> Популярное
             </h2>
           </div>
 
-          <div style={styles.trendingGrid}>
+          <div className="trending-grid" style={styles.trendingGrid}>
             {loading ? (
               <p>Загрузка...</p>
             ) : trendingProducts.map((product) => (
@@ -247,15 +321,15 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                   )}
                 </div>
                 <div style={styles.trendingCardContent}>
-                  <h4 style={styles.trendingCardTitle}>{product.name}</h4>
+                  <h4 className="trending-card-title" style={styles.trendingCardTitle}>{product.name}</h4>
                   <div style={styles.trendingCardFooter}>
                     {product.discount_price && product.retail_price ? (
                       <>
-                        <span style={styles.trendingPrice}>{product.discount_price} ₽</span>
+                        <span className="trending-price" style={styles.trendingPrice}>{product.discount_price} ₽</span>
                         <span style={styles.oldPrice}>{product.retail_price} ₽</span>
                       </>
                     ) : (
-                      <span style={styles.trendingPrice}>{product.retail_price || product.price || 0} ₽</span>
+                      <span className="trending-price" style={styles.trendingPrice}>{product.retail_price || product.price || 0} ₽</span>
                     )}
                   </div>
                 </div>
@@ -266,8 +340,8 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
       </main>
 
       {/* Trust Badges */}
-      <section style={styles.trustSection}>
-        <div style={styles.trustContainer}>
+      <section className="trust-section" style={styles.trustSection}>
+        <div className="trust-container" style={styles.trustContainer}>
           <div style={styles.trustItem}>
             <div style={styles.trustIcon}>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2">
@@ -275,8 +349,8 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               </svg>
             </div>
             <div>
-              <h4 style={styles.trustTitle}>Безопасные платежи</h4>
-              <p style={styles.trustDesc}>Все транзакции защищены и зашифрованы</p>
+              <h4 className="trust-title" style={styles.trustTitle}>Безопасные платежи</h4>
+              <p className="trust-desc" style={styles.trustDesc}>Все транзакции защищены и зашифрованы</p>
             </div>
           </div>
           <div style={styles.trustItem}>
@@ -287,8 +361,8 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               </svg>
             </div>
             <div>
-              <h4 style={styles.trustTitle}>Проверенные продавцы</h4>
-              <p style={styles.trustDesc}>Все продавцы проходят верификацию</p>
+              <h4 className="trust-title" style={styles.trustTitle}>Проверенные продавцы</h4>
+              <p className="trust-desc" style={styles.trustDesc}>Все продавцы проходят верификацию</p>
             </div>
           </div>
           <div style={styles.trustItem}>
@@ -299,16 +373,16 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               </svg>
             </div>
             <div>
-              <h4 style={styles.trustTitle}>Быстрая доставка</h4>
-              <p style={styles.trustDesc}>Доставка по всему миру с отслеживанием</p>
+              <h4 className="trust-title" style={styles.trustTitle}>Быстрая доставка</h4>
+              <p className="trust-desc" style={styles.trustDesc}>Доставка по всему миру с отслеживанием</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer style={styles.footer}>
-        <div style={styles.footerContent}>
+      <footer className="footer" style={styles.footer}>
+        <div className="footer-content" style={styles.footerContent}>
           <div style={styles.footerMain}>
             <div style={styles.footerLogo}>
               <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
@@ -323,7 +397,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
             </p>
           </div>
 
-          <div style={styles.footerLinks}>
+          <div className="footer-links" style={styles.footerLinks}>
             <div style={styles.footerColumn}>
               <h5 style={styles.footerColumnTitle}>Магазин</h5>
               <a href="#" style={styles.footerLink}>Все товары</a>
@@ -379,6 +453,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: 10,
+    flexShrink: 0,
   },
   logoIcon: {
     display: 'flex',
@@ -389,9 +464,9 @@ const styles = {
     color: '#111827',
   },
   searchContainer: {
-    width: 480,
+    flex: 1,
+    maxWidth: 480,
     position: 'relative',
-    margin: '0 auto',
   },
   searchIcon: {
     position: 'absolute',
@@ -407,6 +482,7 @@ const styles = {
     borderRadius: 8,
     backgroundColor: '#F9FAFB',
     outline: 'none',
+    boxSizing: 'border-box',
   },
   nav: {
     display: 'flex',
@@ -421,11 +497,23 @@ const styles = {
   headerIcons: {
     display: 'flex',
     gap: 8,
+    flexShrink: 0,
   },
   iconButton: {
     width: 40,
     height: 40,
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    border: 'none',
+    borderRadius: 8,
+    cursor: 'pointer',
+  },
+  mobileMenuBtn: {
+    display: 'none',
+    width: 40,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
@@ -470,6 +558,7 @@ const styles = {
     margin: '0 auto',
     padding: '0 24px',
     width: '100%',
+    boxSizing: 'border-box',
   },
   heroBadge: {
     display: 'inline-block',
@@ -520,6 +609,7 @@ const styles = {
     display: 'flex',
     gap: 12,
     overflowX: 'auto',
+    WebkitOverflowScrolling: 'touch',
   },
   categoryTab: {
     display: 'flex',
@@ -534,6 +624,7 @@ const styles = {
     color: '#374151',
     cursor: 'pointer',
     whiteSpace: 'nowrap',
+    flexShrink: 0,
   },
   categoryTabActive: {
     backgroundColor: PRIMARY,
@@ -547,7 +638,7 @@ const styles = {
     padding: '32px 24px',
     display: 'grid',
     gridTemplateColumns: '1fr 1.5fr',
-    gap: 100,
+    gap: 48,
   },
   sectionHeader: {
     display: 'flex',
@@ -613,6 +704,7 @@ const styles = {
     padding: 16,
     display: 'flex',
     flexDirection: 'column',
+    minWidth: 0,
   },
   productCategory: {
     fontSize: 11,
@@ -633,6 +725,7 @@ const styles = {
     lineHeight: 1.4,
     marginBottom: 12,
     flex: 1,
+    overflow: 'hidden',
   },
   editorCardFooter: {
     display: 'flex',
@@ -654,14 +747,6 @@ const styles = {
     fontWeight: 700,
     color: '#111827',
   },
-  verifiedBadge: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 4,
-    fontSize: 12,
-    color: PRIMARY,
-    fontWeight: 500,
-  },
 
   // Trending Now
   trendingSection: {},
@@ -680,7 +765,7 @@ const styles = {
     width: '100%',
     aspectRatio: '1',
     backgroundColor: '#F5EBE6',
-    borderRadius: 4,
+    borderRadius: 8,
     overflow: 'hidden',
   },
   discountBadge: {
@@ -706,18 +791,14 @@ const styles = {
   },
   trendingCardFooter: {
     display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    gap: 8,
     marginTop: 4,
   },
   trendingPrice: {
     fontSize: 15,
     fontWeight: 600,
     color: '#111827',
-  },
-  trendingSubtext: {
-    fontSize: 12,
-    color: '#6B7280',
   },
 
   // Trust Section
@@ -731,6 +812,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     gap: 64,
+    flexWrap: 'wrap',
   },
   trustItem: {
     display: 'flex',
@@ -746,6 +828,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     border: '1px solid #E5E7EB',
+    flexShrink: 0,
   },
   trustTitle: {
     fontSize: 15,
@@ -770,6 +853,8 @@ const styles = {
     justifyContent: 'space-between',
     paddingBottom: 32,
     borderBottom: '1px solid #374151',
+    flexWrap: 'wrap',
+    gap: 32,
   },
   footerMain: {
     maxWidth: 280,
@@ -793,6 +878,7 @@ const styles = {
   footerLinks: {
     display: 'flex',
     gap: 64,
+    flexWrap: 'wrap',
   },
   footerColumn: {
     display: 'flex',
