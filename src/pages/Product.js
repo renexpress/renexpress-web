@@ -505,10 +505,39 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
 
         {/* Description & Characteristics */}
         <div className="product-details-row" style={styles.detailsRow}>
-          {/* Description Block */}
-          <div className="product-desc-block" style={styles.descBlock}>
-            <h3 style={styles.sectionTitle}>Описание</h3>
-            <p style={styles.descText}>{product.description || 'Описание отсутствует.'}</p>
+          {/* Left Column - Description + Similar Products */}
+          <div style={styles.descCol}>
+            {/* Description Block */}
+            <div className="product-desc-block" style={styles.descBlock}>
+              <h3 style={styles.sectionTitle}>Описание</h3>
+              <p style={styles.descText}>{product.description || 'Описание отсутствует.'}</p>
+            </div>
+
+            {/* Similar Products - Under Description */}
+            <div className="similar-section" style={styles.similarSection}>
+              <div style={styles.similarHeader}>
+                <h3 style={{...styles.sectionTitle, marginBottom: 0}}>Похожие товары</h3>
+                <div style={styles.scrollBtns}>
+                  <button style={styles.scrollBtn} onClick={() => scrollSimilar('left')}>‹</button>
+                  <button style={styles.scrollBtn} onClick={() => scrollSimilar('right')}>›</button>
+                </div>
+              </div>
+              <div className="similar-products-grid" style={styles.similarScroll} ref={similarScrollRef}>
+                {similarProducts.length > 0 ? (
+                  similarProducts.map(p => (
+                    <div key={p.id} style={styles.simCard} onClick={() => navigate(`/product/${p.id}`)}>
+                      <div style={styles.simImg}>
+                        {p.primary_image ? <img src={p.primary_image} alt="" style={styles.simImage} /> : <div style={styles.simNo}>Нет фото</div>}
+                      </div>
+                      <div style={styles.simName}>{p.name}</div>
+                      <div style={styles.simPrice}>{formatPrice(p.retail_price || p.price)} ₽</div>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{color: '#9CA3AF', fontSize: 11}}>Нет похожих товаров</div>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Characteristics Block */}
@@ -529,32 +558,6 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
                 {product.weight && <div style={styles.charRow}><span style={styles.charLabel}>Вес</span><span style={styles.charDots}></span><span style={styles.charValue}>{product.weight} {product.weight_unit || 'кг'}</span></div>}
                 {product.sku && <div style={styles.charRow}><span style={styles.charLabel}>Артикул</span><span style={styles.charDots}></span><span style={styles.charValue}>{product.sku}</span></div>}
               </>
-            )}
-          </div>
-        </div>
-
-        {/* Similar Products */}
-        <div className="similar-section" style={styles.similarSection}>
-          <div style={styles.similarHeader}>
-            <h3 style={{...styles.sectionTitle, marginBottom: 0}}>Похожие товары</h3>
-            <div style={styles.scrollBtns}>
-              <button style={styles.scrollBtn} onClick={() => scrollSimilar('left')}>‹</button>
-              <button style={styles.scrollBtn} onClick={() => scrollSimilar('right')}>›</button>
-            </div>
-          </div>
-          <div className="similar-products-grid" style={styles.similarScroll} ref={similarScrollRef}>
-            {similarProducts.length > 0 ? (
-              similarProducts.map(p => (
-                <div key={p.id} style={styles.simCard} onClick={() => navigate(`/product/${p.id}`)}>
-                  <div style={styles.simImg}>
-                    {p.primary_image ? <img src={p.primary_image} alt="" style={styles.simImage} /> : <div style={styles.simNo}>Нет фото</div>}
-                  </div>
-                  <div style={styles.simName}>{p.name}</div>
-                  <div style={styles.simPrice}>{formatPrice(p.retail_price || p.price)} ₽</div>
-                </div>
-              ))
-            ) : (
-              <div style={{color: '#9CA3AF', fontSize: 11}}>Нет похожих товаров</div>
             )}
           </div>
         </div>

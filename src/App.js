@@ -5,6 +5,9 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Product from './pages/Product';
+import MyProducts from './pages/MyProducts';
+import AddProduct from './pages/AddProduct';
+import Analytics from './pages/Analytics';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -41,6 +44,22 @@ function App() {
         <Route
           path="/product/:id"
           element={<Product isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path="/my-products"
+          element={<MyProducts isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path="/add-product"
+          element={<AddProduct isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path="/add-product/:id"
+          element={<AddProduct isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path="/analytics"
+          element={<Analytics isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

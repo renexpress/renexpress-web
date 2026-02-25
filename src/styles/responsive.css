@@ -110,6 +110,25 @@
     display: none;
   }
 
+  /* App Store Banner - mobile */
+  .app-banner-content {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .app-banner-left {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .app-banner-title {
+    font-size: 16px !important;
+  }
+
+  .app-banner-desc {
+    font-size: 13px !important;
+  }
+
   .hero-button {
     padding: 12px 20px !important;
     font-size: 14px !important;

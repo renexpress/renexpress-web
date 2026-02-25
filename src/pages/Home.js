@@ -107,6 +107,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           <div className="header-icons" style={styles.headerRight}>
             <nav className="header-nav" style={styles.nav}>
               <a href="/shop" style={styles.navLink}>Каталог</a>
+              <a href="/my-products" style={styles.navLink}>Мои товары</a>
               <a href="#" style={styles.navLink}>О нас</a>
               <a href="#" style={styles.navLink}>Контакты</a>
             </nav>
@@ -214,6 +215,38 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               </svg>
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* App Store Banner */}
+      <section style={styles.appBanner}>
+        <div className="app-banner-content" style={styles.appBannerContent}>
+          <div className="app-banner-left" style={styles.appBannerLeft}>
+            <div style={styles.appBannerIcon}>
+              <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="8" fill="#fff" />
+                <text x="16" y="22" fontSize="18" fontWeight="700" fill={PRIMARY} textAnchor="middle">R</text>
+              </svg>
+            </div>
+            <div>
+              <h3 className="app-banner-title" style={styles.appBannerTitle}>Скачайте приложение RENEXPRESS</h3>
+              <p className="app-banner-desc" style={styles.appBannerDesc}>Отслеживайте доставки, создавайте заказы и общайтесь с поддержкой</p>
+            </div>
+          </div>
+          <a
+            href="https://apps.apple.com/app/renexpress/id6757761284"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.appStoreButton}
+          >
+            <svg width="20" height="24" viewBox="0 0 384 512" fill="#fff">
+              <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+            </svg>
+            <div>
+              <div style={styles.appStoreLabel}>Загрузите в</div>
+              <div style={styles.appStoreName}>App Store</div>
+            </div>
+          </a>
         </div>
       </section>
 
@@ -387,20 +420,19 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           <div className="footer-links" style={styles.footerLinks}>
             <div style={styles.footerColumn}>
               <h5 style={styles.footerColumnTitle}>Магазин</h5>
-              <a href="#" style={styles.footerLink}>Все товары</a>
-              <a href="#" style={styles.footerLink}>Новинки</a>
-              <a href="#" style={styles.footerLink}>Популярное</a>
+              <a href="/shop" style={styles.footerLink}>Все товары</a>
+              <a href="/shop" style={styles.footerLink}>Новинки</a>
+              <a href="/shop" style={styles.footerLink}>Популярное</a>
             </div>
             <div style={styles.footerColumn}>
-              <h5 style={styles.footerColumnTitle}>Поддержка</h5>
+              <h5 style={styles.footerColumnTitle}>Приложение</h5>
+              <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" style={styles.footerLink}>App Store</a>
               <a href="#" style={styles.footerLink}>Центр помощи</a>
-              <a href="#" style={styles.footerLink}>Безопасность</a>
               <a href="#" style={styles.footerLink}>Условия</a>
             </div>
             <div style={styles.footerColumn}>
               <h5 style={styles.footerColumnTitle}>Компания</h5>
               <a href="#" style={styles.footerLink}>О нас</a>
-              <a href="#" style={styles.footerLink}>Блог</a>
               <a href="#" style={styles.footerLink}>Контакты</a>
             </div>
           </div>
@@ -588,6 +620,65 @@ const styles = {
     border: 'none',
     borderRadius: 8,
     cursor: 'pointer',
+  },
+
+  // App Store Banner
+  appBanner: {
+    background: `linear-gradient(135deg, ${PRIMARY} 0%, #2a6b6b 100%)`,
+    padding: '20px 0',
+  },
+  appBannerContent: {
+    maxWidth: 1280,
+    margin: '0 auto',
+    padding: '0 24px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: 16,
+  },
+  appBannerLeft: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 16,
+  },
+  appBannerIcon: {
+    flexShrink: 0,
+  },
+  appBannerTitle: {
+    fontSize: 18,
+    fontWeight: 700,
+    color: '#fff',
+    margin: 0,
+    lineHeight: 1.3,
+  },
+  appBannerDesc: {
+    fontSize: 14,
+    color: 'rgba(255,255,255,0.85)',
+    margin: '4px 0 0',
+  },
+  appStoreButton: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+    backgroundColor: '#000',
+    color: '#fff',
+    padding: '10px 20px',
+    borderRadius: 10,
+    textDecoration: 'none',
+    flexShrink: 0,
+    transition: 'transform 0.2s',
+  },
+  appStoreLabel: {
+    fontSize: 11,
+    fontWeight: 400,
+    lineHeight: 1,
+    color: 'rgba(255,255,255,0.8)',
+  },
+  appStoreName: {
+    fontSize: 18,
+    fontWeight: 600,
+    lineHeight: 1.2,
   },
 
   // Categories
