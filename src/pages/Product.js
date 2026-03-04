@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import API_URL from '../config/api';
 import '../styles/responsive.css';
+import useIsMobile from '../hooks/useIsMobile';
+import Navbar from '../components/Navbar';
 
 const PRIMARY = '#3D8B8B';
 
@@ -17,7 +19,7 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
   const [similarProducts, setSimilarProducts] = useState([]);
   const [reviews, setReviews] = useState([]);
   const similarScrollRef = useRef(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const scrollSimilar = (direction) => {
     if (similarScrollRef.current) {
@@ -252,6 +254,9 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
           <nav className="header-nav" style={styles.nav}>
             <a href="/" style={styles.navLink}>Главная</a>
             <a href="/shop" style={styles.navLink}>Каталог</a>
+            <a href="/services" style={styles.navLink}>Услуги</a>
+            <a href="/about" style={styles.navLink}>О нас</a>
+            <a href="/contacts" style={styles.navLink}>Контакты</a>
           </nav>
           <div className="header-icons" style={styles.headerRight}>
             {isAuthenticated ? (
@@ -263,63 +268,11 @@ function Product({ isAuthenticated, setIsAuthenticated }) {
             ) : (
               <button onClick={() => navigate('/login')} style={styles.signInBtn}>Войти</button>
             )}
-            {/* Mobile Menu Button */}
-            <button
-              className="mobile-menu-btn"
-              onClick={() => setMobileMenuOpen(true)}
-              style={styles.mobileMenuBtn}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
-                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-              </svg>
-            </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`}
-        onClick={() => setMobileMenuOpen(false)}
-      >
-        <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
-          <div className="mobile-menu-header">
-            <div style={styles.logo}>
-              <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-                <rect width="32" height="32" rx="8" fill={PRIMARY} />
-                <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
-              </svg>
-              <span style={styles.logoText}>RENEXPRESS</span>
-            </div>
-            <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
-          </div>
-          <nav className="mobile-menu-nav">
-            <a href="/">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              </svg>
-              Главная
-            </a>
-            <a href="/shop">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="3" width="7" height="7"/>
-              </svg>
-              Каталог
-            </a>
-          </nav>
-          <div className="mobile-menu-footer">
-            {isAuthenticated ? (
-              <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>Выйти</button>
-            ) : (
-              <button onClick={() => { navigate('/login'); setMobileMenuOpen(false); }}>Войти</button>
-            )}
-          </div>
-        </div>
-      </div>
+      <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
       <main className="product-detail-container" style={styles.main}>
         {/* Breadcrumb */}

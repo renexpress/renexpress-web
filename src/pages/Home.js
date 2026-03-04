@@ -4,6 +4,7 @@ import axios from 'axios';
 import API_URL from '../config/api';
 import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
+import Navbar from '../components/Navbar';
 
 const PRIMARY = '#3D8B8B';
 
@@ -14,8 +15,6 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeNav, setActiveNav] = useState('/');
   const [scrollY, setScrollY] = useState(0);
   const isMobile = useIsMobile();
   const heroRef = useRef(null);
@@ -92,123 +91,18 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div style={styles.page}>
-      {/* Tubelight Floating Navbar */}
-      <nav className="tubelight-nav" style={styles.tubelightWrapper}>
-        <div className="tubelight-bar" style={styles.tubelightBar}>
-          {/* Logo */}
-          <a href="/" style={styles.tubelightLogo}>
-            <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="8" fill={PRIMARY} />
-              <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
-            </svg>
-          </a>
-
-          {/* Nav Links */}
-          {[
-            { name: 'Главная', url: '/' },
-            { name: 'Услуги', url: '/services' },
-            { name: 'Калькулятор', url: '/calculator' },
-            { name: 'FAQ', url: '/faq' },
-            { name: 'О нас', url: '/about' },
-            { name: 'Контакты', url: '/contacts' },
-          ].map((item) => (
-            <a
-              key={item.url}
-              href={item.url}
-              className={`tubelight-link ${activeNav === item.url ? 'tubelight-active' : ''}`}
-              onMouseEnter={() => setActiveNav(item.url)}
-              style={{
-                ...styles.tubelightLink,
-                ...(activeNav === item.url ? styles.tubelightLinkActive : {}),
-              }}
-            >
-              {activeNav === item.url && <span className="tubelight-glow" style={styles.tubelightGlow} />}
-              <span style={{ position: 'relative', zIndex: 1 }}>{item.name}</span>
-            </a>
-          ))}
-
-          {/* Auth Button */}
-          {isAuthenticated ? (
-            <button onClick={handleLogout} style={styles.tubelightAuthBtn}>Выйти</button>
-          ) : (
-            <button onClick={() => navigate('/login')} style={styles.tubelightAuthBtn}>Войти</button>
-          )}
-        </div>
-      </nav>
-
-      {/* Mobile Bottom Nav */}
-      <nav className="mobile-bottom-nav" style={styles.mobileBottomNav}>
-        {[
-          { name: 'Главная', url: '/', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
-          { name: 'Каталог', url: '/shop', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> },
-          { name: 'Услуги', url: '/services', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> },
-          { name: 'О нас', url: '/about', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> },
-          { name: 'Ещё', url: '#more', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg> },
-        ].map((item) => (
-          <a
-            key={item.url}
-            href={item.url === '#more' ? undefined : item.url}
-            onClick={item.url === '#more' ? (e) => { e.preventDefault(); setMobileMenuOpen(true); } : undefined}
-            className={`mobile-bottom-link ${activeNav === item.url ? 'mobile-bottom-active' : ''}`}
-            style={{
-              ...styles.mobileBottomLink,
-              color: activeNav === item.url ? PRIMARY : '#6B7280',
-            }}
-          >
-            {item.icon}
-            <span style={styles.mobileBottomLabel}>{item.name}</span>
-          </a>
-        ))}
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`}
-        onClick={() => setMobileMenuOpen(false)}
-      >
-        <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
-          <div className="mobile-menu-header">
-            <div style={{display:'flex',alignItems:'center',gap:10}}>
-              <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-                <rect width="32" height="32" rx="8" fill={PRIMARY} />
-                <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
-              </svg>
-              <span style={{fontSize:18,fontWeight:700,color:'#111827'}}>RENEXPRESS</span>
-            </div>
-            <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
-          </div>
-          <nav className="mobile-menu-nav">
-            <a href="/" className="active">Главная</a>
-            <a href="/shop">Каталог</a>
-            <a href="/about">О нас</a>
-            <a href="/services">Услуги</a>
-            <a href="/faq">FAQ</a>
-            <a href="/calculator">Калькулятор</a>
-            <a href="/contacts">Контакты</a>
-          </nav>
-          <div className="mobile-menu-footer">
-            {isAuthenticated ? (
-              <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>Выйти</button>
-            ) : (
-              <button onClick={() => { navigate('/login'); setMobileMenuOpen(false); }}>Войти</button>
-            )}
-          </div>
-        </div>
-      </div>
+      <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
       {/* Hero Section with Scroll Animation */}
-      <section ref={heroRef} className="hero-section" style={styles.heroWrapper}>
+      <section ref={heroRef} className="hero-section" style={{...styles.heroWrapper, ...(isMobile ? {padding: '20px 12px 12px'} : {})}}>
         <div style={{
           ...styles.heroInner,
-          perspective: '1000px',
+          perspective: isMobile ? 'none' : '1000px',
         }}>
           <div style={{
             ...styles.heroCard,
-            transform: `rotateX(${20 - scrollY * 20}deg) scale(${1.05 - scrollY * 0.05})`,
+            ...(isMobile ? { height: 380, borderRadius: 16, border: '2px solid #333' } : {}),
+            transform: isMobile ? 'none' : `rotateX(${20 - scrollY * 20}deg) scale(${1.05 - scrollY * 0.05})`,
             transition: 'transform 0.1s linear',
           }}>
             <img src="/room.png" alt="RENEXPRESS доставка из Турции" style={styles.heroImage} />
@@ -221,7 +115,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                   opacity: 1 - scrollY * 0.8,
                   transform: `translateY(${scrollY * -40}px)`,
                   transition: 'opacity 0.1s, transform 0.1s',
-                }}>Карго доставка из<br/>Стамбула в Москву</h1>
+                }}>Карго доставка из{isMobile ? ' ' : <br/>}Стамбула в Москву</h1>
                 <p className="hero-subtitle" style={{
                   ...styles.heroSubtitle,
                   fontSize: isMobile ? 14 : 16,
@@ -229,8 +123,8 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                   transform: `translateY(${scrollY * -20}px)`,
                   transition: 'opacity 0.1s, transform 0.1s',
                 }}>
-                  Авиа и авто перевозки текстиля, обуви и товаров из Турции.<br/>
-                  От $4/кг. Сроки от 3 дней. Более 3000 клиентов доверяют нам.
+                  Авиа и авто перевозки текстиля, обуви и товаров из Турции.{!isMobile && <br/>}
+                  {' '}От $4/кг. Сроки от 3 дней. Более 3000 клиентов доверяют нам.
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: 1 - scrollY * 1.5, transition: 'opacity 0.1s' }}>
                   <button className="hero-button" onClick={() => navigate('/calculator')} style={{...styles.heroButton, ...(isMobile ? {width: '100%', fontSize: 14, justifyContent: 'center'} : {})}}>
@@ -239,7 +133,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                   </button>
-                  <button onClick={() => navigate('/services')} style={styles.heroSecondaryBtn}>
+                  <button onClick={() => navigate('/services')} style={{...styles.heroSecondaryBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', fontSize: 14} : {})}}>
                     Наши услуги
                   </button>
                 </div>
@@ -250,10 +144,10 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* Display Cards - Key Features */}
-      <section className="display-cards-section" style={styles.displayCardsSection}>
+      <section className="display-cards-section" style={{...styles.displayCardsSection, ...(isMobile ? {padding: '40px 16px 32px'} : {})}}>
         <h2 style={{...styles.displayCardsTitle, fontSize: isMobile ? 20 : 32}}>Почему выбирают RENEXPRESS</h2>
         <p style={{...styles.displayCardsSubtitle, fontSize: isMobile ? 13 : 16}}>Карго доставка из Турции для бизнеса и частных клиентов</p>
-        <div className="display-cards-grid" style={{ minHeight: 280, ...(isMobile ? {transform: 'scale(0.6)', transformOrigin: 'center center'} : {}) }}>
+        <div className="display-cards-grid" style={{ minHeight: isMobile ? 180 : 280, ...(isMobile ? {transform: 'scale(0.55)', transformOrigin: 'center center', marginBottom: -40} : {}) }}>
           {/* Card 1 */}
           <div className="display-card display-card--1">
             <div className="display-card__header">
@@ -607,106 +501,6 @@ const styles = {
     minHeight: '100vh',
     backgroundColor: '#fff',
     fontFamily: 'Inter, -apple-system, sans-serif',
-  },
-
-  // Tubelight Navbar
-  tubelightWrapper: {
-    position: 'fixed',
-    top: 0,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    zIndex: 100,
-    paddingTop: 16,
-  },
-  tubelightBar: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 4,
-    backgroundColor: 'rgba(17,24,39,0.85)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)',
-    padding: '4px 6px',
-    borderRadius: 50,
-    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-  },
-  tubelightLogo: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '6px 10px',
-    textDecoration: 'none',
-    flexShrink: 0,
-  },
-  tubelightLink: {
-    position: 'relative',
-    padding: '8px 18px',
-    fontSize: 14,
-    fontWeight: 600,
-    color: 'rgba(255,255,255,0.7)',
-    textDecoration: 'none',
-    borderRadius: 50,
-    transition: 'color 0.3s',
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-  },
-  tubelightLinkActive: {
-    color: '#fff',
-    backgroundColor: 'rgba(61,139,139,0.15)',
-  },
-  tubelightGlow: {
-    position: 'absolute',
-    top: -2,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: 32,
-    height: 4,
-    backgroundColor: PRIMARY,
-    borderRadius: '4px 4px 0 0',
-    boxShadow: `0 0 12px 4px rgba(61,139,139,0.4), 0 0 24px 8px rgba(61,139,139,0.2)`,
-  },
-  tubelightAuthBtn: {
-    padding: '8px 18px',
-    fontSize: 13,
-    fontWeight: 600,
-    color: '#fff',
-    backgroundColor: PRIMARY,
-    border: 'none',
-    borderRadius: 50,
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-    marginLeft: 4,
-  },
-
-  // Mobile Bottom Nav
-  mobileBottomNav: {
-    display: 'none',
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 100,
-    backgroundColor: 'rgba(255,255,255,0.95)',
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    borderTop: '1px solid #E5E7EB',
-    padding: '6px 0 env(safe-area-inset-bottom, 8px)',
-    justifyContent: 'space-around',
-  },
-  mobileBottomLink: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 2,
-    textDecoration: 'none',
-    padding: '4px 0',
-    fontSize: 10,
-    fontWeight: 500,
-    minWidth: 56,
-  },
-  mobileBottomLabel: {
-    fontSize: 10,
-    fontWeight: 500,
   },
 
   // Hero
