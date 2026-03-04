@@ -19,12 +19,12 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
   };
 
   const deliveryTypes = [
-    { code: 'avto_express', name: 'AVTO EXPRESS', price: 5, days: '12-15', desc: 'Домашний текстиль, Турецкий текстиль' },
-    { code: 'avto_ex_marka', name: 'AVTO EX MARKA', price: 7, days: '12-15', desc: 'Бренд/марка текстиль, Б/У текстиль' },
-    { code: 'avto_obuv', name: 'AVTO ОБУВЬ', price: 7, days: '14-15', desc: 'Обувь турецкого производства' },
-    { code: 'avia_u2_marka', name: 'AVIA U2 MARKA', price: 9, days: '7-8', desc: 'Бренд/Марка текстиль, Б/У текстиль' },
-    { code: 'avia_ex_marka', name: 'AVIA EX MARKA', price: 11, days: '3-4', desc: 'Домашний текстиль, Турецкий текстиль' },
-    { code: 'avia_u2_obuv', name: 'AVIA U2 ОБУВЬ', price: 11, days: '7-8', desc: 'Брендовая обувь, Б/У обувь' },
+    { code: 'avto_express', name: 'AVTO EXPRESS', price: 4, days: '14-18', desc: 'Домашний текстиль, Турецкий текстиль' },
+    { code: 'avto_ex_marka', name: 'AVTO EX MARKA', price: 5, days: '14-18', desc: 'Домашний текстиль, Бренд/Марка текстиль, Турецкий текстиль' },
+    { code: 'avto_obuv', name: 'AVTO ОБУВЬ', price: 5, days: '14-18', desc: 'Турецкие производители обуви (не марка, не бренд)' },
+    { code: 'avia_u2_marka', name: 'AVIA U2 MARKA', price: 7.5, days: '7-8', desc: 'Турецкий текстиль, Бренд/Марка текстиль' },
+    { code: 'avia_u3', name: 'AVIA U3', price: 8, days: '4-5', desc: 'Обувь (марка, турецкое производство)' },
+    { code: 'avia_ex_marka', name: 'AVIA EX MARKA', price: 10, days: '3-4', desc: 'Турецкое производство, Бренд/Марка текстиль' },
   ];
 
   const calculate = () => {
@@ -337,14 +337,14 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
             Онлайн-калькулятор RENEXPRESS позволяет быстро рассчитать стоимость доставки груза из Стамбула
             в Москву. Выберите тип доставки в зависимости от категории вашего товара и укажите вес —
             система автоматически рассчитает итоговую стоимость перевозки. Мы предлагаем шесть тарифов:
-            три вида автомобильной доставки (AVTO EXPRESS от $5/кг, AVTO EX MARKA и AVTO ОБУВЬ от $7/кг)
-            и три вида авиадоставки (AVIA U2 MARKA от $9/кг, AVIA EX MARKA и AVIA U2 ОБУВЬ от $11/кг).
+            три вида автомобильной доставки (AVTO EXPRESS от $4/кг, AVTO EX MARKA и AVTO ОБУВЬ от $5/кг)
+            и три вида авиадоставки (AVIA U2 MARKA от $7.5/кг, AVIA U3 от $8/кг, AVIA EX MARKA от $10/кг).
             Минимальный вес отправки составляет 10 килограмм для всех тарифов.
           </p>
           <p style={styles.seoText}>
-            Сроки доставки варьируются от 3 до 15 дней. Самая быстрая доставка — AVIA EX MARKA (3-4 дня),
-            самая экономичная — AVTO EXPRESS (12-15 дней, $5/кг). Для брендовых товаров и товаров с маркировкой
-            рекомендуем тарифы с пометкой MARKA. Для обуви предусмотрены специальные тарифы AVTO ОБУВЬ и AVIA U2 ОБУВЬ.
+            Сроки доставки варьируются от 3 до 18 дней. Самая быстрая доставка — AVIA EX MARKA (3-4 дня),
+            самая экономичная — AVTO EXPRESS (14-18 дней, $4/кг). Для брендовых товаров и товаров с маркировкой
+            рекомендуем тарифы с пометкой MARKA. Для обуви предусмотрены специальные тарифы AVTO ОБУВЬ и AVIA U3.
             Рассчитайте стоимость доставки прямо сейчас и оформите заказ через приложение RENEXPRESS или свяжитесь
             с нашим менеджером по WhatsApp.
           </p>

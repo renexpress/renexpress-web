@@ -226,7 +226,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                   transition: 'opacity 0.1s, transform 0.1s',
                 }}>
                   Авиа и авто перевозки текстиля, обуви и товаров из Турции.<br/>
-                  От $5/кг. Сроки от 3 дней. Более 3000 клиентов доверяют нам.
+                  От $4/кг. Сроки от 3 дней. Более 3000 клиентов доверяют нам.
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: 1 - scrollY * 1.5, transition: 'opacity 0.1s' }}>
                   <button className="hero-button" onClick={() => navigate('/calculator')} style={styles.heroButton}>
@@ -261,7 +261,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               </span>
               <p className="display-card__title" style={{ color: '#93C5FD' }}>Авто доставка</p>
             </div>
-            <p className="display-card__desc">От $5/кг — текстиль за 12-15 дней</p>
+            <p className="display-card__desc">От $4/кг — текстиль за 14-18 дней</p>
             <p className="display-card__date">6 тарифов на выбор</p>
           </div>
           {/* Card 2 */}
@@ -274,7 +274,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               </span>
               <p className="display-card__title" style={{ color: '#93C5FD' }}>Авиа доставка</p>
             </div>
-            <p className="display-card__desc">От $9/кг — экспресс за 3-4 дня</p>
+            <p className="display-card__desc">От $7.5/кг — экспресс за 3-4 дня</p>
             <p className="display-card__date">Ежедневные отправки</p>
           </div>
           {/* Card 3 */}
@@ -351,7 +351,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
             {[
               { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,
                 title: 'Авто и авиа доставка',
-                text: 'Шесть тарифов: авто от $5/кг за 12-15 дней, авиа от $9/кг за 3-4 дня. Ежедневные отправки из Стамбула.' },
+                text: 'Шесть тарифов: авто от $4/кг за 14-18 дней, авиа от $7.5/кг за 3-4 дня. Ежедневные отправки из Стамбула.' },
               { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>,
                 title: 'Честный знак и маркировка',
                 text: 'Маркируем товары для легальной продажи в России. Доставляем напрямую на склады Wildberries и OZON.' },
@@ -381,12 +381,12 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
             <h3 style={styles.seoTariffTitle}>Тарифы на карго доставку из Турции</h3>
             <div className="seo-tariff-row" style={styles.seoTariffRow}>
               {[
-                { name: 'AVTO EXPRESS', price: '$5/кг', days: '12-15 дн', type: 'Текстиль' },
-                { name: 'AVTO EX MARKA', price: '$7/кг', days: '12-15 дн', type: 'Бренд текстиль' },
-                { name: 'AVTO ОБУВЬ', price: '$7/кг', days: '14-15 дн', type: 'Обувь' },
-                { name: 'AVIA U2 MARKA', price: '$9/кг', days: '7-8 дн', type: 'Бренд текстиль' },
-                { name: 'AVIA EX MARKA', price: '$11/кг', days: '3-4 дн', type: 'Экспресс' },
-                { name: 'AVIA U2 ОБУВЬ', price: '$11/кг', days: '7-8 дн', type: 'Бренд обувь' },
+                { name: 'AVTO EXPRESS', price: '$4/кг', days: '14-18 дн', type: 'Текстиль' },
+                { name: 'AVTO EX MARKA', price: '$5/кг', days: '14-18 дн', type: 'Бренд текстиль' },
+                { name: 'AVTO ОБУВЬ', price: '$5/кг', days: '14-18 дн', type: 'Обувь' },
+                { name: 'AVIA U2 MARKA', price: '$7.5/кг', days: '7-8 дн', type: 'Бренд текстиль' },
+                { name: 'AVIA U3', price: '$8/кг', days: '4-5 дн', type: 'Обувь' },
+                { name: 'AVIA EX MARKA', price: '$10/кг', days: '3-4 дн', type: 'Бренд текстиль' },
               ].map((t, i) => (
                 <div key={i} style={styles.seoTariffChip}>
                   <span style={styles.seoTariffName}>{t.name}</span>
