@@ -211,10 +211,10 @@ function About({ isAuthenticated, setIsAuthenticated }) {
 
       {/* ====== Stats Section ====== */}
       <section style={styles.statsSection}>
-        <div style={styles.statsGrid}>
+        <div className="statsGrid" style={styles.statsGrid}>
           {stats.map((stat, i) => (
             <div key={i} style={styles.statCard}>
-              <div style={styles.statNumber}>{stat.number}</div>
+              <div className="statNumber" style={styles.statNumber}>{stat.number}</div>
               <div style={styles.statLabel}>{stat.label}</div>
             </div>
           ))}
@@ -255,7 +255,7 @@ function About({ isAuthenticated, setIsAuthenticated }) {
             Мы предоставляем комплексные решения для доставки грузов из Турции в Россию,
             учитывая специфику каждого типа товара и потребности клиента.
           </p>
-          <div style={styles.advantagesGrid}>
+          <div className="advantagesGrid" style={styles.advantagesGrid}>
             {advantages.map((adv, i) => (
               <div key={i} style={styles.advantageCard}>
                 <div style={styles.advantageIconCircle}>
@@ -273,7 +273,7 @@ function About({ isAuthenticated, setIsAuthenticated }) {
       <section style={styles.warehouseSection}>
         <div style={styles.container}>
           <h2 style={styles.warehouseSectionTitle}>Наши склады</h2>
-          <div style={styles.warehouseGrid}>
+          <div className="warehouseGrid" style={styles.warehouseGrid}>
             <div style={styles.warehouseCard}>
               <div style={styles.warehouseCardHeader}>
                 <div style={styles.warehouseIconCircle}>

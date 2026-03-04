@@ -177,7 +177,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
       {/* ====== CALCULATOR SECTION ====== */}
       <section style={styles.calcSection}>
         <div style={styles.calcContainer}>
-          <div style={styles.calcCard}>
+          <div className="calc-card" style={styles.calcCard}>
             {/* Glass shimmer top edge */}
             <div style={{
               position: 'absolute', top: 0, left: '10%', right: '10%', height: 1,
