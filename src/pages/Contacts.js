@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
+import useIsMobile from '../hooks/useIsMobile';
 
 const PRIMARY = '#3D8B8B';
 
@@ -8,6 +9,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
   const [activeNav, setActiveNav] = useState('/contacts');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleLogout = () => {
     localStorage.removeItem('client');
@@ -155,7 +157,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
       </div>
 
       {/* ============ DARK HERO ============ */}
-      <section style={styles.hero}>
+      <section style={{ ...styles.hero, ...(isMobile ? { padding: '80px 16px 48px' } : {}) }}>
         {/* Floating blobs */}
         <div style={styles.heroBlobContainer}>
           <div style={{ ...styles.heroBlob, width: 200, height: 200, background: PRIMARY, top: -60, left: '10%', opacity: 0.25, filter: 'blur(80px)' }} />
@@ -163,19 +165,19 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
           <div style={{ ...styles.heroBlob, width: 120, height: 120, background: '#818CF8', bottom: -40, left: '45%', opacity: 0.15, filter: 'blur(70px)' }} />
         </div>
         <div style={styles.heroContent}>
-          <h1 style={styles.heroTitle}>Контакты RENEXPRESS</h1>
-          <p style={styles.heroSubtitle}>
+          <h1 style={{ ...styles.heroTitle, ...(isMobile ? { fontSize: 26 } : {}) }}>Контакты RENEXPRESS</h1>
+          <p style={{ ...styles.heroSubtitle, ...(isMobile ? { fontSize: 14 } : {}) }}>
             Свяжитесь с нами любым удобным способом. Менеджеры в Стамбуле и Москве на связи для вас.
           </p>
         </div>
       </section>
 
       {/* ============ CONTACT CARDS ============ */}
-      <section style={styles.contactSection}>
+      <section style={{ ...styles.contactSection, ...(isMobile ? { padding: '48px 16px' } : {}) }}>
         <div style={styles.container}>
           <h2 style={styles.sectionTitleLight}>Наши контакты</h2>
           <p style={styles.sectionSubtitleLight}>Выберите удобный способ связи с нашей командой</p>
-          <div style={styles.contactGrid}>
+          <div style={{ ...styles.contactGrid, ...(isMobile ? { gridTemplateColumns: '1fr' } : {}) }}>
             {contacts.map((c, i) => (
               <a
                 key={i}
@@ -183,7 +185,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                 target={c.link.startsWith('http') ? '_blank' : undefined}
                 rel="noopener noreferrer"
                 className="contact-glass-card"
-                style={styles.contactCard}
+                style={{ ...styles.contactCard, ...(isMobile ? { padding: 20 } : {}) }}
               >
                 <div style={styles.contactIconCircle}>
                   {renderContactIcon(c.icon)}
@@ -202,11 +204,11 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* ============ SOCIAL & BRANDS ============ */}
-      <section style={styles.socialSection}>
+      <section style={{ ...styles.socialSection, ...(isMobile ? { padding: '48px 16px' } : {}) }}>
         <div style={styles.container}>
           <h2 style={styles.sectionTitleLight}>Мы в соцсетях</h2>
-          <div style={styles.socialGrid}>
-            <a href="https://instagram.com/renat_karaliev" target="_blank" rel="noopener noreferrer" className="contact-glass-card" style={styles.socialCard}>
+          <div style={{ ...styles.socialGrid, ...(isMobile ? { gridTemplateColumns: '1fr' } : {}) }}>
+            <a href="https://instagram.com/renat_karaliev" target="_blank" rel="noopener noreferrer" className="contact-glass-card" style={{ ...styles.socialCard, ...(isMobile ? { padding: '24px 16px' } : {}) }}>
               <div style={styles.socialIconCircle}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
                   <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
@@ -215,7 +217,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
               <h3 style={styles.socialTitle}>Instagram</h3>
               <p style={styles.socialHandle}>@renat_karaliev</p>
             </a>
-            <a href="https://www.rencargo.com" target="_blank" rel="noopener noreferrer" className="contact-glass-card" style={styles.socialCard}>
+            <a href="https://www.rencargo.com" target="_blank" rel="noopener noreferrer" className="contact-glass-card" style={{ ...styles.socialCard, ...(isMobile ? { padding: '24px 16px' } : {}) }}>
               <div style={{ ...styles.socialIconCircle, background: 'linear-gradient(135deg, #3B82F6, #2563EB)' }}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
                   <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
@@ -225,7 +227,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
               <p style={styles.socialHandle}>www.rencargo.com</p>
             </a>
           </div>
-          <div style={styles.brandsRow}>
+          <div style={{ ...styles.brandsRow, ...(isMobile ? { flexWrap: 'wrap', justifyContent: 'center' } : {}) }}>
             {['RENEXPRESS', 'RENCARGO TRANSPORTATION', 'RENSHOPPING ISTANBUL', 'RENFABRIK'].map((brand) => (
               <span key={brand} className="contact-glass-card" style={styles.brandTag}>{brand}</span>
             ))}
@@ -234,21 +236,21 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* ============ WAREHOUSES ============ */}
-      <section style={styles.warehouseSection}>
+      <section style={{ ...styles.warehouseSection, ...(isMobile ? { padding: '48px 16px' } : {}) }}>
         <div style={styles.container}>
-          <h2 style={styles.sectionTitleDark}>Наши склады</h2>
+          <h2 style={{ ...styles.sectionTitleDark, ...(isMobile ? { fontSize: 22 } : {}) }}>Наши склады</h2>
           <p style={styles.sectionSubtitleDark}>Складские помещения для приёма и отправки грузов</p>
-          <div style={styles.warehouseGrid}>
+          <div style={{ ...styles.warehouseGrid, ...(isMobile ? { gridTemplateColumns: '1fr' } : {}) }}>
             {/* Moscow */}
             <div style={styles.warehouseCard}>
-              <div style={styles.warehouseHeader}>
+              <div style={{ ...styles.warehouseHeader, ...(isMobile ? { padding: '20px 20px 0' } : {}) }}>
                 <div style={styles.warehouseBadge}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   <span>Россия</span>
                 </div>
                 <h3 style={styles.warehouseTitle}>Склад в Москве</h3>
               </div>
-              <div style={styles.warehouseBody}>
+              <div style={{ ...styles.warehouseBody, ...(isMobile ? { padding: '12px 20px' } : {}) }}>
                 <div style={styles.warehouseDetail}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   <span>ул. Южнопортовая 7а, стр 2, склад 8, ворота 1</span>
@@ -262,7 +264,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                   <span>Менеджер: <a href="https://wa.me/905511898299" style={{ color: PRIMARY, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 99</a></span>
                 </div>
               </div>
-              <div style={styles.mapContainer}>
+              <div style={{ ...styles.mapContainer, ...(isMobile ? { padding: '0 20px 20px' } : {}) }}>
                 <iframe
                   title="Склад RENEXPRESS Москва"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2247.5!2d37.6573!3d55.7058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z0YPQuy4g0K7QttC90L7Qv9C-0YDRgtC-0LLQsNGPIDdhLCDRgdGC0YAgMg!5e0!3m2!1sru!2sru!4v1700000000000"
@@ -278,14 +280,14 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
 
             {/* Istanbul */}
             <div style={styles.warehouseCard}>
-              <div style={styles.warehouseHeader}>
+              <div style={{ ...styles.warehouseHeader, ...(isMobile ? { padding: '20px 20px 0' } : {}) }}>
                 <div style={styles.warehouseBadge}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   <span>Турция</span>
                 </div>
                 <h3 style={styles.warehouseTitle}>Офис в Стамбуле</h3>
               </div>
-              <div style={styles.warehouseBody}>
+              <div style={{ ...styles.warehouseBody, ...(isMobile ? { padding: '12px 20px' } : {}) }}>
                 <div style={styles.warehouseDetail}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                   <span>Телефон офиса: 0212 522 55 50</span>
@@ -303,7 +305,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                   <span>Байер: <a href="https://wa.me/905511898289" style={{ color: PRIMARY, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 89</a></span>
                 </div>
               </div>
-              <div style={styles.warehouseDescBox}>
+              <div style={{ ...styles.warehouseDescBox, ...(isMobile ? { padding: '0 20px 20px' } : {}) }}>
                 <p style={styles.warehouseDesc}>
                   Стамбульский офис координирует приём товаров от поставщиков, упаковку, консолидацию
                   и ежедневную отправку грузов в Россию. Наш байер поможет с поиском и закупкой товаров
@@ -316,16 +318,16 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* ============ APP CTA ============ */}
-      <section style={styles.appCtaSection}>
+      <section style={{ ...styles.appCtaSection, ...(isMobile ? { padding: '48px 16px' } : {}) }}>
         <div style={styles.container}>
-          <div className="contact-glass-card" style={styles.appCtaCard}>
-            <div style={styles.appCtaContent}>
+          <div className="contact-glass-card" style={{ ...styles.appCtaCard, ...(isMobile ? { padding: 24 } : {}) }}>
+            <div style={{ ...styles.appCtaContent, ...(isMobile ? { flexDirection: 'column', textAlign: 'center' } : {}) }}>
               <div style={styles.appCtaText}>
                 <h3 style={styles.appCtaTitle}>Скачайте приложение RENEXPRESS</h3>
                 <p style={styles.appCtaDesc}>Отслеживайте доставки, создавайте заказы и общайтесь с поддержкой в приложении</p>
               </div>
-              <div style={styles.appCtaButtons}>
-                <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" style={styles.appStoreBtn}>
+              <div style={{ ...styles.appCtaButtons, ...(isMobile ? { flexDirection: 'column', alignItems: 'stretch', width: '100%' } : {}) }}>
+                <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" style={{ ...styles.appStoreBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
                   <svg width="20" height="24" viewBox="0 0 384 512" fill="#fff">
                     <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
                   </svg>
@@ -334,11 +336,11 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                     <div style={{ fontSize: 18, fontWeight: 600 }}>App Store</div>
                   </div>
                 </a>
-                <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" style={styles.whatsappBtn}>
+                <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" style={{ ...styles.whatsappBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                   WhatsApp
                 </a>
-                <a href="tel:+905070107070" style={styles.callBtn}>
+                <a href="tel:+905070107070" style={{ ...styles.callBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                   Позвонить
                 </a>
@@ -349,7 +351,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* ============ SEO TEXT ============ */}
-      <section style={styles.seoSection}>
+      <section style={{ ...styles.seoSection, ...(isMobile ? { padding: '40px 16px' } : {}) }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
           <h2 style={styles.seoTitle}>Контакты карго компании RENEXPRESS — доставка из Турции в Россию</h2>
           <p style={styles.seoText}>
@@ -366,7 +368,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* ============ CREATIVE FOOTER ============ */}
-      <footer className="footer" style={styles.footer}>
+      <footer className="footer" style={{ ...styles.footer, ...(isMobile ? { paddingBottom: 80 } : {}) }}>
         {/* Animated gradient blobs */}
         <div className="footer-blobs" style={styles.footerBlobs}>
           <div className="footer-blob footer-blob-1" />
@@ -378,7 +380,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
         <div style={styles.footerTopDivider} />
 
         {/* Footer columns grid */}
-        <div className="footer-content" style={styles.footerGrid}>
+        <div className="footer-content" style={{ ...styles.footerGrid, ...(isMobile ? { gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 } : {}) }}>
           {/* Brand column */}
           <div style={styles.footerBrand}>
             <div style={styles.footerLogo}>

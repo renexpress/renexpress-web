@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
+import useIsMobile from '../hooks/useIsMobile';
 
 const PRIMARY = '#3D8B8B';
 
 function Services({ isAuthenticated, setIsAuthenticated }) {
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [activeNav, setActiveNav] = useState('/services');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -431,8 +433,9 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
       <section style={{
         position: 'relative',
         backgroundColor: '#111827',
-        paddingTop: 100,
-        paddingBottom: 80,
+        padding: isMobile ? '80px 16px 48px' : undefined,
+        paddingTop: isMobile ? undefined : 100,
+        paddingBottom: isMobile ? undefined : 80,
         overflow: 'hidden',
       }}>
         {/* Blobs behind hero */}
@@ -455,7 +458,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
             6 тарифов доставки
           </span>
           <h1 style={{
-            fontSize: 48,
+            fontSize: isMobile ? 26 : 48,
             fontWeight: 700,
             color: '#fff',
             lineHeight: 1.15,
@@ -465,7 +468,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
             Услуги доставки из Турции<br/>в Россию
           </h1>
           <p style={{
-            fontSize: 18,
+            fontSize: isMobile ? 14 : 18,
             color: 'rgba(255,255,255,0.6)',
             lineHeight: 1.7,
             maxWidth: 600,
@@ -480,6 +483,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: 8,
                 backgroundColor: PRIMARY,
                 color: '#fff',
@@ -491,6 +495,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 cursor: 'pointer',
                 transition: 'transform 0.2s, box-shadow 0.2s',
                 boxShadow: '0 4px 16px rgba(61,139,139,0.3)',
+                width: isMobile ? '100%' : 'auto',
               }}
             >
               Рассчитать стоимость
@@ -504,6 +509,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 backgroundColor: 'rgba(255,255,255,0.08)',
                 color: '#fff',
                 fontSize: 15,
@@ -514,6 +520,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 cursor: 'pointer',
                 transition: 'background 0.2s, border-color 0.2s',
                 backdropFilter: 'blur(4px)',
+                width: isMobile ? '100%' : 'auto',
               }}
             >
               Связаться
@@ -526,13 +533,13 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
       <section style={{
         position: 'relative',
         backgroundColor: '#0B1120',
-        padding: '80px 24px',
+        padding: isMobile ? '48px 16px' : '80px 24px',
         overflow: 'hidden',
       }}>
         <div className="services-blob-3" />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1280, margin: '0 auto' }}>
           <h2 style={{
-            fontSize: 36,
+            fontSize: isMobile ? 22 : 36,
             fontWeight: 700,
             color: '#fff',
             textAlign: 'center',
@@ -550,15 +557,15 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           </p>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 24,
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+            gap: isMobile ? 12 : 24,
           }} className="services-tariff-grid">
             {deliveryTypes.map((dt, i) => (
               <div
                 key={i}
                 className="services-tariff-card"
                 style={{
-                  padding: 28,
+                  padding: isMobile ? 20 : 28,
                   background: 'rgba(255,255,255,0.06)',
                   backdropFilter: 'blur(16px)',
                   WebkitBackdropFilter: 'blur(16px)',
@@ -594,7 +601,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                   <h3 style={{ fontSize: 18, fontWeight: 700, color: '#fff' }}>{dt.name}</h3>
                 </div>
                 <div style={{ marginBottom: 16 }}>
-                  <span style={{ fontSize: 40, fontWeight: 700, color: PRIMARY }}>${dt.price}</span>
+                  <span style={{ fontSize: isMobile ? 32 : 40, fontWeight: 700, color: PRIMARY }}>${dt.price}</span>
                   <span style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)', fontWeight: 500, marginLeft: 2 }}>/кг</span>
                 </div>
                 <div style={{ marginBottom: 16 }}>
@@ -615,11 +622,11 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
       {/* ======= HOW IT WORKS ======= */}
       <section style={{
         backgroundColor: '#fff',
-        padding: '80px 24px',
+        padding: isMobile ? '48px 16px' : '80px 24px',
       }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
           <h2 style={{
-            fontSize: 36,
+            fontSize: isMobile ? 22 : 36,
             fontWeight: 700,
             color: '#111827',
             textAlign: 'center',
@@ -635,9 +642,9 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           }}>
             Простой и прозрачный процесс доставки грузов из Турции
           </p>
-          <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }} className="services-steps-grid">
+          <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: isMobile ? 12 : 24 }} className="services-steps-grid">
             {/* Connecting line */}
-            <div className="services-step-line" />
+            <div className="services-step-line" style={{ display: isMobile ? 'none' : 'block' }} />
 
             {steps.map((step, i) => (
               <div
@@ -646,7 +653,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 style={{
                   position: 'relative',
                   zIndex: 1,
-                  padding: 28,
+                  padding: isMobile ? 20 : 28,
                   background: '#FAFAFA',
                   borderRadius: 20,
                   border: '1px solid #E5E7EB',
@@ -692,14 +699,14 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
       <section style={{
         position: 'relative',
         backgroundColor: '#111827',
-        padding: '80px 24px',
+        padding: isMobile ? '48px 16px' : '80px 24px',
         overflow: 'hidden',
       }}>
         <div className="services-blob-1" style={{ opacity: 0.5 }} />
         <div className="services-blob-2" style={{ opacity: 0.5 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1280, margin: '0 auto' }}>
           <h2 style={{
-            fontSize: 36,
+            fontSize: isMobile ? 22 : 36,
             fontWeight: 700,
             color: '#fff',
             textAlign: 'center',
@@ -717,15 +724,15 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           </p>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 24,
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+            gap: isMobile ? 12 : 24,
           }} className="services-addon-grid">
             {additionalServices.map((svc, i) => (
               <div
                 key={i}
                 className="services-addon-card"
                 style={{
-                  padding: 28,
+                  padding: isMobile ? 20 : 28,
                   background: 'rgba(255,255,255,0.06)',
                   backdropFilter: 'blur(16px)',
                   WebkitBackdropFilter: 'blur(16px)',
@@ -777,7 +784,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           zIndex: 2,
           maxWidth: 720,
           margin: '0 auto',
-          padding: '48px 40px',
+          padding: isMobile ? '28px 16px' : '48px 40px',
           background: 'rgba(255,255,255,0.06)',
           backdropFilter: 'blur(24px) saturate(1.4)',
           WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
@@ -787,7 +794,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           textAlign: 'center',
         }}>
           <h2 style={{
-            fontSize: 32,
+            fontSize: isMobile ? 22 : 32,
             fontWeight: 700,
             color: '#fff',
             marginBottom: 12,
@@ -811,6 +818,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: 8,
                 padding: '14px 28px',
                 backgroundColor: '#25D366',
@@ -822,6 +830,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 transition: 'transform 0.2s, box-shadow 0.2s',
                 boxShadow: '0 4px 16px rgba(37,211,102,0.3)',
                 border: 'none',
+                width: isMobile ? '100%' : 'auto',
               }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
@@ -835,6 +844,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: 8,
                 padding: '14px 28px',
                 backgroundColor: PRIMARY,
@@ -846,6 +856,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 cursor: 'pointer',
                 transition: 'transform 0.2s, box-shadow 0.2s',
                 boxShadow: '0 4px 16px rgba(61,139,139,0.3)',
+                width: isMobile ? '100%' : 'auto',
               }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -863,6 +874,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 padding: '14px 28px',
                 backgroundColor: 'rgba(255,255,255,0.08)',
                 color: '#fff',
@@ -873,6 +885,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 cursor: 'pointer',
                 transition: 'background 0.2s, border-color 0.2s',
                 backdropFilter: 'blur(4px)',
+                width: isMobile ? '100%' : 'auto',
               }}
             >
               Связаться
@@ -927,6 +940,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
         position: 'relative',
         backgroundColor: '#0B1120',
         padding: '0 0 24px',
+        paddingBottom: isMobile ? 80 : 24,
         overflow: 'hidden',
       }}>
         {/* Animated gradient blobs */}
@@ -956,7 +970,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           margin: '0 auto',
           padding: '0 24px 40px',
           display: 'grid',
-          gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1.2fr',
+          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : '1.5fr 1fr 1fr 1fr 1.2fr',
           gap: 40,
         }}>
           {/* Brand column */}

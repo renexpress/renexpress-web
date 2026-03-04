@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
+import useIsMobile from '../hooks/useIsMobile';
 
 const PRIMARY = '#3D8B8B';
 
@@ -9,6 +10,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
   const [activeNav, setActiveNav] = useState('/faq');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
+  const isMobile = useIsMobile();
 
   const handleLogout = () => {
     localStorage.removeItem('client');
@@ -255,8 +257,9 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
       {/* Dark Hero Section */}
       <section style={{
         backgroundColor: '#111827',
-        paddingTop: 100,
-        paddingBottom: 64,
+        padding: isMobile ? '80px 16px 48px' : undefined,
+        paddingTop: isMobile ? undefined : 100,
+        paddingBottom: isMobile ? undefined : 64,
         position: 'relative',
         overflow: 'hidden',
       }}>
@@ -296,7 +299,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
 
         <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 2, padding: '0 24px' }}>
           <h1 style={{
-            fontSize: 48,
+            fontSize: isMobile ? 26 : 48,
             fontWeight: 700,
             color: '#fff',
             marginBottom: 16,
@@ -304,7 +307,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
             letterSpacing: -0.5,
           }}>Часто задаваемые вопросы</h1>
           <p style={{
-            fontSize: 18,
+            fontSize: isMobile ? 14 : 18,
             color: 'rgba(255,255,255,0.6)',
             lineHeight: 1.7,
             marginBottom: 40,
@@ -319,7 +322,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
             display: 'inline-flex',
             alignItems: 'center',
             gap: 12,
-            padding: '14px 28px',
+            padding: isMobile ? '10px 20px' : '14px 28px',
             background: 'rgba(255,255,255,0.06)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
@@ -340,7 +343,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
       {/* FAQ Accordion Section */}
       <section style={{
         backgroundColor: '#0B1120',
-        padding: '64px 24px 80px',
+        padding: isMobile ? '40px 16px 60px' : '64px 24px 80px',
       }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
           {faqItems.map((item, i) => {
@@ -350,7 +353,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
               <div key={i}>
                 {showCat && (
                   <h3 style={{
-                    fontSize: 18,
+                    fontSize: isMobile ? 16 : 18,
                     fontWeight: 700,
                     color: PRIMARY,
                     marginTop: i === 0 ? 0 : 40,
@@ -387,7 +390,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                     }}
                   >
                     <span style={{
-                      fontSize: 15,
+                      fontSize: isMobile ? 14 : 16,
                       fontWeight: 600,
                       color: '#fff',
                       lineHeight: 1.5,
@@ -408,7 +411,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                   {isOpen && (
                     <div style={{
                       padding: '0 22px 20px',
-                      fontSize: 14,
+                      fontSize: isMobile ? 14 : 15,
                       color: 'rgba(255,255,255,0.7)',
                       lineHeight: 1.8,
                     }}>{item.a}</div>
@@ -428,7 +431,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
         <div style={{
           maxWidth: 700,
           margin: '0 auto',
-          padding: '48px 40px',
+          padding: isMobile ? '32px 20px' : '48px 40px',
           background: 'rgba(255,255,255,0.04)',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
@@ -438,7 +441,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
           boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 48px rgba(0,0,0,0.2)',
         }}>
           <h2 style={{
-            fontSize: 28,
+            fontSize: isMobile ? 22 : 28,
             fontWeight: 700,
             color: '#fff',
             marginBottom: 12,
@@ -453,7 +456,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
           }}>
             Свяжитесь с нами любым удобным способом — мы ответим на все вопросы о доставке из Турции
           </p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap', flexDirection: isMobile ? 'column' : 'row' }}>
             <a
               href="https://wa.me/905511898288"
               target="_blank"
@@ -462,6 +465,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: 8,
                 padding: '14px 28px',
                 backgroundColor: '#25D366',
@@ -474,6 +478,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                 cursor: 'pointer',
                 transition: 'transform 0.2s, box-shadow 0.2s',
                 boxShadow: '0 4px 16px rgba(37,211,102,0.3)',
+                width: isMobile ? '100%' : undefined,
               }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
@@ -489,6 +494,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: 8,
                 padding: '14px 28px',
                 backgroundColor: 'rgba(255,255,255,0.08)',
@@ -502,6 +508,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                 backdropFilter: 'blur(8px)',
                 WebkitBackdropFilter: 'blur(8px)',
                 transition: 'transform 0.2s, background 0.2s',
+                width: isMobile ? '100%' : undefined,
               }}
             >
               <svg width="16" height="18" viewBox="0 0 384 512" fill="#fff">
@@ -515,6 +522,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: 8,
                 padding: '14px 28px',
                 backgroundColor: PRIMARY,
@@ -526,6 +534,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                 cursor: 'pointer',
                 transition: 'transform 0.2s, box-shadow 0.2s',
                 boxShadow: `0 4px 16px rgba(61,139,139,0.3)`,
+                width: isMobile ? '100%' : undefined,
               }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
@@ -574,6 +583,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
         position: 'relative',
         backgroundColor: '#0B1120',
         padding: '0 0 24px',
+        paddingBottom: isMobile ? 80 : 24,
         overflow: 'hidden',
       }}>
         {/* Animated gradient blobs */}
@@ -607,8 +617,8 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
           margin: '0 auto',
           padding: '0 24px 40px',
           display: 'grid',
-          gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1.2fr',
-          gap: 40,
+          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : '1.5fr 1fr 1fr 1fr 1.2fr',
+          gap: isMobile ? 24 : 40,
         }}>
           {/* Brand column */}
           <div style={{ paddingRight: 16 }}>

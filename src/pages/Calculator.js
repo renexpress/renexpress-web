@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
+import useIsMobile from '../hooks/useIsMobile';
 
 const PRIMARY = '#3D8B8B';
 
 function Calculator({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const [activeNav, setActiveNav] = useState('/calculator');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedType, setSelectedType] = useState('');
@@ -145,7 +147,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
       </div>
 
       {/* ====== DARK HERO ====== */}
-      <section style={styles.hero}>
+      <section style={{...styles.hero, ...(isMobile ? {padding: '80px 16px 48px'} : {})}}>
         {/* Decorative blobs */}
         <div style={styles.heroBlobs}>
           <div style={{
@@ -166,8 +168,8 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
             </svg>
             <span>Онлайн-расчёт</span>
           </div>
-          <h1 style={styles.heroTitle}>Калькулятор стоимости доставки</h1>
-          <p style={styles.heroSubtitle}>
+          <h1 style={{...styles.heroTitle, fontSize: isMobile ? 26 : 48}}>Калькулятор стоимости доставки</h1>
+          <p style={{...styles.heroSubtitle, fontSize: isMobile ? 14 : 17}}>
             Рассчитайте стоимость доставки груза из Турции в Россию онлайн.
             Выберите тип доставки и укажите вес — получите результат мгновенно.
           </p>
@@ -175,16 +177,16 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* ====== CALCULATOR SECTION ====== */}
-      <section style={styles.calcSection}>
+      <section style={{...styles.calcSection, ...(isMobile ? {padding: '40px 16px 60px'} : {})}}>
         <div style={styles.calcContainer}>
-          <div className="calc-card" style={styles.calcCard}>
+          <div className="calc-card" style={{...styles.calcCard, padding: isMobile ? '24px 16px' : '40px 36px'}}>
             {/* Glass shimmer top edge */}
             <div style={{
               position: 'absolute', top: 0, left: '10%', right: '10%', height: 1,
               background: `linear-gradient(90deg, transparent, rgba(61,139,139,0.4), transparent)`,
             }} />
 
-            <h2 style={styles.calcTitle}>Рассчитать стоимость</h2>
+            <h2 style={{...styles.calcTitle, fontSize: isMobile ? 22 : 26}}>Рассчитать стоимость</h2>
             <p style={styles.calcSubtitle}>Укажите параметры груза для расчёта</p>
 
             <div style={styles.formGroup}>
@@ -192,7 +194,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
               <select
                 value={selectedType}
                 onChange={(e) => { setSelectedType(e.target.value); setResult(null); }}
-                style={styles.select}
+                style={{...styles.select, ...(isMobile ? {fontSize: 16} : {})}}
                 className="calc-select"
               >
                 <option value="">Выберите тип доставки</option>
@@ -210,7 +212,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
                 value={weight}
                 onChange={(e) => { setWeight(e.target.value); setResult(null); }}
                 placeholder="Минимум 10 кг"
-                style={styles.input}
+                style={{...styles.input, ...(isMobile ? {fontSize: 16} : {})}}
                 className="calc-input"
               />
             </div>
@@ -253,8 +255,8 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
                 </div>
                 <div style={styles.resultDivider} />
                 <div style={styles.resultRow}>
-                  <span style={{ ...styles.resultLabel, fontWeight: 700, fontSize: 18, color: '#fff' }}>Итого:</span>
-                  <span style={styles.resultTotal}>${result.total}</span>
+                  <span style={{ ...styles.resultLabel, fontWeight: 700, fontSize: isMobile ? 16 : 18, color: '#fff' }}>Итого:</span>
+                  <span style={{...styles.resultTotal, fontSize: isMobile ? 26 : 32}}>${result.total}</span>
                 </div>
               </div>
             )}
@@ -263,13 +265,13 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* ====== TARIFF COMPARISON SECTION ====== */}
-      <section style={styles.tariffSection}>
+      <section style={{...styles.tariffSection, ...(isMobile ? {padding: '48px 16px'} : {})}}>
         <div style={styles.tariffContainer}>
-          <h2 style={styles.tariffSectionTitle}>Все тарифы</h2>
+          <h2 style={{...styles.tariffSectionTitle, fontSize: isMobile ? 22 : 36}}>Все тарифы</h2>
           <p style={styles.tariffSectionSubtitle}>Шесть тарифов доставки из Стамбула в Москву</p>
-          <div className="tariff-grid" style={styles.tariffGrid}>
+          <div className="tariff-grid" style={{...styles.tariffGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 12 : 24}}>
             {deliveryTypes.map((dt, i) => (
-              <div key={i} className="tariff-card" style={styles.tariffCard}>
+              <div key={i} className="tariff-card" style={{...styles.tariffCard, padding: isMobile ? 20 : 28}}>
                 <div style={styles.tariffCardShimmer} />
                 <div style={styles.tariffIconWrap}>
                   {i < 3 ? (
@@ -284,7 +286,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
                   )}
                 </div>
                 <h3 style={styles.tariffName}>{dt.name}</h3>
-                <div style={styles.tariffPrice}>
+                <div style={{...styles.tariffPrice, fontSize: isMobile ? 32 : 40}}>
                   ${dt.price}<span style={styles.tariffUnit}>/кг</span>
                 </div>
                 <div style={styles.tariffDays}>
@@ -308,20 +310,20 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
             position: 'absolute', top: 0, left: '15%', right: '15%', height: 1,
             background: 'linear-gradient(90deg, transparent, rgba(61,139,139,0.35), transparent)',
           }} />
-          <h2 style={styles.ctaTitle}>Готовы отправить груз?</h2>
+          <h2 style={{...styles.ctaTitle, fontSize: isMobile ? 22 : 32}}>Готовы отправить груз?</h2>
           <p style={styles.ctaDesc}>Свяжитесь с нами для оформления заказа или скачайте приложение</p>
-          <div style={styles.ctaButtons}>
-            <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="cta-btn-whatsapp" style={styles.ctaWhatsappBtn}>
+          <div style={{...styles.ctaButtons, ...(isMobile ? {flexDirection: 'column', alignItems: 'stretch'} : {})}}>
+            <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="cta-btn-whatsapp" style={{...styles.ctaWhatsappBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', boxSizing: 'border-box'} : {})}}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Написать в WhatsApp
             </a>
-            <button onClick={() => navigate('/contacts')} className="cta-btn-contacts" style={styles.ctaContactsBtn}>
+            <button onClick={() => navigate('/contacts')} className="cta-btn-contacts" style={{...styles.ctaContactsBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', boxSizing: 'border-box'} : {})}}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{ marginRight: 8 }}>
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
               Контакты
             </button>
-            <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="cta-btn-appstore" style={styles.ctaAppBtn}>
+            <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="cta-btn-appstore" style={{...styles.ctaAppBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', boxSizing: 'border-box'} : {})}}>
               <svg width="16" height="18" viewBox="0 0 384 512" fill="#fff"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
               App Store
             </a>
@@ -352,7 +354,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
       </section>
 
       {/* ====== CREATIVE FOOTER ====== */}
-      <footer style={styles.footer}>
+      <footer style={{...styles.footer, ...(isMobile ? {paddingBottom: 80} : {})}}>
         {/* Background blobs */}
         <div style={styles.footerBlobs}>
           <div style={{
@@ -368,7 +370,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
         </div>
 
         {/* Footer columns grid */}
-        <div className="footer-content" style={styles.footerGrid}>
+        <div className="footer-content" style={{...styles.footerGrid, gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : '1.5fr 1fr 1fr 1fr 1.2fr'}}>
           {/* Brand column */}
           <div style={styles.footerBrand}>
             <div style={styles.footerLogo}>

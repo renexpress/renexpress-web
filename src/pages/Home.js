@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import API_URL from '../config/api';
 import '../styles/responsive.css';
+import useIsMobile from '../hooks/useIsMobile';
 
 const PRIMARY = '#3D8B8B';
 
@@ -16,6 +17,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('/');
   const [scrollY, setScrollY] = useState(0);
+  const isMobile = useIsMobile();
   const heroRef = useRef(null);
 
   useEffect(() => {
@@ -211,16 +213,18 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           }}>
             <img src="/room.png" alt="RENEXPRESS доставка из Турции" style={styles.heroImage} />
             <div style={styles.heroOverlay}>
-              <div className="hero-content" style={styles.heroContent}>
+              <div className="hero-content" style={{...styles.heroContent, padding: isMobile ? '0 16px' : '0 40px'}}>
                 <span style={styles.heroBadge}>Доставка из Турции</span>
                 <h1 className="hero-title" style={{
                   ...styles.heroTitle,
+                  fontSize: isMobile ? 26 : 44,
                   opacity: 1 - scrollY * 0.8,
                   transform: `translateY(${scrollY * -40}px)`,
                   transition: 'opacity 0.1s, transform 0.1s',
                 }}>Карго доставка из<br/>Стамбула в Москву</h1>
                 <p className="hero-subtitle" style={{
                   ...styles.heroSubtitle,
+                  fontSize: isMobile ? 14 : 16,
                   opacity: 1 - scrollY * 1.2,
                   transform: `translateY(${scrollY * -20}px)`,
                   transition: 'opacity 0.1s, transform 0.1s',
@@ -229,7 +233,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                   От $4/кг. Сроки от 3 дней. Более 3000 клиентов доверяют нам.
                 </p>
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: 1 - scrollY * 1.5, transition: 'opacity 0.1s' }}>
-                  <button className="hero-button" onClick={() => navigate('/calculator')} style={styles.heroButton}>
+                  <button className="hero-button" onClick={() => navigate('/calculator')} style={{...styles.heroButton, ...(isMobile ? {width: '100%', fontSize: 14, justifyContent: 'center'} : {})}}>
                     Рассчитать стоимость
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: 8 }}>
                       <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -247,9 +251,9 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
 
       {/* Display Cards - Key Features */}
       <section className="display-cards-section" style={styles.displayCardsSection}>
-        <h2 style={styles.displayCardsTitle}>Почему выбирают RENEXPRESS</h2>
-        <p style={styles.displayCardsSubtitle}>Карго доставка из Турции для бизнеса и частных клиентов</p>
-        <div className="display-cards-grid" style={{ minHeight: 280 }}>
+        <h2 style={{...styles.displayCardsTitle, fontSize: isMobile ? 20 : 32}}>Почему выбирают RENEXPRESS</h2>
+        <p style={{...styles.displayCardsSubtitle, fontSize: isMobile ? 13 : 16}}>Карго доставка из Турции для бизнеса и частных клиентов</p>
+        <div className="display-cards-grid" style={{ minHeight: 280, ...(isMobile ? {transform: 'scale(0.6)', transformOrigin: 'center center'} : {}) }}>
           {/* Card 1 */}
           <div className="display-card display-card--1">
             <div className="display-card__header">
@@ -310,7 +314,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           </div>
 
           {/* Glass surface */}
-          <div className="liquid-glass-surface" style={styles.liquidSurface}>
+          <div className="liquid-glass-surface" style={{...styles.liquidSurface, ...(isMobile ? {flexDirection: 'column', textAlign: 'center'} : {})}}>
             {/* App icon */}
             <div className="liquid-glass-icon" style={styles.liquidIcon}>
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -340,14 +344,14 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
         <div className="seo-content" style={styles.seoContainer}>
 
           {/* Headline */}
-          <h2 style={styles.seoHeadline}>Доставка из Турции в Россию —<br/>быстро, надёжно, прозрачно</h2>
+          <h2 style={{...styles.seoHeadline, fontSize: isMobile ? 22 : 36}}>Доставка из Турции в Россию —<br/>быстро, надёжно, прозрачно</h2>
           <p style={styles.seoSubhead}>
             RENEXPRESS — карго компания с 2017 года. Более 3000 клиентов из России, Турции, Узбекистана и Казахстана
             доверяют нам доставку текстиля, обуви и товаров из Стамбула в Москву.
           </p>
 
           {/* Feature Grid */}
-          <div className="seo-features" style={styles.seoFeatures}>
+          <div className="seo-features" style={{...styles.seoFeatures, gridTemplateColumns: isMobile ? 'repeat(1, 1fr)' : 'repeat(3, 1fr)'}}>
             {[
               { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,
                 title: 'Авто и авиа доставка',
@@ -388,7 +392,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                 { name: 'AVIA U3', price: '$8/кг', days: '4-5 дн', type: 'Обувь' },
                 { name: 'AVIA EX MARKA', price: '$10/кг', days: '3-4 дн', type: 'Бренд текстиль' },
               ].map((t, i) => (
-                <div key={i} style={styles.seoTariffChip}>
+                <div key={i} style={{...styles.seoTariffChip, ...(isMobile ? {padding: '8px 12px', gap: 6} : {})}}>
                   <span style={styles.seoTariffName}>{t.name}</span>
                   <span style={styles.seoTariffPrice}>{t.price}</span>
                   <span style={styles.seoTariffDays}>{t.days}</span>
@@ -434,15 +438,15 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
 
           {/* CTA Buttons */}
           <div style={styles.seoCta}>
-            <button onClick={() => navigate('/contacts')} style={styles.seoCtaPrimary}>Связаться с нами</button>
-            <button onClick={() => navigate('/about')} style={styles.seoCtaSecondary}>Подробнее о компании</button>
-            <button onClick={() => navigate('/faq')} style={styles.seoCtaSecondary}>Частые вопросы</button>
+            <button onClick={() => navigate('/contacts')} style={{...styles.seoCtaPrimary, width: isMobile ? '100%' : 'auto'}}>Связаться с нами</button>
+            <button onClick={() => navigate('/about')} style={{...styles.seoCtaSecondary, width: isMobile ? '100%' : 'auto'}}>Подробнее о компании</button>
+            <button onClick={() => navigate('/faq')} style={{...styles.seoCtaSecondary, width: isMobile ? '100%' : 'auto'}}>Частые вопросы</button>
           </div>
         </div>
       </section>
 
       {/* Creative Footer */}
-      <footer className="footer" style={styles.footer}>
+      <footer className="footer" style={{...styles.footer, paddingBottom: isMobile ? 80 : 24}}>
         {/* Animated gradient blobs */}
         <div className="footer-blobs" style={styles.footerBlobs}>
           <div className="footer-blob footer-blob-1" />
@@ -490,7 +494,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
         </div>
 
         {/* Footer columns grid */}
-        <div className="footer-content" style={styles.footerGrid}>
+        <div className="footer-content" style={{...styles.footerGrid, gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : '1.5fr 1fr 1fr 1fr 1.2fr'}}>
           {/* Brand column */}
           <div style={styles.footerBrand}>
             <div style={styles.footerLogo}>
