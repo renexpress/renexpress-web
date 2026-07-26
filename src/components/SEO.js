@@ -15,7 +15,10 @@ import { useTranslation, logicalPathFromUrl, localizedPath } from '../i18n/Langu
 //     jsonLd={[ /* any extra Schema.org objects */ ]}
 //   />
 
-const DEFAULT_OG_IMAGE = `${SITE.url}/og-default.jpg`;
+// Default OG image must point at a file that actually exists in public/ (else 404 on every URL).
+// meeting.png is a real, reasonably-light asset shipped in public/. Owner will provide a
+// branded 1200×630 og-default later — swap this constant then.
+const DEFAULT_OG_IMAGE = `${SITE.url}/meeting.png`;
 
 export default function SEO({
   titleKey,
@@ -45,8 +48,14 @@ export default function SEO({
   const logicalPath = logicalPathFromUrl(pathname);
   const canonical = `${SITE.url}${localizedPath(logicalPath, language)}`;
 
-  // hreflang links for every supported language, plus x-default → RU
-  const hreflangs = SITE.supportedLanguages.map((lang) => ({
+  // hreflang links, plus x-default → RU.
+  // If the page declared which languages it actually has a real body translation for,
+  // only advertise hreflang for those — advertising /en, /tr for a RU-only page is
+  // hreflang-asymmetry (points at pages that don't exist in the sitemap).
+  const hreflangLangs = Array.isArray(translatedLanguages) && translatedLanguages.length > 0
+    ? SITE.supportedLanguages.filter((l) => translatedLanguages.includes(l))
+    : SITE.supportedLanguages;
+  const hreflangs = hreflangLangs.map((lang) => ({
     lang,
     href: `${SITE.url}${localizedPath(logicalPath, lang)}`,
   }));

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
+import CalcWidget from '../components/CalcWidget';
 import { useTranslation } from '../i18n/LanguageContext';
 import { SITE } from '../config/site';
 
@@ -13,11 +14,9 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const { t } = useTranslation();
-  const [selectedType, setSelectedType] = useState('');
-  const [weight, setWeight] = useState('');
-  const [result, setResult] = useState(null);
 
   // Single source of truth — tariffs come from SITE.tariffs (synced with DB / mobile app).
+  // Used by the tariff comparison grid below; the calculator itself is <CalcWidget/>.
   const deliveryTypes = SITE.tariffs.map(tf => ({
     code: tf.id,
     name: tf.name,
@@ -26,17 +25,6 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
     desc: tf.category,
     mode: tf.mode,
   }));
-
-  const calculate = () => {
-    const type = deliveryTypes.find(t => t.code === selectedType);
-    const w = parseFloat(weight);
-    if (!type || !w || w < 10) {
-      setResult(null);
-      return;
-    }
-    const total = Math.round(w * type.price * 100) / 100;
-    setResult({ type: type.name, weight: w, pricePerKg: type.price, days: type.days, total });
-  };
 
   return (
     <div style={styles.page}>
@@ -86,88 +74,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
       {/* ====== CALCULATOR SECTION ====== */}
       <section style={{...styles.calcSection, ...(isMobile ? {padding: '40px 16px 60px'} : {})}}>
         <div style={styles.calcContainer}>
-          <div className="calc-card" style={{...styles.calcCard, padding: isMobile ? '24px 16px' : '40px 36px'}}>
-            {/* Glass shimmer top edge */}
-            <div style={{
-              position: 'absolute', top: 0, left: '10%', right: '10%', height: 1,
-              background: `linear-gradient(90deg, transparent, rgba(61,139,139,0.4), transparent)`,
-            }} />
-
-            <h2 style={{...styles.calcTitle, fontSize: isMobile ? 22 : 26}}>Рассчитать стоимость</h2>
-            <p style={styles.calcSubtitle}>Укажите параметры груза для расчёта</p>
-
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Тип доставки</label>
-              <select
-                value={selectedType}
-                onChange={(e) => { setSelectedType(e.target.value); setResult(null); }}
-                style={{...styles.select, ...(isMobile ? {fontSize: 16} : {})}}
-                className="calc-select"
-              >
-                <option value="">Выберите тип доставки</option>
-                {deliveryTypes.map(dt => (
-                  <option key={dt.code} value={dt.code}>{dt.name} — ${dt.price}/кг ({dt.days} дней)</option>
-                ))}
-              </select>
-            </div>
-
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Вес груза (кг)</label>
-              <input
-                type="number"
-                min="10"
-                value={weight}
-                onChange={(e) => { setWeight(e.target.value); setResult(null); }}
-                placeholder="Минимум 10 кг"
-                style={{...styles.input, ...(isMobile ? {fontSize: 16} : {})}}
-                className="calc-input"
-              />
-            </div>
-
-            <button onClick={calculate} style={styles.calcBtn} className="calc-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{ marginRight: 8 }}>
-                <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/>
-              </svg>
-              Рассчитать
-            </button>
-
-            {weight && parseFloat(weight) < 10 && parseFloat(weight) > 0 && (
-              <p style={styles.warning}>Минимальный вес для отправки — 10 кг</p>
-            )}
-
-            {result && (
-              <div style={styles.resultCard}>
-                <div style={styles.resultHeader}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                    <polyline points="22 4 12 14.01 9 11.01"/>
-                  </svg>
-                  <h3 style={styles.resultTitle}>Результат расчёта</h3>
-                </div>
-                <div style={styles.resultRow}>
-                  <span style={styles.resultLabel}>Тип доставки</span>
-                  <span style={styles.resultValue}>{result.type}</span>
-                </div>
-                <div style={styles.resultRow}>
-                  <span style={styles.resultLabel}>Вес груза</span>
-                  <span style={styles.resultValue}>{result.weight} кг</span>
-                </div>
-                <div style={styles.resultRow}>
-                  <span style={styles.resultLabel}>Тариф</span>
-                  <span style={styles.resultValue}>${result.pricePerKg}/кг</span>
-                </div>
-                <div style={styles.resultRow}>
-                  <span style={styles.resultLabel}>Срок доставки</span>
-                  <span style={styles.resultValue}>{result.days} дней</span>
-                </div>
-                <div style={styles.resultDivider} />
-                <div style={styles.resultRow}>
-                  <span style={{ ...styles.resultLabel, fontWeight: 700, fontSize: isMobile ? 16 : 18, color: '#fff' }}>Итого:</span>
-                  <span style={{...styles.resultTotal, fontSize: isMobile ? 26 : 32}}>${result.total}</span>
-                </div>
-              </div>
-            )}
-          </div>
+          <CalcWidget isMobile={isMobile} />
         </div>
       </section>
 
@@ -230,9 +137,13 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
               </svg>
               Контакты
             </button>
-            <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="cta-btn-appstore" style={{...styles.ctaAppBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', boxSizing: 'border-box'} : {})}}>
+            <a href={SITE.social.appStore} target="_blank" rel="noopener noreferrer" className="cta-btn-appstore" style={{...styles.ctaAppBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', boxSizing: 'border-box'} : {})}}>
               <svg width="16" height="18" viewBox="0 0 384 512" fill="#fff"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
               App Store
+            </a>
+            <a href={SITE.social.googlePlay} target="_blank" rel="noopener noreferrer" className="cta-btn-appstore" style={{...styles.ctaAppBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', boxSizing: 'border-box'} : {})}}>
+              <svg width="16" height="18" viewBox="0 0 512 512" fill="#fff"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z"/></svg>
+              Google Play
             </a>
           </div>
         </div>
@@ -341,7 +252,8 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
               </span>
             </a>
             <a href="/contacts" className="footer-link" style={styles.footerLink}>Поддержка</a>
-            <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>Приложение iOS</a>
+            <a href={SITE.social.appStore} target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>Приложение для iOS</a>
+            <a href={SITE.social.googlePlay} target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>Приложение для Android</a>
           </div>
 
           {/* Contact column */}

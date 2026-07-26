@@ -43,6 +43,7 @@ export const SITE = {
 
   social: {
     appStore: 'https://apps.apple.com/app/renexpress/id6757761284',
+    googlePlay: 'https://play.google.com/store/apps/details?id=com.renexpress.app',
     instagram: 'https://instagram.com/renat_karaliev',
     rencargo: 'https://www.rencargo.com',
   },
@@ -111,8 +112,6 @@ export const SITE = {
   // Routes served (used for service pages + structured data)
   routes: [
     { from: 'Turkey', to: 'Russia', primaryCity: 'Moscow', fromRu: 'Турция', toRu: 'Россия', primaryCityRu: 'Москва' },
-    { from: 'Turkey', to: 'Kazakhstan', primaryCity: 'Almaty', fromRu: 'Турция', toRu: 'Казахстан', primaryCityRu: 'Алматы' },
-    { from: 'Turkey', to: 'Uzbekistan', primaryCity: 'Tashkent', fromRu: 'Турция', toRu: 'Узбекистан', primaryCityRu: 'Ташкент' },
   ],
 
   cargoCategories: [

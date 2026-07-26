@@ -6,10 +6,22 @@ import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
+import CalcWidget from '../components/CalcWidget';
+import LeadForm from '../components/LeadForm';
 import { useTranslation } from '../i18n/LanguageContext';
 import { SITE } from '../config/site';
 
 const PRIMARY = '#3D8B8B';
+
+// Single source for the home FAQ — used BOTH in the visible <details> accordion
+// and in the FAQPage JSON-LD, so Google sees identical Q/A in HTML and schema.
+const HOME_FAQ = [
+  { q: 'Сколько стоит доставка из Турции в Россию?', a: 'AVTO EXPRESS — $4/кг (14-18 дней), AVIA U3 — $8.5/кг (4-5 дней), AVIA EX MARKA — $10/кг (3-4 дня). Минимальный вес отправки — 10 кг.' },
+  { q: 'Какие сроки доставки из Стамбула в Москву?', a: 'Авто доставка занимает 14-18 дней. Авиа U3 — 4-5 дней, авиа EX MARKA — 3-4 дня.' },
+  { q: 'Какие товары можно отправить через RENEXPRESS?', a: 'Домашний текстиль, турецкий текстиль, брендовый текстиль, б/у текстиль, обувь турецкого производства, брендовую и б/у обувь.' },
+  { q: 'Где находится склад RENEXPRESS в Москве?', a: 'Московский склад: ул. Южнопортовая 7а, стр 2, склад 8, ворота 1. Режим работы: Пн-Пт 09:00-18:00.' },
+  { q: 'Есть ли мобильное приложение для отслеживания?', a: 'Да, приложение RENEXPRESS доступно в App Store (iOS) и Google Play (Android). В приложении можно отслеживать доставки и общаться с поддержкой.' },
+];
 
 function Home({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -20,6 +32,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [scrollY, setScrollY] = useState(0);
+  const [showStickyBar, setShowStickyBar] = useState(false);
   const isMobile = useIsMobile();
   const heroRef = useRef(null);
 
@@ -29,11 +42,17 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
         const rect = heroRef.current.getBoundingClientRect();
         const progress = Math.min(Math.max(-rect.top / (rect.height || 1), 0), 1);
         setScrollY(progress);
+        // Show sticky CTA bar only after scrolling past the hero (so it never covers the hero CTA)
+        setShowStickyBar(rect.bottom < 0);
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const scrollToCalc = () => document.getElementById('calc')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToLead = () => document.getElementById('lead')?.scrollIntoView({ behavior: 'smooth' });
+  const waManager = `https://wa.me/${SITE.whatsapp.istanbulManager.wa}`;
 
   const CACHE_KEY = 'home_cache_v2';
   const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
@@ -93,18 +112,16 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
     )
   };
 
-  // Home-page FAQ schema. Moved here from public/index.html so each route
-  // owns exactly one FAQPage (landing pages have their own, with route-specific Q/A).
+  // Home-page FAQ schema — built from the same HOME_FAQ array rendered visibly below,
+  // so schema and on-page HTML stay identical (one source, changed in one place).
   const homeFaqJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      { '@type': 'Question', name: 'Сколько стоит доставка из Турции в Россию?', acceptedAnswer: { '@type': 'Answer', text: 'AVTO EXPRESS — $4/кг (14-18 дней), AVIA U3 — $8.5/кг (4-5 дней), AVIA EX MARKA — $10/кг (3-4 дня). Минимальный вес отправки — 10 кг.' } },
-      { '@type': 'Question', name: 'Какие сроки доставки из Стамбула в Москву?', acceptedAnswer: { '@type': 'Answer', text: 'Авто доставка занимает 14-18 дней. Авиа U3 — 4-5 дней, авиа EX MARKA — 3-4 дня.' } },
-      { '@type': 'Question', name: 'Какие товары можно отправить через RENEXPRESS?', acceptedAnswer: { '@type': 'Answer', text: 'Домашний текстиль, турецкий текстиль, брендовый текстиль, б/у текстиль, обувь турецкого производства, брендовую и б/у обувь.' } },
-      { '@type': 'Question', name: 'Где находится склад RENEXPRESS в Москве?', acceptedAnswer: { '@type': 'Answer', text: 'Московский склад: ул. Южнопортовая 7а, стр 2, склад 8, ворота 1. Режим работы: Пн-Пт 09:00-18:00.' } },
-      { '@type': 'Question', name: 'Есть ли мобильное приложение для отслеживания?', acceptedAnswer: { '@type': 'Answer', text: 'Да, приложение RENEXPRESS доступно в App Store для iOS. В приложении можно отслеживать доставки и общаться с поддержкой.' } },
-    ],
+    mainEntity: HOME_FAQ.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
   };
 
   return (
@@ -117,7 +134,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
       />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
-      {/* Hero Section with Scroll Animation */}
+      {/* Hero Section — one dominant CTA, no scroll-fade of the copy */}
       <section ref={heroRef} className="hero-section" style={{...styles.heroWrapper, ...(isMobile ? {padding: '20px 12px 12px'} : {})}}>
         <div style={{
           ...styles.heroInner,
@@ -125,41 +142,44 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
         }}>
           <div style={{
             ...styles.heroCard,
-            ...(isMobile ? { height: 380, borderRadius: 16, border: '2px solid #333' } : {}),
+            ...(isMobile ? { height: 500, borderRadius: 16, border: '2px solid #333' } : {}),
+            // 3D tilt kept as pure desktop decor; content opacity stays 1.
             transform: isMobile ? 'none' : `rotateX(${20 - scrollY * 20}deg) scale(${1.05 - scrollY * 0.05})`,
             transition: 'transform 0.1s linear',
           }}>
-            <img src="/room.png" alt="RENEXPRESS доставка из Турции" style={styles.heroImage} />
+            {/* TODO[ЗАПОЛНИТЬ]: заменить room.png на реальный кадр склада/фуры RENEXPRESS (hero.webp ≤150КБ). */}
+            <img src="/room.png" alt="RENEXPRESS — карго доставка из Турции в Россию" style={styles.heroImage} width="1280" height="480" loading="eager" decoding="async" />
             <div style={styles.heroOverlay}>
               <div className="hero-content" style={{...styles.heroContent, padding: isMobile ? '0 16px' : '0 40px'}}>
-                <span style={styles.heroBadge}>Доставка из Турции</span>
-                <h1 className="hero-title" style={{
-                  ...styles.heroTitle,
-                  fontSize: isMobile ? 26 : 44,
-                  opacity: 1 - scrollY * 0.8,
-                  transform: `translateY(${scrollY * -40}px)`,
-                  transition: 'opacity 0.1s, transform 0.1s',
-                }}>Карго доставка из{isMobile ? ' ' : <br/>}Стамбула в Москву</h1>
-                <p className="hero-subtitle" style={{
-                  ...styles.heroSubtitle,
-                  fontSize: isMobile ? 14 : 16,
-                  opacity: 1 - scrollY * 1.2,
-                  transform: `translateY(${scrollY * -20}px)`,
-                  transition: 'opacity 0.1s, transform 0.1s',
-                }}>
-                  Авиа и авто перевозки текстиля, обуви и товаров из Турции.{!isMobile && <br/>}
-                  {' '}От $4/кг. Сроки от 3 дней. Более 3000 клиентов доверяют нам.
-                </p>
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', opacity: 1 - scrollY * 1.5, transition: 'opacity 0.1s' }}>
-                  <button className="hero-button" onClick={() => navigate('/calculator')} style={{...styles.heroButton, ...(isMobile ? {width: '100%', fontSize: 14, justifyContent: 'center'} : {})}}>
-                    Рассчитать стоимость
+                <span style={styles.heroBadge}>Карго Турция → Россия · с {SITE.foundingYear}</span>
+                <h1 className="hero-title" style={{ ...styles.heroTitle, fontSize: isMobile ? 27 : 44 }}>
+                  Карго из Турции в Россию — доставка из Стамбула в Москву от $4/кг
+                </h1>
+                <ul style={{ ...styles.heroBullets, ...(isMobile ? { gap: 8, marginBottom: 20 } : {}) }}>
+                  {[
+                    'Цена от $4/кг — 5 тарифов, авто и авиа',
+                    'Сроки от 3 дней — авиа-экспресс из Стамбула',
+                    'Честный знак · WB и OZON — маркировка и поставка',
+                  ].map((b, i) => (
+                    <li key={i} style={styles.heroBullet}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="3" style={{ flexShrink: 0, marginTop: 2 }}>
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+                  <button className="hero-button" onClick={scrollToCalc} style={{...styles.heroButton, ...(isMobile ? {width: '100%', justifyContent: 'center'} : {})}}>
+                    Рассчитать и оставить заявку
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: 8 }}>
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                   </button>
-                  <button onClick={() => navigate('/services')} style={{...styles.heroSecondaryBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', fontSize: 14} : {})}}>
-                    Наши услуги
-                  </button>
+                  <a href={waManager} target="_blank" rel="noopener noreferrer" style={{...styles.heroSecondaryBtn, ...(isMobile ? {width: '100%', justifyContent: 'center'} : {})}}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" style={{ marginRight: 8 }}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884" /></svg>
+                    Написать в WhatsApp
+                  </a>
                 </div>
               </div>
             </div>
@@ -167,11 +187,30 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
         </div>
       </section>
 
+      {/* Trust strip — real numbers from SITE */}
+      <section style={{ ...styles.trustSection, ...(isMobile ? { padding: '28px 16px' } : {}) }}>
+        <div style={styles.trustInner}>
+          {[
+            { big: `с ${SITE.foundingYear}`, small: 'на маршруте Турция–Россия' },
+            { big: '3000+', small: 'клиентов' }, /* TODO[ЗАПОЛНИТЬ]: подтвердить/уточнить цифру клиентов */
+            { big: `${SITE.tariffs.length} тарифов`, small: 'авто и авиа' },
+            { big: 'Свои офисы', small: 'в Стамбуле и Москве' },
+            { big: 'Таможня — на нас', small: 'без доп. документов' },
+          ].map((c, i) => (
+            <div key={i} style={styles.trustChip}>
+              <span style={styles.trustBig}>{c.big}</span>
+              <span style={styles.trustSmall}>{c.small}</span>
+            </div>
+          ))}
+        </div>
+        <p style={styles.trustMarketplaces}>Доставляем на склады <strong style={{ color: '#fff' }}>Wildberries</strong> и <strong style={{ color: '#fff' }}>OZON</strong></p>
+      </section>
+
       {/* Display Cards - Key Features */}
       <section className="display-cards-section" style={{...styles.displayCardsSection, ...(isMobile ? {padding: '40px 16px 32px'} : {})}}>
         <h2 style={{...styles.displayCardsTitle, fontSize: isMobile ? 20 : 32}}>Почему выбирают RENEXPRESS</h2>
         <p style={{...styles.displayCardsSubtitle, fontSize: isMobile ? 13 : 16}}>Карго доставка из Турции для бизнеса и частных клиентов</p>
-        <div className="display-cards-grid" style={{ minHeight: isMobile ? 180 : 280, ...(isMobile ? {transform: 'scale(0.55)', transformOrigin: 'center center', marginBottom: -40} : {}) }}>
+        <div className="display-cards-grid" style={{ minHeight: isMobile ? 'auto' : 280 }}>
           {/* Card 1 */}
           <div className="display-card display-card--1">
             <div className="display-card__header">
@@ -210,20 +249,53 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               <p className="display-card__title" style={{ color: '#5EEAD4' }}>3000+ клиентов</p>
             </div>
             <p className="display-card__desc">Доверяют нам с 2017 года</p>
-            <p className="display-card__date">Россия, Турция, Узбекистан, Казахстан</p>
+            <p className="display-card__date">Турция → Россия</p>
           </div>
         </div>
       </section>
 
-      {/* App Store Banner — Liquid Glass */}
+      {/* How it works — 4 steps */}
+      <section style={{ ...styles.stepsSection, ...(isMobile ? { padding: '48px 16px' } : {}) }}>
+        <h2 style={{ ...styles.stepsTitle, fontSize: isMobile ? 22 : 32 }}>Как работает доставка — 4 шага</h2>
+        <div style={{ ...styles.stepsGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)' }}>
+          {[
+            { n: 1, t: 'Приём в Стамбуле', d: 'Привозите или отправляете товар на наш стамбульский склад. Байер может закупить за вас.' },
+            { n: 2, t: 'Консолидация и вес', d: 'Собираем груз от разных поставщиков, взвешиваем и фиксируем стоимость по тарифу.' },
+            { n: 3, t: 'Отправка авто / авиа', d: 'Отправляем выбранным тарифом. Таможенное оформление берём на себя — без доп. документов от вас.' },
+            { n: 4, t: 'Выдача в Москве', d: 'Забираете груз на складе Южнопортовая 7а или заказываете доставку. Отслеживание в приложении.' },
+          ].map((s) => (
+            <div key={s.n} style={styles.stepCard}>
+              <span style={styles.stepNum}>{s.n}</span>
+              <h3 style={styles.stepCardTitle}>{s.t}</h3>
+              <p style={styles.stepCardDesc}>{s.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Calculator + jump-to-lead (anchor target of the hero CTA) */}
+      <section id="calc" style={{ ...styles.calcSection, ...(isMobile ? { padding: '48px 16px' } : {}) }}>
+        <div style={styles.calcContainer}>
+          <h2 style={{ ...styles.sectionHeading, fontSize: isMobile ? 22 : 32 }}>Рассчитайте стоимость за 10 секунд</h2>
+          <p style={styles.sectionSubheading}>Отправьте заявку — менеджер подтвердит расчёт и сроки</p>
+          <CalcWidget isMobile={isMobile} />
+        </div>
+      </section>
+
+      {/* Lead form — Phase 1 WhatsApp deep-link */}
+      <section id="lead" style={{ ...styles.leadSection, ...(isMobile ? { padding: '48px 16px' } : {}) }}>
+        <div style={styles.leadContainer}>
+          <h2 style={{ ...styles.sectionHeading, fontSize: isMobile ? 22 : 32 }}>Оставьте заявку — ответим в течение рабочего дня</h2>
+          <p style={styles.sectionSubheading}>Заполните 3 поля — продолжим в WhatsApp</p>
+          <div style={styles.leadCard}>
+            <LeadForm isMobile={isMobile} source="home" />
+          </div>
+        </div>
+      </section>
+
+      {/* App Store + Google Play Banner — Liquid Glass */}
       <section className="app-banner-section" style={styles.appBannerSection}>
-        <a
-          href="https://apps.apple.com/app/renexpress/id6757761284"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="liquid-glass-pill"
-          style={styles.liquidPill}
-        >
+        <div className="liquid-glass-pill" style={styles.liquidPill}>
           {/* Animated liquid blobs behind the glass */}
           <div className="liquid-glass-bg" style={styles.liquidBg}>
             <div className="liquid-blob liquid-blob-1" />
@@ -246,15 +318,23 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               <span style={styles.liquidTitle}>Скачайте RENEXPRESS</span>
               <span style={styles.liquidDesc}>Отслеживание доставок, заказы, поддержка</span>
             </div>
-            {/* Badge */}
-            <div className="liquid-glass-badge" style={styles.liquidBadge}>
-              <svg width="16" height="20" viewBox="0 0 384 512" fill="#fff" style={{opacity:0.9}}>
-                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-              </svg>
-              <span style={styles.liquidBadgeText}>App Store</span>
+            {/* Store badges — App Store (iOS) + Google Play (Android) */}
+            <div style={{ display: 'flex', gap: 8, flexShrink: 0, ...(isMobile ? { width: '100%', justifyContent: 'center', flexWrap: 'wrap' } : {}) }}>
+              <a href={SITE.social.appStore} target="_blank" rel="noopener noreferrer" className="liquid-glass-badge" style={styles.liquidBadge}>
+                <svg width="16" height="20" viewBox="0 0 384 512" fill="#fff" style={{opacity:0.9}}>
+                  <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                </svg>
+                <span style={styles.liquidBadgeText}>App Store</span>
+              </a>
+              <a href={SITE.social.googlePlay} target="_blank" rel="noopener noreferrer" className="liquid-glass-badge" style={styles.liquidBadge}>
+                <svg width="16" height="18" viewBox="0 0 512 512" fill="#fff" style={{opacity:0.9}}>
+                  <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z"/>
+                </svg>
+                <span style={styles.liquidBadgeText}>Google Play</span>
+              </a>
             </div>
           </div>
-        </a>
+        </div>
       </section>
 
       {/* SEO Content — About RENEXPRESS */}
@@ -264,7 +344,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           {/* Headline */}
           <h2 style={{...styles.seoHeadline, fontSize: isMobile ? 22 : 36}}>Доставка из Турции в Россию —<br/>быстро, надёжно, прозрачно</h2>
           <p style={styles.seoSubhead}>
-            RENEXPRESS — карго компания с 2017 года. Более 3000 клиентов из России, Турции, Узбекистана и Казахстана
+            RENEXPRESS — карго компания с 2017 года. Более 3000 клиентов из России и Турции
             доверяют нам доставку текстиля, обуви и товаров из Стамбула в Москву.
           </p>
 
@@ -356,8 +436,24 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
         </div>
       </section>
 
+      {/* FAQ — visible accordion, identical Q/A to the FAQPage JSON-LD above */}
+      <section style={{ ...styles.faqSection, ...(isMobile ? { padding: '48px 16px' } : {}) }}>
+        <div style={styles.faqContainer}>
+          <h2 style={{ ...styles.sectionHeading, fontSize: isMobile ? 22 : 32, marginBottom: 28 }}>Частые вопросы</h2>
+          {HOME_FAQ.map((f, i) => (
+            <details key={i} style={styles.faqItem}>
+              <summary style={styles.faqSummary}>
+                {f.q}
+                <span style={styles.faqChevron} aria-hidden="true">+</span>
+              </summary>
+              <p style={styles.faqAnswer}>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
       {/* Creative Footer */}
-      <footer className="footer" style={{...styles.footer, paddingBottom: isMobile ? 80 : 24}}>
+      <footer className="footer" style={{...styles.footer, paddingBottom: isMobile ? 148 : 24}}>
         {/* Animated gradient blobs */}
         <div className="footer-blobs" style={styles.footerBlobs}>
           <div className="footer-blob footer-blob-1" />
@@ -379,9 +475,13 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                   Написать в WhatsApp
                 </a>
-                <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="footer-cta-btn" style={styles.footerCtaApp}>
+                <a href={SITE.social.appStore} target="_blank" rel="noopener noreferrer" className="footer-cta-btn" style={styles.footerCtaApp}>
                   <svg width="16" height="18" viewBox="0 0 384 512" fill="#fff"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                  Скачать приложение
+                  App Store
+                </a>
+                <a href={SITE.social.googlePlay} target="_blank" rel="noopener noreferrer" className="footer-cta-btn" style={styles.footerCtaApp}>
+                  <svg width="16" height="18" viewBox="0 0 512 512" fill="#fff"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z"/></svg>
+                  Google Play
                 </a>
               </div>
             </div>
@@ -469,7 +569,8 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               </span>
             </a>
             <a href="/contacts" className="footer-link" style={styles.footerLink}>Поддержка</a>
-            <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>Приложение iOS</a>
+            <a href={SITE.social.appStore} target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>Приложение для iOS</a>
+            <a href={SITE.social.googlePlay} target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>Приложение для Android</a>
           </div>
 
           {/* Contact column with icons */}
@@ -509,6 +610,16 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           </div>
         </div>
       </footer>
+
+      {/* Sticky mobile CTA bar — sits ABOVE the Navbar's bottom nav (z 100), appears after hero */}
+      {isMobile && showStickyBar && (
+        <div style={styles.stickyBar}>
+          <button onClick={scrollToLead} style={styles.stickyPrimary}>Оставить заявку</button>
+          <a href={waManager} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style={styles.stickyWa}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347" /></svg>
+          </a>
+        </div>
+      )}
     </div>
   );
 }
@@ -600,15 +711,259 @@ const styles = {
   heroSecondaryBtn: {
     display: 'inline-flex',
     alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.15)',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.12)',
     color: '#fff',
-    fontSize: 15,
-    fontWeight: 600,
-    padding: '14px 28px',
-    border: '1px solid rgba(255,255,255,0.3)',
+    fontSize: 14,
+    fontWeight: 500,
+    padding: '13px 24px',
+    minHeight: 48,
+    boxSizing: 'border-box',
+    border: '1px solid rgba(255,255,255,0.25)',
     borderRadius: 10,
     cursor: 'pointer',
+    textDecoration: 'none',
     backdropFilter: 'blur(4px)',
+  },
+  heroBullets: {
+    listStyle: 'none',
+    padding: 0,
+    margin: '0 0 28px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 10,
+    maxWidth: 560,
+  },
+  heroBullet: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: 10,
+    fontSize: 15,
+    color: 'rgba(255,255,255,0.9)',
+    lineHeight: 1.4,
+  },
+
+  // Trust strip
+  trustSection: {
+    backgroundColor: '#111827',
+    padding: '32px 24px',
+    textAlign: 'center',
+    borderTop: '1px solid rgba(255,255,255,0.05)',
+  },
+  trustInner: {
+    maxWidth: 1080,
+    margin: '0 auto',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 12,
+  },
+  trustChip: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 4,
+    padding: '14px 20px',
+    minWidth: 130,
+    background: 'rgba(255,255,255,0.06)',
+    backdropFilter: 'blur(24px) saturate(1.4)',
+    WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
+    border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: 16,
+  },
+  trustBig: {
+    fontSize: 18,
+    fontWeight: 700,
+    color: PRIMARY,
+  },
+  trustSmall: {
+    fontSize: 12,
+    color: 'rgba(255,255,255,0.65)',
+  },
+  trustMarketplaces: {
+    marginTop: 20,
+    fontSize: 15,
+    color: 'rgba(255,255,255,0.65)',
+  },
+
+  // How it works — steps
+  stepsSection: {
+    backgroundColor: '#0B1120',
+    padding: '72px 24px',
+    textAlign: 'center',
+  },
+  stepsTitle: {
+    fontSize: 32,
+    fontWeight: 700,
+    color: '#fff',
+    marginBottom: 40,
+  },
+  stepsGrid: {
+    maxWidth: 1080,
+    margin: '0 auto',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gap: 20,
+  },
+  stepCard: {
+    position: 'relative',
+    padding: '28px 22px',
+    background: 'rgba(255,255,255,0.05)',
+    border: '1px solid rgba(255,255,255,0.08)',
+    borderRadius: 20,
+    textAlign: 'left',
+  },
+  stepNum: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: '50%',
+    backgroundColor: 'rgba(61,139,139,0.15)',
+    color: PRIMARY,
+    fontSize: 18,
+    fontWeight: 700,
+    marginBottom: 14,
+  },
+  stepCardTitle: {
+    fontSize: 16,
+    fontWeight: 700,
+    color: '#fff',
+    marginBottom: 8,
+  },
+  stepCardDesc: {
+    fontSize: 14,
+    color: 'rgba(255,255,255,0.6)',
+    lineHeight: 1.6,
+    margin: 0,
+  },
+
+  // Section headings (calc / lead / faq)
+  sectionHeading: {
+    fontSize: 32,
+    fontWeight: 700,
+    color: '#fff',
+    textAlign: 'center',
+    marginBottom: 8,
+    lineHeight: 1.2,
+  },
+  sectionSubheading: {
+    fontSize: 15,
+    color: 'rgba(255,255,255,0.55)',
+    textAlign: 'center',
+    marginBottom: 32,
+  },
+
+  // Calc section
+  calcSection: {
+    backgroundColor: '#111827',
+    padding: '72px 24px',
+  },
+  calcContainer: {
+    maxWidth: 560,
+    margin: '0 auto',
+  },
+
+  // Lead section
+  leadSection: {
+    backgroundColor: '#0B1120',
+    padding: '72px 24px',
+  },
+  leadContainer: {
+    maxWidth: 560,
+    margin: '0 auto',
+  },
+  leadCard: {
+    padding: '32px 28px',
+    background: 'rgba(255,255,255,0.05)',
+    backdropFilter: 'blur(24px) saturate(1.4)',
+    WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
+    border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: 24,
+    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 48px rgba(0,0,0,0.3)',
+  },
+
+  // FAQ
+  faqSection: {
+    backgroundColor: '#111827',
+    padding: '72px 24px',
+  },
+  faqContainer: {
+    maxWidth: 760,
+    margin: '0 auto',
+  },
+  faqItem: {
+    background: 'rgba(255,255,255,0.05)',
+    border: '1px solid rgba(255,255,255,0.08)',
+    borderRadius: 14,
+    padding: '4px 20px',
+    marginBottom: 12,
+  },
+  faqSummary: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 12,
+    padding: '16px 0',
+    fontSize: 16,
+    fontWeight: 600,
+    color: '#fff',
+    cursor: 'pointer',
+    listStyle: 'none',
+  },
+  faqChevron: {
+    fontSize: 22,
+    fontWeight: 400,
+    color: PRIMARY,
+    flexShrink: 0,
+    lineHeight: 1,
+  },
+  faqAnswer: {
+    fontSize: 14,
+    color: 'rgba(255,255,255,0.6)',
+    lineHeight: 1.7,
+    margin: '0 0 16px',
+  },
+
+  // Sticky mobile CTA bar
+  stickyBar: {
+    position: 'fixed',
+    left: 0,
+    right: 0,
+    bottom: 'calc(64px + env(safe-area-inset-bottom, 0px))',
+    zIndex: 90,
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+    padding: '10px 12px',
+    background: 'rgba(11,17,32,0.96)',
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
+    borderTop: '1px solid rgba(255,255,255,0.1)',
+  },
+  stickyPrimary: {
+    flex: 1,
+    padding: '14px',
+    minHeight: 48,
+    backgroundColor: PRIMARY,
+    color: '#fff',
+    border: 'none',
+    borderRadius: 12,
+    fontSize: 15,
+    fontWeight: 700,
+    cursor: 'pointer',
+  },
+  stickyWa: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 48,
+    height: 48,
+    flexShrink: 0,
+    backgroundColor: '#25D366',
+    borderRadius: 12,
+    textDecoration: 'none',
   },
 
   // Display Cards
