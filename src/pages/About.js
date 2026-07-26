@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
+import { useTranslation } from '../i18n/LanguageContext';
 
 const PRIMARY = '#3D8B8B';
 
 function About({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   const stats = [
     { number: '3000+', label: 'клиентов' },
@@ -67,6 +70,15 @@ function About({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div style={styles.page}>
+      <SEO
+        titleKey="seo.about.title"
+        descriptionKey="seo.about.description"
+        translatedLanguages={['ru']}
+        breadcrumbs={[
+          { name: t('common.home'), path: '/' },
+          { name: t('common.about'), path: '/about' },
+        ]}
+      />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
       {/* ====== Dark Hero Section ====== */}

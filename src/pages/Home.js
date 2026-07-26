@@ -5,11 +5,14 @@ import API_URL from '../config/api';
 import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
+import { useTranslation } from '../i18n/LanguageContext';
 
 const PRIMARY = '#3D8B8B';
 
 function Home({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -89,8 +92,28 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
     )
   };
 
+  // Home-page FAQ schema. Moved here from public/index.html so each route
+  // owns exactly one FAQPage (landing pages have their own, with route-specific Q/A).
+  const homeFaqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Сколько стоит доставка из Турции в Россию?', acceptedAnswer: { '@type': 'Answer', text: 'AVTO EXPRESS — $4/кг (14-18 дней), AVIA U3 — $8/кг (4-5 дней), AVIA EX MARKA — $10/кг (3-4 дня). Минимальный вес отправки — 10 кг.' } },
+      { '@type': 'Question', name: 'Какие сроки доставки из Стамбула в Москву?', acceptedAnswer: { '@type': 'Answer', text: 'Авто доставка занимает 14-18 дней. Авиа U3 — 4-5 дней, авиа EX MARKA — 3-4 дня.' } },
+      { '@type': 'Question', name: 'Какие товары можно отправить через RENEXPRESS?', acceptedAnswer: { '@type': 'Answer', text: 'Домашний текстиль, турецкий текстиль, брендовый текстиль, б/у текстиль, обувь турецкого производства, брендовую и б/у обувь.' } },
+      { '@type': 'Question', name: 'Где находится склад RENEXPRESS в Москве?', acceptedAnswer: { '@type': 'Answer', text: 'Московский склад: ул. Южнопортовая 7а, стр 2, склад 8, ворота 1. Режим работы: Пн-Пт 09:00-18:00.' } },
+      { '@type': 'Question', name: 'Есть ли мобильное приложение для отслеживания?', acceptedAnswer: { '@type': 'Answer', text: 'Да, приложение RENEXPRESS доступно в App Store для iOS. В приложении можно отслеживать доставки и общаться с поддержкой.' } },
+    ],
+  };
+
   return (
     <div style={styles.page}>
+      <SEO
+        titleKey="seo.home.title"
+        descriptionKey="seo.home.description"
+        breadcrumbs={[{ name: t('common.home'), path: '/' }]}
+        jsonLd={[homeFaqJsonLd]}
+      />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
       {/* Hero Section with Scroll Animation */}

@@ -1,3 +1,21 @@
 User-agent: *
 Allow: /
+
+# Auth-only pages — not for search engines.
+Disallow: /login
+Disallow: /register
+Disallow: /my-products
+Disallow: /add-product
+Disallow: /analytics
+Disallow: /en/login
+Disallow: /en/register
+Disallow: /en/my-products
+Disallow: /en/add-product
+Disallow: /en/analytics
+Disallow: /tr/login
+Disallow: /tr/register
+Disallow: /tr/my-products
+Disallow: /tr/add-product
+Disallow: /tr/analytics
+
 Sitemap: https://renexpress.online/sitemap.xml

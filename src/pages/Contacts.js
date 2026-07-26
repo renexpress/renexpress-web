@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
+import { useTranslation } from '../i18n/LanguageContext';
 
 const PRIMARY = '#3D8B8B';
 
 function Contacts({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem('client');
@@ -52,6 +55,15 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div style={styles.page}>
+      <SEO
+        titleKey="seo.contacts.title"
+        descriptionKey="seo.contacts.description"
+        translatedLanguages={['ru']}
+        breadcrumbs={[
+          { name: t('common.home'), path: '/' },
+          { name: t('common.contacts'), path: '/contacts' },
+        ]}
+      />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
       {/* ============ DARK HERO ============ */}

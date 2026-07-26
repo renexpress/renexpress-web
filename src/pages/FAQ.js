@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
+import { useTranslation } from '../i18n/LanguageContext';
 
 const PRIMARY = '#3D8B8B';
 
@@ -10,6 +12,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState(null);
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem('client');
@@ -56,6 +59,15 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0B1120', fontFamily: 'Inter, -apple-system, sans-serif' }}>
+      <SEO
+        titleKey="seo.faq.title"
+        descriptionKey="seo.faq.description"
+        translatedLanguages={['ru']}
+        breadcrumbs={[
+          { name: t('common.home'), path: '/' },
+          { name: t('common.faq'), path: '/faq' },
+        ]}
+      />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
       {/* Dark Hero Section */}

@@ -126,55 +126,10 @@
     }
     </script>
 
-    <!-- Structured Data: FAQ -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Сколько стоит доставка из Турции в Россию?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Стоимость доставки из Турции зависит от типа товара и способа перевозки. Авто доставка: от $4/кг (AVTO EXPRESS) до $5/кг. Авиа доставка: от $7.5/кг до $10/кг. Минимальный вес отправки — 10 кг."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Какие сроки доставки из Стамбула в Москву?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Авто доставка занимает 14-18 дней. Авиа доставка: AVIA EX MARKA — 3-4 дня, AVIA U3 — 4-5 дней, AVIA U2 MARKA — 7-8 дней."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Какие товары можно отправить через RENEXPRESS?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Мы доставляем домашний текстиль, турецкий текстиль, брендовый текстиль, б/у текстиль, обувь турецкого производства, брендовую и б/у обувь. Для каждой категории предусмотрен свой тариф."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Где находится склад RENEXPRESS в Москве?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Московский склад: ул. Южнопортовая 7а, стр 2, склад 8, ворота 1. Режим работы: Пн-Пт 09:00-18:00."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Есть ли мобильное приложение для отслеживания?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Да, приложение RENEXPRESS доступно в App Store для iOS. В приложении можно отслеживать доставки, создавать заказы и общаться с поддержкой."
-          }
-        }
-      ]
-    }
-    </script>
+    <!-- Per-page FAQPage schema is injected by Home.js via react-helmet-async to avoid duplicate-schema warnings. -->
+    <!-- Landing pages (delivery-turkey-russia, customs-clearance, etc.) inject their own FAQPage. -->
+    <!-- Site-wide schemas above (Organization / WebSite / LocalBusiness / SoftwareApplication) remain here. -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">

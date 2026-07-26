@@ -5,11 +5,14 @@ import API_URL from '../config/api';
 import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
+import { useTranslation } from '../i18n/LanguageContext';
 
 const PRIMARY = '#3D8B8B';
 
 function Shop({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [products, setProducts] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [colors, setColors] = useState([]);
@@ -254,6 +257,15 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div style={styles.page}>
+      <SEO
+        titleKey="seo.shop.title"
+        descriptionKey="seo.shop.description"
+        translatedLanguages={['ru']}
+        breadcrumbs={[
+          { name: t('common.home'), path: '/' },
+          { name: t('common.shop'), path: '/shop' },
+        ]}
+      />
       {/* Header */}
       <header style={styles.header}>
         <div className="header-content" style={styles.headerContent}>

@@ -1,93 +1,106 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Home from './pages/Home';
-import Shop from './pages/Shop';
-import Product from './pages/Product';
-import MyProducts from './pages/MyProducts';
-import AddProduct from './pages/AddProduct';
-import Analytics from './pages/Analytics';
-import About from './pages/About';
-import Services from './pages/Services';
-import FAQ from './pages/FAQ';
-import Calculator from './pages/Calculator';
-import Contacts from './pages/Contacts';
+import React, { useState, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { LanguageProvider } from './i18n/LanguageContext';
+
+// Code-splitting: each page is loaded only when visited.
+// Previously, all 13 pages were bundled into one giant chunk (~11k LOC).
+const Login = lazy(() => import('./pages/Login'));
+const Register = lazy(() => import('./pages/Register'));
+const Home = lazy(() => import('./pages/Home'));
+const Shop = lazy(() => import('./pages/Shop'));
+const Product = lazy(() => import('./pages/Product'));
+const MyProducts = lazy(() => import('./pages/MyProducts'));
+const AddProduct = lazy(() => import('./pages/AddProduct'));
+const Analytics = lazy(() => import('./pages/Analytics'));
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const FAQ = lazy(() => import('./pages/FAQ'));
+const Calculator = lazy(() => import('./pages/Calculator'));
+const Contacts = lazy(() => import('./pages/Contacts'));
+
+// SEO landing pages (Phase 2)
+const DeliveryTurkeyRussia = lazy(() => import('./pages/landing/DeliveryTurkeyRussia'));
+const DeliveryIstanbulMoscow = lazy(() => import('./pages/landing/DeliveryIstanbulMoscow'));
+const CustomsClearance = lazy(() => import('./pages/landing/CustomsClearance'));
+
+function PageFallback() {
+  return (
+    <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ width: 40, height: 40, border: '3px solid #E5E7EB', borderTopColor: '#3D8B8B', borderRadius: '50%', animation: 'seo-spin 0.8s linear infinite' }} />
+      <style>{`@keyframes seo-spin{to{transform:rotate(360deg)}}`}</style>
+    </div>
+  );
+}
+
+// Scrolls to top on every route change — better UX, avoids the "you land mid-page" feel.
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+// One block of routes — reused for each language prefix.
+function AllRoutes({ isAuthenticated, setIsAuthenticated }) {
+  const authProps = { isAuthenticated, setIsAuthenticated };
+  return (
+    <Routes>
+      <Route
+        path="login"
+        element={
+          isAuthenticated ? <Navigate to="../" replace /> : <Login setIsAuthenticated={setIsAuthenticated} />
+        }
+      />
+      <Route
+        path="register"
+        element={
+          isAuthenticated ? <Navigate to="../" replace /> : <Register setIsAuthenticated={setIsAuthenticated} />
+        }
+      />
+      <Route index element={<Home {...authProps} />} />
+      <Route path="shop" element={<Shop {...authProps} />} />
+      <Route path="product/:id" element={<Product {...authProps} />} />
+      <Route path="my-products" element={<MyProducts {...authProps} />} />
+      <Route path="add-product" element={<AddProduct {...authProps} />} />
+      <Route path="add-product/:id" element={<AddProduct {...authProps} />} />
+      <Route path="analytics" element={<Analytics {...authProps} />} />
+      <Route path="about" element={<About {...authProps} />} />
+      <Route path="services" element={<Services {...authProps} />} />
+      <Route path="faq" element={<FAQ {...authProps} />} />
+      <Route path="calculator" element={<Calculator {...authProps} />} />
+      <Route path="contacts" element={<Contacts {...authProps} />} />
+
+      {/* SEO landing pages */}
+      <Route path="delivery-turkey-russia" element={<DeliveryTurkeyRussia {...authProps} />} />
+      <Route path="delivery-istanbul-moscow" element={<DeliveryIstanbulMoscow {...authProps} />} />
+      <Route path="customs-clearance" element={<CustomsClearance {...authProps} />} />
+
+      <Route path="*" element={<Navigate to="." replace />} />
+    </Routes>
+  );
+}
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('client') !== null;
+    return typeof window !== 'undefined' && localStorage.getItem('client') !== null;
   });
 
   return (
     <Router>
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            isAuthenticated ?
-              <Navigate to="/" replace /> :
-              <Login setIsAuthenticated={setIsAuthenticated} />
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            isAuthenticated ?
-              <Navigate to="/" replace /> :
-              <Register setIsAuthenticated={setIsAuthenticated} />
-          }
-        />
-        <Route
-          path="/"
-          element={<Home isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/shop"
-          element={<Shop isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/product/:id"
-          element={<Product isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/my-products"
-          element={<MyProducts isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/add-product"
-          element={<AddProduct isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/add-product/:id"
-          element={<AddProduct isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/analytics"
-          element={<Analytics isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/about"
-          element={<About isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/services"
-          element={<Services isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/faq"
-          element={<FAQ isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/calculator"
-          element={<Calculator isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route
-          path="/contacts"
-          element={<Contacts isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <LanguageProvider>
+        <ScrollToTop />
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            {/* English routes under /en */}
+            <Route path="/en/*" element={<AllRoutes isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
+            {/* Turkish routes under /tr */}
+            <Route path="/tr/*" element={<AllRoutes isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
+            {/* Russian (default) at root */}
+            <Route path="/*" element={<AllRoutes isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} />
+          </Routes>
+        </Suspense>
+      </LanguageProvider>
     </Router>
   );
 }

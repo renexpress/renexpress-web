@@ -30,3 +30,6 @@ Thumbs.db
 # Cache
 .cache/
 .eslintcache
+
+# Internal growth/SEO audit notes (not part of the site)
+growth/

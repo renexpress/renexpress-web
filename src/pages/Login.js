@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import API_URL from '../config/api';
 import '../styles/responsive.css';
+import SEO from '../components/SEO';
 
 const PRIMARY = '#3D8B8B';
 
@@ -44,6 +45,7 @@ function Login({ setIsAuthenticated }) {
 
   return (
     <div className="auth-container" style={styles.container}>
+      <SEO title="Вход в личный кабинет — RENEXPRESS" description="Вход в личный кабинет RENEXPRESS." noindex />
       <style>{`
         .auth-input::placeholder { color: rgba(255,255,255,0.3); }
         .auth-input:focus { border-color: ${PRIMARY} !important; box-shadow: 0 0 0 3px rgba(61,139,139,0.15); }

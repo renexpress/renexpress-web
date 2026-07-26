@@ -7,12 +7,43 @@
     "framer-motion": "^12.34.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^3.0.0",
     "react-router-dom": "^6.20.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "react-snap": "^1.23.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "prebuild": "node scripts/generate-sitemap.js",
+    "build": "react-scripts build",
+    "postbuild": "react-snap"
+  },
+  "reactSnap": {
+    "comment": "Only include routes that have real body translation. Russian root + the 3 landing pages × 3 languages.",
+    "include": [
+      "/",
+      "/services",
+      "/calculator",
+      "/about",
+      "/faq",
+      "/contacts",
+      "/shop",
+      "/delivery-turkey-russia",
+      "/delivery-istanbul-moscow",
+      "/customs-clearance",
+      "/en",
+      "/en/delivery-turkey-russia",
+      "/en/delivery-istanbul-moscow",
+      "/en/customs-clearance",
+      "/tr",
+      "/tr/delivery-turkey-russia",
+      "/tr/delivery-istanbul-moscow",
+      "/tr/customs-clearance"
+    ],
+    "skipThirdPartyRequests": true,
+    "inlineCss": false,
+    "fixWebpackChunksIssue": false,
+    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"]
   },
   "eslintConfig": {
     "extends": [

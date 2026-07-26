@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
+import { useTranslation } from '../i18n/LanguageContext';
 
 const PRIMARY = '#3D8B8B';
 
 function Services({ isAuthenticated, setIsAuthenticated }) {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem('client');
@@ -82,6 +85,15 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0B1120', fontFamily: 'Inter, -apple-system, sans-serif' }}>
+      <SEO
+        titleKey="seo.services.title"
+        descriptionKey="seo.services.description"
+        translatedLanguages={['ru']}
+        breadcrumbs={[
+          { name: t('common.home'), path: '/' },
+          { name: t('common.services'), path: '/services' },
+        ]}
+      />
 
       {/* ======= CSS for hover/animations ======= */}
       <style>{`

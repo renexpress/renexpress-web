@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
+import { useTranslation } from '../i18n/LanguageContext';
 
 const PRIMARY = '#3D8B8B';
 
 function Calculator({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
   const [selectedType, setSelectedType] = useState('');
   const [weight, setWeight] = useState('');
   const [result, setResult] = useState(null);
@@ -34,6 +37,15 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div style={styles.page}>
+      <SEO
+        titleKey="seo.calculator.title"
+        descriptionKey="seo.calculator.description"
+        translatedLanguages={['ru']}
+        breadcrumbs={[
+          { name: t('common.home'), path: '/' },
+          { name: t('common.calculator'), path: '/calculator' },
+        ]}
+      />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
 

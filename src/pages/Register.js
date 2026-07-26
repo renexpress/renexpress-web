@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import API_URL from '../config/api';
 import '../styles/responsive.css';
+import SEO from '../components/SEO';
 
 const PRIMARY = '#3D8B8B';
 
@@ -64,6 +65,7 @@ function Register({ setIsAuthenticated }) {
 
   return (
     <div style={styles.page}>
+      <SEO title="Регистрация — RENEXPRESS" description="Создайте аккаунт RENEXPRESS для отслеживания доставок." noindex />
       <style>{`
         .reg-input::placeholder { color: rgba(255,255,255,0.3); }
         .reg-input:focus { border-color: ${PRIMARY} !important; box-shadow: 0 0 0 3px rgba(61,139,139,0.15); }
