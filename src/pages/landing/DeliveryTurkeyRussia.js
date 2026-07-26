@@ -22,7 +22,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
     ru: [
       {
         q: 'Сколько стоит доставка из Турции в Россию?',
-        a: 'Стоимость зависит от способа доставки. Автомобильный тариф AVTO EXPRESS — $4 за кг, доставка занимает 14-18 дней. Авиа тариф AVIA U3 — $8 за кг, 4-5 дней. Премиум-авиа AVIA EX MARKA — $10 за кг, 3-4 дня. Минимальный вес отправки — 10 кг.',
+        a: 'Стоимость зависит от способа доставки. Автомобильный тариф AVTO EXPRESS — $4 за кг, доставка занимает 14-18 дней. Авиа тариф AVIA U3 — $8.5 за кг, 4-5 дней. Премиум-авиа AVIA EX MARKA — $10 за кг, 3-4 дня. Минимальный вес отправки — 10 кг.',
       },
       {
         q: 'Какие сроки доставки из Турции в Россию?',
@@ -48,7 +48,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
     en: [
       {
         q: 'How much does cargo from Turkey to Russia cost?',
-        a: 'Cost depends on the shipping method. Road tariff AVTO EXPRESS — $4 per kg, 14-18 days. Air tariff AVIA U3 — $8 per kg, 4-5 days. Premium air AVIA EX MARKA — $10 per kg, 3-4 days. Minimum shipment weight is 10 kg.',
+        a: 'Cost depends on the shipping method. Road tariff AVTO EXPRESS — $4 per kg, 14-18 days. Air tariff AVIA U3 — $8.5 per kg, 4-5 days. Premium air AVIA EX MARKA — $10 per kg, 3-4 days. Minimum shipment weight is 10 kg.',
       },
       {
         q: 'How long does delivery from Turkey to Russia take?',
@@ -74,7 +74,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
     tr: [
       {
         q: 'Türkiye\'den Rusya\'ya kargo ne kadar?',
-        a: 'Maliyet gönderim yöntemine bağlıdır. Karayolu tarifesi AVTO EXPRESS — kg başına $4, 14-18 gün. Havayolu AVIA U3 — kg başına $8, 4-5 gün. Premium havayolu AVIA EX MARKA — kg başına $10, 3-4 gün. Minimum gönderi ağırlığı 10 kg.',
+        a: 'Maliyet gönderim yöntemine bağlıdır. Karayolu tarifesi AVTO EXPRESS — kg başına $4, 14-18 gün. Havayolu AVIA U3 — kg başına $8.5, 4-5 gün. Premium havayolu AVIA EX MARKA — kg başına $10, 3-4 gün. Minimum gönderi ağırlığı 10 kg.',
       },
       {
         q: 'Türkiye\'den Rusya\'ya teslimat ne kadar sürer?',
@@ -143,7 +143,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
   const copy = {
     ru: {
       h1: 'Доставка из Турции в Россию',
-      lead: 'RENEXPRESS — карго компания с офисами в Стамбуле и Москве. Доставляем грузы между Турцией и Россией с 2017 года: текстиль, одежду, обувь, потребительские товары. Три тарифа на выбор — от $4 за кг.',
+      lead: 'RENEXPRESS — карго компания с офисами в Стамбуле и Москве. Доставляем грузы между Турцией и Россией с 2017 года: текстиль, одежду, обувь, потребительские товары. Пять тарифов на выбор — от $4 за кг.',
       h2Tariffs: 'Тарифы доставки Турция → Россия',
       tariffNote: 'Минимальный вес отправки — 10 кг. Цена включает таможенное оформление и доставку до московского склада.',
       h2How: 'Как работает доставка',
@@ -156,7 +156,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
       ],
       h2Why: 'Почему RENEXPRESS',
       whyItems: [
-        { title: '7 лет на маршруте', text: 'Работаем с 2017 года, более 3000 клиентов. Знаем особенности турецких поставщиков и российской таможни.' },
+        { title: 'С 2017 года на маршруте', text: 'Работаем с 2017 года, более 3000 клиентов. Знаем особенности турецких поставщиков и российской таможни.' },
         { title: 'Свои офисы в Стамбуле и Москве', text: 'Не агрегатор — собственные склады, собственные сотрудники с обеих сторон. Контролируем весь маршрут.' },
         { title: 'Прозрачные тарифы', text: 'Цена за кг фиксированная. Никаких «скрытых сборов» за упаковку, документы или растаможку.' },
         { title: 'Отслеживание в приложении', text: 'iOS-приложение RENEXPRESS показывает статусы в реальном времени и историю отправок.' },
@@ -170,7 +170,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
     },
     en: {
       h1: 'Cargo from Turkey to Russia',
-      lead: 'RENEXPRESS is a cargo company with offices in Istanbul and Moscow. Shipping goods between Turkey and Russia since 2017: textiles, clothing, footwear, consumer goods. Three tariffs — starting from $4 per kg.',
+      lead: 'RENEXPRESS is a cargo company with offices in Istanbul and Moscow. Shipping goods between Turkey and Russia since 2017: textiles, clothing, footwear, consumer goods. Five tariffs — starting from $4 per kg.',
       h2Tariffs: 'Turkey → Russia tariffs',
       tariffNote: 'Minimum shipment 10 kg. Price includes customs clearance and delivery to the Moscow warehouse.',
       h2How: 'How it works',
@@ -183,7 +183,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
       ],
       h2Why: 'Why RENEXPRESS',
       whyItems: [
-        { title: '7 years on this route', text: 'Operating since 2017, more than 3000 clients. We know Turkish suppliers and Russian customs inside out.' },
+        { title: 'On this route since 2017', text: 'Operating since 2017, more than 3000 clients. We know Turkish suppliers and Russian customs inside out.' },
         { title: 'Own offices in Istanbul and Moscow', text: 'Not a broker — our own warehouses and our own staff on both sides. We control the whole route.' },
         { title: 'Transparent pricing', text: 'Fixed price per kg. No hidden fees for packaging, paperwork, or customs.' },
         { title: 'In-app tracking', text: 'RENEXPRESS iOS app shows real-time statuses and shipment history.' },
@@ -197,7 +197,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
     },
     tr: {
       h1: 'Türkiye\'den Rusya\'ya kargo',
-      lead: 'RENEXPRESS, İstanbul ve Moskova ofisleri olan bir kargo şirketidir. 2017\'den bu yana Türkiye ile Rusya arasında tekstil, giysi, ayakkabı ve tüketim malları taşıyoruz. Üç tarife — kg başına $4\'ten başlayan fiyatlarla.',
+      lead: 'RENEXPRESS, İstanbul ve Moskova ofisleri olan bir kargo şirketidir. 2017\'den bu yana Türkiye ile Rusya arasında tekstil, giysi, ayakkabı ve tüketim malları taşıyoruz. Beş tarife — kg başına $4\'ten başlayan fiyatlarla.',
       h2Tariffs: 'Türkiye → Rusya tarifeleri',
       tariffNote: 'Minimum gönderi 10 kg. Fiyat, gümrük işlemleri ve Moskova deposuna teslimi içerir.',
       h2How: 'Nasıl çalışır',
@@ -210,7 +210,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
       ],
       h2Why: 'Neden RENEXPRESS',
       whyItems: [
-        { title: 'Bu rotada 7 yıl', text: '2017\'den bu yana, 3000\'den fazla müşteri. Türk tedarikçiler ve Rus gümrüğünü iyi tanırız.' },
+        { title: '2017\'den beri bu rotada', text: '2017\'den bu yana, 3000\'den fazla müşteri. Türk tedarikçiler ve Rus gümrüğünü iyi tanırız.' },
         { title: 'Kendi ofislerimiz', text: 'Aracı değil — her iki tarafta kendi depolarımız ve personelimiz. Tüm rotayı kontrol ederiz.' },
         { title: 'Şeffaf fiyatlandırma', text: 'Kg başına sabit fiyat. Paketleme, evrak veya gümrük için gizli ücret yoktur.' },
         { title: 'Uygulamada takip', text: 'RENEXPRESS iOS uygulaması, gerçek zamanlı durum ve gönderi geçmişi gösterir.' },

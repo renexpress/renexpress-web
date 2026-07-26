@@ -5,6 +5,7 @@ import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import { useTranslation } from '../i18n/LanguageContext';
+import { SITE } from '../config/site';
 
 const PRIMARY = '#3D8B8B';
 
@@ -15,8 +16,8 @@ function About({ isAuthenticated, setIsAuthenticated }) {
 
   const stats = [
     { number: '3000+', label: 'клиентов' },
-    { number: '7+', label: 'лет опыта' },
-    { number: '6', label: 'типов доставки' },
+    { number: `с ${SITE.foundingYear}`, label: 'на рынке' },
+    { number: String(SITE.tariffs.length), label: 'типов доставки' },
     { number: '365', label: 'дней в году' },
   ];
 
@@ -137,7 +138,7 @@ function About({ isAuthenticated, setIsAuthenticated }) {
             </p>
             <p style={styles.storyText}>
               Сегодня RENEXPRESS обслуживает более 3000 клиентов из России, Турции, Узбекистана и Казахстана.
-              Мы предлагаем шесть различных тарифов на доставку, включая авиа и авто перевозки, а также
+              Мы предлагаем пять различных тарифов на доставку, включая авиа и авто перевозки, а также
               специализированные услуги по маркировке товаров системой «Честный знак» и доставке на склады
               маркетплейсов Wildberries и OZON.
             </p>

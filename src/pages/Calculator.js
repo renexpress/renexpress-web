@@ -5,6 +5,7 @@ import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import { useTranslation } from '../i18n/LanguageContext';
+import { SITE } from '../config/site';
 
 const PRIMARY = '#3D8B8B';
 
@@ -16,14 +17,15 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
   const [weight, setWeight] = useState('');
   const [result, setResult] = useState(null);
 
-  const deliveryTypes = [
-    { code: 'avto_express', name: 'AVTO EXPRESS', price: 4, days: '14-18', desc: 'Домашний текстиль, Турецкий текстиль' },
-    { code: 'avto_ex_marka', name: 'AVTO EX MARKA', price: 5, days: '14-18', desc: 'Домашний текстиль, Бренд/Марка текстиль, Турецкий текстиль' },
-    { code: 'avto_obuv', name: 'AVTO ОБУВЬ', price: 5, days: '14-18', desc: 'Турецкие производители обуви (не марка, не бренд)' },
-    { code: 'avia_u2_marka', name: 'AVIA U2 MARKA', price: 7.5, days: '7-8', desc: 'Турецкий текстиль, Бренд/Марка текстиль' },
-    { code: 'avia_u3', name: 'AVIA U3', price: 8, days: '4-5', desc: 'Обувь (марка, турецкое производство)' },
-    { code: 'avia_ex_marka', name: 'AVIA EX MARKA', price: 10, days: '3-4', desc: 'Турецкое производство, Бренд/Марка текстиль' },
-  ];
+  // Single source of truth — tariffs come from SITE.tariffs (synced with DB / mobile app).
+  const deliveryTypes = SITE.tariffs.map(tf => ({
+    code: tf.id,
+    name: tf.name,
+    price: tf.pricePerKg,
+    days: `${tf.transitDaysMin}-${tf.transitDaysMax}`,
+    desc: tf.category,
+    mode: tf.mode,
+  }));
 
   const calculate = () => {
     const type = deliveryTypes.find(t => t.code === selectedType);
@@ -32,7 +34,8 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
       setResult(null);
       return;
     }
-    setResult({ type: type.name, weight: w, pricePerKg: type.price, days: type.days, total: w * type.price });
+    const total = Math.round(w * type.price * 100) / 100;
+    setResult({ type: type.name, weight: w, pricePerKg: type.price, days: type.days, total });
   };
 
   return (
@@ -172,13 +175,13 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
       <section style={{...styles.tariffSection, ...(isMobile ? {padding: '48px 16px'} : {})}}>
         <div style={styles.tariffContainer}>
           <h2 style={{...styles.tariffSectionTitle, fontSize: isMobile ? 22 : 36}}>Все тарифы</h2>
-          <p style={styles.tariffSectionSubtitle}>Шесть тарифов доставки из Стамбула в Москву</p>
+          <p style={styles.tariffSectionSubtitle}>{SITE.tariffs.length} тарифов доставки из Стамбула в Москву</p>
           <div className="tariff-grid" style={{...styles.tariffGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 12 : 24}}>
             {deliveryTypes.map((dt, i) => (
               <div key={i} className="tariff-card" style={{...styles.tariffCard, padding: isMobile ? 20 : 28}}>
                 <div style={styles.tariffCardShimmer} />
                 <div style={styles.tariffIconWrap}>
-                  {i < 3 ? (
+                  {dt.mode !== 'air' ? (
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2">
                       <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
                       <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
@@ -242,9 +245,9 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
           <p style={styles.seoText}>
             Онлайн-калькулятор RENEXPRESS позволяет быстро рассчитать стоимость доставки груза из Стамбула
             в Москву. Выберите тип доставки в зависимости от категории вашего товара и укажите вес —
-            система автоматически рассчитает итоговую стоимость перевозки. Мы предлагаем шесть тарифов:
-            три вида автомобильной доставки (AVTO EXPRESS от $4/кг, AVTO EX MARKA и AVTO ОБУВЬ от $5/кг)
-            и три вида авиадоставки (AVIA U2 MARKA от $7.5/кг, AVIA U3 от $8/кг, AVIA EX MARKA от $10/кг).
+            система автоматически рассчитает итоговую стоимость перевозки. Мы предлагаем пять тарифов:
+            два вида автомобильной доставки (AVTO EXPRESS $4/кг, AVTO ОБУВЬ $5/кг)
+            и три вида авиадоставки (AVIA U2 MARKA $8/кг, AVIA U3 $8.5/кг, AVIA EX MARKA $10/кг).
             Минимальный вес отправки составляет 10 килограмм для всех тарифов.
           </p>
           <p style={styles.seoText}>

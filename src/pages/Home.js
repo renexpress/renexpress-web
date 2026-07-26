@@ -7,6 +7,7 @@ import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import { useTranslation } from '../i18n/LanguageContext';
+import { SITE } from '../config/site';
 
 const PRIMARY = '#3D8B8B';
 
@@ -98,7 +99,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-      { '@type': 'Question', name: 'Сколько стоит доставка из Турции в Россию?', acceptedAnswer: { '@type': 'Answer', text: 'AVTO EXPRESS — $4/кг (14-18 дней), AVIA U3 — $8/кг (4-5 дней), AVIA EX MARKA — $10/кг (3-4 дня). Минимальный вес отправки — 10 кг.' } },
+      { '@type': 'Question', name: 'Сколько стоит доставка из Турции в Россию?', acceptedAnswer: { '@type': 'Answer', text: 'AVTO EXPRESS — $4/кг (14-18 дней), AVIA U3 — $8.5/кг (4-5 дней), AVIA EX MARKA — $10/кг (3-4 дня). Минимальный вес отправки — 10 кг.' } },
       { '@type': 'Question', name: 'Какие сроки доставки из Стамбула в Москву?', acceptedAnswer: { '@type': 'Answer', text: 'Авто доставка занимает 14-18 дней. Авиа U3 — 4-5 дней, авиа EX MARKA — 3-4 дня.' } },
       { '@type': 'Question', name: 'Какие товары можно отправить через RENEXPRESS?', acceptedAnswer: { '@type': 'Answer', text: 'Домашний текстиль, турецкий текстиль, брендовый текстиль, б/у текстиль, обувь турецкого производства, брендовую и б/у обувь.' } },
       { '@type': 'Question', name: 'Где находится склад RENEXPRESS в Москве?', acceptedAnswer: { '@type': 'Answer', text: 'Московский склад: ул. Южнопортовая 7а, стр 2, склад 8, ворота 1. Режим работы: Пн-Пт 09:00-18:00.' } },
@@ -183,7 +184,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               <p className="display-card__title" style={{ color: '#93C5FD' }}>Авто доставка</p>
             </div>
             <p className="display-card__desc">От $4/кг — текстиль за 14-18 дней</p>
-            <p className="display-card__date">6 тарифов на выбор</p>
+            <p className="display-card__date">{SITE.tariffs.length} тарифов на выбор</p>
           </div>
           {/* Card 2 */}
           <div className="display-card display-card--2">
@@ -195,7 +196,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               </span>
               <p className="display-card__title" style={{ color: '#93C5FD' }}>Авиа доставка</p>
             </div>
-            <p className="display-card__desc">От $7.5/кг — экспресс за 3-4 дня</p>
+            <p className="display-card__desc">От $8/кг — экспресс за 3-4 дня</p>
             <p className="display-card__date">Ежедневные отправки</p>
           </div>
           {/* Card 3 */}
@@ -272,7 +273,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
             {[
               { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,
                 title: 'Авто и авиа доставка',
-                text: 'Шесть тарифов: авто от $4/кг за 14-18 дней, авиа от $7.5/кг за 3-4 дня. Ежедневные отправки из Стамбула.' },
+                text: 'Пять тарифов: авто от $4/кг за 14-18 дней, авиа от $8/кг за 3-4 дня. Ежедневные отправки из Стамбула.' },
               { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>,
                 title: 'Честный знак и маркировка',
                 text: 'Маркируем товары для легальной продажи в России. Доставляем напрямую на склады Wildberries и OZON.' },
@@ -301,18 +302,11 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           <div style={styles.seoTariffBlock}>
             <h3 style={styles.seoTariffTitle}>Тарифы на карго доставку из Турции</h3>
             <div className="seo-tariff-row" style={styles.seoTariffRow}>
-              {[
-                { name: 'AVTO EXPRESS', price: '$4/кг', days: '14-18 дн', type: 'Текстиль' },
-                { name: 'AVTO EX MARKA', price: '$5/кг', days: '14-18 дн', type: 'Бренд текстиль' },
-                { name: 'AVTO ОБУВЬ', price: '$5/кг', days: '14-18 дн', type: 'Обувь' },
-                { name: 'AVIA U2 MARKA', price: '$7.5/кг', days: '7-8 дн', type: 'Бренд текстиль' },
-                { name: 'AVIA U3', price: '$8/кг', days: '4-5 дн', type: 'Обувь' },
-                { name: 'AVIA EX MARKA', price: '$10/кг', days: '3-4 дн', type: 'Бренд текстиль' },
-              ].map((t, i) => (
+              {SITE.tariffs.map((tariff, i) => (
                 <div key={i} style={{...styles.seoTariffChip, ...(isMobile ? {padding: '8px 12px', gap: 6} : {})}}>
-                  <span style={styles.seoTariffName}>{t.name}</span>
-                  <span style={styles.seoTariffPrice}>{t.price}</span>
-                  <span style={styles.seoTariffDays}>{t.days}</span>
+                  <span style={styles.seoTariffName}>{tariff.name}</span>
+                  <span style={styles.seoTariffPrice}>${tariff.pricePerKg}/кг</span>
+                  <span style={styles.seoTariffDays}>{tariff.transitDaysMin}-{tariff.transitDaysMax} дн</span>
                 </div>
               ))}
             </div>
@@ -332,9 +326,9 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               на российском рынке.
             </p>
             <p style={styles.seoText}>
-              Мы предлагаем шесть тарифов доставки, адаптированных под разные категории товаров.
-              Автомобильная доставка подходит для крупных партий текстиля и обуви — стоимость от $5 до $7
-              за килограмм, сроки 12-15 дней. Авиадоставка — для срочных отправок: от $9 до $11 за килограмм,
+              Мы предлагаем пять тарифов доставки, адаптированных под разные категории товаров.
+              Автомобильная доставка подходит для крупных партий текстиля и обуви — стоимость от $4 до $5
+              за килограмм, сроки 14-18 дней. Авиадоставка — для срочных отправок: от $8 до $10 за килограмм,
               сроки от 3 до 8 дней. Минимальный вес отправки составляет 10 килограмм.
             </p>
             <p style={styles.seoText}>
@@ -378,7 +372,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
               <h2 style={styles.footerCtaTitle}>Готовы начать доставку из Турции?</h2>
               <p style={styles.footerCtaDesc}>
                 Присоединяйтесь к 3000+ клиентам, которые доверяют нам грузоперевозки.
-                Авиа от 3 дней, авто от 12 дней.
+                Авиа от 3 дней, авто от 14 дней.
               </p>
               <div style={styles.footerCtaButtons}>
                 <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-cta-btn" style={styles.footerCtaWhatsapp}>
@@ -398,11 +392,11 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
                   <span style={styles.footerCtaStatLabel}>клиентов</span>
                 </div>
                 <div style={styles.footerCtaStat}>
-                  <span style={styles.footerCtaStatNum}>7 лет</span>
+                  <span style={styles.footerCtaStatNum}>с {SITE.foundingYear}</span>
                   <span style={styles.footerCtaStatLabel}>на рынке</span>
                 </div>
                 <div style={styles.footerCtaStat}>
-                  <span style={styles.footerCtaStatNum}>6</span>
+                  <span style={styles.footerCtaStatNum}>{SITE.tariffs.length}</span>
                   <span style={styles.footerCtaStatLabel}>тарифов</span>
                 </div>
               </div>

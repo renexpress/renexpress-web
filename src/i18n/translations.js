@@ -30,11 +30,11 @@ export const translations = {
     seo: {
       home: {
         title: 'RENEXPRESS — доставка из Турции в Россию | карго из Стамбула в Москву',
-        description: 'Карго RENEXPRESS: доставка грузов из Турции в Россию от $4/кг. Авто (14-18 дней) и авиа (3-5 дней) из Стамбула в Москву. Склад на Южнопортовой, отслеживание в приложении.',
+        description: 'Карго RENEXPRESS: доставка грузов из Турции в Россию от $4/кг. Авто (14-18 дней) и авиа (3-8 дней) из Стамбула в Москву. Склад на Южнопортовой, отслеживание в приложении.',
       },
       services: {
         title: 'Услуги доставки из Турции — авиа и авто карго | RENEXPRESS',
-        description: 'Три тарифа доставки из Турции: AVTO EXPRESS $4/кг (14-18 дней), AVIA U3 $8/кг (4-5 дней), AVIA EX MARKA $10/кг (3-4 дня). Минимальный вес 10 кг.',
+        description: 'Тарифы доставки из Турции: AVTO EXPRESS $4/кг (14-18 дней), AVIA U3 $8.5/кг (4-5 дней), AVIA EX MARKA $10/кг (3-4 дня). Минимальный вес 10 кг.',
       },
       calculator: {
         title: 'Калькулятор стоимости доставки из Турции в Россию | RENEXPRESS',
@@ -58,11 +58,11 @@ export const translations = {
       },
       deliveryTurkeyRussia: {
         title: 'Доставка из Турции в Россию — карго от $4/кг | RENEXPRESS',
-        description: 'Грузоперевозки Турция–Россия: три тарифа, склады в Стамбуле и Москве, таможенное сопровождение. Авто 14-18 дней или авиа 3-5 дней.',
+        description: 'Грузоперевозки Турция–Россия: пять тарифов, склады в Стамбуле и Москве, таможенное сопровождение. Авто 14-18 дней или авиа 3-8 дней.',
       },
       deliveryIstanbulMoscow: {
         title: 'Доставка из Стамбула в Москву — авто и авиа карго | RENEXPRESS',
-        description: 'Карго Стамбул–Москва от $4/кг: автомобильная доставка за 14-18 дней или авиа за 3-5 дней. Склад на Южнопортовой, выдача груза с отслеживанием.',
+        description: 'Карго Стамбул–Москва от $4/кг: автомобильная доставка за 14-18 дней или авиа за 3-8 дней. Склад на Южнопортовой, выдача груза с отслеживанием.',
       },
       customsClearance: {
         title: 'Таможенное оформление грузов из Турции | RENEXPRESS',
@@ -71,11 +71,11 @@ export const translations = {
     },
     home: {
       heroTitle: 'Карго из Турции в Россию',
-      heroSubtitle: 'Три способа доставки от $4 за кг. Из Стамбула в Москву за 3-18 дней с отслеживанием в приложении.',
+      heroSubtitle: 'Пять тарифов доставки от $4 за кг. Из Стамбула в Москву за 3-18 дней с отслеживанием в приложении.',
     },
     services: {
       pageTitle: 'Тарифы доставки из Турции',
-      pageSubtitle: 'Три способа отправить груз из Стамбула в Москву',
+      pageSubtitle: 'Пять тарифов доставки груза из Стамбула в Москву',
     },
   },
 
@@ -107,11 +107,11 @@ export const translations = {
     seo: {
       home: {
         title: 'RENEXPRESS — Cargo from Turkey to Russia | Istanbul-Moscow Freight',
-        description: 'RENEXPRESS cargo: shipments from Turkey to Russia from $4/kg. Road (14-18 days) and air (3-5 days) freight from Istanbul to Moscow. Warehouse in Moscow, in-app tracking.',
+        description: 'RENEXPRESS cargo: shipments from Turkey to Russia from $4/kg. Road (14-18 days) and air (3-8 days) freight from Istanbul to Moscow. Warehouse in Moscow, in-app tracking.',
       },
       services: {
         title: 'Cargo Delivery Services from Turkey — Air & Road | RENEXPRESS',
-        description: 'Three shipping options from Turkey: AVTO EXPRESS $4/kg (14-18 days), AVIA U3 $8/kg (4-5 days), AVIA EX MARKA $10/kg (3-4 days). Minimum weight 10 kg.',
+        description: 'Shipping options from Turkey: AVTO EXPRESS $4/kg (14-18 days), AVIA U3 $8.5/kg (4-5 days), AVIA EX MARKA $10/kg (3-4 days). Minimum weight 10 kg.',
       },
       calculator: {
         title: 'Turkey to Russia Shipping Cost Calculator | RENEXPRESS',
@@ -135,11 +135,11 @@ export const translations = {
       },
       deliveryTurkeyRussia: {
         title: 'Cargo from Turkey to Russia — Freight from $4/kg | RENEXPRESS',
-        description: 'Turkey-Russia freight: three tariffs, warehouses in Istanbul and Moscow, customs assistance. Road in 14-18 days or air in 3-5 days.',
+        description: 'Turkey-Russia freight: five tariffs, warehouses in Istanbul and Moscow, customs assistance. Road in 14-18 days or air in 3-8 days.',
       },
       deliveryIstanbulMoscow: {
         title: 'Cargo from Istanbul to Moscow — Road & Air | RENEXPRESS',
-        description: 'Istanbul-Moscow cargo from $4/kg: road delivery in 14-18 days or air in 3-5 days. Warehouse on Yuzhnoportovaya, trackable shipments.',
+        description: 'Istanbul-Moscow cargo from $4/kg: road delivery in 14-18 days or air in 3-8 days. Warehouse on Yuzhnoportovaya, trackable shipments.',
       },
       customsClearance: {
         title: 'Customs Clearance for Imports from Turkey | RENEXPRESS',
@@ -148,11 +148,11 @@ export const translations = {
     },
     home: {
       heroTitle: 'Cargo from Turkey to Russia',
-      heroSubtitle: 'Three shipping options from $4 per kg. From Istanbul to Moscow in 3-18 days with in-app tracking.',
+      heroSubtitle: 'Five tariffs from $4 per kg. From Istanbul to Moscow in 3-18 days with in-app tracking.',
     },
     services: {
       pageTitle: 'Turkey Shipping Tariffs',
-      pageSubtitle: 'Three ways to ship cargo from Istanbul to Moscow',
+      pageSubtitle: 'Five shipping tariffs from Istanbul to Moscow',
     },
   },
 
@@ -184,11 +184,11 @@ export const translations = {
     seo: {
       home: {
         title: 'RENEXPRESS — Türkiye Rusya kargo | İstanbul Moskova taşımacılık',
-        description: 'RENEXPRESS kargo: Türkiye\'den Rusya\'ya $4/kg\'dan başlayan taşımacılık. Karayolu (14-18 gün) ve havayolu (3-5 gün) İstanbul-Moskova. Moskova\'da depo, uygulama içi takip.',
+        description: 'RENEXPRESS kargo: Türkiye\'den Rusya\'ya $4/kg\'dan başlayan taşımacılık. Karayolu (14-18 gün) ve havayolu (3-8 gün) İstanbul-Moskova. Moskova\'da depo, uygulama içi takip.',
       },
       services: {
         title: 'Türkiye Kargo Hizmetleri — Hava ve Karayolu | RENEXPRESS',
-        description: 'Türkiye\'den üç gönderim seçeneği: AVTO EXPRESS $4/kg (14-18 gün), AVIA U3 $8/kg (4-5 gün), AVIA EX MARKA $10/kg (3-4 gün). Minimum ağırlık 10 kg.',
+        description: 'Türkiye\'den gönderim tarifeleri: AVTO EXPRESS $4/kg (14-18 gün), AVIA U3 $8.5/kg (4-5 gün), AVIA EX MARKA $10/kg (3-4 gün). Minimum ağırlık 10 kg.',
       },
       calculator: {
         title: 'Türkiye-Rusya Kargo Ücret Hesaplayıcı | RENEXPRESS',
@@ -212,11 +212,11 @@ export const translations = {
       },
       deliveryTurkeyRussia: {
         title: 'Türkiye\'den Rusya\'ya Kargo — $4/kg\'dan | RENEXPRESS',
-        description: 'Türkiye-Rusya taşımacılık: üç tarife, İstanbul ve Moskova depoları, gümrük desteği. Karayolu 14-18 gün veya havayolu 3-5 gün.',
+        description: 'Türkiye-Rusya taşımacılık: beş tarife, İstanbul ve Moskova depoları, gümrük desteği. Karayolu 14-18 gün veya havayolu 3-8 gün.',
       },
       deliveryIstanbulMoscow: {
         title: 'İstanbul\'dan Moskova\'ya Kargo — Karayolu ve Havayolu | RENEXPRESS',
-        description: 'İstanbul-Moskova kargo $4/kg\'dan: karayolu 14-18 gün veya havayolu 3-5 gün. Yujnoportovaya\'da depo, takip edilebilir gönderiler.',
+        description: 'İstanbul-Moskova kargo $4/kg\'dan: karayolu 14-18 gün veya havayolu 3-8 gün. Yujnoportovaya\'da depo, takip edilebilir gönderiler.',
       },
       customsClearance: {
         title: 'Türkiye\'den İthalat için Gümrük İşlemleri | RENEXPRESS',
@@ -225,11 +225,11 @@ export const translations = {
     },
     home: {
       heroTitle: 'Türkiye\'den Rusya\'ya kargo',
-      heroSubtitle: 'Üç gönderim seçeneği, $4/kg\'dan başlayan fiyatlarla. İstanbul\'dan Moskova\'ya 3-18 günde, uygulama içi takip.',
+      heroSubtitle: 'Beş tarife, $4/kg\'dan başlayan fiyatlarla. İstanbul\'dan Moskova\'ya 3-18 günde, uygulama içi takip.',
     },
     services: {
       pageTitle: 'Türkiye Kargo Tarifeleri',
-      pageSubtitle: 'İstanbul\'dan Moskova\'ya kargo göndermenin üç yolu',
+      pageSubtitle: 'İstanbul\'dan Moskova\'ya beş kargo tarifesi',
     },
   },
 };

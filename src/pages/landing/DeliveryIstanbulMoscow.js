@@ -16,7 +16,7 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
   const copy = {
     ru: {
       h1: 'Доставка из Стамбула в Москву',
-      lead: 'Прямой карго-маршрут Стамбул → Москва. Три тарифа от $4 за кг: автомобильная и авиа доставка. Свои склады с обеих сторон, таможенное оформление включено.',
+      lead: 'Прямой карго-маршрут Стамбул → Москва. Пять тарифов от $4 за кг: автомобильная и авиа доставка. Свои склады с обеих сторон, таможенное оформление включено.',
       h2Route: 'О маршруте',
       routeText: `Стамбул и Москва — основа нашей сети. Стамбульский офис принимает товары от поставщиков, консолидирует партии и ежедневно отправляет в Россию. Прибывшие грузы поступают на склад в Москве на ${SITE.warehouses.moscow.address}.`,
       h2Options: 'Варианты доставки Стамбул → Москва',
@@ -34,7 +34,7 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
     },
     en: {
       h1: 'Cargo from Istanbul to Moscow',
-      lead: 'Direct Istanbul → Moscow cargo route. Three tariffs from $4 per kg: road and air. Our own warehouses on both sides, customs clearance included.',
+      lead: 'Direct Istanbul → Moscow cargo route. Five tariffs from $4 per kg: road and air. Our own warehouses on both sides, customs clearance included.',
       h2Route: 'About the route',
       routeText: `Istanbul and Moscow are the backbone of our network. The Istanbul office receives goods from suppliers, consolidates batches, and dispatches daily to Russia. Arriving cargo lands at the Moscow warehouse at ${SITE.warehouses.moscow.address}.`,
       h2Options: 'Istanbul → Moscow delivery options',
@@ -52,7 +52,7 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
     },
     tr: {
       h1: 'İstanbul\'dan Moskova\'ya kargo',
-      lead: 'Doğrudan İstanbul → Moskova kargo rotası. Kg başına $4\'ten başlayan üç tarife: karayolu ve havayolu. Her iki tarafta kendi depolarımız, gümrük işlemleri dahil.',
+      lead: 'Doğrudan İstanbul → Moskova kargo rotası. Kg başına $4\'ten başlayan beş tarife: karayolu ve havayolu. Her iki tarafta kendi depolarımız, gümrük işlemleri dahil.',
       h2Route: 'Rota hakkında',
       routeText: `İstanbul ve Moskova ağımızın temelidir. İstanbul ofisi tedarikçilerden ürünleri alır, partileri birleştirir ve günlük olarak Rusya\'ya gönderir. Gelen kargolar Moskova\'daki depoya iner: ${SITE.warehouses.moscow.address}.`,
       h2Options: 'İstanbul → Moskova teslimat seçenekleri',

@@ -5,6 +5,7 @@ import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import { useTranslation } from '../i18n/LanguageContext';
+import { SITE } from '../config/site';
 
 const PRIMARY = '#3D8B8B';
 
@@ -19,14 +20,14 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
     navigate('/login');
   };
 
-  const deliveryTypes = [
-    { name: 'AVTO EXPRESS', price: 4, days: '14-18', desc: 'Домашний текстиль, Турецкий текстиль', icon: 'truck' },
-    { name: 'AVTO EX MARKA', price: 5, days: '14-18', desc: 'Домашний текстиль, Бренд/Марка текстиль, Турецкий текстиль', icon: 'truck' },
-    { name: 'AVTO ОБУВЬ', price: 5, days: '14-18', desc: 'Турецкие производители обуви (не марка, не бренд)', icon: 'truck' },
-    { name: 'AVIA U2 MARKA', price: 7.5, days: '7-8', desc: 'Турецкий текстиль, Бренд/Марка текстиль', icon: 'plane' },
-    { name: 'AVIA U3', price: 8, days: '4-5', desc: 'Обувь (марка, турецкое производство)', icon: 'plane' },
-    { name: 'AVIA EX MARKA', price: 10, days: '3-4', desc: 'Турецкое производство, Бренд/Марка текстиль', icon: 'plane' },
-  ];
+  // Single source of truth — tariffs come from SITE.tariffs (synced with DB / mobile app).
+  const deliveryTypes = SITE.tariffs.map(tf => ({
+    name: tf.name,
+    price: tf.pricePerKg,
+    days: `${tf.transitDaysMin}-${tf.transitDaysMax}`,
+    desc: tf.category,
+    icon: tf.mode === 'air' ? 'plane' : 'truck',
+  }));
 
   const steps = [
     { num: '01', title: 'Оформление заказа', desc: 'Свяжитесь с нами или оформите заказ через приложение RENEXPRESS. Получите персональный код REN.' },
@@ -270,7 +271,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
             marginBottom: 24,
             letterSpacing: 0.5,
           }}>
-            6 тарифов доставки
+            {SITE.tariffs.length} тарифов доставки
           </span>
           <h1 style={{
             fontSize: isMobile ? 26 : 48,
@@ -289,7 +290,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
             maxWidth: 600,
             margin: '0 auto 36px',
           }}>
-            6 тарифов на карго доставку из Стамбула в Москву. Авиа и авто перевозки текстиля, обуви и брендовых товаров.
+            {SITE.tariffs.length} тарифов на карго доставку из Стамбула в Москву. Авиа и авто перевозки текстиля, обуви и брендовых товаров.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button
@@ -732,7 +733,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
             в Москву автомобильным и авиационным транспортом. Наши тарифы рассчитаны на различные категории
             товаров: домашний текстиль, турецкий текстиль, брендовый текстиль, обувь турецкого и импортного
             производства. Стоимость доставки начинается от $4 за килограмм при автомобильной перевозке
-            и от $7.5 при авиадоставке. Сроки доставки составляют от 3 до 18 дней в зависимости от выбранного тарифа.
+            и от $8 при авиадоставке. Сроки доставки составляют от 3 до 18 дней в зависимости от выбранного тарифа.
           </p>
           <p style={{
             fontSize: 15,

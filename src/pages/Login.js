@@ -3,6 +3,7 @@ import axios from 'axios';
 import API_URL from '../config/api';
 import '../styles/responsive.css';
 import SEO from '../components/SEO';
+import { SITE } from '../config/site';
 
 const PRIMARY = '#3D8B8B';
 
@@ -101,8 +102,8 @@ function Login({ setIsAuthenticated }) {
           <div style={styles.statsRow}>
             {[
               { num: '3000+', label: 'клиентов' },
-              { num: '6', label: 'тарифов' },
-              { num: '7 лет', label: 'опыта' },
+              { num: String(SITE.tariffs.length), label: 'тарифов' },
+              { num: `с ${SITE.foundingYear}`, label: 'на рынке' },
             ].map((s, i) => (
               <div key={i} className="auth-stat-card" style={styles.statCard}>
                 <span style={styles.statNum}>{s.num}</span>

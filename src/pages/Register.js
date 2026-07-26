@@ -54,7 +54,7 @@ function Register({ setIsAuthenticated }) {
   const features = [
     { icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-    ), title: 'Авто и авиа доставка', desc: 'От 3 дней авиа, от 12 дней авто' },
+    ), title: 'Авто и авиа доставка', desc: 'От 3 дней авиа, от 14 дней авто' },
     { icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     ), title: 'Отслеживание груза', desc: 'В реальном времени через приложение' },
