@@ -2,7 +2,9 @@
 node_modules/
 
 # Production build
-build/
+# NOTE: build/ is intentionally committed — Vercel can't run react-snap (no Chromium
+# libs), so we prerender locally and deploy the prebuilt output. Rebuild + commit on
+# every content change. See vercel.json (buildCommand is a no-op).
 dist/
 
 # Environment files
