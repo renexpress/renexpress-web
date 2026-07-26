@@ -2,8 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "comment": "Prebuilt deploy: react-snap needs Chromium which Vercel's build container lacks (libnss3 missing). We prerender locally (npm run build) and commit build/. Vercel does NOT build — it just serves the committed prebuilt output.",
   "framework": null,
-  "installCommand": "echo 'skip install — serving prebuilt build/'",
-  "buildCommand": "echo 'skip build — serving prebuilt build/ committed to git'",
+  "installCommand": "",
+  "buildCommand": "",
   "outputDirectory": "build",
   "rewrites": [
     { "source": "/((?!api|sitemap.xml|robots.txt|.*\\.(?:png|jpg|jpeg|svg|webp|ico|js|css|json|xml|txt|woff2?|ttf|mp4|webm|map)).*)", "destination": "/index.html" }
