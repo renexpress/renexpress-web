@@ -58,10 +58,11 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
         <nav className="tubelight-nav" style={styles.tubelightWrapper} aria-label={t('nav.ariaPrimary')}>
           <div className="tubelight-bar" style={styles.tubelightBar}>
             <a href={localizedPath('/', language)} style={styles.tubelightLogo} aria-label="RENEXPRESS — home">
-              <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
                 <rect width="32" height="32" rx="8" fill={PRIMARY} />
                 <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
               </svg>
+              <span style={{ fontSize: 18, fontWeight: 800, color: COLORS.text, letterSpacing: 0.3 }}>RENEXPRESS</span>
             </a>
             {navLinks.map((item) => (
               <a
@@ -75,13 +76,12 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
                   ...(activeNav === item.url ? styles.tubelightLinkActive : {}),
                 }}
               >
-                {activeNav === item.url && <span className="tubelight-glow" style={styles.tubelightGlow} />}
                 <span style={{ position: 'relative', zIndex: 1 }}>{item.name}</span>
               </a>
             ))}
 
             {/* Language switcher */}
-            <div style={{ position: 'relative', marginLeft: 4 }}>
+            <div style={{ position: 'relative', marginLeft: 'auto' }}>
               <button
                 onClick={() => setLangMenuOpen((v) => !v)}
                 style={{
@@ -248,46 +248,43 @@ const styles = {
   tubelightWrapper: {
     position: 'fixed',
     top: 0,
-    left: '50%',
-    transform: 'translateX(-50%)',
+    left: 0,
+    right: 0,
     zIndex: 100,
-    paddingTop: 16,
+    background: '#fff',
+    borderBottom: `1px solid ${COLORS.cardBorder}`,
   },
   tubelightBar: {
     display: 'flex',
     alignItems: 'center',
-    gap: 4,
-    backgroundColor: 'rgba(255,255,255,0.92)',
-    border: `1px solid ${COLORS.cardBorder}`,
-    backdropFilter: 'blur(10px)',
-    WebkitBackdropFilter: 'blur(10px)',
-    padding: '4px 6px',
-    borderRadius: 50,
-    boxShadow: '0 6px 20px rgba(16,24,40,.08)',
+    gap: 2,
+    maxWidth: 1200,
+    margin: '0 auto',
+    height: 64,
+    padding: '0 24px',
   },
   tubelightLogo: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: '6px 10px',
+    gap: 10,
+    marginRight: 24,
     textDecoration: 'none',
     flexShrink: 0,
   },
   tubelightLink: {
     position: 'relative',
-    padding: '8px 18px',
-    fontSize: 14,
+    padding: '8px 14px',
+    fontSize: 15,
     fontWeight: 600,
     color: COLORS.textSecond,
     textDecoration: 'none',
-    borderRadius: 50,
-    transition: 'color 0.3s',
+    borderRadius: 8,
+    transition: 'color 0.2s',
     cursor: 'pointer',
     whiteSpace: 'nowrap',
   },
   tubelightLinkActive: {
     color: COLORS.primaryText,
-    backgroundColor: 'rgba(42,171,171,0.10)',
   },
   tubelightGlow: {
     position: 'absolute',
