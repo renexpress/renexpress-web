@@ -141,11 +141,6 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
               )}
             </div>
 
-            {isAuthenticated ? (
-              <button onClick={handleLogout} style={styles.tubelightAuthBtn}>{language === 'ru' ? 'Выйти' : language === 'tr' ? 'Çıkış' : 'Sign out'}</button>
-            ) : (
-              <button onClick={() => navigate(localizedPath('/login', language))} style={styles.tubelightAuthBtn}>{t('common.login')}</button>
-            )}
           </div>
         </nav>
       )}
@@ -231,11 +226,6 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
                   </button>
                 ))}
               </div>
-              {isAuthenticated ? (
-                <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }}>{language === 'ru' ? 'Выйти' : language === 'tr' ? 'Çıkış' : 'Sign out'}</button>
-              ) : (
-                <button onClick={() => { navigate(localizedPath('/login', language)); setMobileMenuOpen(false); }}>{t('common.login')}</button>
-              )}
             </div>
           </div>
         </div>
