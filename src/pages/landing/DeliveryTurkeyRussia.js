@@ -5,8 +5,7 @@ import SEO from '../../components/SEO';
 import useIsMobile from '../../hooks/useIsMobile';
 import { useTranslation, localizedPath } from '../../i18n/LanguageContext';
 import { SITE } from '../../config/site';
-
-const PRIMARY = '#3D8B8B';
+import { COLORS, GRADIENT, SHADOW } from '../../config/theme';
 
 // Long-form SEO landing page for the main route Turkey → Russia.
 // All numbers come from SITE.tariffs (single source of truth). No invented data.
@@ -226,7 +225,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
   const c = copy[language] || copy.ru;
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FAFBFC', fontFamily: 'Inter, -apple-system, sans-serif', color: '#0B1120' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', fontFamily: 'Inter, -apple-system, sans-serif', color: COLORS.text }}>
       <SEO
         titleKey="seo.deliveryTurkeyRussia.title"
         descriptionKey="seo.deliveryTurkeyRussia.description"
@@ -241,7 +240,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
 
       <main style={{ maxWidth: 1180, margin: '0 auto', padding: isMobile ? '24px 16px 48px' : '48px 32px 96px' }}>
         <header style={{ marginBottom: isMobile ? 24 : 48 }}>
-          <h1 style={{ fontSize: isMobile ? 32 : 52, fontWeight: 800, lineHeight: 1.15, marginBottom: 16, color: '#0B1120' }}>{c.h1}</h1>
+          <h1 style={{ fontSize: isMobile ? 32 : 52, fontWeight: 800, lineHeight: 1.15, marginBottom: 16, color: COLORS.text }}>{c.h1}</h1>
           <p style={{ fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color: '#475569', maxWidth: 760 }}>{c.lead}</p>
         </header>
 
@@ -252,16 +251,16 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
 
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 16 }}>
             {SITE.tariffs.map((tariff) => (
-              <article key={tariff.id} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 16, padding: 24 }}>
-                <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: 1, color: PRIMARY, fontWeight: 700, marginBottom: 6 }}>
+              <article key={tariff.id} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: 24 }}>
+                <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: 1, color: COLORS.primaryText, fontWeight: 700, marginBottom: 6 }}>
                   {tariff.mode === 'road' ? (language === 'ru' ? 'Авто' : language === 'tr' ? 'Karayolu' : 'Road') : (language === 'ru' ? 'Авиа' : language === 'tr' ? 'Havayolu' : 'Air')}
                 </div>
                 <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 12 }}>{tariff.name}</h3>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 6 }}>
-                  <span style={{ fontSize: 36, fontWeight: 800, color: '#0B1120' }}>${tariff.pricePerKg}</span>
+                  <span style={{ fontSize: 36, fontWeight: 800, color: COLORS.text }}>${tariff.pricePerKg}</span>
                   <span style={{ color: '#64748B' }}>/ {t('common.kg')}</span>
                 </div>
-                <div style={{ color: '#0B1120', fontWeight: 600 }}>
+                <div style={{ color: COLORS.text, fontWeight: 600 }}>
                   {tariff.transitDaysMin}-{tariff.transitDaysMax} {t('common.days')}
                 </div>
               </article>
@@ -274,9 +273,9 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
           <h2 id="how-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2How}</h2>
           <ol style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: 16 }}>
             {c.steps.map((step) => (
-              <li key={step.n} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 12, padding: 20 }}>
+              <li key={step.n} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: 20 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                  <span style={{ width: 32, height: 32, borderRadius: '50%', background: PRIMARY, color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{step.n}</span>
+                  <span style={{ width: 32, height: 32, borderRadius: '50%', background: COLORS.primary, color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{step.n}</span>
                   <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>{step.title}</h3>
                 </div>
                 <p style={{ color: '#475569', lineHeight: 1.6, margin: 0 }}>{step.text}</p>
@@ -290,7 +289,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
           <h2 id="why-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2Why}</h2>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: 16 }}>
             {c.whyItems.map((item, i) => (
-              <article key={i} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 12, padding: 20 }}>
+              <article key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: 20 }}>
                 <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>{item.title}</h3>
                 <p style={{ color: '#475569', lineHeight: 1.6, margin: 0 }}>{item.text}</p>
               </article>
@@ -303,7 +302,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
           <h2 id="cargo-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Cargo}</h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {SITE.cargoCategories.map((cat) => (
-              <span key={cat} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 999, padding: '8px 14px', fontSize: 14, color: '#334155' }}>{cat}</span>
+              <span key={cat} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', borderRadius: 999, padding: '8px 14px', fontSize: 14, color: '#334155' }}>{cat}</span>
             ))}
           </div>
         </section>
@@ -313,7 +312,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
           <h2 id="faq-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2FAQ}</h2>
           <div style={{ display: 'grid', gap: 12 }}>
             {faqList.map((f, i) => (
-              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 12, padding: '16px 20px' }}>
+              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: '16px 20px' }}>
                 <summary style={{ fontSize: 16, fontWeight: 600, cursor: 'pointer', listStyle: 'none' }}>{f.q}</summary>
                 <p style={{ color: '#475569', lineHeight: 1.6, marginTop: 12, marginBottom: 0 }}>{f.a}</p>
               </details>
@@ -322,19 +321,19 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
         </section>
 
         {/* CTA */}
-        <section aria-labelledby="cta-heading" style={{ background: '#0B1120', color: '#FFFFFF', borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
+        <section aria-labelledby="cta-heading" style={{ background: '#FFFFFF', color: COLORS.text, border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
           <h2 id="cta-heading" style={{ fontSize: isMobile ? 22 : 28, fontWeight: 800, marginBottom: 8 }}>{c.ctaTitle}</h2>
-          <p style={{ color: '#94A3B8', marginBottom: 24, fontSize: 16 }}>{c.ctaText}</p>
+          <p style={{ color: COLORS.textSecond, marginBottom: 24, fontSize: 16 }}>{c.ctaText}</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
             <button
               onClick={() => navigate(localizedPath('/calculator', language))}
-              style={{ background: PRIMARY, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: GRADIENT, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', textShadow: '0 1px 2px rgba(10,37,53,.35)', minHeight: 48 }}
             >
               {c.ctaPrimary}
             </button>
             <Link
               to={localizedPath('/contacts', language)}
-              style={{ background: 'transparent', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.3)', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, textDecoration: 'none' }}
+              style={{ background: '#FFFFFF', color: COLORS.primaryText, border: '1.5px solid #2AABAB', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, textDecoration: 'none', minHeight: 48, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
             >
               {c.ctaSecondary}
             </Link>
@@ -342,20 +341,20 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
         </section>
 
         {/* Internal links for SEO link graph */}
-        <nav aria-label="Related pages" style={{ marginTop: isMobile ? 32 : 48, padding: '24px 0', borderTop: '1px solid #E5E7EB', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
-          <Link to={localizedPath('/delivery-istanbul-moscow', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>
+        <nav aria-label="Related pages" style={{ marginTop: isMobile ? 32 : 48, padding: '24px 0', borderTop: '1px solid #EEEEEE', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
+          <Link to={localizedPath('/delivery-istanbul-moscow', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {language === 'ru' ? 'Доставка Стамбул-Москва' : language === 'tr' ? 'İstanbul-Moskova kargo' : 'Istanbul-Moscow cargo'}
           </Link>
-          <Link to={localizedPath('/customs-clearance', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>
+          <Link to={localizedPath('/customs-clearance', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {language === 'ru' ? 'Таможенное оформление' : language === 'tr' ? 'Gümrük işlemleri' : 'Customs clearance'}
           </Link>
-          <Link to={localizedPath('/services', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>
+          <Link to={localizedPath('/services', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {t('common.services')}
           </Link>
-          <Link to={localizedPath('/calculator', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>
+          <Link to={localizedPath('/calculator', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {t('common.calculator')}
           </Link>
-          <Link to={localizedPath('/faq', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>
+          <Link to={localizedPath('/faq', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {t('common.faq')}
           </Link>
         </nav>

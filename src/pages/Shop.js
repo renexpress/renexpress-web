@@ -7,8 +7,10 @@ import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import { useTranslation } from '../i18n/LanguageContext';
+import { COLORS } from '../config/theme';
 
-const PRIMARY = '#3D8B8B';
+const PRIMARY = COLORS.primary;
+const PRIMARY_TEXT = COLORS.primaryText;
 
 function Shop({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -292,7 +294,7 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
 
           <nav className="header-nav" style={styles.nav}>
             <a href="/" style={styles.navLink}>Главная</a>
-            <a href="/shop" style={{...styles.navLink, color: PRIMARY}}>Каталог</a>
+            <a href="/shop" style={{...styles.navLink, color: PRIMARY_TEXT}}>Каталог</a>
             <a href="/services" style={styles.navLink}>Услуги</a>
             <a href="/about" style={styles.navLink}>О нас</a>
             <a href="/contacts" style={styles.navLink}>Контакты</a>
@@ -368,10 +370,10 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
                     onClick={() => selectFilterCategory(filterCurrentCategoryId)}
                   >
                     <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
-                      <span style={{fontSize: 14, fontWeight: 600, color: PRIMARY}}>{filterCurrentCategory.name}</span>
+                      <span style={{fontSize: 14, fontWeight: 600, color: PRIMARY_TEXT}}>{filterCurrentCategory.name}</span>
                       <span style={{fontSize: 12, color: '#9CA3AF'}}>({getCategoryCount(filterCurrentCategoryId)})</span>
                     </div>
-                    <span style={{fontSize: 12, color: PRIMARY}}>Выбрать</span>
+                    <span style={{fontSize: 12, color: PRIMARY_TEXT}}>Выбрать</span>
                   </div>
                 </div>
               )}
@@ -396,7 +398,7 @@ function Shop({ isAuthenticated, setIsAuthenticated }) {
                       onClick={() => catHasChildren ? navigateFilterCategory(cat.id) : selectFilterCategory(cat.id)}
                     >
                       <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
-                        <span style={{fontSize: 14, color: isSelected ? PRIMARY : '#374151', fontWeight: isSelected ? 600 : 400}}>
+                        <span style={{fontSize: 14, color: isSelected ? PRIMARY_TEXT : '#374151', fontWeight: isSelected ? 600 : 400}}>
                           {cat.name}
                         </span>
                         <span style={{fontSize: 12, color: '#9CA3AF'}}>({getCategoryCount(cat.id)})</span>
@@ -829,7 +831,7 @@ const styles = {
   },
   signInButton: {
     padding: '10px 20px',
-    backgroundColor: PRIMARY,
+    backgroundColor: COLORS.ctaFloor,
     color: '#fff',
     border: 'none',
     borderRadius: 8,
@@ -1062,7 +1064,7 @@ const styles = {
     position: 'absolute',
     top: 10,
     left: 10,
-    backgroundColor: PRIMARY,
+    backgroundColor: COLORS.ctaFloor,
     color: '#fff',
     fontSize: 10,
     fontWeight: 600,

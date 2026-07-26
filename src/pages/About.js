@@ -6,8 +6,10 @@ import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import { useTranslation } from '../i18n/LanguageContext';
 import { SITE } from '../config/site';
+import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
-const PRIMARY = '#3D8B8B';
+const PRIMARY = COLORS.primary;
+const PRIMARY_TEXT = COLORS.primaryText;
 
 function About({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -82,15 +84,8 @@ function About({ isAuthenticated, setIsAuthenticated }) {
       />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
-      {/* ====== Dark Hero Section ====== */}
+      {/* ====== Hero Section ====== */}
       <section style={{...styles.hero, padding: isMobile ? '80px 16px 48px' : '140px 24px 80px'}}>
-        {/* Animated blobs */}
-        <div style={styles.heroBlobs}>
-          <div className="hero-blob hero-blob-1" />
-          <div className="hero-blob hero-blob-2" />
-          <div className="hero-blob hero-blob-3" />
-        </div>
-
         <div style={styles.heroContent}>
           <div style={styles.heroBadge}>О компании</div>
           <h1 style={{...styles.heroTitle, fontSize: isMobile ? 26 : 48, padding: isMobile ? '0 8px' : 0}}>О компании RENEXPRESS</h1>
@@ -105,7 +100,7 @@ function About({ isAuthenticated, setIsAuthenticated }) {
               Связаться
             </button>
             <button onClick={() => navigate('/calculator')} style={{...styles.heroBtnSecondary, width: isMobile ? '100%' : 'auto', padding: isMobile ? '12px 24px' : '14px 32px'}}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{ marginRight: 8 }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY_TEXT} strokeWidth="2" style={{ marginRight: 8 }}>
                 <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/>
               </svg>
               Калькулятор
@@ -232,11 +227,11 @@ function About({ isAuthenticated, setIsAuthenticated }) {
               Написать в WhatsApp
             </a>
             <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="footer-cta-btn" style={{...styles.ctaAppStore, width: isMobile ? '100%' : 'auto'}}>
-              <svg width="16" height="18" viewBox="0 0 384 512" fill="#fff"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <svg width="16" height="18" viewBox="0 0 384 512" fill={PRIMARY_TEXT}><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
               App Store
             </a>
             <a href="tel:+905070107070" className="footer-cta-btn" style={{...styles.ctaCall, width: isMobile ? '100%' : 'auto'}}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY_TEXT} strokeWidth="2">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
               Позвонить
@@ -267,13 +262,6 @@ function About({ isAuthenticated, setIsAuthenticated }) {
 
       {/* ====== Creative Footer ====== */}
       <footer className="footer" style={{...styles.footer, paddingBottom: isMobile ? 80 : 24}}>
-        {/* Animated gradient blobs */}
-        <div className="footer-blobs" style={styles.footerBlobs}>
-          <div className="footer-blob footer-blob-1" />
-          <div className="footer-blob footer-blob-2" />
-          <div className="footer-blob footer-blob-3" />
-        </div>
-
         {/* Footer columns grid */}
         <div className="footer-content" style={{...styles.footerGrid, gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : '1.5fr 1fr 1fr 1fr 1.2fr'}}>
           {/* Brand column */}
@@ -386,7 +374,7 @@ function About({ isAuthenticated, setIsAuthenticated }) {
 const styles = {
   page: {
     minHeight: '100vh',
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bg,
     fontFamily: 'Inter, -apple-system, sans-serif',
   },
 
@@ -403,13 +391,11 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'rgba(17,24,39,0.85)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)',
+    backgroundColor: '#fff',
+    border: '1px solid #E8E8E8',
     padding: '4px 6px',
     borderRadius: 50,
-    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+    boxShadow: SHADOW.card,
   },
   tubelightLogo: {
     display: 'flex',
@@ -424,7 +410,7 @@ const styles = {
     padding: '8px 18px',
     fontSize: 14,
     fontWeight: 600,
-    color: 'rgba(255,255,255,0.7)',
+    color: COLORS.textSecond,
     textDecoration: 'none',
     borderRadius: 50,
     transition: 'color 0.3s',
@@ -432,8 +418,8 @@ const styles = {
     whiteSpace: 'nowrap',
   },
   tubelightLinkActive: {
-    color: '#fff',
-    backgroundColor: 'rgba(61,139,139,0.15)',
+    color: PRIMARY_TEXT,
+    backgroundColor: 'rgba(42,171,171,0.1)',
   },
   tubelightGlow: {
     position: 'absolute',
@@ -444,7 +430,7 @@ const styles = {
     height: 4,
     backgroundColor: PRIMARY,
     borderRadius: '4px 4px 0 0',
-    boxShadow: '0 0 12px 4px rgba(61,139,139,0.4), 0 0 24px 8px rgba(61,139,139,0.2)',
+    boxShadow: '0 0 12px 4px rgba(42,171,171,0.4), 0 0 24px 8px rgba(42,171,171,0.2)',
   },
   tubelightAuthBtn: {
     padding: '8px 18px',
@@ -468,9 +454,7 @@ const styles = {
     right: 0,
     zIndex: 100,
     backgroundColor: 'rgba(255,255,255,0.95)',
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    borderTop: '1px solid #E5E7EB',
+    borderTop: '1px solid #E8E8E8',
     padding: '6px 0 env(safe-area-inset-bottom, 8px)',
     justifyContent: 'space-around',
   },
@@ -490,10 +474,10 @@ const styles = {
     fontWeight: 500,
   },
 
-  // ====== Dark Hero ======
+  // ====== Hero ======
   hero: {
     position: 'relative',
-    backgroundColor: '#111827',
+    backgroundColor: COLORS.bg,
     padding: '140px 24px 80px',
     textAlign: 'center',
     overflow: 'hidden',
@@ -512,27 +496,27 @@ const styles = {
   },
   heroBadge: {
     display: 'inline-block',
-    backgroundColor: 'rgba(61,139,139,0.15)',
-    color: PRIMARY,
+    backgroundColor: 'rgba(42,171,171,0.08)',
+    color: PRIMARY_TEXT,
     fontSize: 13,
     fontWeight: 600,
     padding: '6px 20px',
     borderRadius: 50,
-    border: '1px solid rgba(61,139,139,0.3)',
+    border: '1px solid rgba(42,171,171,0.3)',
     marginBottom: 24,
     letterSpacing: 0.5,
   },
   heroTitle: {
     fontSize: 48,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     lineHeight: 1.15,
     marginBottom: 20,
     letterSpacing: -0.5,
   },
   heroSubtitle: {
     fontSize: 18,
-    color: 'rgba(255,255,255,0.6)',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
     marginBottom: 36,
     maxWidth: 640,
@@ -549,35 +533,33 @@ const styles = {
     display: 'inline-flex',
     alignItems: 'center',
     padding: '14px 32px',
-    backgroundColor: PRIMARY,
+    background: GRADIENT,
     color: '#fff',
     fontSize: 15,
     fontWeight: 600,
     border: 'none',
     borderRadius: 50,
     cursor: 'pointer',
-    boxShadow: '0 4px 20px rgba(61,139,139,0.35)',
+    boxShadow: SHADOW.cta,
     transition: 'transform 0.2s, box-shadow 0.2s',
   },
   heroBtnSecondary: {
     display: 'inline-flex',
     alignItems: 'center',
     padding: '14px 32px',
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    color: '#fff',
+    backgroundColor: '#fff',
+    color: PRIMARY_TEXT,
     fontSize: 15,
     fontWeight: 600,
-    border: '1px solid rgba(255,255,255,0.2)',
+    border: '1.5px solid #2AABAB',
     borderRadius: 50,
     cursor: 'pointer',
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
     transition: 'transform 0.2s, background 0.2s',
   },
 
   // ====== Stats Section ======
   statsSection: {
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bgSecond,
     padding: '64px 24px',
   },
   statsGrid: {
@@ -589,13 +571,11 @@ const styles = {
   },
   statCard: {
     padding: 32,
-    background: 'rgba(255,255,255,0.06)',
-    backdropFilter: 'blur(24px)',
-    WebkitBackdropFilter: 'blur(24px)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    background: '#FFFFFF',
+    border: '1px solid #E8E8E8',
     borderRadius: 20,
     textAlign: 'center',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+    boxShadow: SHADOW.card,
   },
   statNumber: {
     fontSize: 40,
@@ -606,7 +586,7 @@ const styles = {
   },
   statLabel: {
     fontSize: 15,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     fontWeight: 500,
   },
 
@@ -622,7 +602,7 @@ const styles = {
   storySectionTitle: {
     fontSize: 36,
     fontWeight: 700,
-    color: '#111827',
+    color: COLORS.text,
     textAlign: 'center',
     marginBottom: 40,
     lineHeight: 1.2,
@@ -633,27 +613,27 @@ const styles = {
   },
   storyText: {
     fontSize: 16,
-    color: '#4B5563',
+    color: COLORS.textSecond,
     lineHeight: 1.8,
     marginBottom: 20,
   },
 
   // ====== Advantages Section ======
   advantagesSection: {
-    backgroundColor: '#111827',
+    backgroundColor: COLORS.bgSecond,
     padding: '80px 24px',
   },
   advantagesSectionTitle: {
     fontSize: 36,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     textAlign: 'center',
     marginBottom: 16,
     lineHeight: 1.2,
   },
   advantagesSectionSubtitle: {
     fontSize: 16,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     textAlign: 'center',
     lineHeight: 1.7,
     maxWidth: 720,
@@ -668,12 +648,10 @@ const styles = {
   },
   advantageCard: {
     padding: 32,
-    background: 'rgba(255,255,255,0.06)',
-    backdropFilter: 'blur(24px)',
-    WebkitBackdropFilter: 'blur(24px)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    background: '#FFFFFF',
+    border: '1px solid #E8E8E8',
     borderRadius: 20,
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+    boxShadow: SHADOW.card,
     transition: 'border-color 0.3s, transform 0.3s',
   },
   advantageIconCircle: {
@@ -685,17 +663,17 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-    boxShadow: '0 4px 16px rgba(61,139,139,0.3)',
+    boxShadow: '0 4px 16px rgba(42,171,171,0.3)',
   },
   advantageTitle: {
     fontSize: 18,
     fontWeight: 600,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 10,
   },
   advantageDesc: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
   },
 
@@ -707,7 +685,7 @@ const styles = {
   warehouseSectionTitle: {
     fontSize: 36,
     fontWeight: 700,
-    color: '#111827',
+    color: COLORS.text,
     textAlign: 'center',
     marginBottom: 40,
     lineHeight: 1.2,
@@ -721,8 +699,8 @@ const styles = {
   },
   warehouseCard: {
     padding: 32,
-    backgroundColor: '#FAFAFA',
-    border: '1px solid #E5E7EB',
+    backgroundColor: COLORS.bgTert,
+    border: '1px solid #E8E8E8',
     borderRadius: 20,
     borderTop: `3px solid ${PRIMARY}`,
   },
@@ -735,7 +713,7 @@ const styles = {
   warehouseIconCircle: {
     width: 48,
     height: 48,
-    backgroundColor: 'rgba(61,139,139,0.08)',
+    backgroundColor: 'rgba(42,171,171,0.08)',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
@@ -745,58 +723,56 @@ const styles = {
   warehouseTitle: {
     fontSize: 20,
     fontWeight: 700,
-    color: '#111827',
+    color: COLORS.text,
     marginBottom: 2,
   },
   warehouseHours: {
     fontSize: 13,
-    color: PRIMARY,
+    color: PRIMARY_TEXT,
     fontWeight: 500,
   },
   warehouseDivider: {
     height: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: COLORS.divider,
     marginBottom: 16,
   },
   warehouseAddr: {
     fontSize: 15,
-    color: '#374151',
+    color: COLORS.text,
     fontWeight: 500,
     marginBottom: 10,
   },
   warehouseDesc: {
     fontSize: 14,
-    color: '#6B7280',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
   },
 
   // ====== CTA Section ======
   ctaSection: {
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bgSecond,
     padding: '80px 24px',
   },
   ctaCard: {
     maxWidth: 800,
     margin: '0 auto',
     padding: '48px 40px',
-    background: 'rgba(255,255,255,0.06)',
-    backdropFilter: 'blur(24px)',
-    WebkitBackdropFilter: 'blur(24px)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    background: '#FFFFFF',
+    border: '1px solid #E8E8E8',
     borderRadius: 24,
     textAlign: 'center',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 48px rgba(0,0,0,0.25)',
+    boxShadow: SHADOW.card,
   },
   ctaTitle: {
     fontSize: 32,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 12,
     lineHeight: 1.25,
   },
   ctaDesc: {
     fontSize: 16,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     marginBottom: 32,
     lineHeight: 1.6,
   },
@@ -825,15 +801,13 @@ const styles = {
     alignItems: 'center',
     gap: 8,
     padding: '14px 28px',
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    border: '1px solid rgba(255,255,255,0.2)',
-    color: '#fff',
+    backgroundColor: '#fff',
+    border: '1.5px solid #2AABAB',
+    color: PRIMARY_TEXT,
     fontSize: 14,
     fontWeight: 600,
     borderRadius: 50,
     textDecoration: 'none',
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
     transition: 'transform 0.2s, background 0.2s',
   },
   ctaCall: {
@@ -841,41 +815,40 @@ const styles = {
     alignItems: 'center',
     gap: 8,
     padding: '14px 28px',
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    border: '1px solid rgba(255,255,255,0.2)',
-    color: '#fff',
+    backgroundColor: '#fff',
+    border: '1.5px solid #2AABAB',
+    color: PRIMARY_TEXT,
     fontSize: 14,
     fontWeight: 600,
     borderRadius: 50,
     textDecoration: 'none',
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
     transition: 'transform 0.2s, background 0.2s',
   },
 
   // ====== SEO Section ======
   seoSection: {
-    backgroundColor: '#F9FAFB',
+    backgroundColor: COLORS.bg,
     padding: '64px 24px',
   },
   seoTitle: {
     fontSize: 24,
     fontWeight: 700,
-    color: '#111827',
+    color: COLORS.text,
     marginBottom: 16,
   },
   seoText: {
     fontSize: 15,
-    color: '#4B5563',
+    color: COLORS.textSecond,
     lineHeight: 1.8,
   },
 
   // ====== Creative Footer ======
   footer: {
     position: 'relative',
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bgTert,
     padding: '64px 0 24px',
     overflow: 'hidden',
+    borderTop: '1px solid #EEEEEE',
   },
   footerBlobs: {
     position: 'absolute',
@@ -917,12 +890,12 @@ const styles = {
   footerLogoText: {
     fontSize: 20,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     letterSpacing: 0.5,
   },
   footerDesc: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
     marginBottom: 20,
   },
@@ -936,9 +909,9 @@ const styles = {
     justifyContent: 'center',
     width: 38,
     height: 38,
-    color: 'rgba(255,255,255,0.6)',
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    color: COLORS.textSecond,
+    backgroundColor: '#fff',
+    border: '1px solid #E8E8E8',
     borderRadius: '50%',
     textDecoration: 'none',
     transition: 'all 0.2s',
@@ -951,12 +924,12 @@ const styles = {
   footerColTitle: {
     fontSize: 14,
     fontWeight: 600,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 4,
   },
   footerLink: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: '#666666',
     textDecoration: 'none',
     transition: 'color 0.2s',
   },
@@ -965,14 +938,14 @@ const styles = {
     alignItems: 'center',
     gap: 8,
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: '#666666',
     textDecoration: 'none',
     transition: 'color 0.2s',
   },
   footerAddress: {
     fontStyle: 'normal',
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: '#666666',
     lineHeight: 1.5,
   },
 
@@ -1010,7 +983,7 @@ const styles = {
     margin: '0 auto',
     padding: '0 24px',
     height: 1,
-    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+    background: '#EEEEEE',
   },
   footerBottom: {
     position: 'relative',
@@ -1026,7 +999,7 @@ const styles = {
   },
   copyright: {
     fontSize: 13,
-    color: 'rgba(255,255,255,0.3)',
+    color: COLORS.textMuted,
   },
   footerBrands: {
     display: 'flex',
@@ -1036,10 +1009,10 @@ const styles = {
   footerBrandTag: {
     fontSize: 11,
     fontWeight: 600,
-    color: 'rgba(255,255,255,0.3)',
+    color: COLORS.textMuted,
     padding: '4px 12px',
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    backgroundColor: '#F5F5F5',
+    border: '1px solid #E8E8E8',
     borderRadius: 50,
     letterSpacing: 0.5,
   },
@@ -1050,7 +1023,7 @@ const styles = {
   },
   footerLegalLink: {
     fontSize: 13,
-    color: 'rgba(255,255,255,0.3)',
+    color: '#666666',
     textDecoration: 'none',
     transition: 'color 0.2s',
   },

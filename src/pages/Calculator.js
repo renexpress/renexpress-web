@@ -7,8 +7,9 @@ import SEO from '../components/SEO';
 import CalcWidget from '../components/CalcWidget';
 import { useTranslation } from '../i18n/LanguageContext';
 import { SITE } from '../config/site';
+import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
-const PRIMARY = '#3D8B8B';
+const PRIMARY = COLORS.primary; // #2AABAB — fills / icon strokes / borders / big numbers
 
 function Calculator({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -41,21 +42,8 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
 
 
 
-      {/* ====== DARK HERO ====== */}
+      {/* ====== HERO ====== */}
       <section style={{...styles.hero, ...(isMobile ? {padding: '80px 16px 48px'} : {})}}>
-        {/* Decorative blobs */}
-        <div style={styles.heroBlobs}>
-          <div style={{
-            position: 'absolute', top: -120, right: -80, width: 400, height: 400,
-            background: `radial-gradient(circle, rgba(61,139,139,0.15) 0%, transparent 70%)`,
-            borderRadius: '50%', filter: 'blur(60px)',
-          }} />
-          <div style={{
-            position: 'absolute', bottom: -100, left: -60, width: 300, height: 300,
-            background: 'radial-gradient(circle, rgba(61,139,139,0.1) 0%, transparent 70%)',
-            borderRadius: '50%', filter: 'blur(50px)',
-          }} />
-        </div>
         <div style={styles.heroContent}>
           <div style={styles.heroBadge}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2">
@@ -104,7 +92,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
                   ${dt.price}<span style={styles.tariffUnit}>/кг</span>
                 </div>
                 <div style={styles.tariffDays}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2" style={{ marginRight: 6, flexShrink: 0 }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999999" strokeWidth="2" style={{ marginRight: 6, flexShrink: 0 }}>
                     <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                   </svg>
                   {dt.days} дней
@@ -119,10 +107,10 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
       {/* ====== CTA SECTION ====== */}
       <section style={styles.ctaSection}>
         <div style={styles.ctaCard}>
-          {/* Glass shimmer */}
+          {/* Accent shimmer */}
           <div style={{
             position: 'absolute', top: 0, left: '15%', right: '15%', height: 1,
-            background: 'linear-gradient(90deg, transparent, rgba(61,139,139,0.35), transparent)',
+            background: 'linear-gradient(90deg, transparent, rgba(42,171,171,0.35), transparent)',
           }} />
           <h2 style={{...styles.ctaTitle, fontSize: isMobile ? 22 : 32}}>Готовы отправить груз?</h2>
           <p style={styles.ctaDesc}>Свяжитесь с нами для оформления заказа или скачайте приложение</p>
@@ -132,17 +120,17 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
               Написать в WhatsApp
             </a>
             <button onClick={() => navigate('/contacts')} className="cta-btn-contacts" style={{...styles.ctaContactsBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', boxSizing: 'border-box'} : {})}}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" style={{ marginRight: 8 }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#157070" strokeWidth="2" style={{ marginRight: 8 }}>
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
               Контакты
             </button>
             <a href={SITE.social.appStore} target="_blank" rel="noopener noreferrer" className="cta-btn-appstore" style={{...styles.ctaAppBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', boxSizing: 'border-box'} : {})}}>
-              <svg width="16" height="18" viewBox="0 0 384 512" fill="#fff"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <svg width="16" height="18" viewBox="0 0 384 512" fill="#1A1A1A"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
               App Store
             </a>
             <a href={SITE.social.googlePlay} target="_blank" rel="noopener noreferrer" className="cta-btn-appstore" style={{...styles.ctaAppBtn, ...(isMobile ? {width: '100%', justifyContent: 'center', boxSizing: 'border-box'} : {})}}>
-              <svg width="16" height="18" viewBox="0 0 512 512" fill="#fff"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z"/></svg>
+              <svg width="16" height="18" viewBox="0 0 512 512" fill="#1A1A1A"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z"/></svg>
               Google Play
             </a>
           </div>
@@ -173,20 +161,6 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
 
       {/* ====== CREATIVE FOOTER ====== */}
       <footer style={{...styles.footer, ...(isMobile ? {paddingBottom: 80} : {})}}>
-        {/* Background blobs */}
-        <div style={styles.footerBlobs}>
-          <div style={{
-            position: 'absolute', top: -100, right: '10%', width: 350, height: 350,
-            background: `radial-gradient(circle, rgba(61,139,139,0.08) 0%, transparent 70%)`,
-            borderRadius: '50%', filter: 'blur(60px)',
-          }} />
-          <div style={{
-            position: 'absolute', bottom: -80, left: '5%', width: 280, height: 280,
-            background: 'radial-gradient(circle, rgba(61,139,139,0.06) 0%, transparent 70%)',
-            borderRadius: '50%', filter: 'blur(50px)',
-          }} />
-        </div>
-
         {/* Footer columns grid */}
         <div className="footer-content" style={{...styles.footerGrid, gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : '1.5fr 1fr 1fr 1fr 1.2fr'}}>
           {/* Brand column */}
@@ -302,7 +276,7 @@ function Calculator({ isAuthenticated, setIsAuthenticated }) {
 const styles = {
   page: {
     minHeight: '100vh',
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bg,
     fontFamily: 'Inter, -apple-system, sans-serif',
   },
 
@@ -319,13 +293,11 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'rgba(17,24,39,0.85)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)',
+    backgroundColor: '#fff',
+    border: '1px solid #E8E8E8',
     padding: '4px 6px',
     borderRadius: 50,
-    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+    boxShadow: SHADOW.card,
   },
   tubelightLogo: {
     display: 'flex',
@@ -340,7 +312,7 @@ const styles = {
     padding: '8px 18px',
     fontSize: 14,
     fontWeight: 600,
-    color: 'rgba(255,255,255,0.7)',
+    color: COLORS.textSecond,
     textDecoration: 'none',
     borderRadius: 50,
     transition: 'color 0.3s',
@@ -348,8 +320,8 @@ const styles = {
     whiteSpace: 'nowrap',
   },
   tubelightLinkActive: {
-    color: '#fff',
-    backgroundColor: 'rgba(61,139,139,0.15)',
+    color: COLORS.text,
+    backgroundColor: 'rgba(42,171,171,0.08)',
   },
   tubelightGlow: {
     position: 'absolute',
@@ -360,14 +332,15 @@ const styles = {
     height: 4,
     backgroundColor: PRIMARY,
     borderRadius: '4px 4px 0 0',
-    boxShadow: '0 0 12px 4px rgba(61,139,139,0.4), 0 0 24px 8px rgba(61,139,139,0.2)',
+    boxShadow: '0 0 12px 4px rgba(42,171,171,0.4), 0 0 24px 8px rgba(42,171,171,0.2)',
   },
   tubelightAuthBtn: {
     padding: '8px 18px',
     fontSize: 13,
     fontWeight: 600,
     color: '#fff',
-    backgroundColor: PRIMARY,
+    background: GRADIENT,
+    textShadow: '0 1px 2px rgba(10,37,53,.35)',
     border: 'none',
     borderRadius: 50,
     cursor: 'pointer',
@@ -383,10 +356,9 @@ const styles = {
     left: 0,
     right: 0,
     zIndex: 100,
-    backgroundColor: 'rgba(11,17,32,0.95)',
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    borderTop: '1px solid rgba(255,255,255,0.08)',
+    backgroundColor: '#fff',
+    borderTop: '1px solid #E8E8E8',
+    boxShadow: SHADOW.card,
     padding: '6px 0 env(safe-area-inset-bottom, 8px)',
     justifyContent: 'space-around',
   },
@@ -406,10 +378,10 @@ const styles = {
     fontWeight: 500,
   },
 
-  // ==================== DARK HERO ====================
+  // ==================== HERO ====================
   hero: {
     position: 'relative',
-    backgroundColor: '#111827',
+    backgroundColor: COLORS.bgSecond,
     paddingTop: 100,
     paddingBottom: 64,
     paddingLeft: 24,
@@ -434,27 +406,25 @@ const styles = {
     alignItems: 'center',
     gap: 8,
     padding: '8px 18px',
-    backgroundColor: 'rgba(61,139,139,0.12)',
-    border: '1px solid rgba(61,139,139,0.25)',
+    backgroundColor: 'rgba(42,171,171,0.08)',
+    border: '1px solid rgba(42,171,171,0.25)',
     borderRadius: 50,
     fontSize: 13,
     fontWeight: 600,
-    color: PRIMARY,
+    color: COLORS.primaryText,
     marginBottom: 24,
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
   },
   heroTitle: {
     fontSize: 48,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     lineHeight: 1.15,
     marginBottom: 20,
     letterSpacing: -0.5,
   },
   heroSubtitle: {
     fontSize: 17,
-    color: 'rgba(255,255,255,0.55)',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
     maxWidth: 580,
     margin: '0 auto',
@@ -463,7 +433,7 @@ const styles = {
   // ==================== CALCULATOR SECTION ====================
   calcSection: {
     padding: '64px 24px 80px',
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bg,
   },
   calcContainer: {
     maxWidth: 560,
@@ -471,25 +441,23 @@ const styles = {
   },
   calcCard: {
     position: 'relative',
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    backdropFilter: 'blur(24px) saturate(1.4)',
-    WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    backgroundColor: '#fff',
+    border: '1px solid #E8E8E8',
     borderRadius: 24,
     padding: '40px 36px',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 48px rgba(0,0,0,0.3)',
+    boxShadow: SHADOW.card,
     overflow: 'hidden',
   },
   calcTitle: {
     fontSize: 26,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     textAlign: 'center',
     marginBottom: 6,
   },
   calcSubtitle: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.4)',
+    color: COLORS.textSecond,
     textAlign: 'center',
     marginBottom: 32,
   },
@@ -500,17 +468,18 @@ const styles = {
     display: 'block',
     fontSize: 13,
     fontWeight: 600,
-    color: 'rgba(255,255,255,0.7)',
+    color: COLORS.textSecond,
     marginBottom: 8,
     letterSpacing: 0.3,
   },
   select: {
     width: '100%',
     padding: '14px 16px',
-    fontSize: 15,
-    color: '#fff',
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    border: '1px solid rgba(255,255,255,0.12)',
+    minHeight: 48,
+    fontSize: 16,
+    color: COLORS.text,
+    backgroundColor: '#F5F5F5',
+    border: '1px solid #E0E0E0',
     borderRadius: 12,
     outline: 'none',
     cursor: 'pointer',
@@ -519,7 +488,7 @@ const styles = {
     WebkitAppearance: 'none',
     MozAppearance: 'none',
     appearance: 'none',
-    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'right 14px center',
     backgroundSize: 16,
@@ -528,10 +497,11 @@ const styles = {
   input: {
     width: '100%',
     padding: '14px 16px',
-    fontSize: 15,
-    color: '#fff',
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    border: '1px solid rgba(255,255,255,0.12)',
+    minHeight: 48,
+    fontSize: 16,
+    color: COLORS.text,
+    backgroundColor: '#F5F5F5',
+    border: '1px solid #E0E0E0',
     borderRadius: 12,
     outline: 'none',
     boxSizing: 'border-box',
@@ -540,8 +510,10 @@ const styles = {
   calcBtn: {
     width: '100%',
     padding: '16px',
-    backgroundColor: PRIMARY,
+    minHeight: 48,
+    background: GRADIENT,
     color: '#fff',
+    textShadow: '0 1px 2px rgba(10,37,53,.35)',
     border: 'none',
     borderRadius: 12,
     fontSize: 16,
@@ -552,7 +524,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'transform 0.2s, box-shadow 0.2s',
-    boxShadow: '0 4px 20px rgba(61,139,139,0.3)',
+    boxShadow: SHADOW.cta,
   },
   warning: {
     color: '#EF4444',
@@ -569,11 +541,9 @@ const styles = {
   resultCard: {
     marginTop: 28,
     padding: 28,
-    backgroundColor: 'rgba(61,139,139,0.08)',
+    backgroundColor: 'rgba(42,171,171,0.08)',
     borderRadius: 16,
-    border: `1px solid rgba(61,139,139,0.3)`,
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
+    border: `1px solid rgba(42,171,171,0.3)`,
   },
   resultHeader: {
     display: 'flex',
@@ -584,7 +554,7 @@ const styles = {
   resultTitle: {
     fontSize: 18,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     margin: 0,
   },
   resultRow: {
@@ -595,29 +565,28 @@ const styles = {
   },
   resultLabel: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
   },
   resultValue: {
     fontSize: 14,
     fontWeight: 600,
-    color: '#fff',
+    color: COLORS.text,
   },
   resultDivider: {
     height: 1,
-    background: 'linear-gradient(90deg, transparent, rgba(61,139,139,0.4), transparent)',
+    background: 'linear-gradient(90deg, transparent, rgba(42,171,171,0.4), transparent)',
     margin: '16px 0',
   },
   resultTotal: {
     fontSize: 32,
     fontWeight: 700,
     color: PRIMARY,
-    textShadow: '0 0 20px rgba(61,139,139,0.3)',
   },
 
   // ==================== TARIFF COMPARISON ====================
   tariffSection: {
     padding: '80px 24px',
-    backgroundColor: '#111827',
+    backgroundColor: COLORS.bgSecond,
   },
   tariffContainer: {
     maxWidth: 1080,
@@ -627,12 +596,12 @@ const styles = {
   tariffSectionTitle: {
     fontSize: 36,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 8,
   },
   tariffSectionSubtitle: {
     fontSize: 16,
-    color: 'rgba(255,255,255,0.45)',
+    color: COLORS.textSecond,
     marginBottom: 48,
   },
   tariffGrid: {
@@ -643,14 +612,13 @@ const styles = {
   tariffCard: {
     position: 'relative',
     padding: '32px 24px',
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    backgroundColor: '#fff',
+    border: '1px solid #E8E8E8',
     borderRadius: 20,
     textAlign: 'center',
     overflow: 'hidden',
-    transition: 'border-color 0.3s, transform 0.3s',
+    boxShadow: SHADOW.card,
+    transition: 'border-color 0.3s, transform 0.3s, box-shadow 0.3s',
   },
   tariffCardShimmer: {
     position: 'absolute',
@@ -658,7 +626,7 @@ const styles = {
     left: '20%',
     right: '20%',
     height: 1,
-    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+    background: 'linear-gradient(90deg, transparent, rgba(42,171,171,0.2), transparent)',
   },
   tariffIconWrap: {
     display: 'inline-flex',
@@ -666,14 +634,14 @@ const styles = {
     justifyContent: 'center',
     width: 52,
     height: 52,
-    backgroundColor: 'rgba(61,139,139,0.12)',
+    backgroundColor: 'rgba(42,171,171,0.08)',
     borderRadius: 14,
     marginBottom: 16,
   },
   tariffName: {
     fontSize: 15,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 12,
     letterSpacing: 0.5,
   },
@@ -682,30 +650,29 @@ const styles = {
     fontWeight: 700,
     color: PRIMARY,
     marginBottom: 6,
-    textShadow: '0 0 24px rgba(61,139,139,0.2)',
   },
   tariffUnit: {
     fontSize: 15,
-    color: 'rgba(255,255,255,0.4)',
+    color: COLORS.textSecond,
     fontWeight: 500,
   },
   tariffDays: {
     display: 'inline-flex',
     alignItems: 'center',
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     marginBottom: 12,
   },
   tariffDesc: {
     fontSize: 13,
-    color: 'rgba(255,255,255,0.35)',
+    color: COLORS.textSecond,
     lineHeight: 1.6,
   },
 
   // ==================== CTA SECTION ====================
   ctaSection: {
     padding: '80px 24px',
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bg,
     display: 'flex',
     justifyContent: 'center',
   },
@@ -715,23 +682,21 @@ const styles = {
     width: '100%',
     textAlign: 'center',
     padding: '48px 40px',
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    backdropFilter: 'blur(24px) saturate(1.4)',
-    WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    backgroundColor: '#fff',
+    border: '1px solid #E8E8E8',
     borderRadius: 24,
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 48px rgba(0,0,0,0.25)',
+    boxShadow: SHADOW.card,
     overflow: 'hidden',
   },
   ctaTitle: {
     fontSize: 32,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 12,
   },
   ctaDesc: {
     fontSize: 16,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     marginBottom: 32,
     lineHeight: 1.6,
   },
@@ -761,15 +726,13 @@ const styles = {
     display: 'inline-flex',
     alignItems: 'center',
     padding: '14px 28px',
-    backgroundColor: 'rgba(255,255,255,0.08)',
-    color: '#fff',
+    backgroundColor: '#fff',
+    color: COLORS.primaryText,
     fontSize: 15,
     fontWeight: 600,
     borderRadius: 12,
-    border: '1px solid rgba(255,255,255,0.15)',
+    border: '1.5px solid #2AABAB',
     cursor: 'pointer',
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
     transition: 'transform 0.2s, background 0.2s',
   },
   ctaAppBtn: {
@@ -777,31 +740,32 @@ const styles = {
     alignItems: 'center',
     gap: 8,
     padding: '14px 24px',
-    backgroundColor: '#000',
-    color: '#fff',
+    backgroundColor: '#fff',
+    color: COLORS.text,
     fontSize: 15,
     fontWeight: 600,
     borderRadius: 12,
     textDecoration: 'none',
-    border: '1px solid rgba(255,255,255,0.15)',
+    border: '1px solid #E8E8E8',
+    boxShadow: SHADOW.card,
     transition: 'transform 0.2s',
   },
 
   // ==================== SEO SECTION ====================
   seoSection: {
     padding: '64px 24px',
-    backgroundColor: '#111827',
-    borderTop: '1px solid rgba(255,255,255,0.06)',
+    backgroundColor: COLORS.bgSecond,
+    borderTop: '1px solid #EEEEEE',
   },
   seoTitle: {
     fontSize: 24,
     fontWeight: 700,
-    color: 'rgba(255,255,255,0.85)',
+    color: COLORS.text,
     marginBottom: 20,
   },
   seoText: {
     fontSize: 15,
-    color: 'rgba(255,255,255,0.45)',
+    color: COLORS.textSecond,
     lineHeight: 1.8,
     marginBottom: 16,
   },
@@ -809,7 +773,8 @@ const styles = {
   // ==================== CREATIVE FOOTER ====================
   footer: {
     position: 'relative',
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bgTert,
+    borderTop: '1px solid #EEEEEE',
     padding: '0 0 24px',
     overflow: 'hidden',
   },
@@ -851,12 +816,12 @@ const styles = {
   footerLogoText: {
     fontSize: 20,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     letterSpacing: 0.5,
   },
   footerDesc: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
     marginBottom: 20,
   },
@@ -870,9 +835,9 @@ const styles = {
     justifyContent: 'center',
     width: 38,
     height: 38,
-    color: 'rgba(255,255,255,0.6)',
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    color: COLORS.textSecond,
+    backgroundColor: '#F5F5F5',
+    border: '1px solid #E8E8E8',
     borderRadius: '50%',
     textDecoration: 'none',
     transition: 'all 0.2s',
@@ -885,12 +850,12 @@ const styles = {
   footerColTitle: {
     fontSize: 14,
     fontWeight: 600,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 4,
   },
   footerLink: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     textDecoration: 'none',
     transition: 'color 0.2s',
   },
@@ -899,14 +864,14 @@ const styles = {
     alignItems: 'center',
     gap: 8,
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     textDecoration: 'none',
     transition: 'color 0.2s',
   },
   footerAddress: {
     fontStyle: 'normal',
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     lineHeight: 1.5,
   },
   liveDotWrap: {
@@ -942,7 +907,7 @@ const styles = {
     margin: '0 auto',
     padding: '0 24px',
     height: 1,
-    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+    background: 'linear-gradient(90deg, transparent, #EEEEEE, transparent)',
   },
 
   // Bottom bar
@@ -960,7 +925,7 @@ const styles = {
   },
   copyright: {
     fontSize: 13,
-    color: 'rgba(255,255,255,0.3)',
+    color: COLORS.textMuted,
   },
   footerBrands: {
     display: 'flex',
@@ -970,10 +935,10 @@ const styles = {
   footerBrandTag: {
     fontSize: 11,
     fontWeight: 600,
-    color: 'rgba(255,255,255,0.3)',
+    color: COLORS.textMuted,
     padding: '4px 12px',
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    backgroundColor: '#F5F5F5',
+    border: '1px solid #E8E8E8',
     borderRadius: 50,
     letterSpacing: 0.5,
   },
@@ -984,7 +949,7 @@ const styles = {
   },
   footerLegalLink: {
     fontSize: 13,
-    color: 'rgba(255,255,255,0.3)',
+    color: COLORS.textSecond,
     textDecoration: 'none',
     transition: 'color 0.2s',
   },

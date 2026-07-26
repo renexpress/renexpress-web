@@ -4,8 +4,7 @@ import Navbar from '../../components/Navbar';
 import SEO from '../../components/SEO';
 import useIsMobile from '../../hooks/useIsMobile';
 import { useTranslation, localizedPath } from '../../i18n/LanguageContext';
-
-const PRIMARY = '#3D8B8B';
+import { COLORS, GRADIENT, SHADOW } from '../../config/theme';
 
 export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }) {
   const { language, t } = useTranslation();
@@ -127,7 +126,7 @@ export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FAFBFC', fontFamily: 'Inter, -apple-system, sans-serif', color: '#0B1120' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', fontFamily: 'Inter, -apple-system, sans-serif', color: COLORS.text }}>
       <SEO
         titleKey="seo.customsClearance.title"
         descriptionKey="seo.customsClearance.description"
@@ -153,7 +152,7 @@ export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }
           </ul>
         </section>
 
-        <section style={{ marginBottom: isMobile ? 32 : 48, background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 12, padding: 24 }}>
+        <section style={{ marginBottom: isMobile ? 32 : 48, background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: 24 }}>
           <h2 style={{ fontSize: isMobile ? 22 : 28, fontWeight: 700, marginBottom: 12 }}>{c.h2Why}</h2>
           <p style={{ color: '#475569', lineHeight: 1.7, fontSize: 16, margin: 0 }}>{c.whyText}</p>
         </section>
@@ -174,7 +173,7 @@ export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }
           <h2 style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2Faq}</h2>
           <div style={{ display: 'grid', gap: 12 }}>
             {faqList.map((f, i) => (
-              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 12, padding: '16px 20px' }}>
+              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: '16px 20px' }}>
                 <summary style={{ fontSize: 16, fontWeight: 600, cursor: 'pointer', listStyle: 'none' }}>{f.q}</summary>
                 <p style={{ color: '#475569', lineHeight: 1.6, marginTop: 12, marginBottom: 0 }}>{f.a}</p>
               </details>
@@ -182,26 +181,26 @@ export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }
           </div>
         </section>
 
-        <section style={{ background: '#0B1120', color: '#FFFFFF', borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
+        <section style={{ background: '#FFFFFF', color: COLORS.text, border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
           <h2 style={{ fontSize: isMobile ? 22 : 28, fontWeight: 800, marginBottom: 8 }}>{c.ctaTitle}</h2>
-          <p style={{ color: '#94A3B8', marginBottom: 24 }}>{c.ctaText}</p>
+          <p style={{ color: COLORS.textSecond, marginBottom: 24 }}>{c.ctaText}</p>
           <button
             onClick={() => navigate(localizedPath('/calculator', language))}
-            style={{ background: PRIMARY, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer' }}
+            style={{ background: GRADIENT, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', textShadow: '0 1px 2px rgba(10,37,53,.35)', minHeight: 48 }}
           >
             {t('common.orderNow')}
           </button>
         </section>
 
-        <nav aria-label="Related pages" style={{ marginTop: 48, padding: '24px 0', borderTop: '1px solid #E5E7EB', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
-          <Link to={localizedPath('/delivery-turkey-russia', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>
+        <nav aria-label="Related pages" style={{ marginTop: 48, padding: '24px 0', borderTop: '1px solid #EEEEEE', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
+          <Link to={localizedPath('/delivery-turkey-russia', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {language === 'ru' ? 'Доставка Турция-Россия' : language === 'tr' ? 'Türkiye-Rusya kargo' : 'Turkey-Russia cargo'}
           </Link>
-          <Link to={localizedPath('/delivery-istanbul-moscow', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>
+          <Link to={localizedPath('/delivery-istanbul-moscow', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {language === 'ru' ? 'Стамбул-Москва' : language === 'tr' ? 'İstanbul-Moskova' : 'Istanbul-Moscow'}
           </Link>
-          <Link to={localizedPath('/services', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>{t('common.services')}</Link>
-          <Link to={localizedPath('/faq', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>{t('common.faq')}</Link>
+          <Link to={localizedPath('/services', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.services')}</Link>
+          <Link to={localizedPath('/faq', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.faq')}</Link>
         </nav>
       </main>
     </div>

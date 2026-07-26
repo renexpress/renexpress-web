@@ -6,7 +6,7 @@ import '../styles/responsive.css';
 import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 
-const PRIMARY = '#3D8B8B';
+const PRIMARY = '#2AABAB';
 
 function Product({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();

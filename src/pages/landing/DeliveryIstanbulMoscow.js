@@ -5,8 +5,7 @@ import SEO from '../../components/SEO';
 import useIsMobile from '../../hooks/useIsMobile';
 import { useTranslation, localizedPath } from '../../i18n/LanguageContext';
 import { SITE } from '../../config/site';
-
-const PRIMARY = '#3D8B8B';
+import { COLORS, GRADIENT, SHADOW } from '../../config/theme';
 
 export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthenticated }) {
   const { language, t } = useTranslation();
@@ -104,7 +103,7 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FAFBFC', fontFamily: 'Inter, -apple-system, sans-serif', color: '#0B1120' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', fontFamily: 'Inter, -apple-system, sans-serif', color: COLORS.text }}>
       <SEO
         titleKey="seo.deliveryIstanbulMoscow.title"
         descriptionKey="seo.deliveryIstanbulMoscow.description"
@@ -132,13 +131,13 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
           <h2 id="options-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2Options}</h2>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 16 }}>
             {SITE.tariffs.map((tariff) => (
-              <article key={tariff.id} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 16, padding: 24 }}>
+              <article key={tariff.id} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: 24 }}>
                 <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 12 }}>{tariff.name}</h3>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 6 }}>
                   <span style={{ fontSize: 32, fontWeight: 800 }}>${tariff.pricePerKg}</span>
                   <span style={{ color: '#64748B' }}>/ {t('common.kg')}</span>
                 </div>
-                <div style={{ color: '#0B1120', fontWeight: 600 }}>{tariff.transitDaysMin}-{tariff.transitDaysMax} {t('common.days')}</div>
+                <div style={{ color: COLORS.text, fontWeight: 600 }}>{tariff.transitDaysMin}-{tariff.transitDaysMax} {t('common.days')}</div>
               </article>
             ))}
           </div>
@@ -157,7 +156,7 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
           <h2 id="faq-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2Faq}</h2>
           <div style={{ display: 'grid', gap: 12 }}>
             {faqList.map((f, i) => (
-              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: 12, padding: '16px 20px' }}>
+              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: '16px 20px' }}>
                 <summary style={{ fontSize: 16, fontWeight: 600, cursor: 'pointer', listStyle: 'none' }}>{f.q}</summary>
                 <p style={{ color: '#475569', lineHeight: 1.6, marginTop: 12, marginBottom: 0 }}>{f.a}</p>
               </details>
@@ -165,28 +164,28 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
           </div>
         </section>
 
-        <section style={{ background: '#0B1120', color: '#FFFFFF', borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
+        <section style={{ background: '#FFFFFF', color: COLORS.text, border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
           <h2 style={{ fontSize: isMobile ? 22 : 28, fontWeight: 800, marginBottom: 8 }}>{c.ctaTitle}</h2>
-          <p style={{ color: '#94A3B8', marginBottom: 24 }}>{c.ctaText}</p>
+          <p style={{ color: COLORS.textSecond, marginBottom: 24 }}>{c.ctaText}</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
             <button
               onClick={() => navigate(localizedPath('/calculator', language))}
-              style={{ background: PRIMARY, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer' }}
+              style={{ background: GRADIENT, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', textShadow: '0 1px 2px rgba(10,37,53,.35)', minHeight: 48 }}
             >
               {t('common.orderNow')}
             </button>
           </div>
         </section>
 
-        <nav aria-label="Related pages" style={{ marginTop: 48, padding: '24px 0', borderTop: '1px solid #E5E7EB', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
-          <Link to={localizedPath('/delivery-turkey-russia', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>
+        <nav aria-label="Related pages" style={{ marginTop: 48, padding: '24px 0', borderTop: '1px solid #EEEEEE', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
+          <Link to={localizedPath('/delivery-turkey-russia', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {language === 'ru' ? 'Доставка Турция-Россия' : language === 'tr' ? 'Türkiye-Rusya kargo' : 'Turkey-Russia cargo'}
           </Link>
-          <Link to={localizedPath('/customs-clearance', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>
+          <Link to={localizedPath('/customs-clearance', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {language === 'ru' ? 'Таможенное оформление' : language === 'tr' ? 'Gümrük işlemleri' : 'Customs clearance'}
           </Link>
-          <Link to={localizedPath('/calculator', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>{t('common.calculator')}</Link>
-          <Link to={localizedPath('/contacts', language)} style={{ color: PRIMARY, textDecoration: 'none' }}>{t('common.contacts')}</Link>
+          <Link to={localizedPath('/calculator', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.calculator')}</Link>
+          <Link to={localizedPath('/contacts', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.contacts')}</Link>
         </nav>
       </main>
     </div>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import API_URL from '../config/api';
 
-const PRIMARY = '#3D8B8B';
+const PRIMARY = '#2AABAB';
 const PRIMARY_LIGHT = '#E8F5F5';
 
 function Analytics({ isAuthenticated, setIsAuthenticated }) {

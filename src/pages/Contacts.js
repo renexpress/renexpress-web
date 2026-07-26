@@ -5,8 +5,8 @@ import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import { useTranslation } from '../i18n/LanguageContext';
-
-const PRIMARY = '#3D8B8B';
+import { SITE } from '../config/site';
+import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
 function Contacts({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -66,14 +66,8 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
       />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
-      {/* ============ DARK HERO ============ */}
+      {/* ============ HERO ============ */}
       <section style={{ ...styles.hero, ...(isMobile ? { padding: '80px 16px 48px' } : {}) }}>
-        {/* Floating blobs */}
-        <div style={styles.heroBlobContainer}>
-          <div style={{ ...styles.heroBlob, width: 200, height: 200, background: PRIMARY, top: -60, left: '10%', opacity: 0.25, filter: 'blur(80px)' }} />
-          <div style={{ ...styles.heroBlob, width: 160, height: 160, background: '#5EEAD4', top: 20, right: '15%', opacity: 0.18, filter: 'blur(60px)' }} />
-          <div style={{ ...styles.heroBlob, width: 120, height: 120, background: '#818CF8', bottom: -40, left: '45%', opacity: 0.15, filter: 'blur(70px)' }} />
-        </div>
         <div style={styles.heroContent}>
           <h1 style={{ ...styles.heroTitle, ...(isMobile ? { fontSize: 26 } : {}) }}>Контакты RENEXPRESS</h1>
           <p style={{ ...styles.heroSubtitle, ...(isMobile ? { fontSize: 14 } : {}) }}>
@@ -103,7 +97,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                 <h3 style={styles.contactTitle}>{c.title}</h3>
                 <p style={styles.contactValue}>{c.value}</p>
                 <span style={styles.contactArrow}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
                 </span>
@@ -155,7 +149,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
             <div style={styles.warehouseCard}>
               <div style={{ ...styles.warehouseHeader, ...(isMobile ? { padding: '20px 20px 0' } : {}) }}>
                 <div style={styles.warehouseBadge}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   <span>Россия</span>
                 </div>
                 <h3 style={styles.warehouseTitle}>Склад в Москве</h3>
@@ -171,7 +165,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                 </div>
                 <div style={styles.warehouseDetail}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  <span>Менеджер: <a href="https://wa.me/905511898299" style={{ color: PRIMARY, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 99</a></span>
+                  <span>Менеджер: <a href="https://wa.me/905511898299" style={{ color: COLORS.primaryText, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 99</a></span>
                 </div>
               </div>
               <div style={{ ...styles.mapContainer, ...(isMobile ? { padding: '0 20px 20px' } : {}) }}>
@@ -192,7 +186,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
             <div style={styles.warehouseCard}>
               <div style={{ ...styles.warehouseHeader, ...(isMobile ? { padding: '20px 20px 0' } : {}) }}>
                 <div style={styles.warehouseBadge}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   <span>Турция</span>
                 </div>
                 <h3 style={styles.warehouseTitle}>Офис в Стамбуле</h3>
@@ -208,11 +202,11 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                 </div>
                 <div style={styles.warehouseDetail}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  <span>Менеджер: <a href="https://wa.me/905511898288" style={{ color: PRIMARY, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 88</a></span>
+                  <span>Менеджер: <a href="https://wa.me/905511898288" style={{ color: COLORS.primaryText, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 88</a></span>
                 </div>
                 <div style={styles.warehouseDetail}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  <span>Байер: <a href="https://wa.me/905511898289" style={{ color: PRIMARY, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 89</a></span>
+                  <span>Байер: <a href="https://wa.me/905511898289" style={{ color: COLORS.primaryText, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 89</a></span>
                 </div>
               </div>
               <div style={{ ...styles.warehouseDescBox, ...(isMobile ? { padding: '0 20px 20px' } : {}) }}>
@@ -246,12 +240,21 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                     <div style={{ fontSize: 18, fontWeight: 600 }}>App Store</div>
                   </div>
                 </a>
+                <a href={SITE.social.googlePlay} target="_blank" rel="noopener noreferrer" style={{ ...styles.appStoreBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
+                  <svg width="20" height="22" viewBox="0 0 512 512" fill="#fff">
+                    <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z"/>
+                  </svg>
+                  <div>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.8)' }}>Загрузите в</div>
+                    <div style={{ fontSize: 18, fontWeight: 600 }}>Google Play</div>
+                  </div>
+                </a>
                 <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" style={{ ...styles.whatsappBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                   WhatsApp
                 </a>
                 <a href="tel:+905070107070" style={{ ...styles.callBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#157070" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                   Позвонить
                 </a>
               </div>
@@ -279,14 +282,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
 
       {/* ============ CREATIVE FOOTER ============ */}
       <footer className="footer" style={{ ...styles.footer, ...(isMobile ? { paddingBottom: 80 } : {}) }}>
-        {/* Animated gradient blobs */}
-        <div className="footer-blobs" style={styles.footerBlobs}>
-          <div className="footer-blob footer-blob-1" />
-          <div className="footer-blob footer-blob-2" />
-          <div className="footer-blob footer-blob-3" />
-        </div>
-
-        {/* Glass divider at top */}
+        {/* Divider at top */}
         <div style={styles.footerTopDivider} />
 
         {/* Footer columns grid */}
@@ -354,26 +350,27 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
               </span>
             </a>
             <a href="/contacts" className="footer-link" style={styles.footerLink}>Поддержка</a>
-            <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>Приложение iOS</a>
+            <a href={SITE.social.appStore} target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>Приложение iOS</a>
+            <a href={SITE.social.googlePlay} target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>Приложение Android</a>
           </div>
 
           {/* Contact column with icons */}
           <div style={styles.footerCol}>
             <h5 style={styles.footerColTitle}>Контакты</h5>
             <a href="mailto:info@renexpress.online" className="footer-link" style={styles.footerContactLink}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2" style={{ flexShrink: 0 }}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               <span>info@renexpress.online</span>
             </a>
             <a href="tel:+905070107070" className="footer-link" style={styles.footerContactLink}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <span>+90 507 010 70 70</span>
             </a>
             <a href="tel:+79289707010" className="footer-link" style={styles.footerContactLink}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <span>+7 928 970 70 10</span>
             </a>
             <div className="footer-link" style={styles.footerContactLink}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               <address style={styles.footerAddress}>Москва, ул. Южнопортовая 7а, стр 2</address>
             </div>
           </div>
@@ -402,8 +399,14 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
         }
         .contact-glass-card:hover {
           transform: translateY(-4px) !important;
-          box-shadow: 0 12px 40px rgba(61,139,139,0.2), inset 0 1px 0 rgba(255,255,255,0.15) !important;
-          border-color: rgba(61,139,139,0.4) !important;
+          box-shadow: 0 8px 24px rgba(16,24,40,0.08) !important;
+          border-color: rgba(42,171,171,0.4) !important;
+        }
+        .footer .footer-link:hover { color: #157070 !important; }
+        .footer .footer-social:hover {
+          color: #157070 !important;
+          background: rgba(42,171,171,0.12) !important;
+          border-color: rgba(42,171,171,0.4) !important;
         }
         @media (max-width: 768px) {
           .contacts-grid-responsive {
@@ -445,125 +448,16 @@ const styles = {
     fontFamily: 'Inter, -apple-system, sans-serif',
   },
 
-  // Tubelight Navbar
-  tubelightWrapper: {
-    position: 'fixed',
-    top: 0,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    zIndex: 100,
-    paddingTop: 16,
-  },
-  tubelightBar: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 4,
-    backgroundColor: 'rgba(17,24,39,0.85)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)',
-    padding: '4px 6px',
-    borderRadius: 50,
-    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-  },
-  tubelightLogo: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '6px 10px',
-    textDecoration: 'none',
-    flexShrink: 0,
-  },
-  tubelightLink: {
-    position: 'relative',
-    padding: '8px 18px',
-    fontSize: 14,
-    fontWeight: 600,
-    color: 'rgba(255,255,255,0.7)',
-    textDecoration: 'none',
-    borderRadius: 50,
-    transition: 'color 0.3s',
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-  },
-  tubelightLinkActive: {
-    color: '#fff',
-    backgroundColor: 'rgba(61,139,139,0.15)',
-  },
-  tubelightGlow: {
-    position: 'absolute',
-    top: -2,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: 32,
-    height: 4,
-    backgroundColor: PRIMARY,
-    borderRadius: '4px 4px 0 0',
-    boxShadow: '0 0 12px 4px rgba(61,139,139,0.4), 0 0 24px 8px rgba(61,139,139,0.2)',
-  },
-  tubelightAuthBtn: {
-    padding: '8px 18px',
-    fontSize: 13,
-    fontWeight: 600,
-    color: '#fff',
-    backgroundColor: PRIMARY,
-    border: 'none',
-    borderRadius: 50,
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-    marginLeft: 4,
-  },
-
-  // Mobile Bottom Nav
-  mobileBottomNav: {
-    display: 'none',
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 100,
-    backgroundColor: 'rgba(255,255,255,0.95)',
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    borderTop: '1px solid #E5E7EB',
-    padding: '6px 0 env(safe-area-inset-bottom, 8px)',
-    justifyContent: 'space-around',
-  },
-  mobileBottomLink: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 2,
-    textDecoration: 'none',
-    padding: '4px 0',
-    fontSize: 10,
-    fontWeight: 500,
-    minWidth: 56,
-  },
-  mobileBottomLabel: {
-    fontSize: 10,
-    fontWeight: 500,
-  },
-
   // Hero
   hero: {
     position: 'relative',
-    backgroundColor: '#111827',
+    backgroundColor: '#FFFFFF',
     paddingTop: 100,
     paddingBottom: 64,
     paddingLeft: 24,
     paddingRight: 24,
     textAlign: 'center',
     overflow: 'hidden',
-  },
-  heroBlobContainer: {
-    position: 'absolute',
-    inset: 0,
-    pointerEvents: 'none',
-  },
-  heroBlob: {
-    position: 'absolute',
-    borderRadius: '50%',
   },
   heroContent: {
     position: 'relative',
@@ -574,14 +468,14 @@ const styles = {
   heroTitle: {
     fontSize: 48,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 16,
     lineHeight: 1.15,
     letterSpacing: -0.5,
   },
   heroSubtitle: {
     fontSize: 18,
-    color: 'rgba(255,255,255,0.65)',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
     maxWidth: 560,
     margin: '0 auto',
@@ -595,20 +489,20 @@ const styles = {
 
   // Contact Cards Section
   contactSection: {
-    backgroundColor: '#0B1120',
+    backgroundColor: '#F5F5F5',
     padding: '72px 24px',
   },
   sectionTitleLight: {
     fontSize: 36,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     textAlign: 'center',
     marginBottom: 8,
     letterSpacing: -0.5,
   },
   sectionSubtitleLight: {
     fontSize: 16,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     textAlign: 'center',
     marginBottom: 48,
   },
@@ -624,32 +518,30 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     padding: 32,
-    background: 'rgba(255,255,255,0.04)',
-    backdropFilter: 'blur(20px)',
-    WebkitBackdropFilter: 'blur(20px)',
+    background: '#FFFFFF',
     borderRadius: 20,
-    border: '1px solid rgba(255,255,255,0.08)',
+    border: '1px solid #E8E8E8',
     textDecoration: 'none',
     textAlign: 'center',
     position: 'relative',
     overflow: 'hidden',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
+    boxShadow: SHADOW.card,
   },
   contactIconCircle: {
     width: 60,
     height: 60,
-    background: `linear-gradient(135deg, ${PRIMARY}, #2a6b6b)`,
+    background: GRADIENT,
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
-    boxShadow: '0 4px 20px rgba(61,139,139,0.3)',
+    boxShadow: '0 4px 20px rgba(42,171,171,0.28)',
   },
   contactTitle: {
     fontSize: 13,
     fontWeight: 600,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     marginBottom: 6,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
@@ -657,7 +549,7 @@ const styles = {
   contactValue: {
     fontSize: 17,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 8,
   },
   contactArrow: {
@@ -666,14 +558,14 @@ const styles = {
     justifyContent: 'center',
     width: 32,
     height: 32,
-    backgroundColor: 'rgba(61,139,139,0.15)',
+    backgroundColor: 'rgba(42,171,171,0.12)',
     borderRadius: '50%',
     marginTop: 4,
   },
 
   // Social Section
   socialSection: {
-    backgroundColor: '#111827',
+    backgroundColor: '#FFFFFF',
     padding: '72px 24px',
   },
   socialGrid: {
@@ -688,14 +580,12 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     padding: '32px 24px',
-    background: 'rgba(255,255,255,0.04)',
-    backdropFilter: 'blur(20px)',
-    WebkitBackdropFilter: 'blur(20px)',
+    background: '#FFFFFF',
     borderRadius: 20,
-    border: '1px solid rgba(255,255,255,0.08)',
+    border: '1px solid #E8E8E8',
     textDecoration: 'none',
     textAlign: 'center',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
+    boxShadow: SHADOW.card,
   },
   socialIconCircle: {
     width: 56,
@@ -711,12 +601,12 @@ const styles = {
   socialTitle: {
     fontSize: 20,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 4,
   },
   socialHandle: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.6)',
+    color: COLORS.textSecond,
   },
   brandsRow: {
     display: 'flex',
@@ -726,34 +616,32 @@ const styles = {
   },
   brandTag: {
     padding: '10px 20px',
-    background: 'rgba(255,255,255,0.06)',
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    background: '#FFFFFF',
+    border: '1px solid #E8E8E8',
     borderRadius: 50,
     fontSize: 13,
     fontWeight: 600,
-    color: 'rgba(255,255,255,0.7)',
+    color: COLORS.textSecond,
     letterSpacing: 0.5,
     cursor: 'default',
   },
 
   // Warehouses
   warehouseSection: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FAFAFA',
     padding: '72px 24px',
   },
   sectionTitleDark: {
     fontSize: 36,
     fontWeight: 700,
-    color: '#111827',
+    color: COLORS.text,
     textAlign: 'center',
     marginBottom: 8,
     letterSpacing: -0.5,
   },
   sectionSubtitleDark: {
     fontSize: 16,
-    color: '#6B7280',
+    color: COLORS.textSecond,
     textAlign: 'center',
     marginBottom: 48,
   },
@@ -765,9 +653,10 @@ const styles = {
     margin: '0 auto',
   },
   warehouseCard: {
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#FFFFFF',
     borderRadius: 20,
-    border: '1px solid #E5E7EB',
+    border: '1px solid #E8E8E8',
+    boxShadow: SHADOW.card,
     overflow: 'hidden',
   },
   warehouseHeader: {
@@ -778,17 +667,17 @@ const styles = {
     alignItems: 'center',
     gap: 6,
     padding: '6px 14px',
-    backgroundColor: 'rgba(61,139,139,0.08)',
+    backgroundColor: 'rgba(42,171,171,0.10)',
     borderRadius: 50,
     fontSize: 13,
     fontWeight: 600,
-    color: PRIMARY,
+    color: COLORS.primaryText,
     marginBottom: 12,
   },
   warehouseTitle: {
     fontSize: 22,
     fontWeight: 700,
-    color: '#111827',
+    color: COLORS.text,
     marginBottom: 4,
   },
   warehouseBody: {
@@ -802,7 +691,7 @@ const styles = {
     alignItems: 'center',
     gap: 10,
     fontSize: 14,
-    color: '#4B5563',
+    color: COLORS.textSecond,
     lineHeight: 1.5,
   },
   warehouseDescBox: {
@@ -810,12 +699,12 @@ const styles = {
   },
   warehouseDesc: {
     fontSize: 14,
-    color: '#6B7280',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
     padding: 16,
-    backgroundColor: 'rgba(61,139,139,0.04)',
+    backgroundColor: 'rgba(42,171,171,0.06)',
     borderRadius: 12,
-    borderLeft: `3px solid ${PRIMARY}`,
+    borderLeft: `3px solid ${COLORS.primary}`,
   },
   mapContainer: {
     padding: '0 28px 28px',
@@ -823,19 +712,17 @@ const styles = {
 
   // App CTA
   appCtaSection: {
-    backgroundColor: '#0B1120',
+    backgroundColor: '#F5F5F5',
     padding: '72px 24px',
   },
   appCtaCard: {
     maxWidth: 960,
     margin: '0 auto',
     padding: 48,
-    background: 'rgba(255,255,255,0.04)',
-    backdropFilter: 'blur(24px)',
-    WebkitBackdropFilter: 'blur(24px)',
+    background: '#FFFFFF',
     borderRadius: 24,
-    border: '1px solid rgba(255,255,255,0.08)',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 48px rgba(0,0,0,0.25)',
+    border: '1px solid #E8E8E8',
+    boxShadow: SHADOW.card,
   },
   appCtaContent: {
     display: 'flex',
@@ -851,13 +738,13 @@ const styles = {
   appCtaTitle: {
     fontSize: 26,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 8,
     lineHeight: 1.3,
   },
   appCtaDesc: {
     fontSize: 15,
-    color: 'rgba(255,255,255,0.55)',
+    color: COLORS.textSecond,
     lineHeight: 1.6,
   },
   appCtaButtons: {
@@ -876,7 +763,6 @@ const styles = {
     borderRadius: 12,
     textDecoration: 'none',
     transition: 'transform 0.2s',
-    border: '1px solid rgba(255,255,255,0.15)',
   },
   whatsappBtn: {
     display: 'inline-flex',
@@ -895,50 +781,44 @@ const styles = {
   callBtn: {
     display: 'inline-flex',
     alignItems: 'center',
+    justifyContent: 'center',
     gap: 8,
     padding: '14px 24px',
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    border: '1px solid rgba(255,255,255,0.2)',
-    color: '#fff',
+    minHeight: 48,
+    backgroundColor: '#FFFFFF',
+    border: '1.5px solid #2AABAB',
+    color: COLORS.primaryText,
     fontSize: 14,
     fontWeight: 600,
     borderRadius: 12,
     textDecoration: 'none',
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
     transition: 'transform 0.2s, background 0.2s',
   },
 
   // SEO Section
   seoSection: {
     padding: '56px 24px',
-    backgroundColor: '#F9FAFB',
-    borderTop: '1px solid #E5E7EB',
+    backgroundColor: '#FAFAFA',
+    borderTop: '1px solid #EEEEEE',
   },
   seoTitle: {
     fontSize: 24,
     fontWeight: 700,
-    color: '#111827',
+    color: COLORS.text,
     marginBottom: 16,
   },
   seoText: {
     fontSize: 15,
-    color: '#4B5563',
+    color: COLORS.textSecond,
     lineHeight: 1.8,
   },
 
-  // Creative Footer
+  // Footer
   footer: {
     position: 'relative',
-    backgroundColor: '#0B1120',
+    backgroundColor: '#F5F5F5',
     padding: '0 0 24px',
     overflow: 'hidden',
-  },
-  footerBlobs: {
-    position: 'absolute',
-    inset: 0,
-    overflow: 'hidden',
-    pointerEvents: 'none',
   },
   footerTopDivider: {
     position: 'relative',
@@ -947,7 +827,7 @@ const styles = {
     margin: '0 auto 48px',
     padding: '0 24px',
     height: 1,
-    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+    background: '#EEEEEE',
   },
   footerGrid: {
     position: 'relative',
@@ -974,19 +854,19 @@ const styles = {
     justifyContent: 'center',
     width: 40,
     height: 40,
-    backgroundColor: PRIMARY,
+    backgroundColor: COLORS.primary,
     borderRadius: '50%',
     flexShrink: 0,
   },
   footerLogoText: {
     fontSize: 20,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     letterSpacing: 0.5,
   },
   footerDesc: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
     marginBottom: 20,
   },
@@ -1000,9 +880,9 @@ const styles = {
     justifyContent: 'center',
     width: 38,
     height: 38,
-    color: 'rgba(255,255,255,0.6)',
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    color: COLORS.textSecond,
+    backgroundColor: '#FFFFFF',
+    border: '1px solid #E8E8E8',
     borderRadius: '50%',
     textDecoration: 'none',
     transition: 'all 0.2s',
@@ -1015,12 +895,12 @@ const styles = {
   footerColTitle: {
     fontSize: 14,
     fontWeight: 600,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 4,
   },
   footerLink: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     textDecoration: 'none',
     transition: 'color 0.2s',
   },
@@ -1029,14 +909,14 @@ const styles = {
     alignItems: 'center',
     gap: 8,
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     textDecoration: 'none',
     transition: 'color 0.2s',
   },
   footerAddress: {
     fontStyle: 'normal',
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     lineHeight: 1.5,
   },
   liveDotWrap: {
@@ -1070,7 +950,7 @@ const styles = {
     margin: '0 auto',
     padding: '0 24px',
     height: 1,
-    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+    background: '#EEEEEE',
   },
   footerBottom: {
     position: 'relative',
@@ -1086,7 +966,7 @@ const styles = {
   },
   copyright: {
     fontSize: 13,
-    color: 'rgba(255,255,255,0.3)',
+    color: COLORS.textMuted,
   },
   footerBrands: {
     display: 'flex',
@@ -1096,10 +976,10 @@ const styles = {
   footerBrandTag: {
     fontSize: 11,
     fontWeight: 600,
-    color: 'rgba(255,255,255,0.3)',
+    color: COLORS.textMuted,
     padding: '4px 12px',
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    backgroundColor: '#FFFFFF',
+    border: '1px solid #E8E8E8',
     borderRadius: 50,
     letterSpacing: 0.5,
   },
@@ -1110,7 +990,7 @@ const styles = {
   },
   footerLegalLink: {
     fontSize: 13,
-    color: 'rgba(255,255,255,0.3)',
+    color: COLORS.textSecond,
     textDecoration: 'none',
     transition: 'color 0.2s',
   },

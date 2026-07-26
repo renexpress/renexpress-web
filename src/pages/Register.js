@@ -4,8 +4,10 @@ import axios from 'axios';
 import API_URL from '../config/api';
 import '../styles/responsive.css';
 import SEO from '../components/SEO';
+import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
-const PRIMARY = '#3D8B8B';
+const PRIMARY = COLORS.primary;
+const PRIMARY_TEXT = COLORS.primaryText;
 
 function Register({ setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -53,13 +55,13 @@ function Register({ setIsAuthenticated }) {
 
   const features = [
     { icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
     ), title: 'Авто и авиа доставка', desc: 'От 3 дней авиа, от 14 дней авто' },
     { icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     ), title: 'Отслеживание груза', desc: 'В реальном времени через приложение' },
     { icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     ), title: 'Честный знак и WB/OZON', desc: 'Маркировка и доставка на склады' },
   ];
 
@@ -67,19 +69,10 @@ function Register({ setIsAuthenticated }) {
     <div style={styles.page}>
       <SEO title="Регистрация — RENEXPRESS" description="Создайте аккаунт RENEXPRESS для отслеживания доставок." noindex />
       <style>{`
-        .reg-input::placeholder { color: rgba(255,255,255,0.3); }
-        .reg-input:focus { border-color: ${PRIMARY} !important; box-shadow: 0 0 0 3px rgba(61,139,139,0.15); }
-        .reg-blob { position: absolute; border-radius: 50%; filter: blur(80px); animation: regBlobFloat 8s ease-in-out infinite; }
-        .reg-blob-1 { width: 350px; height: 350px; background: #5EEAD4; top: -100px; right: -80px; opacity: 0.12; }
-        .reg-blob-2 { width: 300px; height: 300px; background: ${PRIMARY}; bottom: -100px; left: -80px; opacity: 0.15; animation-delay: -3s; }
-        .reg-blob-3 { width: 200px; height: 200px; background: #818CF8; top: 40%; left: 30%; opacity: 0.08; animation-delay: -5s; }
-        @keyframes regBlobFloat {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(20px, -15px) scale(1.08); }
-          66% { transform: translate(-15px, 10px) scale(0.95); }
-        }
-        .reg-submit:hover:not(:disabled) { box-shadow: 0 8px 24px rgba(61,139,139,0.35); transform: translateY(-1px); }
-        .reg-feature:hover { border-color: rgba(255,255,255,0.15) !important; background: rgba(255,255,255,0.06) !important; }
+        .reg-input::placeholder { color: #999999; }
+        .reg-input:focus { border-color: ${PRIMARY} !important; box-shadow: 0 0 0 3px rgba(42,171,171,0.15); }
+        .reg-submit:hover:not(:disabled) { box-shadow: ${SHADOW.cta}; transform: translateY(-1px); }
+        .reg-feature:hover { border-color: #2AABAB !important; background: #FAFAFA !important; }
         @media (max-width: 768px) {
           .reg-left { display: none !important; }
           .reg-right { flex: 1 !important; padding: 24px !important; }
@@ -107,14 +100,9 @@ function Register({ setIsAuthenticated }) {
       <div className="auth-container" style={styles.container}>
         {/* Left Side */}
         <div className="auth-left reg-left" style={styles.leftSide}>
-          {/* Blobs */}
-          <div className="reg-blob reg-blob-1" />
-          <div className="reg-blob reg-blob-2" />
-          <div className="reg-blob reg-blob-3" />
-
           <div style={styles.leftContent}>
             <h2 style={styles.leftTitle}>
-              Начните доставлять<br />из <span style={{ color: PRIMARY }}>Турции</span> сегодня
+              Начните доставлять<br />из <span style={{ color: PRIMARY_TEXT }}>Турции</span> сегодня
             </h2>
             <p style={styles.leftSubtitle}>
               Зарегистрируйтесь и получите персональный код REN для управления заказами и отслеживания грузов.
@@ -165,7 +153,7 @@ function Register({ setIsAuthenticated }) {
                 <div style={styles.inputGroup}>
                   <label style={styles.label}>ФИО</label>
                   <div style={styles.inputWrapper}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2" style={styles.inputIconLeft}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999999" strokeWidth="2" style={styles.inputIconLeft}>
                       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
                     </svg>
                     <input
@@ -183,7 +171,7 @@ function Register({ setIsAuthenticated }) {
                 <div style={styles.inputGroup}>
                   <label style={styles.label}>Номер телефона</label>
                   <div style={styles.inputWrapper}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2" style={styles.inputIconLeft}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999999" strokeWidth="2" style={styles.inputIconLeft}>
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
                     <input
@@ -239,7 +227,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     fontFamily: 'Inter, -apple-system, sans-serif',
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bg,
   },
 
   // Header
@@ -248,10 +236,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '16px 48px',
-    backgroundColor: 'rgba(11,17,32,0.8)',
-    backdropFilter: 'blur(12px)',
-    WebkitBackdropFilter: 'blur(12px)',
-    borderBottom: '1px solid rgba(255,255,255,0.06)',
+    backgroundColor: COLORS.bg,
+    borderBottom: `1px solid ${COLORS.cardBorder}`,
     position: 'relative',
     zIndex: 10,
   },
@@ -271,7 +257,7 @@ const styles = {
     borderRadius: '50%',
   },
   logoText: {
-    color: '#fff',
+    color: COLORS.text,
     fontSize: 18,
     fontWeight: 700,
   },
@@ -282,12 +268,12 @@ const styles = {
   },
   headerText: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.4)',
+    color: COLORS.textSecond,
   },
   headerLink: {
     fontSize: 14,
     fontWeight: 600,
-    color: PRIMARY,
+    color: PRIMARY_TEXT,
     textDecoration: 'none',
   },
 
@@ -300,7 +286,7 @@ const styles = {
   // Left Side
   leftSide: {
     flex: 1,
-    backgroundColor: '#0B1120',
+    backgroundColor: COLORS.bgSecond,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -316,13 +302,13 @@ const styles = {
   leftTitle: {
     fontSize: 36,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     lineHeight: 1.15,
     marginBottom: 16,
   },
   leftSubtitle: {
     fontSize: 15,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     lineHeight: 1.7,
     marginBottom: 32,
   },
@@ -337,8 +323,9 @@ const styles = {
     alignItems: 'center',
     gap: 14,
     padding: '14px 18px',
-    backgroundColor: 'rgba(255,255,255,0.03)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    backgroundColor: COLORS.bg,
+    border: `1px solid ${COLORS.cardBorder}`,
+    boxShadow: SHADOW.card,
     borderRadius: 14,
     transition: 'all 0.3s',
     cursor: 'default',
@@ -349,19 +336,19 @@ const styles = {
     justifyContent: 'center',
     width: 40,
     height: 40,
-    backgroundColor: 'rgba(61,139,139,0.15)',
+    backgroundColor: 'rgba(42,171,171,0.12)',
     borderRadius: 10,
     flexShrink: 0,
   },
   featureTitle: {
     fontSize: 14,
     fontWeight: 600,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 2,
   },
   featureDesc: {
     fontSize: 12,
-    color: 'rgba(255,255,255,0.45)',
+    color: COLORS.textSecond,
   },
   trustRow: {
     display: 'flex',
@@ -373,14 +360,14 @@ const styles = {
   },
   trustText: {
     fontSize: 13,
-    color: 'rgba(255,255,255,0.4)',
+    color: COLORS.textSecond,
     fontWeight: 500,
   },
 
   // Right Side
   rightSide: {
     flex: 1,
-    backgroundColor: '#111827',
+    backgroundColor: COLORS.bg,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -394,12 +381,11 @@ const styles = {
     gap: 20,
   },
   formCard: {
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    backgroundColor: COLORS.cardBg,
+    border: `1px solid ${COLORS.cardBorder}`,
     borderRadius: 20,
     padding: '36px 32px',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)',
+    boxShadow: SHADOW.card,
   },
   formHeader: {
     marginBottom: 24,
@@ -407,12 +393,12 @@ const styles = {
   formTitle: {
     fontSize: 26,
     fontWeight: 700,
-    color: '#fff',
+    color: COLORS.text,
     marginBottom: 6,
   },
   formSubtitle: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.45)',
+    color: COLORS.textSecond,
   },
   errorBox: {
     display: 'flex',
@@ -439,7 +425,7 @@ const styles = {
   label: {
     fontSize: 13,
     fontWeight: 500,
-    color: 'rgba(255,255,255,0.6)',
+    color: COLORS.textSecond,
   },
   inputWrapper: {
     position: 'relative',
@@ -453,11 +439,12 @@ const styles = {
   },
   input: {
     width: '100%',
+    minHeight: 48,
     padding: '12px 16px 12px 42px',
-    fontSize: 15,
-    color: '#fff',
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    fontSize: 16,
+    color: COLORS.text,
+    backgroundColor: COLORS.inputBg,
+    border: `1px solid ${COLORS.inputBorder}`,
     borderRadius: 10,
     outline: 'none',
     transition: 'border-color 0.2s, box-shadow 0.2s',
@@ -465,7 +452,7 @@ const styles = {
   },
   hint: {
     fontSize: 11,
-    color: 'rgba(255,255,255,0.3)',
+    color: COLORS.textSecond,
     marginTop: 2,
   },
   checkboxLabel: {
@@ -473,7 +460,7 @@ const styles = {
     alignItems: 'flex-start',
     gap: 8,
     fontSize: 13,
-    color: 'rgba(255,255,255,0.5)',
+    color: COLORS.textSecond,
     cursor: 'pointer',
     lineHeight: 1.5,
   },
@@ -485,14 +472,14 @@ const styles = {
     accentColor: PRIMARY,
   },
   link: {
-    color: PRIMARY,
+    color: PRIMARY_TEXT,
     fontWeight: 500,
     textDecoration: 'none',
   },
   submitButton: {
     width: '100%',
     padding: '14px',
-    backgroundColor: PRIMARY,
+    background: GRADIENT,
     color: '#fff',
     fontSize: 16,
     fontWeight: 600,
@@ -506,13 +493,13 @@ const styles = {
     textAlign: 'center',
     marginTop: 20,
     fontSize: 13,
-    color: 'rgba(255,255,255,0.4)',
+    color: COLORS.textSecond,
   },
   footer: {
     textAlign: 'center',
   },
   copyright: {
-    color: 'rgba(255,255,255,0.2)',
+    color: COLORS.textMuted,
     fontSize: 13,
   },
 };

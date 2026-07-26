@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SITE } from '../config/site';
+import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
-const PRIMARY = '#3D8B8B';
 const WA = SITE.whatsapp.istanbulManager.wa; // 905511898288
 
 // Lead form — Phase 1: no backend. On submit it opens a WhatsApp deep-link to the
@@ -80,7 +80,7 @@ export default function LeadForm({ isMobile = false, source = 'home' }) {
         <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} style={styles.checkbox} />
         <span>
           Нажимая «Отправить», вы соглашаетесь с{' '}
-          <a href="/about" style={{ color: PRIMARY, textDecoration: 'none' }}>политикой обработки данных</a>
+          <a href="/about" style={{ color: COLORS.primaryText, textDecoration: 'none', fontWeight: 600 }}>политикой обработки данных</a>
         </span>
       </label>
 
@@ -97,20 +97,20 @@ export default function LeadForm({ isMobile = false, source = 'home' }) {
 const styles = {
   form: { width: '100%', maxWidth: 480, margin: '0 auto', textAlign: 'left' },
   row: { marginBottom: 16 },
-  label: { display: 'block', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.7)', marginBottom: 8, letterSpacing: 0.3 },
+  label: { display: 'block', fontSize: 13, fontWeight: 600, color: COLORS.text, marginBottom: 8, letterSpacing: 0.3 },
   input: {
-    width: '100%', padding: '14px 16px', fontSize: 15, color: '#fff',
-    backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)',
+    width: '100%', padding: '14px 16px', fontSize: 15, color: COLORS.text,
+    backgroundColor: COLORS.inputBg, border: `1px solid ${COLORS.inputBorder}`,
     borderRadius: 12, outline: 'none', boxSizing: 'border-box', minHeight: 48,
-    transition: 'border-color 0.2s, background-color 0.2s',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
   },
-  consent: { display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.5, marginBottom: 16, cursor: 'pointer' },
-  checkbox: { marginTop: 3, width: 16, height: 16, accentColor: PRIMARY, flexShrink: 0 },
-  error: { color: '#F87171', fontSize: 13, marginBottom: 12, marginTop: 0 },
+  consent: { display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: COLORS.textSecond, lineHeight: 1.5, marginBottom: 16, cursor: 'pointer' },
+  checkbox: { marginTop: 3, width: 16, height: 16, accentColor: COLORS.primary, flexShrink: 0 },
+  error: { color: COLORS.error, fontSize: 13, marginBottom: 12, marginTop: 0 },
   submit: {
-    width: '100%', padding: '16px', backgroundColor: PRIMARY, color: '#fff', border: 'none',
-    borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', minHeight: 48,
-    transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: '0 4px 20px rgba(61,139,139,0.3)',
+    width: '100%', padding: '16px', background: GRADIENT, color: '#fff', border: 'none',
+    borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', minHeight: 48, textShadow: '0 1px 2px rgba(10,37,53,.35)',
+    transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: SHADOW.cta,
   },
-  hint: { fontSize: 12, color: 'rgba(255,255,255,0.45)', textAlign: 'center', marginTop: 10, marginBottom: 0 },
+  hint: { fontSize: 12, color: COLORS.textSecond, textAlign: 'center', marginTop: 10, marginBottom: 0 },
 };

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
 import { useTranslation, localizedPath } from '../i18n/LanguageContext';
+import { COLORS, GRADIENT } from '../config/theme';
 
-const PRIMARY = '#3D8B8B';
+const PRIMARY = COLORS.primary; // fills/icons only
 
 const NAV_LINK_KEYS = [
   { key: 'common.home', path: '/' },
@@ -86,9 +87,9 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
                 style={{
                   ...styles.tubelightLink,
                   padding: '8px 12px',
-                  color: '#fff',
+                  color: COLORS.text,
                   cursor: 'pointer',
-                  background: 'rgba(255,255,255,0.08)',
+                  background: COLORS.bgSecond,
                 }}
                 aria-expanded={langMenuOpen}
                 aria-haspopup="listbox"
@@ -104,13 +105,14 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
                     position: 'absolute',
                     top: '110%',
                     right: 0,
-                    background: 'rgba(17,24,39,0.95)',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    background: '#fff',
+                    border: `1px solid ${COLORS.cardBorder}`,
                     borderRadius: 12,
                     padding: 4,
                     minWidth: 80,
                     listStyle: 'none',
                     margin: 0,
+                    boxShadow: '0 8px 24px rgba(16,24,40,.08)',
                   }}
                 >
                   {supportedLanguages.map((lng) => (
@@ -121,9 +123,9 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
                         onClick={() => { changeLanguage(lng); setLangMenuOpen(false); }}
                         style={{
                           width: '100%',
-                          background: lng === language ? 'rgba(61,139,139,0.3)' : 'transparent',
+                          background: lng === language ? 'rgba(42,171,171,0.12)' : 'transparent',
                           border: 'none',
-                          color: '#fff',
+                          color: lng === language ? COLORS.primaryText : COLORS.text,
                           padding: '8px 12px',
                           borderRadius: 8,
                           cursor: 'pointer',
@@ -162,7 +164,7 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
                 className={`mobile-bottom-link ${isActive ? 'mobile-bottom-active' : ''}`}
                 style={{
                   ...styles.mobileBottomLink,
-                  color: isActive ? PRIMARY : '#6B7280',
+                  color: isActive ? COLORS.primaryText : COLORS.textSecond,
                 }}
               >
                 {item.icon}
@@ -216,9 +218,9 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
                     style={{
                       flex: 1,
                       padding: '10px 12px',
-                      border: lng === language ? `2px solid ${PRIMARY}` : '1px solid #E5E7EB',
-                      background: lng === language ? 'rgba(61,139,139,0.08)' : '#FFFFFF',
-                      color: '#111827',
+                      border: lng === language ? `2px solid ${COLORS.primary}` : '1px solid #E8E8E8',
+                      background: lng === language ? 'rgba(42,171,171,0.08)' : '#FFFFFF',
+                      color: COLORS.text,
                       borderRadius: 10,
                       fontWeight: 600,
                       cursor: 'pointer',
@@ -255,13 +257,13 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'rgba(17,24,39,0.85)',
-    border: '1px solid rgba(255,255,255,0.1)',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)',
+    backgroundColor: 'rgba(255,255,255,0.92)',
+    border: `1px solid ${COLORS.cardBorder}`,
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
     padding: '4px 6px',
     borderRadius: 50,
-    boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+    boxShadow: '0 6px 20px rgba(16,24,40,.08)',
   },
   tubelightLogo: {
     display: 'flex',
@@ -276,7 +278,7 @@ const styles = {
     padding: '8px 18px',
     fontSize: 14,
     fontWeight: 600,
-    color: 'rgba(255,255,255,0.7)',
+    color: COLORS.textSecond,
     textDecoration: 'none',
     borderRadius: 50,
     transition: 'color 0.3s',
@@ -284,8 +286,8 @@ const styles = {
     whiteSpace: 'nowrap',
   },
   tubelightLinkActive: {
-    color: '#fff',
-    backgroundColor: 'rgba(61,139,139,0.15)',
+    color: COLORS.primaryText,
+    backgroundColor: 'rgba(42,171,171,0.10)',
   },
   tubelightGlow: {
     position: 'absolute',
@@ -296,19 +298,20 @@ const styles = {
     height: 4,
     backgroundColor: PRIMARY,
     borderRadius: '4px 4px 0 0',
-    boxShadow: '0 0 12px 4px rgba(61,139,139,0.4), 0 0 24px 8px rgba(61,139,139,0.2)',
+    boxShadow: '0 0 12px 4px rgba(42,171,171,0.4), 0 0 24px 8px rgba(42,171,171,0.2)',
   },
   tubelightAuthBtn: {
     padding: '8px 18px',
     fontSize: 13,
     fontWeight: 600,
     color: '#fff',
-    backgroundColor: PRIMARY,
+    background: GRADIENT,
     border: 'none',
     borderRadius: 50,
     cursor: 'pointer',
     whiteSpace: 'nowrap',
     marginLeft: 4,
+    textShadow: '0 1px 2px rgba(10,37,53,.35)',
   },
   mobileBottomNav: {
     display: 'flex',

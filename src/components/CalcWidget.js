@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { SITE } from '../config/site';
+import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
-const PRIMARY = '#3D8B8B';
 const WA = SITE.whatsapp.istanbulManager.wa; // 905511898288
 
-// Reusable cargo calculator (dark glass). Tariffs come ONLY from SITE.tariffs
+// Reusable cargo calculator (light). Tariffs come ONLY from SITE.tariffs
 // (single source of truth, synced with DB / mobile app). Under the "Итого $X"
 // result it offers a WhatsApp deep-link prefilled with the calculation, so the
 // result is never a dead end.
@@ -46,10 +46,11 @@ export default function CalcWidget({ isMobile = false }) {
 
   return (
     <div className="calc-card" style={{ ...styles.calcCard, padding: isMobile ? '24px 16px' : '40px 36px' }}>
+      {/* thin brand accent bar at the top of the card */}
       <div
         style={{
-          position: 'absolute', top: 0, left: '10%', right: '10%', height: 1,
-          background: `linear-gradient(90deg, transparent, rgba(61,139,139,0.4), transparent)`,
+          position: 'absolute', top: 0, left: 0, right: 0, height: 3,
+          background: GRADIENT,
         }}
       />
 
@@ -99,7 +100,7 @@ export default function CalcWidget({ isMobile = false }) {
       {result && (
         <div style={styles.resultCard}>
           <div style={styles.resultHeader}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2">
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
               <polyline points="22 4 12 14.01 9 11.01" />
             </svg>
@@ -123,7 +124,7 @@ export default function CalcWidget({ isMobile = false }) {
           </div>
           <div style={styles.resultDivider} />
           <div style={styles.resultRow}>
-            <span style={{ ...styles.resultLabel, fontWeight: 700, fontSize: isMobile ? 16 : 18, color: '#fff' }}>Итого:</span>
+            <span style={{ ...styles.resultLabel, fontWeight: 700, fontSize: isMobile ? 16 : 18, color: COLORS.text }}>Итого:</span>
             <span style={{ ...styles.resultTotal, fontSize: isMobile ? 26 : 32 }}>${result.total}</span>
           </div>
 
@@ -147,59 +148,57 @@ export default function CalcWidget({ isMobile = false }) {
 const styles = {
   calcCard: {
     position: 'relative',
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    backdropFilter: 'blur(24px) saturate(1.4)',
-    WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    backgroundColor: COLORS.cardBg,
+    border: `1px solid ${COLORS.cardBorder}`,
     borderRadius: 24,
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 48px rgba(0,0,0,0.3)',
+    boxShadow: SHADOW.card,
     overflow: 'hidden',
   },
-  calcTitle: { fontSize: 26, fontWeight: 700, color: '#fff', textAlign: 'center', marginBottom: 6 },
-  calcSubtitle: { fontSize: 14, color: 'rgba(255,255,255,0.4)', textAlign: 'center', marginBottom: 32 },
+  calcTitle: { fontSize: 26, fontWeight: 700, color: COLORS.text, textAlign: 'center', marginBottom: 6 },
+  calcSubtitle: { fontSize: 14, color: COLORS.textSecond, textAlign: 'center', marginBottom: 32 },
   formGroup: { marginBottom: 20 },
-  label: { display: 'block', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.7)', marginBottom: 8, letterSpacing: 0.3 },
+  label: { display: 'block', fontSize: 13, fontWeight: 600, color: COLORS.text, marginBottom: 8, letterSpacing: 0.3 },
   select: {
-    width: '100%', padding: '14px 16px', fontSize: 15, color: '#fff',
-    backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)',
+    width: '100%', padding: '14px 16px', fontSize: 15, color: COLORS.text,
+    backgroundColor: COLORS.inputBg, border: `1px solid ${COLORS.inputBorder}`,
     borderRadius: 12, outline: 'none', cursor: 'pointer', boxSizing: 'border-box',
-    transition: 'border-color 0.2s, background-color 0.2s',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
     WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none',
-    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
     backgroundRepeat: 'no-repeat', backgroundPosition: 'right 14px center', backgroundSize: 16, paddingRight: 40, minHeight: 48,
   },
   input: {
-    width: '100%', padding: '14px 16px', fontSize: 15, color: '#fff',
-    backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)',
+    width: '100%', padding: '14px 16px', fontSize: 15, color: COLORS.text,
+    backgroundColor: COLORS.inputBg, border: `1px solid ${COLORS.inputBorder}`,
     borderRadius: 12, outline: 'none', boxSizing: 'border-box', minHeight: 48,
-    transition: 'border-color 0.2s, background-color 0.2s',
+    transition: 'border-color 0.2s, box-shadow 0.2s',
   },
   calcBtn: {
-    width: '100%', padding: '16px', backgroundColor: PRIMARY, color: '#fff', border: 'none',
-    borderRadius: 12, fontSize: 16, fontWeight: 600, cursor: 'pointer', marginTop: 12, minHeight: 48,
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: '0 4px 20px rgba(61,139,139,0.3)',
+    width: '100%', padding: '16px', background: GRADIENT, color: '#fff', border: 'none',
+    borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', marginTop: 12, minHeight: 48,
+    display: 'flex', alignItems: 'center', justifyContent: 'center', textShadow: '0 1px 2px rgba(10,37,53,.35)',
+    transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: SHADOW.cta,
   },
   warning: {
-    color: '#EF4444', fontSize: 13, marginTop: 12, textAlign: 'center', padding: '8px 12px',
-    backgroundColor: 'rgba(239,68,68,0.08)', borderRadius: 8, border: '1px solid rgba(239,68,68,0.15)',
+    color: COLORS.error, fontSize: 13, marginTop: 12, textAlign: 'center', padding: '8px 12px',
+    backgroundColor: 'rgba(239,68,68,0.06)', borderRadius: 8, border: '1px solid rgba(239,68,68,0.2)',
   },
   resultCard: {
-    marginTop: 28, padding: 28, backgroundColor: 'rgba(61,139,139,0.08)', borderRadius: 16,
-    border: `1px solid rgba(61,139,139,0.3)`, backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+    marginTop: 28, padding: 28, backgroundColor: 'rgba(42,171,171,0.06)', borderRadius: 16,
+    border: `1px solid rgba(42,171,171,0.25)`,
   },
   resultHeader: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 },
-  resultTitle: { fontSize: 18, fontWeight: 700, color: '#fff', margin: 0 },
+  resultTitle: { fontSize: 18, fontWeight: 700, color: COLORS.text, margin: 0 },
   resultRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 },
-  resultLabel: { fontSize: 14, color: 'rgba(255,255,255,0.5)' },
-  resultValue: { fontSize: 14, fontWeight: 600, color: '#fff' },
-  resultDivider: { height: 1, background: 'linear-gradient(90deg, transparent, rgba(61,139,139,0.4), transparent)', margin: '16px 0' },
-  resultTotal: { fontSize: 32, fontWeight: 700, color: PRIMARY, textShadow: '0 0 20px rgba(61,139,139,0.3)' },
+  resultLabel: { fontSize: 14, color: COLORS.textSecond },
+  resultValue: { fontSize: 14, fontWeight: 600, color: COLORS.text },
+  resultDivider: { height: 1, backgroundColor: COLORS.divider, margin: '16px 0' },
+  resultTotal: { fontSize: 32, fontWeight: 700, color: COLORS.primary },
   waBtn: {
     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, width: '100%',
-    marginTop: 20, padding: '14px 20px', backgroundColor: '#25D366', color: '#fff',
+    marginTop: 20, padding: '14px 20px', backgroundColor: COLORS.whatsapp, color: '#fff',
     fontSize: 15, fontWeight: 700, borderRadius: 12, textDecoration: 'none', minHeight: 48, boxSizing: 'border-box',
-    transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: '0 4px 16px rgba(37,211,102,0.3)',
+    transition: 'transform 0.2s, box-shadow 0.2s', boxShadow: '0 4px 16px rgba(37,211,102,0.25)',
   },
-  waHint: { fontSize: 12, color: 'rgba(255,255,255,0.45)', textAlign: 'center', marginTop: 10, marginBottom: 0 },
+  waHint: { fontSize: 12, color: COLORS.textSecond, textAlign: 'center', marginTop: 10, marginBottom: 0 },
 };

@@ -6,8 +6,10 @@ import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import { useTranslation } from '../i18n/LanguageContext';
 import { SITE } from '../config/site';
+import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
-const PRIMARY = '#3D8B8B';
+const PRIMARY = COLORS.primary;        // #2AABAB — fills, icon strokes, big numbers
+const PRIMARY_TEXT = COLORS.primaryText; // #157070 — teal text / links on white
 
 function Services({ isAuthenticated, setIsAuthenticated }) {
   const isMobile = useIsMobile();
@@ -85,7 +87,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#0B1120', fontFamily: 'Inter, -apple-system, sans-serif' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: COLORS.bg, fontFamily: 'Inter, -apple-system, sans-serif' }}>
       <SEO
         titleKey="seo.services.title"
         descriptionKey="seo.services.description"
@@ -100,26 +102,26 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
       <style>{`
         .services-tariff-card:hover {
           transform: translateY(-6px) !important;
-          border-color: rgba(61,139,139,0.4) !important;
-          box-shadow: 0 20px 48px rgba(0,0,0,0.4), 0 0 32px rgba(61,139,139,0.15) !important;
+          border-color: rgba(42,171,171,0.4) !important;
+          box-shadow: ${SHADOW.cardHover} !important;
         }
         .services-step-card:hover {
           transform: translateY(-4px) !important;
-          border-color: rgba(61,139,139,0.3) !important;
-          background: rgba(255,255,255,0.08) !important;
+          border-color: rgba(42,171,171,0.3) !important;
+          background: #F5F5F5 !important;
         }
         .services-addon-card:hover {
           transform: translateY(-4px) !important;
-          border-color: rgba(61,139,139,0.3) !important;
-          box-shadow: 0 16px 40px rgba(0,0,0,0.3) !important;
+          border-color: rgba(42,171,171,0.3) !important;
+          box-shadow: ${SHADOW.cardHover} !important;
         }
         .services-hero-btn:hover {
           transform: translateY(-2px) !important;
-          box-shadow: 0 8px 24px rgba(61,139,139,0.4) !important;
+          box-shadow: 0 8px 24px rgba(42,171,171,0.35) !important;
         }
         .services-hero-btn-secondary:hover {
-          background: rgba(255,255,255,0.15) !important;
-          border-color: rgba(255,255,255,0.4) !important;
+          background: rgba(42,171,171,0.08) !important;
+          border-color: #2AABAB !important;
         }
         .services-cta-whatsapp:hover {
           transform: translateY(-2px) !important;
@@ -127,103 +129,31 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
         }
         .services-cta-calc:hover {
           transform: translateY(-2px) !important;
-          box-shadow: 0 8px 24px rgba(61,139,139,0.4) !important;
+          box-shadow: 0 8px 24px rgba(42,171,171,0.35) !important;
         }
         .services-cta-contact:hover {
-          background: rgba(255,255,255,0.12) !important;
-          border-color: rgba(255,255,255,0.3) !important;
+          background: rgba(42,171,171,0.08) !important;
+          border-color: #2AABAB !important;
         }
         .services-days-badge {
           display: inline-flex;
           align-items: center;
           gap: 6px;
           padding: 4px 12px;
-          background: rgba(61,139,139,0.15);
-          border: 1px solid rgba(61,139,139,0.25);
+          background: rgba(42,171,171,0.08);
+          border: 1px solid rgba(42,171,171,0.25);
           border-radius: 20px;
           font-size: 13px;
-          color: ${PRIMARY};
+          color: ${PRIMARY_TEXT};
           font-weight: 500;
-        }
-        .services-blob-1 {
-          position: absolute;
-          width: 400px;
-          height: 400px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(61,139,139,0.15), transparent 70%);
-          top: -100px;
-          right: -100px;
-          filter: blur(60px);
-          animation: servicesBlobFloat 8s ease-in-out infinite;
-          pointer-events: none;
-        }
-        .services-blob-2 {
-          position: absolute;
-          width: 300px;
-          height: 300px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(94,234,212,0.1), transparent 70%);
-          bottom: -50px;
-          left: -80px;
-          filter: blur(60px);
-          animation: servicesBlobFloat 10s ease-in-out infinite reverse;
-          pointer-events: none;
-        }
-        .services-blob-3 {
-          position: absolute;
-          width: 250px;
-          height: 250px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(129,140,248,0.08), transparent 70%);
-          top: 40%;
-          left: 30%;
-          filter: blur(50px);
-          animation: servicesBlobFloat 12s ease-in-out infinite;
-          pointer-events: none;
-        }
-        @keyframes servicesBlobFloat {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(20px, -15px) scale(1.08); }
-          66% { transform: translate(-15px, 10px) scale(0.95); }
-        }
-        .footer-blob {
-          position: absolute;
-          border-radius: 50%;
-          filter: blur(60px);
-          pointer-events: none;
-          animation: servicesBlobFloat 8s ease-in-out infinite;
-        }
-        .footer-blob-1 {
-          width: 300px;
-          height: 300px;
-          background: rgba(61,139,139,0.12);
-          top: 0;
-          left: -100px;
-          animation-delay: 0s;
-        }
-        .footer-blob-2 {
-          width: 250px;
-          height: 250px;
-          background: rgba(94,234,212,0.08);
-          top: 50%;
-          right: -50px;
-          animation-delay: -3s;
-        }
-        .footer-blob-3 {
-          width: 200px;
-          height: 200px;
-          background: rgba(129,140,248,0.06);
-          bottom: 0;
-          left: 40%;
-          animation-delay: -6s;
         }
         .footer-social:hover {
           color: #fff !important;
-          background: rgba(61,139,139,0.3) !important;
-          border-color: rgba(61,139,139,0.5) !important;
+          background: #2AABAB !important;
+          border-color: #2AABAB !important;
         }
         .footer-link:hover {
-          color: rgba(255,255,255,0.8) !important;
+          color: ${COLORS.text} !important;
         }
         .footer-cta-btn:hover {
           transform: translateY(-2px) !important;
@@ -238,32 +168,28 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           left: 0;
           right: 0;
           height: 2px;
-          background: linear-gradient(90deg, transparent, rgba(61,139,139,0.3), rgba(61,139,139,0.3), transparent);
+          background: linear-gradient(90deg, transparent, rgba(42,171,171,0.3), rgba(42,171,171,0.3), transparent);
           z-index: 0;
         }
       `}</style>
 
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
-      {/* ======= DARK HERO ======= */}
+      {/* ======= HERO ======= */}
       <section style={{
         position: 'relative',
-        backgroundColor: '#111827',
+        backgroundColor: COLORS.bg,
         padding: isMobile ? '80px 16px 48px' : undefined,
         paddingTop: isMobile ? undefined : 100,
         paddingBottom: isMobile ? undefined : 80,
         overflow: 'hidden',
       }}>
-        {/* Blobs behind hero */}
-        <div className="services-blob-1" />
-        <div className="services-blob-2" />
-
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 800, margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
           <span style={{
             display: 'inline-block',
-            backgroundColor: 'rgba(61,139,139,0.15)',
-            border: '1px solid rgba(61,139,139,0.3)',
-            color: PRIMARY,
+            backgroundColor: 'rgba(42,171,171,0.08)',
+            border: '1px solid rgba(42,171,171,0.3)',
+            color: PRIMARY_TEXT,
             fontSize: 13,
             fontWeight: 600,
             padding: '6px 18px',
@@ -276,7 +202,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           <h1 style={{
             fontSize: isMobile ? 26 : 48,
             fontWeight: 700,
-            color: '#fff',
+            color: COLORS.text,
             lineHeight: 1.15,
             marginBottom: 20,
             letterSpacing: -0.5,
@@ -285,7 +211,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           </h1>
           <p style={{
             fontSize: isMobile ? 14 : 18,
-            color: 'rgba(255,255,255,0.6)',
+            color: COLORS.textSecond,
             lineHeight: 1.7,
             maxWidth: 600,
             margin: '0 auto 36px',
@@ -301,16 +227,18 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: 8,
-                backgroundColor: PRIMARY,
+                background: GRADIENT,
                 color: '#fff',
                 fontSize: 15,
                 fontWeight: 600,
                 padding: '14px 28px',
+                minHeight: 48,
                 border: 'none',
                 borderRadius: 12,
                 cursor: 'pointer',
                 transition: 'transform 0.2s, box-shadow 0.2s',
-                boxShadow: '0 4px 16px rgba(61,139,139,0.3)',
+                boxShadow: '0 6px 20px rgba(42,171,171,0.28)',
+                textShadow: '0 1px 2px rgba(10,37,53,.35)',
                 width: isMobile ? '100%' : 'auto',
               }}
             >
@@ -326,16 +254,16 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'rgba(255,255,255,0.08)',
-                color: '#fff',
+                backgroundColor: '#fff',
+                color: PRIMARY_TEXT,
                 fontSize: 15,
                 fontWeight: 600,
                 padding: '14px 28px',
-                border: '1px solid rgba(255,255,255,0.2)',
+                minHeight: 48,
+                border: '1.5px solid #2AABAB',
                 borderRadius: 12,
                 cursor: 'pointer',
                 transition: 'background 0.2s, border-color 0.2s',
-                backdropFilter: 'blur(4px)',
                 width: isMobile ? '100%' : 'auto',
               }}
             >
@@ -348,22 +276,21 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
       {/* ======= TARIFF CARDS SECTION ======= */}
       <section style={{
         position: 'relative',
-        backgroundColor: '#0B1120',
+        backgroundColor: COLORS.bgSecond,
         padding: isMobile ? '48px 16px' : '80px 24px',
         overflow: 'hidden',
       }}>
-        <div className="services-blob-3" />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1280, margin: '0 auto' }}>
           <h2 style={{
             fontSize: isMobile ? 22 : 36,
             fontWeight: 700,
-            color: '#fff',
+            color: COLORS.text,
             textAlign: 'center',
             marginBottom: 12,
           }}>Тарифы на доставку</h2>
           <p style={{
             fontSize: 16,
-            color: 'rgba(255,255,255,0.5)',
+            color: COLORS.textSecond,
             textAlign: 'center',
             lineHeight: 1.7,
             maxWidth: 720,
@@ -382,13 +309,11 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 className="services-tariff-card"
                 style={{
                   padding: isMobile ? 20 : 28,
-                  background: 'rgba(255,255,255,0.06)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
+                  background: '#fff',
                   borderRadius: 20,
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  border: '1px solid #E8E8E8',
                   transition: 'transform 0.3s, border-color 0.3s, box-shadow 0.3s',
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+                  boxShadow: SHADOW.card,
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20 }}>
@@ -401,7 +326,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    boxShadow: '0 4px 12px rgba(61,139,139,0.3)',
+                    boxShadow: '0 4px 12px rgba(42,171,171,0.3)',
                   }}>
                     {dt.icon === 'plane' ? (
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
@@ -414,11 +339,11 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                       </svg>
                     )}
                   </div>
-                  <h3 style={{ fontSize: 18, fontWeight: 700, color: '#fff' }}>{dt.name}</h3>
+                  <h3 style={{ fontSize: 18, fontWeight: 700, color: COLORS.text }}>{dt.name}</h3>
                 </div>
                 <div style={{ marginBottom: 16 }}>
                   <span style={{ fontSize: isMobile ? 32 : 40, fontWeight: 700, color: PRIMARY }}>${dt.price}</span>
-                  <span style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)', fontWeight: 500, marginLeft: 2 }}>/кг</span>
+                  <span style={{ fontSize: 16, color: COLORS.textSecond, fontWeight: 500, marginLeft: 2 }}>/кг</span>
                 </div>
                 <div style={{ marginBottom: 16 }}>
                   <span className="services-days-badge">
@@ -428,7 +353,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                     {dt.days} дней
                   </span>
                 </div>
-                <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>{dt.desc}</p>
+                <p style={{ fontSize: 14, color: COLORS.textSecond, lineHeight: 1.6 }}>{dt.desc}</p>
               </div>
             ))}
           </div>
@@ -437,20 +362,20 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
 
       {/* ======= HOW IT WORKS ======= */}
       <section style={{
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.bg,
         padding: isMobile ? '48px 16px' : '80px 24px',
       }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
           <h2 style={{
             fontSize: isMobile ? 22 : 36,
             fontWeight: 700,
-            color: '#111827',
+            color: COLORS.text,
             textAlign: 'center',
             marginBottom: 12,
           }}>Как это работает</h2>
           <p style={{
             fontSize: 16,
-            color: '#6B7280',
+            color: COLORS.textSecond,
             textAlign: 'center',
             lineHeight: 1.7,
             maxWidth: 600,
@@ -472,7 +397,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                   padding: isMobile ? 20 : 28,
                   background: '#FAFAFA',
                   borderRadius: 20,
-                  border: '1px solid #E5E7EB',
+                  border: '1px solid #E8E8E8',
                   transition: 'transform 0.3s, border-color 0.3s, background 0.3s',
                   textAlign: 'center',
                 }}
@@ -480,7 +405,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 <div style={{
                   width: 56,
                   height: 56,
-                  backgroundColor: 'rgba(61,139,139,0.1)',
+                  backgroundColor: 'rgba(42,171,171,0.08)',
                   borderRadius: 16,
                   display: 'flex',
                   alignItems: 'center',
@@ -497,12 +422,12 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 <h3 style={{
                   fontSize: 17,
                   fontWeight: 700,
-                  color: '#111827',
+                  color: COLORS.text,
                   marginBottom: 8,
                 }}>{step.title}</h3>
                 <p style={{
                   fontSize: 14,
-                  color: '#6B7280',
+                  color: COLORS.textSecond,
                   lineHeight: 1.7,
                 }}>{step.desc}</p>
               </div>
@@ -514,23 +439,21 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
       {/* ======= ADDITIONAL SERVICES ======= */}
       <section style={{
         position: 'relative',
-        backgroundColor: '#111827',
+        backgroundColor: COLORS.bgSecond,
         padding: isMobile ? '48px 16px' : '80px 24px',
         overflow: 'hidden',
       }}>
-        <div className="services-blob-1" style={{ opacity: 0.5 }} />
-        <div className="services-blob-2" style={{ opacity: 0.5 }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1280, margin: '0 auto' }}>
           <h2 style={{
             fontSize: isMobile ? 22 : 36,
             fontWeight: 700,
-            color: '#fff',
+            color: COLORS.text,
             textAlign: 'center',
             marginBottom: 12,
           }}>Дополнительные услуги</h2>
           <p style={{
             fontSize: 16,
-            color: 'rgba(255,255,255,0.5)',
+            color: COLORS.textSecond,
             textAlign: 'center',
             lineHeight: 1.7,
             maxWidth: 720,
@@ -549,19 +472,17 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 className="services-addon-card"
                 style={{
                   padding: isMobile ? 20 : 28,
-                  background: 'rgba(255,255,255,0.06)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
+                  background: '#fff',
                   borderRadius: 20,
-                  border: '1px solid rgba(255,255,255,0.1)',
+                  border: '1px solid #E8E8E8',
                   transition: 'transform 0.3s, border-color 0.3s, box-shadow 0.3s',
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+                  boxShadow: SHADOW.card,
                 }}
               >
                 <div style={{
                   width: 48,
                   height: 48,
-                  backgroundColor: 'rgba(61,139,139,0.12)',
+                  backgroundColor: 'rgba(42,171,171,0.08)',
                   borderRadius: 14,
                   display: 'flex',
                   alignItems: 'center',
@@ -573,12 +494,12 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 <h3 style={{
                   fontSize: 18,
                   fontWeight: 600,
-                  color: '#fff',
+                  color: COLORS.text,
                   marginBottom: 8,
                 }}>{svc.title}</h3>
                 <p style={{
                   fontSize: 14,
-                  color: 'rgba(255,255,255,0.55)',
+                  color: COLORS.textSecond,
                   lineHeight: 1.7,
                 }}>{svc.desc}</p>
               </div>
@@ -590,34 +511,31 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
       {/* ======= CTA SECTION ======= */}
       <section style={{
         position: 'relative',
-        backgroundColor: '#0B1120',
+        backgroundColor: COLORS.bg,
         padding: '80px 24px',
         overflow: 'hidden',
       }}>
-        <div className="services-blob-3" />
         <div style={{
           position: 'relative',
           zIndex: 2,
           maxWidth: 720,
           margin: '0 auto',
           padding: isMobile ? '28px 16px' : '48px 40px',
-          background: 'rgba(255,255,255,0.06)',
-          backdropFilter: 'blur(24px) saturate(1.4)',
-          WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
-          border: '1px solid rgba(255,255,255,0.1)',
+          background: '#fff',
+          border: '1px solid #E8E8E8',
           borderRadius: 24,
-          boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 16px 48px rgba(0,0,0,0.25)',
+          boxShadow: SHADOW.card,
           textAlign: 'center',
         }}>
           <h2 style={{
             fontSize: isMobile ? 22 : 32,
             fontWeight: 700,
-            color: '#fff',
+            color: COLORS.text,
             marginBottom: 12,
           }}>Готовы отправить груз?</h2>
           <p style={{
             fontSize: 16,
-            color: 'rgba(255,255,255,0.55)',
+            color: COLORS.textSecond,
             lineHeight: 1.7,
             marginBottom: 32,
             maxWidth: 480,
@@ -637,6 +555,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 justifyContent: 'center',
                 gap: 8,
                 padding: '14px 28px',
+                minHeight: 48,
                 backgroundColor: '#25D366',
                 color: '#fff',
                 fontSize: 15,
@@ -663,7 +582,8 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 justifyContent: 'center',
                 gap: 8,
                 padding: '14px 28px',
-                backgroundColor: PRIMARY,
+                minHeight: 48,
+                background: GRADIENT,
                 color: '#fff',
                 fontSize: 15,
                 fontWeight: 600,
@@ -671,7 +591,8 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 borderRadius: 12,
                 cursor: 'pointer',
                 transition: 'transform 0.2s, box-shadow 0.2s',
-                boxShadow: '0 4px 16px rgba(61,139,139,0.3)',
+                boxShadow: '0 6px 20px rgba(42,171,171,0.28)',
+                textShadow: '0 1px 2px rgba(10,37,53,.35)',
                 width: isMobile ? '100%' : 'auto',
               }}
             >
@@ -692,15 +613,15 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '14px 28px',
-                backgroundColor: 'rgba(255,255,255,0.08)',
-                color: '#fff',
+                minHeight: 48,
+                backgroundColor: '#fff',
+                color: PRIMARY_TEXT,
                 fontSize: 15,
                 fontWeight: 600,
-                border: '1px solid rgba(255,255,255,0.2)',
+                border: '1.5px solid #2AABAB',
                 borderRadius: 12,
                 cursor: 'pointer',
                 transition: 'background 0.2s, border-color 0.2s',
-                backdropFilter: 'blur(4px)',
                 width: isMobile ? '100%' : 'auto',
               }}
             >
@@ -712,19 +633,19 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
 
       {/* ======= SEO TEXT ======= */}
       <section style={{
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.bgSecond,
         padding: '64px 24px',
       }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
           <h2 style={{
             fontSize: 28,
             fontWeight: 700,
-            color: '#111827',
+            color: COLORS.text,
             marginBottom: 20,
           }}>Карго доставка из Турции в Россию — услуги RENEXPRESS</h2>
           <p style={{
             fontSize: 15,
-            color: '#4B5563',
+            color: COLORS.textSecond,
             lineHeight: 1.8,
             marginBottom: 16,
           }}>
@@ -737,7 +658,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           </p>
           <p style={{
             fontSize: 15,
-            color: '#4B5563',
+            color: COLORS.textSecond,
             lineHeight: 1.8,
             marginBottom: 16,
           }}>
@@ -754,18 +675,12 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
       {/* ======= CREATIVE FOOTER ======= */}
       <footer className="footer" style={{
         position: 'relative',
-        backgroundColor: '#0B1120',
+        backgroundColor: COLORS.bgTert,
         padding: '0 0 24px',
         paddingBottom: isMobile ? 80 : 24,
         overflow: 'hidden',
+        borderTop: '1px solid #EEEEEE',
       }}>
-        {/* Animated gradient blobs */}
-        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-          <div className="footer-blob footer-blob-1" />
-          <div className="footer-blob footer-blob-2" />
-          <div className="footer-blob footer-blob-3" />
-        </div>
-
         {/* Glass divider at top */}
         <div style={{
           position: 'relative',
@@ -774,7 +689,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           margin: '0 auto',
           padding: '0 24px',
           height: 1,
-          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+          background: '#EEEEEE',
           marginBottom: 48,
         }} />
 
@@ -806,11 +721,11 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                   <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <span style={{ fontSize: 20, fontWeight: 700, color: '#fff', letterSpacing: 0.5 }}>RENEXPRESS</span>
+              <span style={{ fontSize: 20, fontWeight: 700, color: COLORS.text, letterSpacing: 0.5 }}>RENEXPRESS</span>
             </div>
             <p style={{
               fontSize: 14,
-              color: 'rgba(255,255,255,0.5)',
+              color: COLORS.textSecond,
               lineHeight: 1.7,
               marginBottom: 20,
             }}>
@@ -824,9 +739,9 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 justifyContent: 'center',
                 width: 38,
                 height: 38,
-                color: 'rgba(255,255,255,0.6)',
-                backgroundColor: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                color: COLORS.textSecond,
+                backgroundColor: '#fff',
+                border: '1px solid #E8E8E8',
                 borderRadius: '50%',
                 textDecoration: 'none',
                 transition: 'all 0.2s',
@@ -839,9 +754,9 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 justifyContent: 'center',
                 width: 38,
                 height: 38,
-                color: 'rgba(255,255,255,0.6)',
-                backgroundColor: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                color: COLORS.textSecond,
+                backgroundColor: '#fff',
+                border: '1px solid #E8E8E8',
                 borderRadius: '50%',
                 textDecoration: 'none',
                 transition: 'all 0.2s',
@@ -854,9 +769,9 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 justifyContent: 'center',
                 width: 38,
                 height: 38,
-                color: 'rgba(255,255,255,0.6)',
-                backgroundColor: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                color: COLORS.textSecond,
+                backgroundColor: '#fff',
+                border: '1px solid #E8E8E8',
                 borderRadius: '50%',
                 textDecoration: 'none',
                 transition: 'all 0.2s',
@@ -869,9 +784,9 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 justifyContent: 'center',
                 width: 38,
                 height: 38,
-                color: 'rgba(255,255,255,0.6)',
-                backgroundColor: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                color: COLORS.textSecond,
+                backgroundColor: '#fff',
+                border: '1px solid #E8E8E8',
                 borderRadius: '50%',
                 textDecoration: 'none',
                 transition: 'all 0.2s',
@@ -883,28 +798,28 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
 
           {/* Services column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h5 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Услуги</h5>
-            <a href="/services" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Авто доставка</a>
-            <a href="/services" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Авиа доставка</a>
-            <a href="/services" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Маркировка «Честный знак»</a>
-            <a href="/services" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Доставка на WB / OZON</a>
-            <a href="/calculator" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Калькулятор стоимости</a>
+            <h5 style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, marginBottom: 4 }}>Услуги</h5>
+            <a href="/services" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Авто доставка</a>
+            <a href="/services" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Авиа доставка</a>
+            <a href="/services" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Маркировка «Честный знак»</a>
+            <a href="/services" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Доставка на WB / OZON</a>
+            <a href="/calculator" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Калькулятор стоимости</a>
           </div>
 
           {/* Company column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h5 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Компания</h5>
-            <a href="/about" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>О компании</a>
-            <a href="/about" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Наша команда</a>
-            <a href="/faq" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Вопросы и ответы</a>
-            <a href="/shop" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Каталог товаров</a>
+            <h5 style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, marginBottom: 4 }}>Компания</h5>
+            <a href="/about" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>О компании</a>
+            <a href="/about" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Наша команда</a>
+            <a href="/faq" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Вопросы и ответы</a>
+            <a href="/shop" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Каталог товаров</a>
           </div>
 
           {/* Help column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h5 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Помощь</h5>
-            <a href="/faq" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>FAQ</a>
-            <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>
+            <h5 style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, marginBottom: 4 }}>Помощь</h5>
+            <a href="/faq" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>FAQ</a>
+            <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 Онлайн чат
                 <span style={{ position: 'relative', display: 'inline-flex', width: 8, height: 8 }}>
@@ -929,36 +844,36 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
                 </span>
               </span>
             </a>
-            <a href="/contacts" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Поддержка</a>
-            <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Приложение iOS</a>
+            <a href="/contacts" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Поддержка</a>
+            <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Приложение iOS</a>
           </div>
 
           {/* Contact column with icons */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h5 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Контакты</h5>
+            <h5 style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, marginBottom: 4 }}>Контакты</h5>
             <a href="mailto:info@renexpress.online" className="footer-link" style={{
-              display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s',
+              display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s',
             }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               <span>info@renexpress.online</span>
             </a>
             <a href="tel:+905070107070" className="footer-link" style={{
-              display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s',
+              display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s',
             }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <span>+90 507 010 70 70</span>
             </a>
             <a href="tel:+79289707010" className="footer-link" style={{
-              display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s',
+              display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s',
             }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <span>+7 928 970 70 10</span>
             </a>
             <div className="footer-link" style={{
-              display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none',
+              display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none',
             }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <address style={{ fontStyle: 'normal', fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Москва, ул. Южнопортовая 7а, стр 2</address>
+              <address style={{ fontStyle: 'normal', fontSize: 14, color: '#666666', lineHeight: 1.5 }}>Москва, ул. Южнопортовая 7а, стр 2</address>
             </div>
           </div>
         </div>
@@ -971,7 +886,7 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           margin: '0 auto',
           padding: '0 24px',
           height: 1,
-          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+          background: '#EEEEEE',
         }} />
         <div style={{
           position: 'relative',
@@ -985,42 +900,42 @@ function Services({ isAuthenticated, setIsAuthenticated }) {
           flexWrap: 'wrap',
           gap: 12,
         }}>
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)' }}>© 2026 RENEXPRESS. Все права защищены.</p>
+          <p style={{ fontSize: 13, color: COLORS.textMuted }}>© 2026 RENEXPRESS. Все права защищены.</p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <span style={{
               fontSize: 11,
               fontWeight: 600,
-              color: 'rgba(255,255,255,0.3)',
+              color: COLORS.textMuted,
               padding: '4px 12px',
-              backgroundColor: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              backgroundColor: '#F5F5F5',
+              border: '1px solid #E8E8E8',
               borderRadius: 50,
               letterSpacing: 0.5,
             }}>RENCARGO</span>
             <span style={{
               fontSize: 11,
               fontWeight: 600,
-              color: 'rgba(255,255,255,0.3)',
+              color: COLORS.textMuted,
               padding: '4px 12px',
-              backgroundColor: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              backgroundColor: '#F5F5F5',
+              border: '1px solid #E8E8E8',
               borderRadius: 50,
               letterSpacing: 0.5,
             }}>RENSHOPPING</span>
             <span style={{
               fontSize: 11,
               fontWeight: 600,
-              color: 'rgba(255,255,255,0.3)',
+              color: COLORS.textMuted,
               padding: '4px 12px',
-              backgroundColor: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              backgroundColor: '#F5F5F5',
+              border: '1px solid #E8E8E8',
               borderRadius: 50,
               letterSpacing: 0.5,
             }}>RENFABRIK</span>
           </div>
           <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-            <a href="/about" className="footer-link" style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', transition: 'color 0.2s' }}>Политика конфиденциальности</a>
-            <a href="/about" className="footer-link" style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', transition: 'color 0.2s' }}>Условия использования</a>
+            <a href="/about" className="footer-link" style={{ fontSize: 13, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Политика конфиденциальности</a>
+            <a href="/about" className="footer-link" style={{ fontSize: 13, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Условия использования</a>
           </div>
         </div>
       </footer>

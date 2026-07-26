@@ -5,8 +5,11 @@ import useIsMobile from '../hooks/useIsMobile';
 import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import { useTranslation } from '../i18n/LanguageContext';
+import { SITE } from '../config/site';
+import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
-const PRIMARY = '#3D8B8B';
+const PRIMARY = COLORS.primary;
+const PRIMARY_TEXT = COLORS.primaryText;
 
 function FAQ({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -58,7 +61,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
   const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#0B1120', fontFamily: 'Inter, -apple-system, sans-serif' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: COLORS.bg, fontFamily: 'Inter, -apple-system, sans-serif' }}>
       <SEO
         titleKey="seo.faq.title"
         descriptionKey="seo.faq.description"
@@ -70,61 +73,27 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
       />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
-      {/* Dark Hero Section */}
+      {/* Hero Section */}
       <section style={{
-        backgroundColor: '#111827',
+        backgroundColor: COLORS.bg,
         padding: isMobile ? '80px 16px 48px' : undefined,
         paddingTop: isMobile ? undefined : 100,
         paddingBottom: isMobile ? undefined : 64,
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* Blobs */}
-        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-          <div style={{
-            position: 'absolute',
-            width: 300,
-            height: 300,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(61,139,139,0.3) 0%, transparent 70%)',
-            top: -80,
-            left: '10%',
-            filter: 'blur(60px)',
-          }} />
-          <div style={{
-            position: 'absolute',
-            width: 250,
-            height: 250,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(129,140,248,0.2) 0%, transparent 70%)',
-            bottom: -60,
-            right: '15%',
-            filter: 'blur(60px)',
-          }} />
-          <div style={{
-            position: 'absolute',
-            width: 200,
-            height: 200,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(94,234,212,0.15) 0%, transparent 70%)',
-            top: '50%',
-            left: '60%',
-            filter: 'blur(50px)',
-          }} />
-        </div>
-
         <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 2, padding: '0 24px' }}>
           <h1 style={{
             fontSize: isMobile ? 26 : 48,
             fontWeight: 700,
-            color: '#fff',
+            color: COLORS.text,
             marginBottom: 16,
             lineHeight: 1.15,
             letterSpacing: -0.5,
           }}>Часто задаваемые вопросы</h1>
           <p style={{
             fontSize: isMobile ? 14 : 18,
-            color: 'rgba(255,255,255,0.6)',
+            color: COLORS.textSecond,
             lineHeight: 1.7,
             marginBottom: 40,
             maxWidth: 560,
@@ -139,17 +108,15 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
             alignItems: 'center',
             gap: 12,
             padding: isMobile ? '10px 20px' : '14px 28px',
-            background: 'rgba(255,255,255,0.06)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255,255,255,0.1)',
+            background: '#FFFFFF',
+            border: '1px solid #E8E8E8',
             borderRadius: 50,
-            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.2)',
+            boxShadow: SHADOW.card,
           }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={COLORS.textMuted} strokeWidth="2">
               <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
             </svg>
-            <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}>
+            <span style={{ fontSize: 14, color: COLORS.textMuted, fontWeight: 500 }}>
               Поиск по вопросам...
             </span>
           </div>
@@ -158,7 +125,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
 
       {/* FAQ Accordion Section */}
       <section style={{
-        backgroundColor: '#0B1120',
+        backgroundColor: COLORS.bgSecond,
         padding: isMobile ? '40px 16px 60px' : '64px 24px 80px',
       }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
@@ -171,7 +138,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                   <h3 style={{
                     fontSize: isMobile ? 16 : 18,
                     fontWeight: 700,
-                    color: PRIMARY,
+                    color: PRIMARY_TEXT,
                     marginTop: i === 0 ? 0 : 40,
                     marginBottom: 16,
                     paddingLeft: 16,
@@ -184,9 +151,10 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                   style={{
                     marginBottom: 8,
                     borderRadius: 14,
-                    border: isOpen ? `1px solid ${PRIMARY}` : '1px solid rgba(255,255,255,0.08)',
+                    border: isOpen ? `1px solid ${PRIMARY}` : '1px solid #E8E8E8',
                     overflow: 'hidden',
-                    backgroundColor: isOpen ? 'rgba(61,139,139,0.06)' : 'rgba(255,255,255,0.04)',
+                    backgroundColor: isOpen ? 'rgba(42,171,171,0.06)' : '#FFFFFF',
+                    boxShadow: SHADOW.card,
                     transition: 'all 0.3s ease',
                   }}
                 >
@@ -208,12 +176,12 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                     <span style={{
                       fontSize: isMobile ? 14 : 16,
                       fontWeight: 600,
-                      color: '#fff',
+                      color: COLORS.text,
                       lineHeight: 1.5,
                     }}>{item.q}</span>
                     <svg
                       width="20" height="20" viewBox="0 0 24 24" fill="none"
-                      stroke={isOpen ? PRIMARY : 'rgba(255,255,255,0.4)'}
+                      stroke={isOpen ? PRIMARY : COLORS.textMuted}
                       strokeWidth="2"
                       style={{
                         transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -228,7 +196,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                     <div style={{
                       padding: '0 22px 20px',
                       fontSize: isMobile ? 14 : 15,
-                      color: 'rgba(255,255,255,0.7)',
+                      color: COLORS.textSecond,
                       lineHeight: 1.8,
                     }}>{item.a}</div>
                   )}
@@ -241,30 +209,28 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
 
       {/* CTA Section */}
       <section style={{
-        backgroundColor: '#0B1120',
+        backgroundColor: COLORS.bgSecond,
         padding: '0 24px 80px',
       }}>
         <div style={{
           maxWidth: 700,
           margin: '0 auto',
           padding: isMobile ? '32px 20px' : '48px 40px',
-          background: 'rgba(255,255,255,0.04)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          border: '1px solid rgba(255,255,255,0.08)',
+          background: '#FFFFFF',
+          border: '1px solid #E8E8E8',
           borderRadius: 24,
           textAlign: 'center',
-          boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 48px rgba(0,0,0,0.2)',
+          boxShadow: SHADOW.card,
         }}>
           <h2 style={{
             fontSize: isMobile ? 22 : 28,
             fontWeight: 700,
-            color: '#fff',
+            color: COLORS.text,
             marginBottom: 12,
           }}>Не нашли ответ?</h2>
           <p style={{
             fontSize: 15,
-            color: 'rgba(255,255,255,0.5)',
+            color: '#666666',
             lineHeight: 1.7,
             marginBottom: 32,
             maxWidth: 440,
@@ -303,7 +269,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
               WhatsApp
             </a>
             <a
-              href="https://apps.apple.com/app/renexpress/id6757761284"
+              href={SITE.social.appStore}
               target="_blank"
               rel="noopener noreferrer"
               className="footer-cta-btn"
@@ -313,16 +279,13 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                 justifyContent: 'center',
                 gap: 8,
                 padding: '14px 28px',
-                backgroundColor: 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.15)',
+                backgroundColor: '#000',
                 color: '#fff',
                 fontSize: 14,
                 fontWeight: 600,
                 borderRadius: 12,
                 textDecoration: 'none',
                 cursor: 'pointer',
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)',
                 transition: 'transform 0.2s, background 0.2s',
                 width: isMobile ? '100%' : undefined,
               }}
@@ -331,6 +294,33 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                 <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
               </svg>
               App Store
+            </a>
+            <a
+              href={SITE.social.googlePlay}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-cta-btn"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+                padding: '14px 28px',
+                backgroundColor: '#000',
+                color: '#fff',
+                fontSize: 14,
+                fontWeight: 600,
+                borderRadius: 12,
+                textDecoration: 'none',
+                cursor: 'pointer',
+                transition: 'transform 0.2s, background 0.2s',
+                width: isMobile ? '100%' : undefined,
+              }}
+            >
+              <svg width="16" height="18" viewBox="0 0 512 512" fill="#fff">
+                <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l220.7-221.3 60.1 60.1L104.6 499z"/>
+              </svg>
+              Google Play
             </a>
             <button
               onClick={() => navigate('/contacts')}
@@ -341,7 +331,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                 justifyContent: 'center',
                 gap: 8,
                 padding: '14px 28px',
-                backgroundColor: PRIMARY,
+                background: GRADIENT,
                 color: '#fff',
                 fontSize: 14,
                 fontWeight: 600,
@@ -349,7 +339,8 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'transform 0.2s, box-shadow 0.2s',
-                boxShadow: `0 4px 16px rgba(61,139,139,0.3)`,
+                boxShadow: '0 6px 20px rgba(42,171,171,0.28)',
+                textShadow: '0 1px 2px rgba(10,37,53,.35)',
                 width: isMobile ? '100%' : undefined,
               }}
             >
@@ -365,20 +356,20 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
 
       {/* SEO Text Section */}
       <section style={{
-        backgroundColor: '#111827',
+        backgroundColor: COLORS.bg,
         padding: '64px 24px',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '1px solid #EEEEEE',
       }}>
         <div style={{ maxWidth: 800, margin: '0 auto' }}>
           <h2 style={{
             fontSize: 24,
             fontWeight: 700,
-            color: 'rgba(255,255,255,0.9)',
+            color: COLORS.text,
             marginBottom: 20,
           }}>Доставка из Турции в Россию — вопросы и ответы</h2>
           <p style={{
             fontSize: 15,
-            color: 'rgba(255,255,255,0.5)',
+            color: '#666666',
             lineHeight: 1.8,
           }}>
             RENEXPRESS — одна из ведущих карго компаний, осуществляющих грузоперевозки из Турции в Россию.
@@ -397,24 +388,13 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
       {/* Creative Footer */}
       <footer className="footer" style={{
         position: 'relative',
-        backgroundColor: '#0B1120',
+        backgroundColor: COLORS.bgTert,
         padding: '0 0 24px',
         paddingBottom: isMobile ? 80 : 24,
         overflow: 'hidden',
+        borderTop: '1px solid #EEEEEE',
       }}>
-        {/* Animated gradient blobs */}
-        <div className="footer-blobs" style={{
-          position: 'absolute',
-          inset: 0,
-          overflow: 'hidden',
-          pointerEvents: 'none',
-        }}>
-          <div className="footer-blob footer-blob-1" />
-          <div className="footer-blob footer-blob-2" />
-          <div className="footer-blob footer-blob-3" />
-        </div>
-
-        {/* Glass divider */}
+        {/* Divider */}
         <div style={{
           position: 'relative',
           zIndex: 2,
@@ -422,7 +402,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
           margin: '0 auto 48px',
           padding: '0 24px',
           height: 1,
-          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+          background: '#EEEEEE',
         }} />
 
         {/* Footer columns grid */}
@@ -453,38 +433,38 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                   <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <span style={{ fontSize: 20, fontWeight: 700, color: '#fff', letterSpacing: 0.5 }}>RENEXPRESS</span>
+              <span style={{ fontSize: 20, fontWeight: 700, color: COLORS.text, letterSpacing: 0.5 }}>RENEXPRESS</span>
             </div>
-            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, marginBottom: 20 }}>
+            <p style={{ fontSize: 14, color: '#666666', lineHeight: 1.7, marginBottom: 20 }}>
               Надёжная доставка грузов из Турции в Россию с 2017 года. Текстиль, обувь, брендовые товары.
               Авто и авиа перевозки с отслеживанием в приложении.
             </p>
             <div style={{ display: 'flex', gap: 8 }}>
               <a href="https://instagram.com/renat_karaliev" target="_blank" rel="noopener noreferrer" className="footer-social" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38,
-                color: 'rgba(255,255,255,0.6)', backgroundColor: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
+                color: '#666666', backgroundColor: '#FFFFFF',
+                border: '1px solid #E8E8E8', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
               }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
               </a>
               <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-social" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38,
-                color: 'rgba(255,255,255,0.6)', backgroundColor: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
+                color: '#666666', backgroundColor: '#FFFFFF',
+                border: '1px solid #E8E8E8', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
               }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               </a>
               <a href="https://www.rencargo.com" target="_blank" rel="noopener noreferrer" className="footer-social" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38,
-                color: 'rgba(255,255,255,0.6)', backgroundColor: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
+                color: '#666666', backgroundColor: '#FFFFFF',
+                border: '1px solid #E8E8E8', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
               }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
               </a>
               <a href="tel:+905070107070" className="footer-social" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38,
-                color: 'rgba(255,255,255,0.6)', backgroundColor: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
+                color: '#666666', backgroundColor: '#FFFFFF',
+                border: '1px solid #E8E8E8', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
               }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               </a>
@@ -493,28 +473,28 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
 
           {/* Services column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h5 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Услуги</h5>
-            <a href="/services" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Авто доставка</a>
-            <a href="/services" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Авиа доставка</a>
-            <a href="/services" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Маркировка «Честный знак»</a>
-            <a href="/services" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Доставка на WB / OZON</a>
-            <a href="/calculator" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Калькулятор стоимости</a>
+            <h5 style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, marginBottom: 4}}>Услуги</h5>
+            <a href="/services" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Авто доставка</a>
+            <a href="/services" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Авиа доставка</a>
+            <a href="/services" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Маркировка «Честный знак»</a>
+            <a href="/services" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Доставка на WB / OZON</a>
+            <a href="/calculator" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Калькулятор стоимости</a>
           </div>
 
           {/* Company column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h5 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Компания</h5>
-            <a href="/about" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>О компании</a>
-            <a href="/about" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Наша команда</a>
-            <a href="/faq" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Вопросы и ответы</a>
-            <a href="/shop" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Каталог товаров</a>
+            <h5 style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, marginBottom: 4}}>Компания</h5>
+            <a href="/about" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>О компании</a>
+            <a href="/about" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Наша команда</a>
+            <a href="/faq" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Вопросы и ответы</a>
+            <a href="/shop" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Каталог товаров</a>
           </div>
 
           {/* Help column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h5 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Помощь</h5>
-            <a href="/faq" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>FAQ</a>
-            <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>
+            <h5 style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, marginBottom: 4}}>Помощь</h5>
+            <a href="/faq" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>FAQ</a>
+            <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 Онлайн чат
                 <span style={{ position: 'relative', display: 'inline-flex', width: 8, height: 8 }}>
@@ -527,28 +507,29 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
                 </span>
               </span>
             </a>
-            <a href="/contacts" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Поддержка</a>
-            <a href="https://apps.apple.com/app/renexpress/id6757761284" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>Приложение iOS</a>
+            <a href="/contacts" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Поддержка</a>
+            <a href={SITE.social.appStore} target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Приложение iOS</a>
+            <a href={SITE.social.googlePlay} target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Приложение Android</a>
           </div>
 
           {/* Contact column with icons */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h5 style={{ fontSize: 14, fontWeight: 600, color: '#fff', marginBottom: 4 }}>Контакты</h5>
-            <a href="mailto:info@renexpress.online" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>
+            <h5 style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, marginBottom: 4}}>Контакты</h5>
+            <a href="mailto:info@renexpress.online" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               <span>info@renexpress.online</span>
             </a>
-            <a href="tel:+905070107070" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>
+            <a href="tel:+905070107070" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <span>+90 507 010 70 70</span>
             </a>
-            <a href="tel:+79289707010" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>
+            <a href="tel:+79289707010" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <span>+7 928 970 70 10</span>
             </a>
-            <div className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', transition: 'color 0.2s' }}>
+            <div className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <address style={{ fontStyle: 'normal', fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Москва, ул. Южнопортовая 7а, стр 2</address>
+              <address style={{ fontStyle: 'normal', fontSize: 14, color: '#666666', lineHeight: 1.5 }}>Москва, ул. Южнопортовая 7а, стр 2</address>
             </div>
           </div>
         </div>
@@ -561,7 +542,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
           margin: '0 auto',
           padding: '0 24px',
           height: 1,
-          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)',
+          background: '#EEEEEE',
         }} />
         <div style={{
           position: 'relative',
@@ -575,30 +556,45 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
           flexWrap: 'wrap',
           gap: 12,
         }}>
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)' }}>© 2026 RENEXPRESS. Все права защищены.</p>
+          <p style={{ fontSize: 13, color: COLORS.textMuted }}>© 2026 RENEXPRESS. Все права защищены.</p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <span style={{
-              fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.3)',
-              padding: '4px 12px', backgroundColor: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)', borderRadius: 50, letterSpacing: 0.5,
+              fontSize: 11, fontWeight: 600, color: COLORS.textMuted,
+              padding: '4px 12px', backgroundColor: '#F5F5F5',
+              border: '1px solid #E8E8E8', borderRadius: 50, letterSpacing: 0.5,
             }}>RENCARGO</span>
             <span style={{
-              fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.3)',
-              padding: '4px 12px', backgroundColor: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)', borderRadius: 50, letterSpacing: 0.5,
+              fontSize: 11, fontWeight: 600, color: COLORS.textMuted,
+              padding: '4px 12px', backgroundColor: '#F5F5F5',
+              border: '1px solid #E8E8E8', borderRadius: 50, letterSpacing: 0.5,
             }}>RENSHOPPING</span>
             <span style={{
-              fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.3)',
-              padding: '4px 12px', backgroundColor: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)', borderRadius: 50, letterSpacing: 0.5,
+              fontSize: 11, fontWeight: 600, color: COLORS.textMuted,
+              padding: '4px 12px', backgroundColor: '#F5F5F5',
+              border: '1px solid #E8E8E8', borderRadius: 50, letterSpacing: 0.5,
             }}>RENFABRIK</span>
           </div>
           <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-            <a href="/about" className="footer-link" style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', transition: 'color 0.2s' }}>Политика конфиденциальности</a>
-            <a href="/about" className="footer-link" style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', transition: 'color 0.2s' }}>Условия использования</a>
+            <a href="/about" className="footer-link" style={{ fontSize: 13, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Политика конфиденциальности</a>
+            <a href="/about" className="footer-link" style={{ fontSize: 13, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Условия использования</a>
           </div>
         </div>
       </footer>
+
+      {/* Page-local overrides for the light footer (beats shared responsive.css) */}
+      <style>{`
+        .footer-social:hover {
+          color: #fff !important;
+          background: ${COLORS.primary} !important;
+          border-color: ${COLORS.primary} !important;
+        }
+        .footer-link:hover { color: ${COLORS.text} !important; }
+        .footer-cta-btn:hover { transform: translateY(-2px) !important; }
+        @keyframes footerLivePing {
+          0% { transform: scale(1); opacity: 0.75; }
+          75%, 100% { transform: scale(2); opacity: 0; }
+        }
+      `}</style>
     </div>
   );
 }

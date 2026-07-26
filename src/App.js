@@ -26,7 +26,7 @@ const CustomsClearance = lazy(() => import('./pages/landing/CustomsClearance'));
 function PageFallback() {
   return (
     <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ width: 40, height: 40, border: '3px solid #E5E7EB', borderTopColor: '#3D8B8B', borderRadius: '50%', animation: 'seo-spin 0.8s linear infinite' }} />
+      <div style={{ width: 40, height: 40, border: '3px solid #E8E8E8', borderTopColor: '#2AABAB', borderRadius: '50%', animation: 'seo-spin 0.8s linear infinite' }} />
       <style>{`@keyframes seo-spin{to{transform:rotate(360deg)}}`}</style>
     </div>
   );
