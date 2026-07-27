@@ -15,54 +15,42 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
   const copy = {
     ru: {
       h1: 'Доставка из Стамбула в Москву',
-      lead: 'Прямой карго-маршрут Стамбул → Москва. Пять тарифов от $4 за кг: автомобильная и авиа доставка. Свои склады с обеих сторон, таможенное оформление включено.',
-      h2Route: 'О маршруте',
-      routeText: `Стамбул и Москва — основа нашей сети. Стамбульский офис принимает товары от поставщиков, консолидирует партии и ежедневно отправляет в Россию. Прибывшие грузы поступают на склад в Москве на ${SITE.warehouses.moscow.address}.`,
-      h2Options: 'Варианты доставки Стамбул → Москва',
-      h2Process: 'Этапы доставки',
-      processSteps: [
-        'Приём товара в офисе RENEXPRESS в Стамбуле, упаковка и взвешивание.',
-        'Консолидация с другими грузами для этого тарифа.',
-        'Отправка авто-фурой или авиарейсом по выбранному маршруту.',
-        'Таможенное оформление при ввозе в Россию.',
-        'Выдача на складе в Москве (Южнопортовая 7а) или курьерская доставка.',
-      ],
+      lead: 'Прямой карго-маршрут между двумя городами: принимаем товар в Стамбуле, консолидируем и отправляем в Москву, выдаём на собственном складе. Если вы не в Москве — бесплатно передаём груз транспортной компании до вашего города России.',
+      h2Route: 'Маршрут двух городов',
+      routeText: `Стамбул и Москва — опорные точки сети RENEXPRESS. Стамбульский офис принимает товар от поставщиков и ежедневно отправляет партии в Россию. В Москве груз приходит на собственный склад по адресу ${SITE.warehouses.moscow.address}, откуда его забирают самовывозом или пересылают дальше по стране.`,
+      h2Istanbul: 'Приём и отправка в Стамбуле',
+      istanbulText: 'Товар от ваших поставщиков привозят в наш офис в Стамбуле — или мы организуем забор. Каждую партию проверяем, взвешиваем, упаковываем и присваиваем номер отправки, видимый в приложении. Дальше груз консолидируется с другими и уходит в Москву авто-фурой или авиарейсом — по выбранному тарифу.',
+      h2Moscow: 'Получение в Москве и по России',
+      moscowText: `В Москве груз поступает на склад: ${SITE.warehouses.moscow.address} (пн–пт 09:00–18:00). Забрать можно самовывозом — бесплатно. Если вы в другом городе, бесплатно довозим груз до транспортной компании в Москве и отправляем в ваш регион (стоимость перевозки ТК зависит от направления). Курьерская доставка по Москве до двери — по запросу, платно.`,
+      h2Options: 'Тарифы на маршруте Стамбул → Москва',
       h2Faq: 'Частые вопросы',
       ctaTitle: 'Отправить груз Стамбул → Москва',
       ctaText: 'Рассчитайте стоимость в калькуляторе или свяжитесь с менеджером.',
     },
     en: {
       h1: 'Cargo from Istanbul to Moscow',
-      lead: 'Direct Istanbul → Moscow cargo route. Five tariffs from $4 per kg: road and air. Our own warehouses on both sides, customs clearance included.',
-      h2Route: 'About the route',
-      routeText: `Istanbul and Moscow are the backbone of our network. The Istanbul office receives goods from suppliers, consolidates batches, and dispatches daily to Russia. Arriving cargo lands at the Moscow warehouse at ${SITE.warehouses.moscow.address}.`,
-      h2Options: 'Istanbul → Moscow delivery options',
-      h2Process: 'Stages',
-      processSteps: [
-        'Pickup at the RENEXPRESS Istanbul office, packing and weighing.',
-        'Consolidation with other cargo on the same tariff.',
-        'Departure by truck or air based on the selected option.',
-        'Customs clearance on import to Russia.',
-        'Handover at the Moscow warehouse (Yuzhnoportovaya 7a) or courier delivery.',
-      ],
+      lead: 'A direct cargo route between the two cities: we receive goods in Istanbul, consolidate and ship to Moscow, and hand them over at our own warehouse. Not in Moscow? We forward your cargo free to a transport company for onward delivery to your city in Russia.',
+      h2Route: 'A route between two cities',
+      routeText: `Istanbul and Moscow are the anchor points of the RENEXPRESS network. The Istanbul office receives goods from suppliers and dispatches batches to Russia daily. In Moscow the cargo arrives at our own warehouse at ${SITE.warehouses.moscow.address}, where it is picked up or forwarded onward across the country.`,
+      h2Istanbul: 'Intake and dispatch in Istanbul',
+      istanbulText: 'Your suppliers deliver goods to our Istanbul office — or we arrange pickup. Each batch is inspected, weighed, packed, and assigned a shipment number visible in the app. The cargo is then consolidated with others and leaves for Moscow by truck or air, based on your chosen tariff.',
+      h2Moscow: 'Pickup in Moscow & across Russia',
+      moscowText: `In Moscow the cargo arrives at the warehouse: ${SITE.warehouses.moscow.address} (Mon-Fri 09:00-18:00). You can collect it yourself — free of charge. If you are in another city, we deliver the cargo free to a transport company in Moscow and send it to your region (the carrier's fee depends on the destination). Door-to-door courier within Moscow is available on request, for a fee.`,
+      h2Options: 'Tariffs on the Istanbul → Moscow route',
       h2Faq: 'FAQ',
       ctaTitle: 'Ship from Istanbul to Moscow',
       ctaText: 'Calculate the price or talk to a manager.',
     },
     tr: {
       h1: 'İstanbul\'dan Moskova\'ya kargo',
-      lead: 'Doğrudan İstanbul → Moskova kargo rotası. Kg başına $4\'ten başlayan beş tarife: karayolu ve havayolu. Her iki tarafta kendi depolarımız, gümrük işlemleri dahil.',
-      h2Route: 'Rota hakkında',
-      routeText: `İstanbul ve Moskova ağımızın temelidir. İstanbul ofisi tedarikçilerden ürünleri alır, partileri birleştirir ve günlük olarak Rusya\'ya gönderir. Gelen kargolar Moskova\'daki depoya iner: ${SITE.warehouses.moscow.address}.`,
-      h2Options: 'İstanbul → Moskova teslimat seçenekleri',
-      h2Process: 'Aşamalar',
-      processSteps: [
-        'RENEXPRESS İstanbul ofisinde teslim alma, paketleme ve tartım.',
-        'Aynı tarifedeki diğer kargolarla konsolidasyon.',
-        'Seçilen seçeneğe göre karayolu veya havayolu ile sevkiyat.',
-        'Rusya\'ya ithalatta gümrük işlemleri.',
-        'Moskova deposunda (Yujnoportovaya 7a) teslim veya kurye.',
-      ],
+      lead: 'İki şehir arasında doğrudan kargo rotası: ürünü İstanbul\'da teslim alır, birleştirip Moskova\'ya gönderir ve kendi depomuzda teslim ederiz. Moskova\'da değilseniz — kargonuzu ücretsiz olarak bir nakliye şirketine devrederek Rusya\'daki şehrinize ulaştırırız.',
+      h2Route: 'İki şehrin rotası',
+      routeText: `İstanbul ve Moskova, RENEXPRESS ağının çıpa noktalarıdır. İstanbul ofisi tedarikçilerden ürün alır ve her gün Rusya\'ya parti gönderir. Moskova\'da kargo kendi depomuza gelir: ${SITE.warehouses.moscow.address}; buradan teslim alınır veya ülke geneline aktarılır.`,
+      h2Istanbul: 'İstanbul\'da teslim alma ve sevkiyat',
+      istanbulText: 'Tedarikçileriniz ürünleri İstanbul ofisimize getirir — ya da alımı biz ayarlarız. Her parti kontrol edilir, tartılır, paketlenir ve uygulamada görünen bir sevkiyat numarası alır. Ardından kargo diğerleriyle birleştirilir ve seçtiğiniz tarifeye göre karayolu veya havayolu ile Moskova\'ya gider.',
+      h2Moscow: 'Moskova\'da ve Rusya genelinde teslim',
+      moscowText: `Moskova\'da kargo depoya gelir: ${SITE.warehouses.moscow.address} (Pzt-Cum 09:00-18:00). Kendiniz ücretsiz teslim alabilirsiniz. Başka bir şehirdeyseniz, kargoyu Moskova\'daki bir nakliye şirketine ücretsiz ulaştırır ve bölgenize göndeririz (nakliye ücreti varış yerine bağlıdır). Moskova içi kapıya kurye, talep üzerine ücretlidir.`,
+      h2Options: 'İstanbul → Moskova rotasında tarifeler',
       h2Faq: 'SSS',
       ctaTitle: 'İstanbul → Moskova gönderim',
       ctaText: 'Fiyatı hesaplayın veya bir yöneticiyle konuşun.',
@@ -73,20 +61,23 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
   const faqs = {
     ru: [
       { q: 'Сколько идёт груз из Стамбула в Москву?', a: 'Зависит от тарифа: авто 14-18 дней, авиа U3 4-5 дней, авиа EX MARKA 3-4 дня.' },
-      { q: 'Где забрать груз в Москве?', a: `Со склада: ${SITE.warehouses.moscow.address}. Режим работы пн-пт 09:00-18:00.` },
-      { q: 'Можно ли заказать курьерскую доставку по Москве?', a: 'Да, доступна по запросу — обсуждается с менеджером отдельно при отправке.' },
+      { q: 'Где забрать груз в Москве?', a: `Со склада: ${SITE.warehouses.moscow.address}. Режим работы пн-пт 09:00-18:00. Самовывоз бесплатный.` },
+      { q: 'Доставляете в другие города России?', a: 'Да. До транспортной компании в Москве довозим бесплатно и отправляем в ваш город; стоимость перевозки транспортной компании зависит от направления.' },
+      { q: 'Можно ли заказать курьерскую доставку по Москве?', a: 'Да, доставка по Москве до двери доступна по запросу — платно, обсуждается с менеджером при отправке.' },
       { q: 'Какой минимальный вес для отправки?', a: 'Минимум 10 кг на одну отправку, без верхнего ограничения по весу.' },
     ],
     en: [
       { q: 'How long does Istanbul to Moscow delivery take?', a: 'Depends on tariff: road 14-18 days, air U3 4-5 days, air EX MARKA 3-4 days.' },
-      { q: 'Where do I pick up cargo in Moscow?', a: `From the warehouse: ${SITE.warehouses.moscow.address}. Open Mon-Fri 09:00-18:00.` },
-      { q: 'Can I get courier delivery inside Moscow?', a: 'Yes, available on request — arranged with your manager separately at shipping time.' },
+      { q: 'Where do I pick up cargo in Moscow?', a: `From the warehouse: ${SITE.warehouses.moscow.address}. Open Mon-Fri 09:00-18:00. Self-pickup is free.` },
+      { q: 'Do you deliver to other Russian cities?', a: 'Yes. We deliver free to a transport company in Moscow and send it to your city; the carrier\'s fee depends on the destination.' },
+      { q: 'Can I get courier delivery inside Moscow?', a: 'Yes, door-to-door delivery within Moscow is available on request — for a fee, arranged with your manager at shipping time.' },
       { q: 'What is the minimum shipment weight?', a: 'Minimum 10 kg per shipment, no upper weight limit.' },
     ],
     tr: [
       { q: 'İstanbul-Moskova kargo ne kadar sürer?', a: 'Tarifeye bağlı: karayolu 14-18 gün, havayolu U3 4-5 gün, havayolu EX MARKA 3-4 gün.' },
-      { q: 'Moskova\'da kargoyu nereden alırım?', a: `Depodan: ${SITE.warehouses.moscow.address}. Pzt-Cum 09:00-18:00.` },
-      { q: 'Moskova içi kurye hizmeti var mı?', a: 'Evet, talep üzerine — gönderim sırasında yöneticinizle ayrıca konuşulur.' },
+      { q: 'Moskova\'da kargoyu nereden alırım?', a: `Depodan: ${SITE.warehouses.moscow.address}. Pzt-Cum 09:00-18:00. Teslim alma ücretsizdir.` },
+      { q: 'Rusya\'nın diğer şehirlerine teslimat var mı?', a: 'Evet. Moskova\'daki bir nakliye şirketine ücretsiz ulaştırır ve şehrinize göndeririz; nakliye şirketinin ücreti varış yerine bağlıdır.' },
+      { q: 'Moskova içi kurye hizmeti var mı?', a: 'Evet, Moskova içi kapıya teslim talep üzerine mevcuttur — ücretlidir, gönderim sırasında yöneticinizle ayarlanır.' },
       { q: 'Minimum gönderi ağırlığı nedir?', a: 'Gönderi başına minimum 10 kg, üst sınır yoktur.' },
     ],
   };
@@ -127,6 +118,16 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
           <p style={{ color: '#475569', lineHeight: 1.7, fontSize: 16 }}>{c.routeText}</p>
         </section>
 
+        <section aria-labelledby="istanbul-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>
+          <h2 id="istanbul-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Istanbul}</h2>
+          <p style={{ color: '#475569', lineHeight: 1.7, fontSize: 16, maxWidth: 820 }}>{c.istanbulText}</p>
+        </section>
+
+        <section aria-labelledby="moscow-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>
+          <h2 id="moscow-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Moscow}</h2>
+          <p style={{ color: '#475569', lineHeight: 1.7, fontSize: 16, maxWidth: 820 }}>{c.moscowText}</p>
+        </section>
+
         <section aria-labelledby="options-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>
           <h2 id="options-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2Options}</h2>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 16 }}>
@@ -141,15 +142,6 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
               </article>
             ))}
           </div>
-        </section>
-
-        <section aria-labelledby="process-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>
-          <h2 id="process-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Process}</h2>
-          <ol style={{ paddingLeft: 24, color: '#475569', lineHeight: 1.8, fontSize: 16 }}>
-            {c.processSteps.map((step, i) => (
-              <li key={i} style={{ marginBottom: 8 }}>{step}</li>
-            ))}
-          </ol>
         </section>
 
         <section aria-labelledby="faq-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>

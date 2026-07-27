@@ -61,8 +61,8 @@ export const translations = {
         description: 'Грузоперевозки Турция–Россия: пять тарифов, склады в Стамбуле и Москве, таможенное сопровождение. Авто 14-18 дней или авиа 3-8 дней.',
       },
       deliveryIstanbulMoscow: {
-        title: 'Доставка из Стамбула в Москву — авто и авиа карго | RENEXPRESS',
-        description: 'Карго Стамбул–Москва от $4/кг: автомобильная доставка за 14-18 дней или авиа за 3-8 дней. Склад на Южнопортовой, выдача груза с отслеживанием.',
+        title: 'Карго Стамбул — Москва: сроки, склад, самовывоз | RENEXPRESS',
+        description: 'Прямой маршрут Стамбул→Москва: приём товара в Стамбуле, выдача на складе Южнопортовая 7а в Москве, бесплатная пересылка транспортной компанией по России. Авто 14–18 дней, авиа 3–5.',
       },
       customsClearance: {
         title: 'Таможенное оформление грузов из Турции | RENEXPRESS',
@@ -138,8 +138,8 @@ export const translations = {
         description: 'Turkey-Russia freight: five tariffs, warehouses in Istanbul and Moscow, customs assistance. Road in 14-18 days or air in 3-8 days.',
       },
       deliveryIstanbulMoscow: {
-        title: 'Cargo from Istanbul to Moscow — Road & Air | RENEXPRESS',
-        description: 'Istanbul-Moscow cargo from $4/kg: road delivery in 14-18 days or air in 3-8 days. Warehouse on Yuzhnoportovaya, trackable shipments.',
+        title: 'Istanbul to Moscow Cargo: Transit, Warehouse, Pickup | RENEXPRESS',
+        description: 'Direct Istanbul→Moscow route: intake in Istanbul, handover at the Yuzhnoportovaya warehouse in Moscow, free onward forwarding across Russia. Road 14–18 days, air 3–5.',
       },
       customsClearance: {
         title: 'Customs Clearance for Imports from Turkey | RENEXPRESS',
@@ -215,8 +215,8 @@ export const translations = {
         description: 'Türkiye-Rusya taşımacılık: beş tarife, İstanbul ve Moskova depoları, gümrük desteği. Karayolu 14-18 gün veya havayolu 3-8 gün.',
       },
       deliveryIstanbulMoscow: {
-        title: 'İstanbul\'dan Moskova\'ya Kargo — Karayolu ve Havayolu | RENEXPRESS',
-        description: 'İstanbul-Moskova kargo $4/kg\'dan: karayolu 14-18 gün veya havayolu 3-8 gün. Yujnoportovaya\'da depo, takip edilebilir gönderiler.',
+        title: 'İstanbul – Moskova Kargo: Süre, Depo, Teslim | RENEXPRESS',
+        description: 'Doğrudan İstanbul→Moskova rotası: İstanbul\'da teslim alma, Moskova Yujnoportovaya deposunda teslim, Rusya geneline ücretsiz aktarım. Karayolu 14–18, havayolu 3–5 gün.',
       },
       customsClearance: {
         title: 'Türkiye\'den İthalat için Gümrük İşlemleri | RENEXPRESS',
