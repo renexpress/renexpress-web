@@ -68,6 +68,10 @@ export const translations = {
         title: 'Таможенное оформление грузов из Турции | RENEXPRESS',
         description: 'Полное сопровождение таможни при импорте из Турции в Россию: документы, ТН ВЭД, декларирование. Включено в стоимость карго RENEXPRESS.',
       },
+      marketplace: {
+        title: 'Доставка из Турции для Wildberries и OZON — «Честный знак» | RENEXPRESS',
+        description: 'Легальный импорт товаров из Турции для продажи на Wildberries и OZON: таможенное оформление, коды ТН ВЭД, маркировка «Честный знак», договор. Авиа и авто из Стамбула в Москву от $4/кг.',
+      },
     },
     home: {
       heroTitle: 'Карго из Турции в Россию',
@@ -145,6 +149,10 @@ export const translations = {
         title: 'Customs Clearance for Imports from Turkey | RENEXPRESS',
         description: 'Full customs support for imports from Turkey to Russia: documents, HS codes, declaration. Included in the RENEXPRESS cargo price.',
       },
+      marketplace: {
+        title: 'Turkey Import for Wildberries & OZON — Chestny Znak | RENEXPRESS',
+        description: 'Legal import from Turkey for selling on Wildberries and OZON: customs clearance, HS codes, «Chestny Znak» marking, service contract. Air and road from Istanbul to Moscow from $4/kg.',
+      },
     },
     home: {
       heroTitle: 'Cargo from Turkey to Russia',
@@ -221,6 +229,10 @@ export const translations = {
       customsClearance: {
         title: 'Türkiye\'den İthalat için Gümrük İşlemleri | RENEXPRESS',
         description: 'Türkiye\'den Rusya\'ya ithalat için tam gümrük desteği: belgeler, GTİP kodları, beyan. RENEXPRESS kargo fiyatına dahildir.',
+      },
+      marketplace: {
+        title: 'Wildberries ve OZON için Türkiye\'den İthalat | RENEXPRESS',
+        description: 'Wildberries ve OZON\'da satış için Türkiye\'den yasal ithalat: gümrük işlemleri, GTİP kodları, «Çestnıy Znak» etiketleme, sözleşme. İstanbul\'dan Moskova\'ya hava ve karayolu, $4/kg\'dan.',
       },
     },
     home: {

@@ -348,6 +348,11 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
           <Link to={localizedPath('/customs-clearance', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {language === 'ru' ? 'Таможенное оформление' : language === 'tr' ? 'Gümrük işlemleri' : 'Customs clearance'}
           </Link>
+          {language === 'ru' && (
+            <Link to={localizedPath('/wildberries-ozon', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
+              Доставка для Wildberries и OZON
+            </Link>
+          )}
           <Link to={localizedPath('/services', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {t('common.services')}
           </Link>

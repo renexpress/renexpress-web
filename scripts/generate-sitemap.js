@@ -28,6 +28,7 @@ const ROUTES = [
   { path: '/delivery-turkey-russia',    changefreq: 'monthly', priority: 0.95, langs: ['ru', 'en', 'tr'] },
   { path: '/delivery-istanbul-moscow',  changefreq: 'monthly', priority: 0.9,  langs: ['ru', 'en', 'tr'] },
   { path: '/customs-clearance',         changefreq: 'monthly', priority: 0.85, langs: ['ru', 'en', 'tr'] },
+  { path: '/wildberries-ozon',          changefreq: 'monthly', priority: 0.9,  langs: ['ru'] },
 ];
 
 function localizedUrl(logicalPath, lang) {

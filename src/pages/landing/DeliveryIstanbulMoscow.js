@@ -176,6 +176,11 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
           <Link to={localizedPath('/customs-clearance', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {language === 'ru' ? 'Таможенное оформление' : language === 'tr' ? 'Gümrük işlemleri' : 'Customs clearance'}
           </Link>
+          {language === 'ru' && (
+            <Link to={localizedPath('/wildberries-ozon', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
+              Доставка для Wildberries и OZON
+            </Link>
+          )}
           <Link to={localizedPath('/calculator', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.calculator')}</Link>
           <Link to={localizedPath('/contacts', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.contacts')}</Link>
         </nav>

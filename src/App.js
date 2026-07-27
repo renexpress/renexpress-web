@@ -22,6 +22,7 @@ const Contacts = lazy(() => import('./pages/Contacts'));
 const DeliveryTurkeyRussia = lazy(() => import('./pages/landing/DeliveryTurkeyRussia'));
 const DeliveryIstanbulMoscow = lazy(() => import('./pages/landing/DeliveryIstanbulMoscow'));
 const CustomsClearance = lazy(() => import('./pages/landing/CustomsClearance'));
+const MarketplaceDelivery = lazy(() => import('./pages/landing/MarketplaceDelivery'));
 
 function PageFallback() {
   return (
@@ -75,6 +76,7 @@ function AllRoutes({ isAuthenticated, setIsAuthenticated }) {
       <Route path="delivery-turkey-russia" element={<DeliveryTurkeyRussia {...authProps} />} />
       <Route path="delivery-istanbul-moscow" element={<DeliveryIstanbulMoscow {...authProps} />} />
       <Route path="customs-clearance" element={<CustomsClearance {...authProps} />} />
+      <Route path="wildberries-ozon" element={<MarketplaceDelivery {...authProps} />} />
 
       <Route path="*" element={<Navigate to="." replace />} />
     </Routes>
