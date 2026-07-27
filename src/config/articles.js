@@ -9,6 +9,8 @@
 export const ARTICLES = [
   {
     slug: 'kak-zakazat-dostavku-iz-turcii',
+    tag: 'Инструкция',
+    readMin: 5,
     title: 'Как заказать доставку товара из Турции в Россию: пошагово | RENEXPRESS',
     description: 'Пошаговая инструкция, как привезти товар из Турции в Россию через RENEXPRESS: регистрация, привоз на склад в Стамбуле, отслеживание, таможня и получение в Москве.',
     datePublished: '2026-07-27',
@@ -66,6 +68,8 @@ export const ARTICLES = [
 
   {
     slug: 'skolko-stoit-dostavka-iz-turcii',
+    tag: 'Тарифы и цены',
+    readMin: 4,
     title: 'Сколько стоит доставка из Турции в Россию: тарифы и цены | RENEXPRESS',
     description: 'Тарифы на карго из Турции в Россию: от $4/кг авто и от $8/кг авиа. Разбираем, от чего зависит цена доставки из Стамбула в Москву и что входит в стоимость.',
     datePublished: '2026-07-27',
@@ -116,6 +120,8 @@ export const ARTICLES = [
 
   {
     slug: 'avia-ili-avto-iz-stambula',
+    tag: 'Сравнение',
+    readMin: 4,
     title: 'Авиа или авто доставка из Стамбула в Москву: что выбрать | RENEXPRESS',
     description: 'Сравниваем авиа и авто доставку карго из Стамбула в Москву: сроки, цена и когда что выгоднее. Помогаем выбрать тариф RENEXPRESS под ваш товар.',
     datePublished: '2026-07-27',
