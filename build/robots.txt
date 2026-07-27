@@ -18,4 +18,45 @@ Disallow: /tr/my-products
 Disallow: /tr/add-product
 Disallow: /tr/analytics
 
+# --- AI / answer-engine crawlers: explicitly welcome ---
+# We WANT ChatGPT, Claude, Perplexity, Gemini & co to read and cite us.
+# (These are already permitted by the "*" group above; named groups make
+#  the intent explicit and guard against accidental future blocks.)
+# Note: a crawler obeys ONLY its most-specific matching group, so these
+# bare "Allow: /" groups intentionally let AI crawlers see everything.
+# We do NOT add a named YandexBot group — it must keep the "*" disallows.
+
+# OpenAI — training, search index, and live user fetches
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic — Claude training/search and live user fetches
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Perplexity — index and live user fetches
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google — Gemini / AI answers (separate from Googlebot ranking)
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence / Siri
+User-agent: Applebot-Extended
+Allow: /
+
+# LLM guide: https://renexpress.online/llms.txt
 Sitemap: https://renexpress.online/sitemap.xml
