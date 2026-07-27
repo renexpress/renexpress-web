@@ -183,6 +183,9 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
           )}
           <Link to={localizedPath('/calculator', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.calculator')}</Link>
           <Link to={localizedPath('/contacts', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.contacts')}</Link>
+          {language === 'ru' && (
+            <Link to={localizedPath('/blog', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>Статьи</Link>
+          )}
         </nav>
       </main>
     </div>

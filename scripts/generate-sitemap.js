@@ -29,6 +29,10 @@ const ROUTES = [
   { path: '/delivery-istanbul-moscow',  changefreq: 'monthly', priority: 0.9,  langs: ['ru', 'en', 'tr'] },
   { path: '/customs-clearance',         changefreq: 'monthly', priority: 0.85, langs: ['ru', 'en', 'tr'] },
   { path: '/wildberries-ozon',          changefreq: 'monthly', priority: 0.9,  langs: ['ru'] },
+  { path: '/blog',                                 changefreq: 'weekly',  priority: 0.7,  langs: ['ru'] },
+  { path: '/blog/kak-zakazat-dostavku-iz-turcii',  changefreq: 'monthly', priority: 0.7,  langs: ['ru'] },
+  { path: '/blog/skolko-stoit-dostavka-iz-turcii', changefreq: 'monthly', priority: 0.7,  langs: ['ru'] },
+  { path: '/blog/avia-ili-avto-iz-stambula',       changefreq: 'monthly', priority: 0.7,  langs: ['ru'] },
 ];
 
 function localizedUrl(logicalPath, lang) {

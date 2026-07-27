@@ -362,6 +362,9 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
           <Link to={localizedPath('/faq', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
             {t('common.faq')}
           </Link>
+          {language === 'ru' && (
+            <Link to={localizedPath('/blog', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>Статьи</Link>
+          )}
         </nav>
       </main>
     </div>

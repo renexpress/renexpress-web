@@ -23,6 +23,8 @@ const DeliveryTurkeyRussia = lazy(() => import('./pages/landing/DeliveryTurkeyRu
 const DeliveryIstanbulMoscow = lazy(() => import('./pages/landing/DeliveryIstanbulMoscow'));
 const CustomsClearance = lazy(() => import('./pages/landing/CustomsClearance'));
 const MarketplaceDelivery = lazy(() => import('./pages/landing/MarketplaceDelivery'));
+const BlogIndex = lazy(() => import('./pages/blog/BlogIndex'));
+const Article = lazy(() => import('./pages/blog/Article'));
 
 function PageFallback() {
   return (
@@ -77,6 +79,10 @@ function AllRoutes({ isAuthenticated, setIsAuthenticated }) {
       <Route path="delivery-istanbul-moscow" element={<DeliveryIstanbulMoscow {...authProps} />} />
       <Route path="customs-clearance" element={<CustomsClearance {...authProps} />} />
       <Route path="wildberries-ozon" element={<MarketplaceDelivery {...authProps} />} />
+
+      {/* Blog */}
+      <Route path="blog" element={<BlogIndex {...authProps} />} />
+      <Route path="blog/:slug" element={<Article {...authProps} />} />
 
       <Route path="*" element={<Navigate to="." replace />} />
     </Routes>

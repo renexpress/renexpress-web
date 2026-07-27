@@ -176,4 +176,36 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://renexpress.online/wildberries-ozon"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://renexpress.online/wildberries-ozon"/>
   </url>
+  <url>
+    <loc>https://renexpress.online/blog</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://renexpress.online/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://renexpress.online/blog"/>
+  </url>
+  <url>
+    <loc>https://renexpress.online/blog/kak-zakazat-dostavku-iz-turcii</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://renexpress.online/blog/kak-zakazat-dostavku-iz-turcii"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://renexpress.online/blog/kak-zakazat-dostavku-iz-turcii"/>
+  </url>
+  <url>
+    <loc>https://renexpress.online/blog/skolko-stoit-dostavka-iz-turcii</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://renexpress.online/blog/skolko-stoit-dostavka-iz-turcii"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://renexpress.online/blog/skolko-stoit-dostavka-iz-turcii"/>
+  </url>
+  <url>
+    <loc>https://renexpress.online/blog/avia-ili-avto-iz-stambula</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://renexpress.online/blog/avia-ili-avto-iz-stambula"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://renexpress.online/blog/avia-ili-avto-iz-stambula"/>
+  </url>
 </urlset>

@@ -506,6 +506,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
             <a href="/about" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>О компании</a>
             <a href="/about" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Наша команда</a>
             <a href="/faq" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Вопросы и ответы</a>
+            <a href="/blog" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Статьи</a>
             <a href="/shop" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>Каталог товаров</a>
           </div>
 
