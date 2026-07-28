@@ -8,10 +8,10 @@
          injected per route by src/components/SEO.js via react-helmet-async. Static copies
          here were removed because they duplicate/conflict with the per-page tags in the
          prerendered HTML (e.g. canonical -> homepage on every landing page). -->
-    <!-- Site icon = the RENEXPRESS app logomark (public/app-icon.png). PNG first so
-         browsers/social use the brand mark; the SVG stays as a lightweight fallback. -->
+    <!-- Site icon = the RENEXPRESS app logomark (public/app-icon.png). Only the PNG is
+         declared: a competing SVG favicon was winning in Chrome/Firefox (they prefer
+         image/svg+xml) and kept showing the old letter-R mark. -->
     <link rel="icon" href="%PUBLIC_URL%/app-icon.png" type="image/png" sizes="512x512" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/app-icon.png" />
 
     <!-- Structured Data: Organization -->

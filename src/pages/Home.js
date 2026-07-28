@@ -331,11 +331,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           <div style={{...styles.liquidSurface, ...(isMobile ? {flexDirection: 'column', textAlign: 'center'} : {})}}>
             {/* App icon */}
             <div className="liquid-glass-icon" style={styles.liquidIcon}>
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <rect width="32" height="32" rx="10" fill="rgba(255,255,255,0.15)" />
-                <rect x="1" y="1" width="30" height="30" rx="9" stroke="rgba(255,255,255,0.2)" strokeWidth="1" fill="none"/>
-                <text x="16" y="22" fontSize="16" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
-              </svg>
+              <img src="/app-icon.png" alt="RENEXPRESS" width="44" height="44" style={{ display: 'block', borderRadius: 10, objectFit: 'contain' }} />
             </div>
             {/* Text */}
             <div style={styles.liquidTextBlock}>
@@ -533,11 +529,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
           {/* Brand column */}
           <div style={styles.footerBrand}>
             <div style={styles.footerLogo}>
-              <div style={styles.footerLogoIcon}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
+              <img src="/logo-mark.png" alt="" width="38" height="38" style={{ display: 'block', objectFit: 'contain', flexShrink: 0 }} />
               <span style={styles.footerLogoText}>RENEXPRESS</span>
             </div>
             <p style={styles.footerDesc}>

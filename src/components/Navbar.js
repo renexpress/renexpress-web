@@ -58,10 +58,7 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
         <nav className="tubelight-nav" style={styles.tubelightWrapper} aria-label={t('nav.ariaPrimary')}>
           <div className="tubelight-bar" style={styles.tubelightBar}>
             <a href={localizedPath('/', language)} style={styles.tubelightLogo} aria-label="RENEXPRESS — home">
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-                <rect width="32" height="32" rx="8" fill={PRIMARY} />
-                <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
-              </svg>
+              <img src="/logo-mark.png" alt="" width="30" height="30" style={{ display: 'block', objectFit: 'contain' }} />
               <span style={{ fontSize: 18, fontWeight: 800, color: COLORS.text, letterSpacing: 0.3 }}>RENEXPRESS</span>
             </a>
             {navLinks.map((item) => (
@@ -179,10 +176,7 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
           <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
             <div className="mobile-menu-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-                  <rect width="32" height="32" rx="8" fill={PRIMARY} />
-                  <text x="16" y="22" fontSize="18" fontWeight="700" fill="#fff" textAnchor="middle">R</text>
-                </svg>
+                <img src="/logo-mark.png" alt="" width="28" height="28" style={{ display: 'block', objectFit: 'contain' }} />
                 <span style={{ fontSize: 18, fontWeight: 700, color: '#111827' }}>RENEXPRESS</span>
               </div>
               <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
