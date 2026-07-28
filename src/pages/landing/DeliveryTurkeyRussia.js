@@ -161,6 +161,8 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
         { title: 'Отслеживание в приложении', text: 'iOS-приложение RENEXPRESS показывает статусы в реальном времени и историю отправок.' },
       ],
       h2Cargo: 'Какие товары принимаем',
+      h2Freight: 'Грузоперевозки Турция–Россия: авто и авиа',
+      freightText: 'Организуем грузоперевозки из Турции в Россию двумя способами: автомобильные (фура, 14–18 дней, самый выгодный тариф от $4/кг) и авиа (3–8 дней, для срочных отправок). Автодоставка выгодна для крупных партий текстиля и обуви, авиа — когда важна скорость. Оба варианта включают таможенное оформление и доставку до склада в Москве.',
       h2FAQ: 'Вопросы и ответы',
       ctaTitle: 'Готовы отправить груз из Турции?',
       ctaText: 'Рассчитайте стоимость в калькуляторе или свяжитесь с менеджером — поможем оформить отправку.',
@@ -188,6 +190,8 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
         { title: 'In-app tracking', text: 'RENEXPRESS iOS app shows real-time statuses and shipment history.' },
       ],
       h2Cargo: 'Accepted cargo types',
+      h2Freight: 'Turkey–Russia freight: road and air',
+      freightText: 'We arrange freight from Turkey to Russia two ways: road (truck, 14–18 days, the most affordable tariff from $4/kg) and air (3–8 days, for urgent shipments). Road suits large batches of textiles and footwear; air is best when speed matters. Both include customs clearance and delivery to the Moscow warehouse.',
       h2FAQ: 'Frequently asked questions',
       ctaTitle: 'Ready to ship from Turkey?',
       ctaText: 'Use the calculator to estimate cost or contact a manager — we\'ll help you set up the shipment.',
@@ -215,6 +219,8 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
         { title: 'Uygulamada takip', text: 'RENEXPRESS iOS uygulaması, gerçek zamanlı durum ve gönderi geçmişi gösterir.' },
       ],
       h2Cargo: 'Kabul edilen kargo türleri',
+      h2Freight: 'Türkiye–Rusya taşımacılık: karayolu ve hava',
+      freightText: 'Türkiye\'den Rusya\'ya taşımacılığı iki şekilde düzenliyoruz: karayolu (tır, 14–18 gün, kg başına $4\'ten en uygun tarife) ve hava (3–8 gün, acil gönderiler için). Karayolu büyük tekstil ve ayakkabı partileri için, hava ise hız önemliyse en iyisidir. Her ikisi de gümrük işlemleri ve Moskova deposuna teslimi içerir.',
       h2FAQ: 'Sık sorulan sorular',
       ctaTitle: 'Türkiye\'den gönderim için hazır mısınız?',
       ctaText: 'Hesaplayıcıyla maliyeti tahmin edin veya bir yöneticiyle iletişime geçin — gönderiyi ayarlamanıza yardım ederiz.',
@@ -305,6 +311,12 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
               <span key={cat} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', borderRadius: 999, padding: '8px 14px', fontSize: 14, color: '#334155' }}>{cat}</span>
             ))}
           </div>
+        </section>
+
+        {/* Freight synonym block — captures «грузоперевозки / freight / taşımacılık» */}
+        <section aria-labelledby="freight-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
+          <h2 id="freight-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Freight}</h2>
+          <p style={{ color: '#475569', lineHeight: 1.7, margin: 0, maxWidth: 820 }}>{c.freightText}</p>
         </section>
 
         {/* FAQ — same content as in JSON-LD above */}

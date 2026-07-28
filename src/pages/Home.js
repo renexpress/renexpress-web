@@ -407,6 +407,25 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
             <a href="/calculator" style={{color: PRIMARY_TEXT, fontWeight: 600, textDecoration: 'none'}}>Рассчитать стоимость</a> доставки онлайн или <a href="/services" style={{color: PRIMARY_TEXT, fontWeight: 600, textDecoration: 'none'}}>подробнее об услугах</a>
           </p>
 
+          {/* Internal-link hub: anchor text = target queries, feeds every landing from Home.
+              Improves crawl/ranking of deep pages (Home was linking inward too weakly). */}
+          <nav aria-label="Направления и услуги" style={styles.seoHub} className="seo-hub">
+            {[
+              { href: '/delivery-turkey-russia', label: 'Доставка из Турции в Россию' },
+              { href: '/delivery-istanbul-moscow', label: 'Карго из Стамбула в Москву' },
+              { href: '/customs-clearance', label: 'Растаможка грузов из Турции' },
+              { href: '/wildberries-ozon', label: 'Доставка на Wildberries и OZON' },
+              { href: '/services', label: 'Тарифы и услуги карго' },
+              { href: '/calculator', label: 'Калькулятор стоимости' },
+              { href: '/blog', label: 'Статьи о доставке' },
+              { href: '/faq', label: 'Частые вопросы' },
+            ].map((l) => (
+              <a key={l.href} href={l.href} className="seo-hub-link" style={styles.seoHubLink}>
+                {l.label} <span aria-hidden="true">→</span>
+              </a>
+            ))}
+          </nav>
+
           {/* Long SEO text */}
           <div style={styles.seoTextBlock}>
             <h3 style={styles.seoTextTitle}>Карго из Стамбула в Москву — полный цикл доставки</h3>
@@ -1323,7 +1342,28 @@ const styles = {
     fontSize: 14,
     color: COLORS.textSecond,
     textAlign: 'center',
+    marginBottom: 28,
+  },
+  seoHub: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 10,
     marginBottom: 40,
+  },
+  seoHubLink: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 6,
+    fontSize: 14,
+    fontWeight: 600,
+    color: COLORS.primaryText,
+    textDecoration: 'none',
+    background: COLORS.bgTert,
+    border: `1px solid ${COLORS.cardBorder}`,
+    borderRadius: 999,
+    padding: '9px 16px',
+    transition: 'background .18s ease, border-color .18s ease, transform .18s ease',
   },
   seoTextBlock: {
     marginBottom: 40,

@@ -15,10 +15,10 @@ import { useTranslation, logicalPathFromUrl, localizedPath } from '../i18n/Langu
 //     jsonLd={[ /* any extra Schema.org objects */ ]}
 //   />
 
-// Default OG image must point at a file that actually exists in public/ (else 404 on every URL).
-// meeting.png is a real, reasonably-light asset shipped in public/. Owner will provide a
-// branded 1200×630 og-default later — swap this constant then.
-const DEFAULT_OG_IMAGE = `${SITE.url}/meeting.png`;
+// Default OG image — branded 1200×630 card built from the RENEXPRESS app logomark
+// (scripts/gen-og.js → public/og-default.jpg). Shown as the link preview everywhere
+// the site is shared (WhatsApp/Telegram/social). Real file, no 404.
+const DEFAULT_OG_IMAGE = `${SITE.url}/og-default.jpg`;
 
 export default function SEO({
   titleKey,

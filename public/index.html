@@ -8,7 +8,11 @@
          injected per route by src/components/SEO.js via react-helmet-async. Static copies
          here were removed because they duplicate/conflict with the per-page tags in the
          prerendered HTML (e.g. canonical -> homepage on every landing page). -->
+    <!-- Site icon = the RENEXPRESS app logomark (public/app-icon.png). PNG first so
+         browsers/social use the brand mark; the SVG stays as a lightweight fallback. -->
+    <link rel="icon" href="%PUBLIC_URL%/app-icon.png" type="image/png" sizes="512x512" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/app-icon.png" />
 
     <!-- Structured Data: Organization -->
     <script type="application/ld+json">
@@ -18,7 +22,7 @@
       "name": "RENEXPRESS",
       "alternateName": ["RENCARGO", "Рен Экспресс", "Рен Карго"],
       "url": "https://renexpress.online",
-      "logo": "https://renexpress.online/favicon.svg",
+      "logo": "https://renexpress.online/app-icon.png",
       "description": "Надёжная доставка грузов из Турции в Россию. Карго из Стамбула в Москву. Авиа и авто доставка с отслеживанием.",
       "foundingDate": "2017",
       "founder": {
