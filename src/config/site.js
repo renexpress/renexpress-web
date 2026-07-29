@@ -12,18 +12,15 @@ export const SITE = {
   founder: 'Renat Karaliev',
   brandGroup: ['RENEXPRESS', 'RENCARGO TRANSPORTATION', 'RENSHOPPING ISTANBUL', 'RENFABRIK'],
 
-  email: 'info@renexpress.online',
+  email: 'Inforencargo@gmail.com',
 
   phones: {
-    turkeyMain: { display: '+90 507 010 70 70', tel: '+905070107070', country: 'TR' },
+    turkeyMain: { display: '+90 551 189 82 89', tel: '+905511898289', country: 'TR' },
     russiaMain: { display: '+7 928 970 70 10', tel: '+79289707010', country: 'RU' },
-    istanbulOffice: { display: '0212 522 55 50', tel: '02125225550', country: 'TR' },
   },
 
   whatsapp: {
-    istanbulManager: { display: '+90 551 189 82 88', wa: '905511898288' },
-    moscowManager: { display: '+90 551 189 82 99', wa: '905511898299' },
-    buyer: { display: '+90 551 189 82 89', wa: '905511898289' },
+    main: { display: '+90 551 189 82 89', wa: '905511898289' },
   },
 
   warehouses: {
@@ -37,14 +34,16 @@ export const SITE = {
     istanbul: {
       city: 'Стамбул',
       country: 'TR',
-      hours: { mondayToSaturday: '09:00-19:00' },
+      hours: { mondayToFriday: '09:00-18:00' },
     },
   },
 
   social: {
     appStore: 'https://apps.apple.com/app/renexpress/id6757761284',
     googlePlay: 'https://play.google.com/store/apps/details?id=com.renexpress.app',
-    instagram: 'https://instagram.com/renat_karaliev',
+    instagram: 'https://instagram.com/rencargo',
+    telegram: 'https://t.me/RENEXPRESS',
+    youtube: 'https://youtube.com/@Renat_Karaliev',
     rencargo: 'https://www.rencargo.com',
   },
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SITE } from '../config/site';
 import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
-const WA = SITE.whatsapp.istanbulManager.wa; // 905511898288
+const WA = SITE.whatsapp.main.wa; // 905511898289
 
 // Reusable cargo calculator (light). Tariffs come ONLY from SITE.tariffs
 // (single source of truth, synced with DB / mobile app). Under the "Итого $X"

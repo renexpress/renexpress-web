@@ -20,12 +20,10 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
   };
 
   const contacts = [
-    { title: 'Телефон (Турция)', value: '+90 507 010 70 70', link: 'tel:+905070107070', icon: 'phone' },
+    { title: 'Телефон (Турция)', value: '+90 551 189 82 89', link: 'tel:+905511898289', icon: 'phone' },
     { title: 'Телефон (Россия)', value: '+7 928 970 70 10', link: 'tel:+79289707010', icon: 'phone' },
-    { title: 'Офис Стамбул', value: '0212 522 55 50', link: 'tel:02125225550', icon: 'office' },
-    { title: 'WhatsApp (Стамбул)', value: '+90 551 189 82 88', link: 'https://wa.me/905511898288', icon: 'whatsapp' },
-    { title: 'WhatsApp (Москва)', value: '+90 551 189 82 99', link: 'https://wa.me/905511898299', icon: 'whatsapp' },
-    { title: 'Байер (закупки)', value: '+90 551 189 82 89', link: 'https://wa.me/905511898289', icon: 'whatsapp' },
+    { title: 'WhatsApp', value: '+90 551 189 82 89', link: 'https://wa.me/905511898289', icon: 'whatsapp' },
+    { title: 'Email', value: 'Inforencargo@gmail.com', link: 'mailto:Inforencargo@gmail.com', icon: 'mail' },
   ];
 
   const PhoneIcon = () => (
@@ -46,10 +44,17 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
     </svg>
   );
 
+  const MailIcon = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+      <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>
+    </svg>
+  );
+
   const renderContactIcon = (icon) => {
     if (icon === 'phone') return <PhoneIcon />;
     if (icon === 'office') return <OfficeIcon />;
     if (icon === 'whatsapp') return <WhatsAppIcon />;
+    if (icon === 'mail') return <MailIcon />;
     return null;
   };
 
@@ -112,14 +117,32 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
         <div style={styles.container}>
           <h2 style={styles.sectionTitleLight}>Мы в соцсетях</h2>
           <div style={{ ...styles.socialGrid, ...(isMobile ? { gridTemplateColumns: '1fr' } : {}) }}>
-            <a href="https://instagram.com/renat_karaliev" target="_blank" rel="noopener noreferrer" className="contact-glass-card" style={{ ...styles.socialCard, ...(isMobile ? { padding: '24px 16px' } : {}) }}>
+            <a href="https://instagram.com/rencargo" target="_blank" rel="noopener noreferrer" className="contact-glass-card" style={{ ...styles.socialCard, ...(isMobile ? { padding: '24px 16px' } : {}) }}>
               <div style={styles.socialIconCircle}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
                   <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
                 </svg>
               </div>
               <h3 style={styles.socialTitle}>Instagram</h3>
-              <p style={styles.socialHandle}>@renat_karaliev</p>
+              <p style={styles.socialHandle}>@rencargo</p>
+            </a>
+            <a href="https://t.me/RENEXPRESS" target="_blank" rel="noopener noreferrer" className="contact-glass-card" style={{ ...styles.socialCard, ...(isMobile ? { padding: '24px 16px' } : {}) }}>
+              <div style={{ ...styles.socialIconCircle, background: 'linear-gradient(135deg, #37BBFE, #007DBB)' }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+                  <path d="M21.94 4.68a1.5 1.5 0 0 0-1.56-.24L3.3 11.2c-1.1.45-1.06 2.03.06 2.42l4.2 1.46 1.6 5.05a1 1 0 0 0 1.7.38l2.3-2.42 4.3 3.16a1.5 1.5 0 0 0 2.35-.94l2.9-14.1a1.5 1.5 0 0 0-.77-1.63zM9.9 14.2l8-5.02-6.6 6.03a1 1 0 0 0-.3.6l-.25 2.02z"/>
+                </svg>
+              </div>
+              <h3 style={styles.socialTitle}>Telegram</h3>
+              <p style={styles.socialHandle}>t.me/RENEXPRESS</p>
+            </a>
+            <a href="https://youtube.com/@Renat_Karaliev" target="_blank" rel="noopener noreferrer" className="contact-glass-card" style={{ ...styles.socialCard, ...(isMobile ? { padding: '24px 16px' } : {}) }}>
+              <div style={{ ...styles.socialIconCircle, background: 'linear-gradient(135deg, #FF4E45, #C4302B)' }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+                  <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6z"/>
+                </svg>
+              </div>
+              <h3 style={styles.socialTitle}>YouTube</h3>
+              <p style={styles.socialHandle}>@Renat_Karaliev</p>
             </a>
             <a href="https://www.rencargo.com" target="_blank" rel="noopener noreferrer" className="contact-glass-card" style={{ ...styles.socialCard, ...(isMobile ? { padding: '24px 16px' } : {}) }}>
               <div style={{ ...styles.socialIconCircle, background: 'linear-gradient(135deg, #3B82F6, #2563EB)' }}>
@@ -165,7 +188,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                 </div>
                 <div style={styles.warehouseDetail}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  <span>Менеджер: <a href="https://wa.me/905511898299" style={{ color: COLORS.primaryText, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 99</a></span>
+                  <span>WhatsApp: <a href="https://wa.me/905511898289" style={{ color: COLORS.primaryText, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 89</a></span>
                 </div>
               </div>
               <div style={{ ...styles.mapContainer, ...(isMobile ? { padding: '0 20px 20px' } : {}) }}>
@@ -193,20 +216,16 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
               </div>
               <div style={{ ...styles.warehouseBody, ...(isMobile ? { padding: '12px 20px' } : {}) }}>
                 <div style={styles.warehouseDetail}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  <span>Телефон офиса: 0212 522 55 50</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <a href="https://goo.gl/maps/n5zZ2eL27Uq98eQH6" target="_blank" rel="noopener noreferrer" style={{ color: '#374151', textDecoration: 'none' }}>Kemalpaşa Mah., Atatürk Blv., Emlak Pasajı No:30/1, 34134 İstanbul</a>
                 </div>
                 <div style={styles.warehouseDetail}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <span>Пн-Сб: 09:00-19:00</span>
+                  <span>Пн-Пт: 09:00-18:00</span>
                 </div>
                 <div style={styles.warehouseDetail}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  <span>Менеджер: <a href="https://wa.me/905511898288" style={{ color: COLORS.primaryText, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 88</a></span>
-                </div>
-                <div style={styles.warehouseDetail}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  <span>Байер: <a href="https://wa.me/905511898289" style={{ color: COLORS.primaryText, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 89</a></span>
+                  <span>WhatsApp: <a href="https://wa.me/905511898289" style={{ color: COLORS.primaryText, textDecoration: 'none', fontWeight: 600 }}>+90 551 189 82 89</a></span>
                 </div>
               </div>
               <div style={{ ...styles.warehouseDescBox, ...(isMobile ? { padding: '0 20px 20px' } : {}) }}>
@@ -249,11 +268,11 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
                     <div style={{ fontSize: 18, fontWeight: 600 }}>Google Play</div>
                   </div>
                 </a>
-                <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" style={{ ...styles.whatsappBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
+                <a href="https://wa.me/905511898289" target="_blank" rel="noopener noreferrer" style={{ ...styles.whatsappBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                   WhatsApp
                 </a>
-                <a href="tel:+905070107070" style={{ ...styles.callBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
+                <a href="tel:+905511898289" style={{ ...styles.callBtn, ...(isMobile ? { justifyContent: 'center', width: '100%' } : {}) }}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#157070" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                   Позвонить
                 </a>
@@ -270,10 +289,11 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
           <p style={styles.seoText}>
             RENEXPRESS — карго компания с офисами в Стамбуле и Москве, специализирующаяся на доставке грузов
             из Турции в Россию. Связаться с нами можно по телефону, через WhatsApp или в мобильном приложении.
-            Наш турецкий номер: +905070107070, российский: +7 928 970 7010. Менеджеры в Стамбуле и Москве
-            доступны в WhatsApp для консультаций по тарифам, оформлению заказов и отслеживанию доставок.
+            Наш турецкий номер и WhatsApp: +90 551 189 82 89, российский: +7 928 970 70 10.
+            Email: Inforencargo@gmail.com. Мы доступны в WhatsApp для консультаций по тарифам,
+            оформлению заказов и отслеживанию доставок.
             Склад в Москве расположен по адресу ул. Южнопортовая 7а, стр 2 и работает с понедельника
-            по пятницу с 09:00 до 18:00. Офис в Стамбуле работает с понедельника по субботу с 09:00 до 19:00.
+            по пятницу с 09:00 до 18:00. Офис в Стамбуле работает с понедельника по пятницу с 09:00 до 18:00.
             Мы являемся частью группы компаний: RENEXPRESS, RENCARGO TRANSPORTATION, RENSHOPPING ISTANBUL, RENFABRIK.
             Скачайте приложение RENEXPRESS из App Store для удобного отслеживания доставок и связи с поддержкой.
           </p>
@@ -302,16 +322,16 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
               Авто и авиа перевозки с отслеживанием в приложении.
             </p>
             <div style={styles.footerSocials}>
-              <a href="https://instagram.com/renat_karaliev" target="_blank" rel="noopener noreferrer" className="footer-social" style={styles.footerSocialBtn}>
+              <a href="https://instagram.com/rencargo" target="_blank" rel="noopener noreferrer" className="footer-social" style={styles.footerSocialBtn}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
               </a>
-              <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-social" style={styles.footerSocialBtn}>
+              <a href="https://wa.me/905511898289" target="_blank" rel="noopener noreferrer" className="footer-social" style={styles.footerSocialBtn}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               </a>
               <a href="https://www.rencargo.com" target="_blank" rel="noopener noreferrer" className="footer-social" style={styles.footerSocialBtn}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
               </a>
-              <a href="tel:+905070107070" className="footer-social" style={styles.footerSocialBtn}>
+              <a href="tel:+905511898289" className="footer-social" style={styles.footerSocialBtn}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               </a>
             </div>
@@ -340,7 +360,7 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
           <div style={styles.footerCol}>
             <h5 style={styles.footerColTitle}>Помощь</h5>
             <a href="/faq" className="footer-link" style={styles.footerLink}>FAQ</a>
-            <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>
+            <a href="https://wa.me/905511898289" target="_blank" rel="noopener noreferrer" className="footer-link" style={styles.footerLink}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 Онлайн чат
                 <span className="footer-live-dot" style={styles.liveDotWrap}>
@@ -357,13 +377,13 @@ function Contacts({ isAuthenticated, setIsAuthenticated }) {
           {/* Contact column with icons */}
           <div style={styles.footerCol}>
             <h5 style={styles.footerColTitle}>Контакты</h5>
-            <a href="mailto:info@renexpress.online" className="footer-link" style={styles.footerContactLink}>
+            <a href="mailto:Inforencargo@gmail.com" className="footer-link" style={styles.footerContactLink}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2" style={{ flexShrink: 0 }}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              <span>info@renexpress.online</span>
+              <span>Inforencargo@gmail.com</span>
             </a>
-            <a href="tel:+905070107070" className="footer-link" style={styles.footerContactLink}>
+            <a href="tel:+905511898289" className="footer-link" style={styles.footerContactLink}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <span>+90 507 010 70 70</span>
+              <span>+90 551 189 82 89</span>
             </a>
             <a href="tel:+79289707010" className="footer-link" style={styles.footerContactLink}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={COLORS.primary} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
