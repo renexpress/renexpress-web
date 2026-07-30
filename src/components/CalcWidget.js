@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SITE } from '../config/site';
 import { COLORS, GRADIENT, SHADOW } from '../config/theme';
+import { track } from '../utils/analytics';
 
 const WA = SITE.whatsapp.main.wa; // 905511898288
 
@@ -31,6 +32,7 @@ export default function CalcWidget({ isMobile = false }) {
     }
     const total = Math.round(w * type.price * 100) / 100;
     setResult({ type: type.name, weight: w, pricePerKg: type.price, days: type.days, total });
+    track('calc_result', { tariff: type.name, weight: w, total });
   };
 
   const waHref = () => {

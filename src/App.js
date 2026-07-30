@@ -1,6 +1,7 @@
 import React, { useState, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './i18n/LanguageContext';
+import { initAutoTracking, trackPageview } from './utils/analytics';
 
 // Code-splitting: each page is loaded only when visited.
 // Previously, all 13 pages were bundled into one giant chunk (~11k LOC).
@@ -40,6 +41,20 @@ function ScrollToTop() {
   const { pathname } = useLocation();
   React.useEffect(() => {
     window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+// Analytics bridge: attaches the outbound-link click tracker once, and sends a
+// pageview to Metrika + GA4 on each SPA route change. The very first view is skipped
+// here because the tags already report it on initial load (avoids double counting).
+function AnalyticsTracker() {
+  const { pathname } = useLocation();
+  const firstRef = React.useRef(true);
+  React.useEffect(() => { initAutoTracking(); }, []);
+  React.useEffect(() => {
+    if (firstRef.current) { firstRef.current = false; return; }
+    if (typeof window !== 'undefined') trackPageview(window.location.href, document.title);
   }, [pathname]);
   return null;
 }
@@ -98,6 +113,7 @@ function App() {
     <Router>
       <LanguageProvider>
         <ScrollToTop />
+        <AnalyticsTracker />
         <Suspense fallback={<PageFallback />}>
           <Routes>
             {/* English routes under /en */}

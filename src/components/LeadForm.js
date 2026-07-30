@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SITE } from '../config/site';
 import { COLORS, GRADIENT, SHADOW } from '../config/theme';
+import { track } from '../utils/analytics';
 
 const WA = SITE.whatsapp.main.wa; // 905511898288
 
@@ -27,6 +28,8 @@ export default function LeadForm({ isMobile = false, source = 'home' }) {
     if (phone.trim().length < 5) { setError('Укажите телефон или WhatsApp'); return; }
     if (!agree) { setError('Подтвердите согласие на обработку данных'); return; }
     setError('');
+
+    track('lead_submit', { source });
 
     const text =
       `Здравствуйте! Заявка с сайта RENEXPRESS%0A` +
