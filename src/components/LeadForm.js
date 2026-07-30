@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SITE } from '../config/site';
 import { COLORS, GRADIENT, SHADOW } from '../config/theme';
 
-const WA = SITE.whatsapp.main.wa; // 905511898289
+const WA = SITE.whatsapp.main.wa; // 905511898288
 
 // Lead form — Phase 1: no backend. On submit it opens a WhatsApp deep-link to the
 // Istanbul manager prefilled with the enquiry. Includes a honeypot ("company"):

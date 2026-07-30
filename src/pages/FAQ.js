@@ -51,17 +51,17 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
 
     // Склады
     { q: 'Где находится склад в Москве?', a: 'Наш московский склад расположен по адресу: ул. Южнопортовая 7а, стр 2, склад 8, ворота 1. Режим работы: понедельник-пятница с 09:00 до 18:00. Здесь вы можете получить свой груз лично или оформить доставку на склады WB/OZON.', cat: 'Склады' },
-    { q: 'Есть ли офис в Стамбуле?', a: 'Да, наш офис и склад в Стамбуле координирует приём товаров от турецких поставщиков, упаковку, консолидацию и ежедневную отправку грузов. Для связи с менеджером в Стамбуле используйте WhatsApp: +905511898289.', cat: 'Склады' },
+    { q: 'Есть ли офис в Стамбуле?', a: 'Да, наш офис и склад в Стамбуле координирует приём товаров от турецких поставщиков, упаковку, консолидацию и ежедневную отправку грузов. Для связи с менеджером в Стамбуле используйте WhatsApp: +905511898288.', cat: 'Склады' },
 
     // Дополнительные услуги
     { q: 'Что такое маркировка Честный знак?', a: 'Честный знак — это система обязательной маркировки товаров в России. RENEXPRESS предоставляет услугу маркировки импортируемых товаров, что позволяет легально продавать их на российском рынке, включая маркетплейсы Wildberries и OZON.', cat: 'Доп. услуги' },
     { q: 'Доставляете ли вы на склады Wildberries и OZON?', a: 'Да, мы осуществляем доставку грузов напрямую на склады маркетплейсов Wildberries и OZON. Это особенно удобно для продавцов, которые закупают товары в Турции для продажи на российских маркетплейсах.', cat: 'Доп. услуги' },
-    { q: 'Можете ли вы помочь с закупкой товаров?', a: 'Да, наш байер в Стамбуле поможет найти и закупить товары у турецких поставщиков. Для связи с байером: WhatsApp +905511898289. Мы также организуем фото и видео отчёты при приёмке товара на складе.', cat: 'Доп. услуги' },
+    { q: 'Можете ли вы помочь с закупкой товаров?', a: 'Да, наш байер в Стамбуле поможет найти и закупить товары у турецких поставщиков. Для связи с байером: WhatsApp +905511898288. Мы также организуем фото и видео отчёты при приёмке товара на складе.', cat: 'Доп. услуги' },
 
     // Оплата
     { q: 'Как производится оплата?', a: 'Оплата производится за фактический вес груза по тарифу выбранного типа доставки. Стоимость рассчитывается в долларах за килограмм. Точную сумму к оплате вы увидите в приложении или можете рассчитать через наш онлайн-калькулятор.', cat: 'Оплата' },
     { q: 'Входит ли таможенное оформление в стоимость?', a: 'Да. Растаможка и таможенное оформление входят в стоимость доставки — отдельно за документы или декларирование платить не нужно. Для «белого» импорта RENEXPRESS оформление включает код ТН ВЭД и маркировку «Честный знак».', cat: 'Оплата' },
-    { q: 'Как связаться с RENEXPRESS?', a: 'Телефон и WhatsApp (Турция): +90 551 189 82 89. Телефон (Россия): +7 928 970 70 10. Email: Inforencargo@gmail.com. Instagram: @rencargo. Telegram: t.me/RENEXPRESS. YouTube: @Renat_Karaliev. Также доступен чат поддержки в мобильном приложении.', cat: 'Контакты' },
+    { q: 'Как связаться с RENEXPRESS?', a: 'Телефон и WhatsApp (Турция): +90 551 189 82 88. Телефон (Россия): +7 928 970 70 10. Email: Inforencargo@gmail.com. Instagram: @rencargo. Telegram: t.me/RENEXPRESS. YouTube: @Renat_Karaliev. Также доступен чат поддержки в мобильном приложении.', cat: 'Контакты' },
   ];
 
   // FAQPage structured data — built from the same faqItems shown on the page.
@@ -259,7 +259,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap', flexDirection: isMobile ? 'column' : 'row' }}>
             <a
-              href="https://wa.me/905511898289"
+              href="https://wa.me/905511898288"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-cta-btn"
@@ -466,7 +466,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
               }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
               </a>
-              <a href="https://wa.me/905511898289" target="_blank" rel="noopener noreferrer" className="footer-social" style={{
+              <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-social" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38,
                 color: '#666666', backgroundColor: '#FFFFFF',
                 border: '1px solid #E8E8E8', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
@@ -480,7 +480,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
               }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
               </a>
-              <a href="tel:+905511898289" className="footer-social" style={{
+              <a href="tel:+905511898288" className="footer-social" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', width: 38, height: 38,
                 color: '#666666', backgroundColor: '#FFFFFF',
                 border: '1px solid #E8E8E8', borderRadius: '50%', textDecoration: 'none', transition: 'all 0.2s',
@@ -514,7 +514,7 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <h5 style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, marginBottom: 4}}>Помощь</h5>
             <a href="/faq" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>FAQ</a>
-            <a href="https://wa.me/905511898289" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
+            <a href="https://wa.me/905511898288" target="_blank" rel="noopener noreferrer" className="footer-link" style={{ fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 Онлайн чат
                 <span style={{ position: 'relative', display: 'inline-flex', width: 8, height: 8 }}>
@@ -539,9 +539,9 @@ function FAQ({ isAuthenticated, setIsAuthenticated }) {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               <span>Inforencargo@gmail.com</span>
             </a>
-            <a href="tel:+905511898289" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
+            <a href="tel:+905511898288" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <span>+90 551 189 82 89</span>
+              <span>+90 551 189 82 88</span>
             </a>
             <a href="tel:+79289707010" className="footer-link" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: '#666666', textDecoration: 'none', transition: 'color 0.2s' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={PRIMARY} strokeWidth="2" style={{ flexShrink: 0 }}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>

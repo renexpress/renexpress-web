@@ -15,12 +15,12 @@ export const SITE = {
   email: 'Inforencargo@gmail.com',
 
   phones: {
-    turkeyMain: { display: '+90 551 189 82 89', tel: '+905511898289', country: 'TR' },
+    turkeyMain: { display: '+90 551 189 82 88', tel: '+905511898288', country: 'TR' },
     russiaMain: { display: '+7 928 970 70 10', tel: '+79289707010', country: 'RU' },
   },
 
   whatsapp: {
-    main: { display: '+90 551 189 82 89', wa: '905511898289' },
+    main: { display: '+90 551 189 82 88', wa: '905511898288' },
   },
 
   warehouses: {

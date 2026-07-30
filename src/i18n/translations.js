@@ -50,7 +50,7 @@ export const translations = {
       },
       contacts: {
         title: 'Контакты RENEXPRESS — склад в Москве, офис в Стамбуле',
-        description: 'Телефоны RENEXPRESS: +90 551 189 82 89 (Турция), +7 928 970 70 10 (Россия). Склад: Москва, ул. Южнопортовая 7а. Email: Inforencargo@gmail.com.',
+        description: 'Телефоны RENEXPRESS: +90 551 189 82 88 (Турция), +7 928 970 70 10 (Россия). Склад: Москва, ул. Южнопортовая 7а. Email: Inforencargo@gmail.com.',
       },
       shop: {
         title: 'Витрина товаров поставщиков из Турции | RENEXPRESS',
@@ -131,7 +131,7 @@ export const translations = {
       },
       contacts: {
         title: 'RENEXPRESS Contacts — Warehouse in Moscow, Office in Istanbul',
-        description: 'RENEXPRESS phones: +90 551 189 82 89 (Turkey), +7 928 970 70 10 (Russia). Warehouse: Moscow, Yuzhnoportovaya 7a. Email: Inforencargo@gmail.com.',
+        description: 'RENEXPRESS phones: +90 551 189 82 88 (Turkey), +7 928 970 70 10 (Russia). Warehouse: Moscow, Yuzhnoportovaya 7a. Email: Inforencargo@gmail.com.',
       },
       shop: {
         title: 'Catalog of Turkish Supplier Goods | RENEXPRESS',
@@ -212,7 +212,7 @@ export const translations = {
       },
       contacts: {
         title: 'RENEXPRESS İletişim — Moskova Depo, İstanbul Ofis',
-        description: 'RENEXPRESS telefonlar: +90 551 189 82 89 (Türkiye), +7 928 970 70 10 (Rusya). Depo: Moskova, Yujnoportovaya 7a. E-posta: Inforencargo@gmail.com.',
+        description: 'RENEXPRESS telefonlar: +90 551 189 82 88 (Türkiye), +7 928 970 70 10 (Rusya). Depo: Moskova, Yujnoportovaya 7a. E-posta: Inforencargo@gmail.com.',
       },
       shop: {
         title: 'Türk Tedarikçi Ürünleri Kataloğu | RENEXPRESS',
