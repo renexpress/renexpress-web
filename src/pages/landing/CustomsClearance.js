@@ -1,18 +1,23 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
-import useIsMobile from '../../hooks/useIsMobile';
 import { useTranslation, localizedPath } from '../../i18n/LanguageContext';
-import { COLORS, GRADIENT, SHADOW } from '../../config/theme';
+import '../../styles/home-redesign.css';
+
+const IcCheck = ({ c = '#2AABAB', w = 2.4 }) => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth={w} style={{ flexShrink: 0, marginTop: 3 }}><polyline points="20 6 9 17 4 12" /></svg>
+);
 
 export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }) {
   const { language, t } = useTranslation();
-  const isMobile = useIsMobile();
   const navigate = useNavigate();
 
   const copy = {
     ru: {
+      eyebrow: 'Услуга · Таможенное оформление',
+      kick: 'Таможня',
       h1: 'Растаможка и таможенное оформление грузов из Турции',
       lead: 'RENEXPRESS берёт растаможку и таможенное оформление на себя — это включено в стоимость каждой отправки. Никаких отдельных платежей за брокера, декларирование или подбор кода ТН ВЭД.',
       h2What: 'Что входит в таможенное сопровождение',
@@ -39,6 +44,8 @@ export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }
       ctaText: 'Расчёт стоимости в калькуляторе с учётом таможенных платежей.',
     },
     en: {
+      eyebrow: 'Service · Customs clearance',
+      kick: 'Customs',
       h1: 'Customs clearance for imports from Turkey',
       lead: 'RENEXPRESS handles customs clearance — included in the price of every shipment. No separate fees for the broker, declaration, or HS code.',
       h2What: 'What customs support includes',
@@ -65,6 +72,8 @@ export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }
       ctaText: 'Calculate the cost in the calculator including customs duties.',
     },
     tr: {
+      eyebrow: 'Hizmet · Gümrük işlemleri',
+      kick: 'Gümrük',
       h1: 'Türkiye\'den ithalat için gümrük işlemleri',
       lead: 'RENEXPRESS gümrük işlemlerini üstlenir — bu, her sevkiyatın fiyatına dahildir. Komisyoncu, beyan veya GTİP için ayrı ücret yoktur.',
       h2What: 'Gümrük desteğine neler dahil',
@@ -126,7 +135,7 @@ export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', fontFamily: 'Inter, -apple-system, sans-serif', color: COLORS.text }}>
+    <div className="hx">
       <SEO
         titleKey="seo.customsClearance.title"
         descriptionKey="seo.customsClearance.description"
@@ -139,70 +148,93 @@ export default function CustomsClearance({ isAuthenticated, setIsAuthenticated }
       />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
-      <main style={{ maxWidth: 1180, margin: '0 auto', padding: isMobile ? '24px 16px 48px' : '48px 32px 96px' }}>
-        <header style={{ marginBottom: isMobile ? 24 : 48 }}>
-          <h1 style={{ fontSize: isMobile ? 32 : 52, fontWeight: 800, lineHeight: 1.15, marginBottom: 16 }}>{c.h1}</h1>
-          <p style={{ fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color: '#475569', maxWidth: 760 }}>{c.lead}</p>
-        </header>
+      {/* hero */}
+      <section className="hx-sec hx-hero-sec">
+        <div className="hx-eyebrow"><i />{c.eyebrow}</div>
+        <h1 className="hx-h1" style={{ marginBottom: 18 }}>{c.h1}</h1>
+        <p className="hx-hero-lede" style={{ maxWidth: '70ch' }}>{c.lead}</p>
+      </section>
 
-        <section style={{ marginBottom: isMobile ? 32 : 48 }}>
-          <h2 style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2What}</h2>
-          <ul style={{ paddingLeft: 24, color: '#475569', lineHeight: 1.8, fontSize: 16 }}>
-            {c.whatItems.map((item, i) => <li key={i} style={{ marginBottom: 6 }}>{item}</li>)}
-          </ul>
-        </section>
+      {/* what's included (dark — «Таможня на нас») */}
+      <section className="hx-sec hx-sec--dark">
+        <div className="hx-customs">
+          <div>
+            <div className="kick">{c.kick}</div>
+            <h2>{c.h2What}</h2>
+          </div>
+          <div className="hx-customs-list">
+            {c.whatItems.map((item, i) => (
+              <div key={i}><IcCheck c="#4DCBCB" /><span>{item}</span></div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        <section style={{ marginBottom: isMobile ? 32 : 48, background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: 24 }}>
-          <h2 style={{ fontSize: isMobile ? 22 : 28, fontWeight: 700, marginBottom: 12 }}>{c.h2Why}</h2>
-          <p style={{ color: '#475569', lineHeight: 1.7, fontSize: 16, margin: 0 }}>{c.whyText}</p>
-        </section>
+      {/* why a broker */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 16 }}>{c.h2Why}</h2>
+        <p className="hx-lede" style={{ maxWidth: '82ch' }}>{c.whyText}</p>
+      </section>
 
-        <section style={{ marginBottom: isMobile ? 32 : 48 }}>
-          <h2 style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Docs}</h2>
-          <ul style={{ paddingLeft: 24, color: '#475569', lineHeight: 1.8, fontSize: 16 }}>
-            {c.docsItems.map((item, i) => <li key={i} style={{ marginBottom: 6 }}>{item}</li>)}
-          </ul>
-        </section>
+      {/* documents */}
+      <section className="hx-sec hx-sec--gray">
+        <h2 className="hx-h2" style={{ marginBottom: 24 }}>{c.h2Docs}</h2>
+        <div className="hx-checks">
+          {c.docsItems.map((item, i) => (
+            <div className="hx-check" key={i}><IcCheck /><span>{item}</span></div>
+          ))}
+        </div>
+      </section>
 
-        <section style={{ marginBottom: isMobile ? 32 : 48, background: '#FEF3C7', border: '1px solid #FCD34D', borderRadius: 12, padding: 24 }}>
-          <h2 style={{ fontSize: isMobile ? 22 : 26, fontWeight: 700, marginBottom: 12, color: '#92400E' }}>{c.h2Limits}</h2>
-          <p style={{ color: '#78350F', lineHeight: 1.7, fontSize: 15, margin: 0 }}>{c.limitsText}</p>
-        </section>
+      {/* duty-free limits (callout) */}
+      <section className="hx-sec">
+        <div className="hx-card">
+          <div className="hx-card-top" />
+          <div className="hx-card-body">
+            <div className="hx-card-kicker">{c.h2Limits}</div>
+            <p className="hx-lede" style={{ maxWidth: '82ch', margin: 0 }}>{c.limitsText}</p>
+          </div>
+        </div>
+      </section>
 
-        <section style={{ marginBottom: isMobile ? 32 : 48 }}>
-          <h2 style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2Faq}</h2>
-          <div style={{ display: 'grid', gap: 12 }}>
+      {/* faq */}
+      <section className="hx-sec hx-sec--gray">
+        <div className="hx-faq">
+          <div>
+            <div className="hx-eyebrow"><i />FAQ</div>
+            <h2 className="hx-h2">{c.h2Faq}</h2>
+          </div>
+          <div className="hx-faq-list">
             {faqList.map((f, i) => (
-              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: '16px 20px' }}>
-                <summary style={{ fontSize: 16, fontWeight: 600, cursor: 'pointer', listStyle: 'none' }}>{f.q}</summary>
-                <p style={{ color: '#475569', lineHeight: 1.6, marginTop: 12, marginBottom: 0 }}>{f.a}</p>
+              <details key={i}>
+                <summary>{f.q}<i aria-hidden="true">+</i></summary>
+                <p>{f.a}</p>
               </details>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section style={{ background: '#FFFFFF', color: COLORS.text, border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
-          <h2 style={{ fontSize: isMobile ? 22 : 28, fontWeight: 800, marginBottom: 8 }}>{c.ctaTitle}</h2>
-          <p style={{ color: COLORS.textSecond, marginBottom: 24 }}>{c.ctaText}</p>
-          <button
-            onClick={() => navigate(localizedPath('/calculator', language))}
-            style={{ background: GRADIENT, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', textShadow: '0 1px 2px rgba(10,37,53,.35)', minHeight: 48 }}
-          >
-            {t('common.orderNow')}
-          </button>
-        </section>
-
-        <nav aria-label="Related pages" style={{ marginTop: 48, padding: '24px 0', borderTop: '1px solid #EEEEEE', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
-          <Link to={localizedPath('/delivery-turkey-russia', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-            {language === 'ru' ? 'Доставка Турция-Россия' : language === 'tr' ? 'Türkiye-Rusya kargo' : 'Turkey-Russia cargo'}
+      {/* cta */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 12 }}>{c.ctaTitle}</h2>
+        <p className="hx-lede" style={{ maxWidth: '52ch', marginBottom: 24 }}>{c.ctaText}</p>
+        <button type="button" className="hx-cta" onClick={() => navigate(localizedPath('/calculator', language))}>
+          {t('common.orderNow')}
+        </button>
+        <nav aria-label="Related pages" className="hx-hub" style={{ marginTop: 40 }}>
+          <Link to={localizedPath('/delivery-turkey-russia', language)}>
+            {language === 'ru' ? 'Доставка Турция-Россия' : language === 'tr' ? 'Türkiye-Rusya kargo' : 'Turkey-Russia cargo'} <span aria-hidden="true">→</span>
           </Link>
-          <Link to={localizedPath('/delivery-istanbul-moscow', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-            {language === 'ru' ? 'Стамбул-Москва' : language === 'tr' ? 'İstanbul-Moskova' : 'Istanbul-Moscow'}
+          <Link to={localizedPath('/delivery-istanbul-moscow', language)}>
+            {language === 'ru' ? 'Стамбул-Москва' : language === 'tr' ? 'İstanbul-Moskova' : 'Istanbul-Moscow'} <span aria-hidden="true">→</span>
           </Link>
-          <Link to={localizedPath('/services', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.services')}</Link>
-          <Link to={localizedPath('/faq', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.faq')}</Link>
+          <Link to={localizedPath('/services', language)}>{t('common.services')} <span aria-hidden="true">→</span></Link>
+          <Link to={localizedPath('/faq', language)}>{t('common.faq')} <span aria-hidden="true">→</span></Link>
         </nav>
-      </main>
+      </section>
+
+      <Footer />
     </div>
   );
 }

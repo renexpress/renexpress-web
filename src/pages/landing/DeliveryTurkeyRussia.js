@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
-import useIsMobile from '../../hooks/useIsMobile';
 import { useTranslation, localizedPath } from '../../i18n/LanguageContext';
 import { SITE } from '../../config/site';
-import { COLORS, GRADIENT, SHADOW } from '../../config/theme';
+import '../../styles/home-redesign.css';
 
 // Long-form SEO landing page for the main route Turkey → Russia.
 // All numbers come from SITE.tariffs (single source of truth). No invented data.
 
 export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticated }) {
   const { language, t } = useTranslation();
-  const isMobile = useIsMobile();
   const navigate = useNavigate();
 
   // FAQ content is duplicated as JSON-LD (FAQPage schema) + visible HTML.
@@ -141,6 +140,7 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
   // Body copy by language. RU is canonical, EN/TR mirror its structure.
   const copy = {
     ru: {
+      eyebrow: 'Направление · Турция → Россия',
       h1: 'Доставка из Турции в Россию',
       lead: 'RENEXPRESS — карго компания с офисами в Стамбуле и Москве. Доставляем грузы между Турцией и Россией с 2017 года: текстиль, одежду, обувь, потребительские товары. Пять тарифов на выбор — от $4 за кг.',
       h2Tariffs: 'Тарифы доставки Турция → Россия',
@@ -168,8 +168,14 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
       ctaText: 'Рассчитайте стоимость в калькуляторе или свяжитесь с менеджером — поможем оформить отправку.',
       ctaPrimary: 'Калькулятор стоимости',
       ctaSecondary: 'Связаться с менеджером',
+      thTariff: 'Тариф',
+      thMode: 'Режим',
+      thDays: 'Срок',
+      thCat: 'Категория груза',
+      thPrice: 'Цена за кг',
     },
     en: {
+      eyebrow: 'Route · Turkey → Russia',
       h1: 'Cargo from Turkey to Russia',
       lead: 'RENEXPRESS is a cargo company with offices in Istanbul and Moscow. Shipping goods between Turkey and Russia since 2017: textiles, clothing, footwear, consumer goods. Five tariffs — starting from $4 per kg.',
       h2Tariffs: 'Turkey → Russia tariffs',
@@ -197,8 +203,14 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
       ctaText: 'Use the calculator to estimate cost or contact a manager — we\'ll help you set up the shipment.',
       ctaPrimary: 'Cost calculator',
       ctaSecondary: 'Contact a manager',
+      thTariff: 'Тариф',
+      thMode: 'Режим',
+      thDays: 'Срок',
+      thCat: 'Категория груза',
+      thPrice: 'Цена за кг',
     },
     tr: {
+      eyebrow: 'Rota · Türkiye → Rusya',
       h1: 'Türkiye\'den Rusya\'ya kargo',
       lead: 'RENEXPRESS, İstanbul ve Moskova ofisleri olan bir kargo şirketidir. 2017\'den bu yana Türkiye ile Rusya arasında tekstil, giysi, ayakkabı ve tüketim malları taşıyoruz. Beş tarife — kg başına $4\'ten başlayan fiyatlarla.',
       h2Tariffs: 'Türkiye → Rusya tarifeleri',
@@ -226,12 +238,25 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
       ctaText: 'Hesaplayıcıyla maliyeti tahmin edin veya bir yöneticiyle iletişime geçin — gönderiyi ayarlamanıza yardım ederiz.',
       ctaPrimary: 'Maliyet hesaplayıcı',
       ctaSecondary: 'Yönetici ile iletişim',
+      thTariff: 'Тариф',
+      thMode: 'Режим',
+      thDays: 'Срок',
+      thCat: 'Категория груза',
+      thPrice: 'Цена за кг',
     },
   };
   const c = copy[language] || copy.ru;
 
+  const modeLabel = (mode) =>
+    mode === 'road'
+      ? (language === 'ru' ? 'Авто' : language === 'tr' ? 'Karayolu' : 'Road')
+      : (language === 'ru' ? 'Авиа' : language === 'tr' ? 'Havayolu' : 'Air');
+
+  const tariffsRoad = SITE.tariffs.filter((tf) => tf.mode === 'road');
+  const tariffsAir = SITE.tariffs.filter((tf) => tf.mode === 'air');
+
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', fontFamily: 'Inter, -apple-system, sans-serif', color: COLORS.text }}>
+    <div className="hx">
       <SEO
         titleKey="seo.deliveryTurkeyRussia.title"
         descriptionKey="seo.deliveryTurkeyRussia.description"
@@ -244,141 +269,126 @@ export default function DeliveryTurkeyRussia({ isAuthenticated, setIsAuthenticat
       />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
-      <main style={{ maxWidth: 1180, margin: '0 auto', padding: isMobile ? '24px 16px 48px' : '48px 32px 96px' }}>
-        <header style={{ marginBottom: isMobile ? 24 : 48 }}>
-          <h1 style={{ fontSize: isMobile ? 32 : 52, fontWeight: 800, lineHeight: 1.15, marginBottom: 16, color: COLORS.text }}>{c.h1}</h1>
-          <p style={{ fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color: '#475569', maxWidth: 760 }}>{c.lead}</p>
-        </header>
+      {/* hero */}
+      <section className="hx-sec hx-hero-sec">
+        <div className="hx-eyebrow"><i />{c.eyebrow}</div>
+        <h1 className="hx-h1" style={{ marginBottom: 18 }}>{c.h1}</h1>
+        <p className="hx-hero-lede" style={{ maxWidth: '70ch' }}>{c.lead}</p>
+      </section>
 
-        {/* Tariffs */}
-        <section aria-labelledby="tariffs-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="tariffs-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 8 }}>{c.h2Tariffs}</h2>
-          <p style={{ color: '#64748B', marginBottom: 24, fontSize: 14 }}>{c.tariffNote}</p>
+      {/* how it works */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 32 }}>{c.h2How}</h2>
+        <div className="hx-two">
+          {c.steps.map((step) => (
+            <div className="hx-fcard" key={step.n}>
+              <span className="hx-tag">{step.n}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 16 }}>
-            {SITE.tariffs.map((tariff) => (
-              <article key={tariff.id} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: 24 }}>
-                <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: 1, color: COLORS.primaryText, fontWeight: 700, marginBottom: 6 }}>
-                  {tariff.mode === 'road' ? (language === 'ru' ? 'Авто' : language === 'tr' ? 'Karayolu' : 'Road') : (language === 'ru' ? 'Авиа' : language === 'tr' ? 'Havayolu' : 'Air')}
-                </div>
-                <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 12 }}>{tariff.name}</h3>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 6 }}>
-                  <span style={{ fontSize: 36, fontWeight: 800, color: COLORS.text }}>${tariff.pricePerKg}</span>
-                  <span style={{ color: '#64748B' }}>/ {t('common.kg')}</span>
-                </div>
-                <div style={{ color: COLORS.text, fontWeight: 600 }}>
-                  {tariff.transitDaysMin}-{tariff.transitDaysMax} {t('common.days')}
-                </div>
-              </article>
-            ))}
+      {/* why us */}
+      <section className="hx-sec hx-sec--gray">
+        <h2 className="hx-h2" style={{ marginBottom: 32 }}>{c.h2Why}</h2>
+        <div className="hx-steps">
+          {c.whyItems.map((item, i) => (
+            <div key={i}>
+              <h3 className="hx-step-t">{item.title}</h3>
+              <p className="hx-step-d">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* cargo types — content from SITE.cargoCategories */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 16 }}>{c.h2Cargo}</h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          {SITE.cargoCategories.map((cat) => (
+            <span className="hx-tag" style={{ marginBottom: 0 }} key={cat}>{cat}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* freight synonym block — captures «грузоперевозки / freight / taşımacılık» */}
+      <section className="hx-sec hx-sec--gray">
+        <h2 className="hx-h2" style={{ marginBottom: 16 }}>{c.h2Freight}</h2>
+        <p className="hx-lede" style={{ maxWidth: '82ch' }}>{c.freightText}</p>
+      </section>
+
+      {/* tariffs table */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 12 }}>{c.h2Tariffs}</h2>
+        <p className="hx-lede" style={{ maxWidth: '60ch', marginBottom: 28 }}>{c.tariffNote}</p>
+        <div className="hx-tf-table">
+          <div className="hx-tf-cols hx-tf-header">
+            <span>{c.thTariff}</span><span>{c.thMode}</span><span>{c.thDays}</span><span>{c.thCat}</span><span>{c.thPrice}</span>
           </div>
-        </section>
+          {[...tariffsRoad, ...tariffsAir].map((tf) => (
+            <div className="hx-tf-cols hx-tf-row" key={tf.id}>
+              <span className="hx-tf-name">{tf.name}<span className="sub">{modeLabel(tf.mode)} · {tf.deliveryDays} · {tf.category}</span></span>
+              <span className="hx-tf-mode">{modeLabel(tf.mode)}</span>
+              <span className="hx-tf-days">{tf.deliveryDays}</span>
+              <span className="hx-tf-cat">{tf.category}</span>
+              <span className="hx-tf-price">${tf.pricePerKg}<small>/кг</small></span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        {/* How it works */}
-        <section aria-labelledby="how-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="how-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2How}</h2>
-          <ol style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: 16 }}>
-            {c.steps.map((step) => (
-              <li key={step.n} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: 20 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                  <span style={{ width: 32, height: 32, borderRadius: '50%', background: COLORS.primary, color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{step.n}</span>
-                  <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>{step.title}</h3>
-                </div>
-                <p style={{ color: '#475569', lineHeight: 1.6, margin: 0 }}>{step.text}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        {/* Why us */}
-        <section aria-labelledby="why-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="why-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2Why}</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: 16 }}>
-            {c.whyItems.map((item, i) => (
-              <article key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: 20 }}>
-                <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>{item.title}</h3>
-                <p style={{ color: '#475569', lineHeight: 1.6, margin: 0 }}>{item.text}</p>
-              </article>
-            ))}
+      {/* faq — same content as in JSON-LD above */}
+      <section className="hx-sec hx-sec--gray">
+        <div className="hx-faq">
+          <div>
+            <div className="hx-eyebrow"><i />FAQ</div>
+            <h2 className="hx-h2">{c.h2FAQ}</h2>
           </div>
-        </section>
-
-        {/* Cargo types — content from SITE.cargoCategories */}
-        <section aria-labelledby="cargo-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="cargo-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Cargo}</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {SITE.cargoCategories.map((cat) => (
-              <span key={cat} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', borderRadius: 999, padding: '8px 14px', fontSize: 14, color: '#334155' }}>{cat}</span>
-            ))}
-          </div>
-        </section>
-
-        {/* Freight synonym block — captures «грузоперевозки / freight / taşımacılık» */}
-        <section aria-labelledby="freight-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="freight-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Freight}</h2>
-          <p style={{ color: '#475569', lineHeight: 1.7, margin: 0, maxWidth: 820 }}>{c.freightText}</p>
-        </section>
-
-        {/* FAQ — same content as in JSON-LD above */}
-        <section aria-labelledby="faq-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="faq-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2FAQ}</h2>
-          <div style={{ display: 'grid', gap: 12 }}>
+          <div className="hx-faq-list">
             {faqList.map((f, i) => (
-              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: '16px 20px' }}>
-                <summary style={{ fontSize: 16, fontWeight: 600, cursor: 'pointer', listStyle: 'none' }}>{f.q}</summary>
-                <p style={{ color: '#475569', lineHeight: 1.6, marginTop: 12, marginBottom: 0 }}>{f.a}</p>
+              <details key={i}>
+                <summary>{f.q}<i aria-hidden="true">+</i></summary>
+                <p>{f.a}</p>
               </details>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <section aria-labelledby="cta-heading" style={{ background: '#FFFFFF', color: COLORS.text, border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
-          <h2 id="cta-heading" style={{ fontSize: isMobile ? 22 : 28, fontWeight: 800, marginBottom: 8 }}>{c.ctaTitle}</h2>
-          <p style={{ color: COLORS.textSecond, marginBottom: 24, fontSize: 16 }}>{c.ctaText}</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
-            <button
-              onClick={() => navigate(localizedPath('/calculator', language))}
-              style={{ background: GRADIENT, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', textShadow: '0 1px 2px rgba(10,37,53,.35)', minHeight: 48 }}
-            >
-              {c.ctaPrimary}
-            </button>
-            <Link
-              to={localizedPath('/contacts', language)}
-              style={{ background: '#FFFFFF', color: COLORS.primaryText, border: '1.5px solid #2AABAB', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, textDecoration: 'none', minHeight: 48, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
-            >
-              {c.ctaSecondary}
-            </Link>
-          </div>
-        </section>
-
-        {/* Internal links for SEO link graph */}
-        <nav aria-label="Related pages" style={{ marginTop: isMobile ? 32 : 48, padding: '24px 0', borderTop: '1px solid #EEEEEE', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
-          <Link to={localizedPath('/delivery-istanbul-moscow', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-            {language === 'ru' ? 'Доставка Стамбул-Москва' : language === 'tr' ? 'İstanbul-Moskova kargo' : 'Istanbul-Moscow cargo'}
+      {/* cta */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 12 }}>{c.ctaTitle}</h2>
+        <p className="hx-lede" style={{ maxWidth: '52ch', marginBottom: 24 }}>{c.ctaText}</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+          <button type="button" className="hx-cta" onClick={() => navigate(localizedPath('/calculator', language))}>
+            {c.ctaPrimary}
+          </button>
+          <Link className="hx-cta hx-cta--solid" to={localizedPath('/contacts', language)}>
+            {c.ctaSecondary}
           </Link>
-          <Link to={localizedPath('/customs-clearance', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-            {language === 'ru' ? 'Таможенное оформление' : language === 'tr' ? 'Gümrük işlemleri' : 'Customs clearance'}
+        </div>
+        <nav aria-label="Related pages" className="hx-hub" style={{ marginTop: 40 }}>
+          <Link to={localizedPath('/delivery-istanbul-moscow', language)}>
+            {language === 'ru' ? 'Доставка Стамбул-Москва' : language === 'tr' ? 'İstanbul-Moskova kargo' : 'Istanbul-Moscow cargo'} <span aria-hidden="true">→</span>
+          </Link>
+          <Link to={localizedPath('/customs-clearance', language)}>
+            {language === 'ru' ? 'Таможенное оформление' : language === 'tr' ? 'Gümrük işlemleri' : 'Customs clearance'} <span aria-hidden="true">→</span>
           </Link>
           {language === 'ru' && (
-            <Link to={localizedPath('/wildberries-ozon', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-              Доставка для Wildberries и OZON
-            </Link>
+            <Link to={localizedPath('/wildberries-ozon', language)}>Доставка для Wildberries и OZON <span aria-hidden="true">→</span></Link>
           )}
-          <Link to={localizedPath('/services', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-            {t('common.services')}
-          </Link>
-          <Link to={localizedPath('/calculator', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-            {t('common.calculator')}
-          </Link>
-          <Link to={localizedPath('/faq', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-            {t('common.faq')}
-          </Link>
+          <Link to={localizedPath('/services', language)}>{t('common.services')} <span aria-hidden="true">→</span></Link>
+          <Link to={localizedPath('/calculator', language)}>{t('common.calculator')} <span aria-hidden="true">→</span></Link>
+          <Link to={localizedPath('/faq', language)}>{t('common.faq')} <span aria-hidden="true">→</span></Link>
           {language === 'ru' && (
-            <Link to={localizedPath('/blog', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>Статьи</Link>
+            <Link to={localizedPath('/blog', language)}>Статьи <span aria-hidden="true">→</span></Link>
           )}
         </nav>
-      </main>
+      </section>
+
+      <Footer />
     </div>
   );
 }

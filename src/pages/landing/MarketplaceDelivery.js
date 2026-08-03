@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
-import useIsMobile from '../../hooks/useIsMobile';
 import { useTranslation, localizedPath } from '../../i18n/LanguageContext';
 import { SITE } from '../../config/site';
-import { COLORS, GRADIENT, SHADOW } from '../../config/theme';
+import '../../styles/home-redesign.css';
 
 // SEO landing for marketplace sellers (Wildberries / OZON).
 // Distinct commercial intent: LEGAL ("белый") import — customs clearance, TNVED,
@@ -15,7 +15,6 @@ import { COLORS, GRADIENT, SHADOW } from '../../config/theme';
 
 export default function MarketplaceDelivery({ isAuthenticated, setIsAuthenticated }) {
   const { language, t } = useTranslation();
-  const isMobile = useIsMobile();
   const navigate = useNavigate();
 
   const h1 = 'Доставка из Турции для маркетплейсов Wildberries и OZON';
@@ -75,8 +74,11 @@ export default function MarketplaceDelivery({ isAuthenticated, setIsAuthenticate
     })),
   };
 
+  const tariffsRoad = SITE.tariffs.filter((tf) => tf.mode === 'road');
+  const tariffsAir = SITE.tariffs.filter((tf) => tf.mode === 'air');
+
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', fontFamily: 'Inter, -apple-system, sans-serif', color: COLORS.text }}>
+    <div className="hx">
       <SEO
         titleKey="seo.marketplace.title"
         descriptionKey="seo.marketplace.description"
@@ -90,103 +92,99 @@ export default function MarketplaceDelivery({ isAuthenticated, setIsAuthenticate
       />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
-      <main style={{ maxWidth: 1180, margin: '0 auto', padding: isMobile ? '24px 16px 48px' : '48px 32px 96px' }}>
-        <header style={{ marginBottom: isMobile ? 24 : 48 }}>
-          <h1 style={{ fontSize: isMobile ? 30 : 48, fontWeight: 800, lineHeight: 1.15, marginBottom: 16, color: COLORS.text }}>{h1}</h1>
-          <p style={{ fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color: '#475569', maxWidth: 820 }}>{lead}</p>
-        </header>
+      {/* hero */}
+      <section className="hx-sec hx-hero-sec">
+        <div className="hx-eyebrow"><i />Wildberries · OZON</div>
+        <h1 className="hx-h1" style={{ marginBottom: 18 }}>{h1}</h1>
+        <p className="hx-hero-lede" style={{ maxWidth: '70ch' }}>{lead}</p>
+      </section>
 
-        {/* What's included */}
-        <section aria-labelledby="incl-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="incl-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>Что входит в «белую» доставку</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: 16 }}>
-            {included.map((item, i) => (
-              <article key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: 20 }}>
-                <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>{item.title}</h3>
-                <p style={{ color: '#475569', lineHeight: 1.6, margin: 0 }}>{item.text}</p>
-              </article>
-            ))}
+      {/* what's included */}
+      <section className="hx-sec hx-sec--gray">
+        <h2 className="hx-h2">Что входит в «белую» доставку</h2>
+        <div className="hx-features">
+          {included.map((item, i) => (
+            <div className="hx-feature" key={i}>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* tariffs table */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 12 }}>Тарифы доставки из Турции</h2>
+        <p className="hx-lede" style={{ maxWidth: '60ch', marginBottom: 28 }}>Минимальный вес отправки — 10 кг. Цена включает таможенное оформление и доставку до московского склада.</p>
+        <div className="hx-tf-table">
+          <div className="hx-tf-cols hx-tf-header">
+            <span>{t('common.tariff') || 'Тариф'}</span><span>Режим</span><span>Срок</span><span>Категория груза</span><span>Цена за кг</span>
           </div>
-        </section>
+          {[...tariffsRoad, ...tariffsAir].map((tf) => (
+            <div className="hx-tf-cols hx-tf-row" key={tf.id}>
+              <span className="hx-tf-name">{tf.name}<span className="sub">{tf.mode === 'air' ? 'Авиа' : 'Авто'} · {tf.deliveryDays} · {tf.category}</span></span>
+              <span className="hx-tf-mode">{tf.mode === 'air' ? 'Авиа' : 'Авто'}</span>
+              <span className="hx-tf-days">{tf.deliveryDays}</span>
+              <span className="hx-tf-cat">{tf.category}</span>
+              <span className="hx-tf-price">${tf.pricePerKg}<small>/кг</small></span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        {/* Tariffs */}
-        <section aria-labelledby="tariffs-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="tariffs-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 8 }}>Тарифы доставки из Турции</h2>
-          <p style={{ color: '#64748B', marginBottom: 24, fontSize: 14 }}>Минимальный вес отправки — 10 кг. Цена включает таможенное оформление и доставку до московского склада.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 16 }}>
-            {SITE.tariffs.map((tariff) => (
-              <article key={tariff.id} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: 24 }}>
-                <div style={{ fontSize: 12, textTransform: 'uppercase', letterSpacing: 1, color: COLORS.primaryText, fontWeight: 700, marginBottom: 6 }}>
-                  {tariff.mode === 'road' ? 'Авто' : 'Авиа'}
-                </div>
-                <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 12 }}>{tariff.name}</h3>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 6 }}>
-                  <span style={{ fontSize: 34, fontWeight: 800, color: COLORS.text }}>${tariff.pricePerKg}</span>
-                  <span style={{ color: '#64748B' }}>/ {t('common.kg')}</span>
-                </div>
-                <div style={{ color: COLORS.text, fontWeight: 600 }}>{tariff.transitDaysMin}-{tariff.transitDaysMax} {t('common.days')}</div>
-              </article>
-            ))}
+      {/* how it works */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 24 }}>Как проходит поставка</h2>
+        <div className="hx-steps">
+          {steps.map((step) => (
+            <div key={step.n}>
+              <div className="hx-step-n">{step.n}</div>
+              <h3 className="hx-step-t">{step.title}</h3>
+              <p className="hx-step-d">{step.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* faq */}
+      <section className="hx-sec hx-sec--gray">
+        <div className="hx-faq">
+          <div>
+            <div className="hx-eyebrow"><i />FAQ</div>
+            <h2 className="hx-h2">Вопросы и ответы</h2>
           </div>
-        </section>
-
-        {/* How it works */}
-        <section aria-labelledby="how-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="how-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>Как проходит поставка</h2>
-          <ol style={{ listStyle: 'none', padding: 0, display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: 16 }}>
-            {steps.map((step) => (
-              <li key={step.n} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: 20 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                  <span style={{ width: 32, height: 32, borderRadius: '50%', background: COLORS.primary, color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>{step.n}</span>
-                  <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>{step.title}</h3>
-                </div>
-                <p style={{ color: '#475569', lineHeight: 1.6, margin: 0 }}>{step.text}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        {/* FAQ */}
-        <section aria-labelledby="faq-heading" style={{ marginBottom: isMobile ? 32 : 64 }}>
-          <h2 id="faq-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>Вопросы и ответы</h2>
-          <div style={{ display: 'grid', gap: 12 }}>
+          <div className="hx-faq-list">
             {faqs.map((f, i) => (
-              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: '16px 20px' }}>
-                <summary style={{ fontSize: 16, fontWeight: 600, cursor: 'pointer', listStyle: 'none' }}>{f.q}</summary>
-                <p style={{ color: '#475569', lineHeight: 1.6, marginTop: 12, marginBottom: 0 }}>{f.a}</p>
+              <details key={i}>
+                <summary>{f.q}<i aria-hidden="true">+</i></summary>
+                <p>{f.a}</p>
               </details>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <section aria-labelledby="cta-heading" style={{ background: '#FFFFFF', color: COLORS.text, border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
-          <h2 id="cta-heading" style={{ fontSize: isMobile ? 22 : 28, fontWeight: 800, marginBottom: 8 }}>Везёте товар для маркетплейса?</h2>
-          <p style={{ color: COLORS.textSecond, marginBottom: 24, fontSize: 16 }}>Рассчитайте стоимость в калькуляторе или свяжитесь с менеджером — подскажем по оформлению и «Честному знаку».</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
-            <button
-              onClick={() => navigate(localizedPath('/calculator', language))}
-              style={{ background: GRADIENT, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', textShadow: '0 1px 2px rgba(10,37,53,.35)', minHeight: 48 }}
-            >
-              Калькулятор стоимости
-            </button>
-            <Link
-              to={localizedPath('/contacts', language)}
-              style={{ background: '#FFFFFF', color: COLORS.primaryText, border: '1.5px solid #2AABAB', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, textDecoration: 'none', minHeight: 48, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
-            >
-              Связаться с менеджером
-            </Link>
-          </div>
-        </section>
-
-        {/* Internal links */}
-        <nav aria-label="Related pages" style={{ marginTop: isMobile ? 32 : 48, padding: '24px 0', borderTop: '1px solid #EEEEEE', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
-          <Link to={localizedPath('/delivery-turkey-russia', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>Доставка Турция-Россия</Link>
-          <Link to={localizedPath('/customs-clearance', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>Таможенное оформление</Link>
-          <Link to={localizedPath('/calculator', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.calculator')}</Link>
-          <Link to={localizedPath('/contacts', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.contacts')}</Link>
+      {/* cta */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 12 }}>Везёте товар для маркетплейса?</h2>
+        <p className="hx-lede" style={{ maxWidth: '52ch', marginBottom: 24 }}>Рассчитайте стоимость в калькуляторе или свяжитесь с менеджером — подскажем по оформлению и «Честному знаку».</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+          <button type="button" className="hx-cta" onClick={() => navigate(localizedPath('/calculator', language))}>
+            Калькулятор стоимости
+          </button>
+          <Link className="hx-cta hx-cta--solid" to={localizedPath('/contacts', language)}>
+            Связаться с менеджером
+          </Link>
+        </div>
+        <nav aria-label="Related pages" className="hx-hub" style={{ marginTop: 40 }}>
+          <Link to={localizedPath('/delivery-turkey-russia', language)}>Доставка Турция-Россия <span aria-hidden="true">→</span></Link>
+          <Link to={localizedPath('/customs-clearance', language)}>Таможенное оформление <span aria-hidden="true">→</span></Link>
+          <Link to={localizedPath('/calculator', language)}>{t('common.calculator')} <span aria-hidden="true">→</span></Link>
+          <Link to={localizedPath('/contacts', language)}>{t('common.contacts')} <span aria-hidden="true">→</span></Link>
         </nav>
-      </main>
+      </section>
+
+      <Footer />
     </div>
   );
 }
