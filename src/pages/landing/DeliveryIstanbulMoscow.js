@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
-import useIsMobile from '../../hooks/useIsMobile';
 import { useTranslation, localizedPath } from '../../i18n/LanguageContext';
 import { SITE } from '../../config/site';
-import { COLORS, GRADIENT, SHADOW } from '../../config/theme';
+import '../../styles/home-redesign.css';
 
 export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthenticated }) {
   const { language, t } = useTranslation();
-  const isMobile = useIsMobile();
   const navigate = useNavigate();
 
   const copy = {
     ru: {
+      eyebrow: 'Направление · Стамбул → Москва',
       h1: 'Доставка из Стамбула в Москву',
       lead: 'Прямой карго-маршрут между двумя городами: принимаем товар в Стамбуле, консолидируем и отправляем в Москву, выдаём на собственном складе. Если вы не в Москве — бесплатно передаём груз транспортной компании до вашего города России.',
       h2Route: 'Маршрут двух городов',
@@ -23,11 +23,13 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
       h2Moscow: 'Получение в Москве и по России',
       moscowText: `В Москве груз поступает на склад: ${SITE.warehouses.moscow.address} (пн–пт 09:00–18:00). Забрать можно самовывозом — бесплатно. Если вы в другом городе, бесплатно довозим груз до транспортной компании в Москве и отправляем в ваш регион (стоимость перевозки ТК зависит от направления). Курьерская доставка по Москве до двери — по запросу, платно.`,
       h2Options: 'Тарифы на маршруте Стамбул → Москва',
+      optionsText: 'Цена фиксируется за килограмм после взвешивания в Стамбуле. Минимум — 10 кг на отправку.',
       h2Faq: 'Частые вопросы',
       ctaTitle: 'Отправить груз Стамбул → Москва',
       ctaText: 'Рассчитайте стоимость в калькуляторе или свяжитесь с менеджером.',
     },
     en: {
+      eyebrow: 'Route · Istanbul → Moscow',
       h1: 'Cargo from Istanbul to Moscow',
       lead: 'A direct cargo route between the two cities: we receive goods in Istanbul, consolidate and ship to Moscow, and hand them over at our own warehouse. Not in Moscow? We forward your cargo free to a transport company for onward delivery to your city in Russia.',
       h2Route: 'A route between two cities',
@@ -37,11 +39,13 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
       h2Moscow: 'Pickup in Moscow & across Russia',
       moscowText: `In Moscow the cargo arrives at the warehouse: ${SITE.warehouses.moscow.address} (Mon-Fri 09:00-18:00). You can collect it yourself — free of charge. If you are in another city, we deliver the cargo free to a transport company in Moscow and send it to your region (the carrier's fee depends on the destination). Door-to-door courier within Moscow is available on request, for a fee.`,
       h2Options: 'Tariffs on the Istanbul → Moscow route',
+      optionsText: 'The price is fixed per kilogram after weighing in Istanbul. Minimum — 10 kg per shipment.',
       h2Faq: 'FAQ',
       ctaTitle: 'Ship from Istanbul to Moscow',
       ctaText: 'Calculate the price or talk to a manager.',
     },
     tr: {
+      eyebrow: 'Rota · İstanbul → Moskova',
       h1: 'İstanbul\'dan Moskova\'ya kargo',
       lead: 'İki şehir arasında doğrudan kargo rotası: ürünü İstanbul\'da teslim alır, birleştirip Moskova\'ya gönderir ve kendi depomuzda teslim ederiz. Moskova\'da değilseniz — kargonuzu ücretsiz olarak bir nakliye şirketine devrederek Rusya\'daki şehrinize ulaştırırız.',
       h2Route: 'İki şehrin rotası',
@@ -51,6 +55,7 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
       h2Moscow: 'Moskova\'da ve Rusya genelinde teslim',
       moscowText: `Moskova\'da kargo depoya gelir: ${SITE.warehouses.moscow.address} (Pzt-Cum 09:00-18:00). Kendiniz ücretsiz teslim alabilirsiniz. Başka bir şehirdeyseniz, kargoyu Moskova\'daki bir nakliye şirketine ücretsiz ulaştırır ve bölgenize göndeririz (nakliye ücreti varış yerine bağlıdır). Moskova içi kapıya kurye, talep üzerine ücretlidir.`,
       h2Options: 'İstanbul → Moskova rotasında tarifeler',
+      optionsText: 'Fiyat, İstanbul\'da tartıldıktan sonra kilogram başına sabitlenir. Minimum — gönderi başına 10 kg.',
       h2Faq: 'SSS',
       ctaTitle: 'İstanbul → Moskova gönderim',
       ctaText: 'Fiyatı hesaplayın veya bir yöneticiyle konuşun.',
@@ -93,8 +98,11 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
     })),
   };
 
+  const tariffsRoad = SITE.tariffs.filter((tf) => tf.mode === 'road');
+  const tariffsAir = SITE.tariffs.filter((tf) => tf.mode === 'air');
+
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', fontFamily: 'Inter, -apple-system, sans-serif', color: COLORS.text }}>
+    <div className="hx">
       <SEO
         titleKey="seo.deliveryIstanbulMoscow.title"
         descriptionKey="seo.deliveryIstanbulMoscow.description"
@@ -107,87 +115,95 @@ export default function DeliveryIstanbulMoscow({ isAuthenticated, setIsAuthentic
       />
       <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
 
-      <main style={{ maxWidth: 1180, margin: '0 auto', padding: isMobile ? '24px 16px 48px' : '48px 32px 96px' }}>
-        <header style={{ marginBottom: isMobile ? 24 : 48 }}>
-          <h1 style={{ fontSize: isMobile ? 32 : 52, fontWeight: 800, lineHeight: 1.15, marginBottom: 16 }}>{c.h1}</h1>
-          <p style={{ fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color: '#475569', maxWidth: 760 }}>{c.lead}</p>
-        </header>
+      {/* hero */}
+      <section className="hx-sec hx-hero-sec">
+        <div className="hx-eyebrow"><i />{c.eyebrow}</div>
+        <h1 className="hx-h1" style={{ marginBottom: 18 }}>{c.h1}</h1>
+        <p className="hx-hero-lede" style={{ maxWidth: '70ch' }}>{c.lead}</p>
+      </section>
 
-        <section aria-labelledby="route-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>
-          <h2 id="route-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Route}</h2>
-          <p style={{ color: '#475569', lineHeight: 1.7, fontSize: 16 }}>{c.routeText}</p>
-        </section>
+      {/* route */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 16 }}>{c.h2Route}</h2>
+        <p className="hx-lede" style={{ maxWidth: '82ch' }}>{c.routeText}</p>
+      </section>
 
-        <section aria-labelledby="istanbul-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>
-          <h2 id="istanbul-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Istanbul}</h2>
-          <p style={{ color: '#475569', lineHeight: 1.7, fontSize: 16, maxWidth: 820 }}>{c.istanbulText}</p>
-        </section>
+      {/* istanbul */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 16 }}>{c.h2Istanbul}</h2>
+        <p className="hx-lede" style={{ maxWidth: '82ch' }}>{c.istanbulText}</p>
+      </section>
 
-        <section aria-labelledby="moscow-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>
-          <h2 id="moscow-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 16 }}>{c.h2Moscow}</h2>
-          <p style={{ color: '#475569', lineHeight: 1.7, fontSize: 16, maxWidth: 820 }}>{c.moscowText}</p>
-        </section>
+      {/* moscow */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 16 }}>{c.h2Moscow}</h2>
+        <p className="hx-lede" style={{ maxWidth: '82ch' }}>{c.moscowText}</p>
+      </section>
 
-        <section aria-labelledby="options-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>
-          <h2 id="options-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2Options}</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 16 }}>
-            {SITE.tariffs.map((tariff) => (
-              <article key={tariff.id} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: 24 }}>
-                <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 12 }}>{tariff.name}</h3>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 6 }}>
-                  <span style={{ fontSize: 32, fontWeight: 800 }}>${tariff.pricePerKg}</span>
-                  <span style={{ color: '#64748B' }}>/ {t('common.kg')}</span>
-                </div>
-                <div style={{ color: COLORS.text, fontWeight: 600 }}>{tariff.transitDaysMin}-{tariff.transitDaysMax} {t('common.days')}</div>
-              </article>
-            ))}
+      {/* tariffs table */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 12 }}>{c.h2Options}</h2>
+        <p className="hx-lede" style={{ maxWidth: '60ch', marginBottom: 28 }}>{c.optionsText}</p>
+        <div className="hx-tf-table">
+          <div className="hx-tf-cols hx-tf-header">
+            <span>{t('common.tariff') || 'Тариф'}</span><span>Режим</span><span>Срок</span><span>Категория груза</span><span>Цена за кг</span>
           </div>
-        </section>
+          {[...tariffsRoad, ...tariffsAir].map((tf) => (
+            <div className="hx-tf-cols hx-tf-row" key={tf.id}>
+              <span className="hx-tf-name">{tf.name}<span className="sub">{tf.mode === 'air' ? 'Авиа' : 'Авто'} · {tf.deliveryDays} · {tf.category}</span></span>
+              <span className="hx-tf-mode">{tf.mode === 'air' ? 'Авиа' : 'Авто'}</span>
+              <span className="hx-tf-days">{tf.deliveryDays}</span>
+              <span className="hx-tf-cat">{tf.category}</span>
+              <span className="hx-tf-price">${tf.pricePerKg}<small>/кг</small></span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <section aria-labelledby="faq-heading" style={{ marginBottom: isMobile ? 32 : 48 }}>
-          <h2 id="faq-heading" style={{ fontSize: isMobile ? 24 : 32, fontWeight: 700, marginBottom: 24 }}>{c.h2Faq}</h2>
-          <div style={{ display: 'grid', gap: 12 }}>
+      {/* faq */}
+      <section className="hx-sec hx-sec--gray">
+        <div className="hx-faq">
+          <div>
+            <div className="hx-eyebrow"><i />FAQ</div>
+            <h2 className="hx-h2">{c.h2Faq}</h2>
+          </div>
+          <div className="hx-faq-list">
             {faqList.map((f, i) => (
-              <details key={i} style={{ background: '#FFFFFF', border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 12, padding: '16px 20px' }}>
-                <summary style={{ fontSize: 16, fontWeight: 600, cursor: 'pointer', listStyle: 'none' }}>{f.q}</summary>
-                <p style={{ color: '#475569', lineHeight: 1.6, marginTop: 12, marginBottom: 0 }}>{f.a}</p>
+              <details key={i}>
+                <summary>{f.q}<i aria-hidden="true">+</i></summary>
+                <p>{f.a}</p>
               </details>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section style={{ background: '#FFFFFF', color: COLORS.text, border: '1px solid #E8E8E8', boxShadow: SHADOW.card, borderRadius: 16, padding: isMobile ? 24 : 40, textAlign: 'center' }}>
-          <h2 style={{ fontSize: isMobile ? 22 : 28, fontWeight: 800, marginBottom: 8 }}>{c.ctaTitle}</h2>
-          <p style={{ color: COLORS.textSecond, marginBottom: 24 }}>{c.ctaText}</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
-            <button
-              onClick={() => navigate(localizedPath('/calculator', language))}
-              style={{ background: GRADIENT, color: '#FFFFFF', border: 'none', padding: '14px 28px', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', textShadow: '0 1px 2px rgba(10,37,53,.35)', minHeight: 48 }}
-            >
-              {t('common.orderNow')}
-            </button>
-          </div>
-        </section>
-
-        <nav aria-label="Related pages" style={{ marginTop: 48, padding: '24px 0', borderTop: '1px solid #EEEEEE', display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14 }}>
-          <Link to={localizedPath('/delivery-turkey-russia', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-            {language === 'ru' ? 'Доставка Турция-Россия' : language === 'tr' ? 'Türkiye-Rusya kargo' : 'Turkey-Russia cargo'}
+      {/* cta */}
+      <section className="hx-sec">
+        <h2 className="hx-h2" style={{ marginBottom: 12 }}>{c.ctaTitle}</h2>
+        <p className="hx-lede" style={{ maxWidth: '52ch', marginBottom: 24 }}>{c.ctaText}</p>
+        <button type="button" className="hx-cta" onClick={() => navigate(localizedPath('/calculator', language))}>
+          {t('common.orderNow')}
+        </button>
+        <nav aria-label="Related pages" className="hx-hub" style={{ marginTop: 40 }}>
+          <Link to={localizedPath('/delivery-turkey-russia', language)}>
+            {language === 'ru' ? 'Доставка Турция–Россия' : language === 'tr' ? 'Türkiye-Rusya kargo' : 'Turkey-Russia cargo'} <span aria-hidden="true">→</span>
           </Link>
-          <Link to={localizedPath('/customs-clearance', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-            {language === 'ru' ? 'Таможенное оформление' : language === 'tr' ? 'Gümrük işlemleri' : 'Customs clearance'}
+          <Link to={localizedPath('/customs-clearance', language)}>
+            {language === 'ru' ? 'Таможенное оформление' : language === 'tr' ? 'Gümrük işlemleri' : 'Customs clearance'} <span aria-hidden="true">→</span>
           </Link>
           {language === 'ru' && (
-            <Link to={localizedPath('/wildberries-ozon', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>
-              Доставка для Wildberries и OZON
-            </Link>
+            <Link to={localizedPath('/wildberries-ozon', language)}>Доставка для Wildberries и OZON <span aria-hidden="true">→</span></Link>
           )}
-          <Link to={localizedPath('/calculator', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.calculator')}</Link>
-          <Link to={localizedPath('/contacts', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>{t('common.contacts')}</Link>
+          <Link to={localizedPath('/calculator', language)}>{t('common.calculator')} <span aria-hidden="true">→</span></Link>
+          <Link to={localizedPath('/contacts', language)}>{t('common.contacts')} <span aria-hidden="true">→</span></Link>
           {language === 'ru' && (
-            <Link to={localizedPath('/blog', language)} style={{ color: COLORS.primaryText, textDecoration: 'none' }}>Статьи</Link>
+            <Link to={localizedPath('/blog', language)}>Статьи <span aria-hidden="true">→</span></Link>
           )}
         </nav>
-      </main>
+      </section>
+
+      <Footer />
     </div>
   );
 }
