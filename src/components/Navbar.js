@@ -242,10 +242,10 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: 2,
-    maxWidth: 1200,
+    maxWidth: 1400,
     margin: '0 auto',
     height: 64,
-    padding: '0 24px',
+    padding: '0 clamp(18px, 4vw, 48px)',
   },
   tubelightLogo: {
     display: 'flex',

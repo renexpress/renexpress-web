@@ -23,8 +23,6 @@
   background: #fff;
   color: var(--ink);
   font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
-  border-left: 1px solid var(--line);
-  border-right: 1px solid var(--line);
 }
 .hx *, .hx *::before, .hx *::after { box-sizing: border-box; }
 .hx h1, .hx h2, .hx h3, .hx p { margin: 0; }
@@ -292,7 +290,6 @@
 
 /* ============ PHONE (<=768) ============ */
 @media (max-width: 768px) {
-  .hx { border-left: none; border-right: none; }
   .hx-h1 { font-size: 32px; }
   .hx-two, .hx-three, .hx-seo-cols { grid-template-columns: 1fr; gap: 16px; }
   .hx-steps { grid-template-columns: 1fr 1fr; border-top: 2px solid var(--ink); }
