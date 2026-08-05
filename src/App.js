@@ -18,6 +18,8 @@ const Services = lazy(() => import('./pages/Services'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Calculator = lazy(() => import('./pages/Calculator'));
 const Contacts = lazy(() => import('./pages/Contacts'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Terms = lazy(() => import('./pages/Terms'));
 
 // SEO landing pages (Phase 2)
 const DeliveryTurkeyRussia = lazy(() => import('./pages/landing/DeliveryTurkeyRussia'));
@@ -88,6 +90,8 @@ function AllRoutes({ isAuthenticated, setIsAuthenticated }) {
       <Route path="faq" element={<FAQ {...authProps} />} />
       <Route path="calculator" element={<Calculator {...authProps} />} />
       <Route path="contacts" element={<Contacts {...authProps} />} />
+      <Route path="privacy" element={<Privacy {...authProps} />} />
+      <Route path="terms" element={<Terms {...authProps} />} />
 
       {/* SEO landing pages */}
       <Route path="delivery-turkey-russia" element={<DeliveryTurkeyRussia {...authProps} />} />

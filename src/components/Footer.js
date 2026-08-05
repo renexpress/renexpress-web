@@ -47,8 +47,8 @@ export default function Footer() {
       <div className="hx-foot-bottom">
         <span>© 2026 RENEXPRESS. Все права защищены.</span>
         <div className="hx-foot-legal">
-          <a href="/about">Политика конфиденциальности</a>
-          <a href="/about">Условия использования</a>
+          <a href="/privacy">Политика конфиденциальности</a>
+          <a href="/terms">Условия использования</a>
         </div>
       </div>
     </footer>

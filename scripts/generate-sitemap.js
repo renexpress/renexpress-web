@@ -33,6 +33,8 @@ const ROUTES = [
   { path: '/blog/kak-zakazat-dostavku-iz-turcii',  changefreq: 'monthly', priority: 0.7,  langs: ['ru'] },
   { path: '/blog/skolko-stoit-dostavka-iz-turcii', changefreq: 'monthly', priority: 0.7,  langs: ['ru'] },
   { path: '/blog/avia-ili-avto-iz-stambula',       changefreq: 'monthly', priority: 0.7,  langs: ['ru'] },
+  { path: '/privacy',                   changefreq: 'yearly',  priority: 0.3,  langs: ['ru'] },
+  { path: '/terms',                     changefreq: 'yearly',  priority: 0.3,  langs: ['ru'] },
 ];
 
 function localizedUrl(logicalPath, lang) {

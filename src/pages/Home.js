@@ -414,7 +414,7 @@ function Home({ isAuthenticated, setIsAuthenticated }) {
             <label className="hx-consent">
               <input type="checkbox" checked={lAgree} onChange={(e) => setLAgree(e.target.checked)}
                 style={{ marginTop: 2, accentColor: '#2AABAB', flexShrink: 0 }} />
-              <span>Нажимая «Продолжить», вы соглашаетесь с <a href="/about">политикой обработки данных</a></span>
+              <span>Нажимая «Продолжить», вы соглашаетесь с <a href="/privacy">политикой обработки данных</a></span>
             </label>
             {lErr && <p className="hx-warn full" style={{ margin: 0 }}>{lErr}</p>}
             <button type="submit" className="hx-cta hx-cta--solid full" style={{ width: '100%' }}>Продолжить в WhatsApp</button>

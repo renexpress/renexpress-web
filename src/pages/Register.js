@@ -189,7 +189,7 @@ function Register({ setIsAuthenticated }) {
                 {/* Terms */}
                 <label style={styles.checkboxLabel}>
                   <input type="checkbox" checked={agreeTerms} onChange={(e) => setAgreeTerms(e.target.checked)} style={styles.checkbox} />
-                  <span>Я согласен с <a href="/about" style={styles.link}>Условиями использования</a> и <a href="/about" style={styles.link}>Политикой конфиденциальности</a></span>
+                  <span>Я согласен с <a href="/terms" style={styles.link}>Условиями использования</a> и <a href="/privacy" style={styles.link}>Политикой конфиденциальности</a></span>
                 </label>
 
                 {/* Submit */}
